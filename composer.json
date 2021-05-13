@@ -9,7 +9,11 @@
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
+<<<<<<< HEAD
         "laravel/framework": "^8.40",
+=======
+        "laravel/framework": "^8.12",
+>>>>>>> origin/main
         "laravel/tinker": "^2.5"
     },
     "require-dev": {
