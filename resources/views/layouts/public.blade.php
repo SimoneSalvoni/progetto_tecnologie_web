@@ -13,6 +13,7 @@
     </head>
     <body>
         @include('layouts/header')
-        @yield('eventi')
+        @yield('content')
         @include('layouts/footer')
     </body>
+</html>

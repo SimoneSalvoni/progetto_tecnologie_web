@@ -5,7 +5,7 @@
         <div class="right_header">
             <div class="account pull-right">
                 <ul class="user-menu">	
-                    <li><a href="#">Accedi</a></li>
+                    <li><a href="#">Accedi</a></li> <!<!-- href per le rotte: {{ route ('nomeRotta') }} -->
                     <!-- NON PENSO SIA COSI' SEMPLICE VISTO CHE ABBIAMO PIU' LIVELLI DI UTENTE
                     @auth
                     <li><a href="#">Area personale</a></li>

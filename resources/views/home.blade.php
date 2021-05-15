@@ -1,3 +1,5 @@
+@extends(layouts.public)
+
 @section ('content')
 <img class="home_img" src="{{ asset('img/concerto.jpg') }}" alt="">
 <section class="main-content">
@@ -28,7 +30,7 @@
                             <li class="span3">
                                 <div class="product-box">
                                     <p><a href="product_detail.html"><img src="themes/images/ladies/5.jpg" alt="" /></a></p>
-                                   <a href="product_detail.html" class="title">Nome evento</a><br/>
+                                    <a href="product_detail.html" class="title">Nome evento</a><br/>
                                 </div>
                             </li>
                     </div>						
@@ -39,3 +41,4 @@
     </div>
     <button class="button" onclick="location.href = '#'" type="button" > <b>VAI ALLA LISTA COMPLETA DEGLI EVENTI</b></button>
 </section>
+@endsection
