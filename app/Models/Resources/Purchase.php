@@ -6,6 +6,30 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Purchase extends Model
-{
-    use HasFactory;
+{       
+    /**
+     * Indica che il modello non devere cercare delle colonne con il time stamp
+     * 
+     * @var boolean
+     */
+    public $timestamps = false;
+    
+    /**
+     * Recupera il modello dell'utente che ha fatto l'acquisto
+     * 
+     * @return User
+     */
+    public function getUtente(){
+        return $this->hasOne(User::class,'emailutente', 'email');
+    }
+    
+    /**
+     * Recupera il modello dell'evento acquistato
+     * 
+     * @return Event
+     */
+    public function getEvento(){
+        return $this->hasOne(Event::class, 'idevento','id');
+    }
+    //use HasFactory;
 }
