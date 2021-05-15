@@ -14,9 +14,10 @@ class Participations extends Migration
     public function up()
     {
         Schema::create('participations', function (Blueprint $table) {
+            $table->id();
             $table->string('emailutente');
             $table->bigInteger('idevento')->unsigned();
-            $table->primary(['emailutente','idevento']);
+            $table->unique(['emailutente', 'idevento']);
             $table->foreign('emailutente')->references('email')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('idevento')->references('id')->on('events')->onDelete('cascade')->onUpdate('cascade');
         });
