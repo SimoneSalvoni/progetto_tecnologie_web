@@ -14,8 +14,8 @@ class Events extends Migration
     public function up()
     {
         Schema::create('events', function(Blueprint $table){
-           $table->id()->primary();
-           $table->string('nome');
+           $table->id();
+           $table->string('nome')->index();
            $table->string('descrizione');
            $table->string('luogo');
            $table->string('urlluogo');
@@ -29,7 +29,7 @@ class Events extends Migration
            $table->float('incassototale')->default(0);
            $table->integer('parteciperò')->default(0);
            $table->string('emailorganizzatore');
-           $table->foreign('emailorganizzatore')->references("email")->on('users');
+           $table->foreign('emailorganizzatore')->references("email")->on('users')->onDelete('cascade')->onUpdate('cascade');
                
         });
     }
