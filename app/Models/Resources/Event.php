@@ -13,5 +13,12 @@ class Event extends Model
      * @var boolean
      */
     public $timestamps = false;
+    
+    /**
+     * Ritrova l'organizzatore associato all'evento
+     */
+    public function getOrganizzatore(){
+        return $this->hasOne(User::class, 'emailorganizzatore', 'email');
+    }
     //use HasFactory;
 }
