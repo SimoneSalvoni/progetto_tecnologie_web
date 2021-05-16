@@ -10,24 +10,27 @@
                 </p>
             </div>
             <div>
-                <form>
+                <!-- action= della forma {{route('nome della rotta in web.php')}} -->
+                <form method="post" id="search" name="search"enctype="multipart/form-data" action="#">
+                    @csfr
                     <span class="search">
                         <label for=date class="control">Data</label>
-                        <input type=month name=date id=date />
+                        <input type=month name=date id=date value="{{old('date')}}"/>
                     </span>
                     <span class="search">
                         <label for=reg class="control">Regione</label>
-                        <input type=text name=reg id=reg />
+                        <!<!-- PER LA REGIONE DOVREMMO METTERE L'AUTO COMPLETAMENTO -->
+                        <input type=text name=reg id=reg value="{{old('reg')}}" />
                     </span>
                     <span class="search">
                         <label for=org class="control">Società organizzatrice</label>
-                        <input type=text name=org id=org />
+                        <input type=text name=org id=org value="{{old('org')}}" />
                     </span>
                     <span class="search">
                         <label for=desc class="control">Descrizione</label>
-                        <input type=text name=desc id=desc />
+                        <input type=text name=desc id=desc value="{{old('desc')}}" />
                     </span>
-                    <button type= submit class="btn btn-inverse" style="vertical-align: super" name="search" formaction="#"> Cerca </button>
+                    <input type= submit class="btn btn-inverse" style="vertical-align: super" value="Cerca"> 
                 </form>
             </div>
         </div>
