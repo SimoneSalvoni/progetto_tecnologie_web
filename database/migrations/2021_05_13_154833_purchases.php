@@ -4,19 +4,18 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Purchases extends Migration
-{
+class Purchases extends Migration {
+
     /**
      * Run the migrations.
      *
      * @return void
      */
-    public function up()
-    {
+    public function up() {
         Schema::create('purchases', function (Blueprint $table) {
             $table->id();
             $table->string('emailutente');
-            $table->bigInteger('idevento')->unsigned();
+            $table->unsignedBigInteger('idevento');
             $table->string('nomeevento');
             $table->integer('numerobiglietti');
             $table->float('costototale');
@@ -32,8 +31,8 @@ class Purchases extends Migration
      *
      * @return void
      */
-    public function down()
-    {
+    public function down() {
         Schema::dropIfExists('purchases');
     }
+
 }

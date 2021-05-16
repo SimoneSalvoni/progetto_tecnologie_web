@@ -12,7 +12,15 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+/*
 Route::get('/', function () {
     return view('welcome');
 });
+ 
+ */
+
+Route::get('/', 'PublicController@showHomePage') -> name('home');
+Route::get('/listaEventi', 'PublicController@showEventsList') -> name('list');
+Route::get('/listaEventi/Evento/{eventId}', 'PublicController@showEvent') -> name('event');
+//Route::get('/Evento/{eventId}','PublicController@showEvent') -> name('event'); non so se serve...
+Route::get('/info', 'PublicController@showInfo') -> name('info');
