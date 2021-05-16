@@ -21,6 +21,7 @@ Route::get('/', function () {
 
 Route::get('/', 'PublicController@showHomePage') -> name('home');
 Route::get('/listaEventi', 'PublicController@showEventsList') -> name('list');
+Route::post('/listaEventi', 'PublicController@showEventsListFiltered') -> name('list.search');
 Route::get('/listaEventi/Evento/{eventId}', 'PublicController@showEvent') -> name('event');
 //Route::get('/Evento/{eventId}','PublicController@showEvent') -> name('event'); non so se serve...
 Route::get('/info', 'PublicController@showInfo') -> name('info');

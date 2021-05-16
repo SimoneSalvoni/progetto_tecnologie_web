@@ -26,8 +26,8 @@ class AdvancedSearchRequest extends FormRequest
         return [
             'date' => '',
             'reg' => '',
-            'org' => 'max:50',
-            'desc' => 'max 50'
+            'org' => '',
+            'desc' => ''
         ];
     }
 }

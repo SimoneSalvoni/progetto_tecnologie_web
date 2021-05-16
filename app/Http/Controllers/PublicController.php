@@ -3,27 +3,34 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-//use App\Models\Event; DA DECOMMENTARE
+use App\Models\EventsList; 
+use App\Http\Requests\AdvancedSearchRequest;
 
 class PublicController extends Controller
 {
-    protected $eventModel;
-    protected $FAQModel;
+    protected $eventsList;
+    protected $FAQList;
     
     public function __construct() {
-        $this->eventModel = new Event; //evento modello da fare
+        $this->eventsList = new EventList; 
+        $this->FAQList = new FAQList;
     }
     
     public function showHomePage (){
-        $nearEvents=$this->eventModel->getNearEvents();
+        $nearEvents=$this->eventList->getNearEvents();
         return view('home')->with('nearEvents', '$nearEvents');
     }
     
     public function showEventsList(){
-        $events=$this->eventModel->getEvents();
+        $events=$this->eventList->getEvents();
         return view('event-list')->with('events', '$events');
     }
-   //TODO INSERIRE NUOVO CONTRLLER/MODIFICARE QUESTO???? PER IL FILTRAGGIO
+   
+    public function showEventsListFiltered(AdvancedSearchRequest $request){
+        
+        $events = $this->eventsList->getEventsFiltered($request->date, $request->reg, $request->org, $request->desc);
+        return view ('event-list')->with ('events', '$events');
+    }
     
     public function showEvent($eventId){
         $event=$this->eventModel->getEventById($eventId);
