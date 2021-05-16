@@ -29,7 +29,9 @@ class Filters {
      * @return type
      */
     public function FilterByOrganizzatore($organizzatore){
-        return Event::where('emailorganizzatore', '=', strval($organizzatore))->get();
+        $emails = User::where([['nomeutente', '=', $organizzatore], ['livello', '=', 3]])->select('email')->get();
+        return Event::where('emailorganizzatore', '=', strval($emails))->get();
+        //in teoria il nome utente è diverso per ogni organizzatore quindi dovrebbe funzionare senza problemi
     }
     
     /**
