@@ -1,4 +1,4 @@
-@extends(layouts.public)
+@extends('layouts.public')
 
 @section ('content')
 <img class="home_img" src="{{ asset('siteimgs/concerto.jpg') }}" alt="">
@@ -13,6 +13,7 @@
                 </span>
             </h4>
             @isset($nearEvents)
+            <?php //$nearEvents->toArray(); ?>
             <div id="myCarousel" class="myCarousel carousel slide">
                 <div class="carousel-inner">
                     <div class="active item">
@@ -48,6 +49,6 @@
         </div>
     </div>
     @endisset
-    <button class="button" onclick="location.href = '#'" type="button" > <b>VAI ALLA LISTA COMPLETA DEGLI EVENTI</b></button>
+    <button class="button" onclick="location.href = '{{route('list')}}'" type="button" > <b>VAI ALLA LISTA COMPLETA DEGLI EVENTI</b></button>
 </section>
 @endsection

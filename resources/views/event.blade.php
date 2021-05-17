@@ -1,4 +1,4 @@
-@extends (layouts.public)
+@extends ('layouts.public')
 
 @section ('content')
 <section  class="main-content">		<!<!-- style=main.css c'era dentro, perché? -->		
