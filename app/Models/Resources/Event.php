@@ -21,7 +21,7 @@ class Event extends Model
     
     //forse serve per modificare gli incassi totali con gli acquisti?
     public function getOrganizzatore(){
-        return $this->hasOne(User::class, "emailorganizzatore", "email");
+        return $this->hasOne(User::class, "email", "emailorganizzatore");
     }
 }
 

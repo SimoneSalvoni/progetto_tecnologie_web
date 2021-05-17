@@ -20,7 +20,7 @@ class Purchase extends Model
      * @return User
      */
     public function getUtente(){
-        return $this->hasOne(User::class,'emailutente', 'email');
+        return $this->hasOne(User::class,'email', 'emailutente');
     }
     
     /**
@@ -29,7 +29,7 @@ class Purchase extends Model
      * @return Event
      */
     public function getEvento(){
-        return $this->hasOne(Event::class, 'idevento','id');
+        return $this->hasOne(Event::class, 'id','idevento');
     }
     //use HasFactory;
 }

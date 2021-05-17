@@ -42,6 +42,41 @@ class Filters {
     public function FilterByDescizione($descrizione) {
         return Event::where('descrizione', '=', '%'.strval($descrizione).'%');
     }
+    
+    public function getEventsFiltered($data=null, $regione=null, $organizzazione=null, $descrizione=null){
+            $filters = array("data" => $data, "regione" => $regione, "organizzazione" => $organizzazione, "descrizione" => $descrizione);
+            
+            //Controllo quali filtri sono stati settati
+            foreach ($filters as $key => $value){
+                if (is_null($value)){unset($filters[$key]);}
+            }
+            $eventList;
+
+            //Creo l'array sul quale verrà fatta la query
+            $queryFilters = [];
+            foreach ($filters as $key => $value){
+                switch ($key){
+                    case "data":
+                        $queryFilters[]=["data", "LIKE", strval($data)];
+                        break;
+                    case "regione":
+                        $queryFilters[]=["regione", "LIKE", strval($regione)];
+                        break;
+                    case "organizzazione":
+                        $queryFilters[]=["nomeorganizzazione", "LIKE", strval($organizzazione)];
+                        break;
+                    case "descrizione":
+                        $queryFilters[]=["descrizione", "LIKE", "%".strval($descrizione)."%"];
+                        break;
+                    default;
+                }
+            }
+            
+           //Controllo se non è presente alcun filtro
+            if(empty($queryFilters)){$eventList = Event::all()->get();}
+            //Caso in cui l'array non sia vuoto
+            else{$eventList = Event::where($queryFilters.values())->get();}
+    
     //TODO Trovare un modo per effettuare la ricerca con la regione
 }   
 
