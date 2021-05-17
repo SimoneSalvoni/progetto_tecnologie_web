@@ -12,6 +12,7 @@
                     <a class="left button" href="#myCarousel" data-slide="prev"></a><a class="right button" href="#myCarousel" data-slide="next"></a>
                 </span>
             </h4>
+            @isset($nearEvents)
             <div id="myCarousel" class="myCarousel carousel slide">
                 <div class="carousel-inner">
                     <div class="active item">
@@ -39,6 +40,7 @@
             </div>				
         </div>
     </div>
+    @endisset
     <button class="button" onclick="location.href = '#'" type="button" > <b>VAI ALLA LISTA COMPLETA DEGLI EVENTI</b></button>
 </section>
 @endsection
