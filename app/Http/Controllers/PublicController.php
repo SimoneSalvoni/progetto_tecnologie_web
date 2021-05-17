@@ -26,8 +26,7 @@ class PublicController extends Controller
         return view('event-list')->with('events', '$events');
     }
    
-    public function showEventsListFiltered(AdvancedSearchRequest $request){
-        
+    public function showEventsListFiltered(AdvancedSearchRequest $request){    
         $events = $this->eventsList->getEventsFiltered($request->date, $request->reg, $request->org, $request->desc);
         return view ('event-list')->with ('events', '$events');
     }

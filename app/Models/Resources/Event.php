@@ -15,13 +15,14 @@ class Event extends Model
     public $timestamps = false;
     //use HasFactory;
     
+    //qua??
     public function getDiscountedPrice(){
         return ($this->costo) - ($this->costo)*($this->sconto/100);
     }
     
     //forse serve per modificare gli incassi totali con gli acquisti?
     public function getOrganizzatore(){
-        return $this->hasOne(User::class, "emailorganizzatore", "email");
+        return $this->hasOne(User::class, "email", "emailorganizzatore");
     }
 }
 
