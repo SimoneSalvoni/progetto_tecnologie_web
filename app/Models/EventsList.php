@@ -4,7 +4,8 @@ use App\Models\Resources\Event;
 class EventsList{
     
     public function getEvents(){
-       return Event::all()->paginate(10);
+       $events= Event::all()->paginate(10);
+       return $events;
     }
     
     
@@ -24,11 +25,20 @@ class EventsList{
     }
     
     public function getNearEvents(){
-        return Event::orderBy('data')->take(16); //non dovrebbe servire ->get()
+        return Event::orderBy('data')->take(8); //non dovrebbe servire ->get()
     }
     
     public function getEventById($eventId){
         return Event::where('id', $eventId);
     }
+    
+    /*
+    public function getOrganizzatore($eventId){
+        $event= Event::where('id', $eventId);
+        return $event->getOrganizzatore()->nomeutente;
+    }
+     * */
+
+                
 }
 

@@ -28,7 +28,7 @@
                     </span>
                     <span class="search">
                         <label for=desc class="control">Descrizione</label>
-                        <input type=text name=desc id=desc value="{{old('desc')}}" />
+                        <input type=text name=desc id=desc value="{{old('desc')}}"/>
                     </span>
                     <input type= submit class="btn btn-inverse" style="vertical-align: super" value="Cerca"> 
                 </form>
@@ -38,27 +38,38 @@
     <!-- Qui inizia la lista degli eventi PLACEHOLDER. NON SO QUANTO MANUALE SIA LA GESTIONE DELLA PAGINAZIONE. IN OGNI CASO
     FOR EACH PENSO PER FARE LA LISTA DEGLI EVENTI-->
     <h4><span>Lista degli eventi</span></h4>
+    @foreach($events as $event)
     <section class="single_product">
         <div class="product_container clickable" >
-            <div class="image_item"><img src="concert.jpg" alt="Immagine dell'evento" class="product_image"></div>
+            <!--<div class="image_item"><img src="concert.jpg" alt="Immagine dell'evento" class="product_image"></div>-->
+            <div class="image item">            
+            </div>
             <div class="descr_container">
-                <div class="title_item"><h4>TITOLOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                <div class="title_item"><h4>{{$event->nome}}
                     </h4></div>
-                <div class="descr_item">PROVAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-                    aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-                    aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-                    aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-                    aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-
+                <div class="descr_item">
+                    {{$event->descrizione}}
                 </div>
                 <div class="info-container">
-                    <div>REGIONE</div>
-                    <div>DATA</div>
-                    <div>CORSO</div>
+                    <div>REGIONE: </div>
+                    <div>DATA: {{$event->data}}</div>
+                    <div>COSTO: 
+                        @if(data>datascont) <!-- specifica!-->
+                        <span style="font-size: large">
+                            {{$event->costo-($event->costo*$event->sconto/100)}}&nbsp&nbsp&nbsp&nbsp
+                        </span>
+                        <span style="font-size: small">
+                            <s>{{$event->costo}}</s>
+                        </span>     
+                        @else
+                        {{$events->costo}}
+                        @endif
+                    </div>
                 </div>
             </div>
         </div>
     </section>
+    @endforeach
     <hr>
     <div class="pagination pagination-small pagination-centered">
         <ul>
