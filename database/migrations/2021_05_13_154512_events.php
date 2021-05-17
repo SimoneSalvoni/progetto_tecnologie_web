@@ -32,8 +32,7 @@ class Events extends Migration {
             $table->integer('parteciperò')->default(0);
             //CAPIRE COME TRATTARE IL NOME ORGANIZZAZIONE
             $table->string('nomeorganizzazione');
-            $table->string('emailorganizzatore');
-            $table->foreign('emailorganizzatore')->references("email")->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('nomeorganizzatore')->references("nomeutente")->on('users')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
