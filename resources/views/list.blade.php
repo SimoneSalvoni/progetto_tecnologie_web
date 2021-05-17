@@ -51,7 +51,7 @@
                     {{$event->descrizione}}
                 </div>
                 <div class="info-container">
-                    <div>REGIONE: </div>
+                    <div>REGIONE: {{$events->regione}} </div>
                     <div>DATA: {{$event->data}}</div>
                     <div>COSTO: 
                         @if(data>datascont) <!-- specifica!-->

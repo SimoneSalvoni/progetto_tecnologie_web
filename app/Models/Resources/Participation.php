@@ -20,7 +20,7 @@ class Participation extends Model
      * @return User
      */
     public function getPartecipante(){
-        return $this->hasOne(User::class, 'emailutente', 'email'); // TODO provare se funziona
+        return $this->hasOne(User::class, 'email', 'emailutente'); // TODO provare se funziona
     }
     
     /**
@@ -29,7 +29,7 @@ class Participation extends Model
      * @return Event
      */
     public function getEvento(){
-        return $this->hasOne(Event::class, 'idevento', 'id'); // TODO provare se funziona
+        return $this->hasOne(Event::class, 'id', 'idevento'); // TODO provare se funziona
     }
     //use HasFactory;
 }

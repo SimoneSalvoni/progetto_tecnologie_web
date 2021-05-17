@@ -1,7 +1,7 @@
 @extends(layouts.public)
 
 @section ('content')
-<img class="home_img" src="{{ asset('img/concerto.jpg') }}" alt="">
+<img class="home_img" src="{{ asset('siteimgs/concerto.jpg') }}" alt="">
 <section class="main-content">
     <img class="home_img" src="concert.jpg" alt="">
     <div class="row">
@@ -16,24 +16,31 @@
             <div id="myCarousel" class="myCarousel carousel slide">
                 <div class="carousel-inner">
                     <div class="active item">
-                        <ul class="thumbnails">												
+                        <ul class="thumbnails">	
+                            @for ($i=0;$i<4;$i++)
+                            @if (@isset($nearEvents[$i]))
                             <li class="span3">
-                                <!<!-- QUA UN FOR EACH PER OGNI PRODOTTO RECENTE -->
                                 <div class="product-box">
                                     <span class="sale_tag"></span>
-                                    <p><a href="product_detail.html"><img src="themes/images/ladies/1.jpg" alt="" /></a></p>
-                                    <a href="product_detail.html" class="title">Nome evento</a><br/>
+                                    <p><a href="{{route('event',[$nearEvents[$i]->id])}}"><img src="{{ asset('locandine/'.$nearEvents[i]->immagine)}}" alt="" /></a></p>
+                                    <a href="{{route('event',[$nearEvents[$i]->id])}}" class="title">{{$nearEvents[$i]->nome}}</a><br/>
                                 </div>
                             </li>
+                            @endif
+                            @endfor
                     </div>
                     <div class="item">
                         <ul class="thumbnails">
+                            @for ($i=4;$i<8;$i++)
+                            @if (@isset($nearEvents[$i]))
                             <li class="span3">
                                 <div class="product-box">
-                                    <p><a href="product_detail.html"><img src="themes/images/ladies/5.jpg" alt="" /></a></p>
-                                    <a href="product_detail.html" class="title">Nome evento</a><br/>
+                                    <p><a href="{{route('event',[$nearEvents[$i]->id])}}"><img src="{{ asset('locandine/'.$nearEvents[i]->immagine)}}" alt="" /></a></p>
+                                    <a href="{{route('event',[$nearEvents[$i]->id])}}" class="title">{{$nearEvents[$i]->nome}}</a><br/>
                                 </div>
                             </li>
+                            @endif
+                            @endfor
                     </div>						
                 </div>
                 <br/>	

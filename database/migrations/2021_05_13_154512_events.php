@@ -16,9 +16,12 @@ class Events extends Migration {
             $table->id();
             $table->string('nome')->index();
             $table->string('descrizione');
-            $table->string('luogo');
             $table->string('urlluogo');
-            $table->date('data');
+            $table->string('regione');
+            $table->string('provincia');
+            $table->string('indirizzo');
+            $table->string('numciv');
+            $table->string('data');
             $table->string('immagine');
             $table->float('costo');
             $table->integer('sconto')->nullable();
@@ -27,7 +30,7 @@ class Events extends Migration {
             $table->integer('bigliettitotali')->default(0);
             $table->float('incassototale')->default(0);
             $table->integer('parteciperò')->default(0);
-            $table->string('nomeorganizzatore');
+            $table->string('nomeorganizzazione');
             $table->foreign('nomeorganizzatore')->references("nomeutente")->on('users')->onDelete('cascade')->onUpdate('cascade');
         });
     }

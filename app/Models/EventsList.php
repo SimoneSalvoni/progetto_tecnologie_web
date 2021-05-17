@@ -10,18 +10,40 @@ class EventsList{
     
     
     //NON RIESCO..
-    public function getEventsFiltered($date, $reg, $org, $desc){
-        $events =  Event::all();
-        if (isset($date)){
-            //data????
-        }
-        if (isset($reg)){
-           // $events = $events->where('') regione/luogo????
-        }
-        if (isset($org)){
-           // $o=getOrganizzatore()->email;
-           // $events=$events->where('');
-        }
+    public function getEventsFiltered($data=null, $regione=null, $organizzazione=null, $descrizione=null){
+            $filters = array("data" => $data, "regione" => $regione, "organizzazione" => $organizzazione, "descrizione" => $descrizione);
+            
+            //Controllo quali filtri sono stati settati
+            foreach ($filters as $key => $value){
+                if (is_null($value)){unset($filters[$key]);}
+            }
+
+            //Creo l'array sul quale verrà fatta la query
+            $queryFilters = [];
+            foreach ($filters as $key => $value){
+                switch ($key){
+                    case "data":
+                        $queryFilters[]=["data", "LIKE", "%".strval($data)."%"];
+                        break;
+                    case "regione":
+                        $queryFilters[]=["regione", "LIKE", strval($regione)];
+                        break;
+                    case "organizzazione":
+                        $queryFilters[]=["nomeorganizzazione", "LIKE", strval($organizzazione)];
+                        break;
+                    case "descrizione":
+                        $queryFilters[]=["descrizione", "LIKE", "%".strval($descrizione)."%"];
+                        break;
+                    default;
+                }
+            }
+            
+           //Controllo se non è presente alcun filtro
+            if(empty($queryFilters)){$eventList = Event::all();}
+            //Caso in cui l'array non sia vuoto
+            else{$eventList = Event::where($queryFilters.values())->get();}
+            
+            return $eventList;
     }
     
     public function getNearEvents(){

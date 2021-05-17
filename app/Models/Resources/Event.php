@@ -15,7 +15,6 @@ class Event extends Model
     public $timestamps = false;
     //use HasFactory;
     
-    //qua??
     public function getDiscountedPrice(){
         return ($this->costo) - ($this->costo)*($this->sconto/100);
     }

@@ -37,8 +37,8 @@ class PublicController extends Controller
     }
    
     public function showInfo(){
-        $FAQ=$this->$FAQModel->getFAQ();
-        return view('info')->with ('FAQ', '$FAQ');
+        $FAQ=$this->$FAQList->getFAQ();
+        return view('faq')->with ('FAQ', '$FAQ');
     }
     
 }
