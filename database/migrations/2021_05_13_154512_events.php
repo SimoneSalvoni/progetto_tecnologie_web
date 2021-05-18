@@ -16,11 +16,11 @@ class Events extends Migration {
             $table->id();
             $table->string('nome')->index();
             $table->string('descrizione');
-            $table->string('luogo');
             $table->string('urlluogo');
-            //AGGIUNTA DI UN CAMPO REGIONE PER SEMPLIFICARE LA RICERCA
             $table->string('regione');
-            // Metto come formato della data string almeno non si hanno problemi con mese e anno
+            $table->string('provincia');
+            $table->string('indirizzo');
+            $table->string('numciv');
             $table->string('data');
             $table->string('immagine');
             $table->float('costo');
@@ -30,7 +30,6 @@ class Events extends Migration {
             $table->integer('bigliettitotali')->default(0);
             $table->float('incassototale')->default(0);
             $table->integer('parteciperò')->default(0);
-            //CAPIRE COME TRATTARE IL NOME ORGANIZZAZIONE
             $table->string('nomeorganizzazione');
             $table->foreign('nomeorganizzatore')->references("nomeutente")->on('users')->onDelete('cascade')->onUpdate('cascade');
         });
