@@ -7,18 +7,18 @@
         <meta name="description" content="">
         <link href="{{asset('css/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">  
         <link href="{{asset('css/themes/css/main.css')}}" rel="stylesheet"/>
-        <!--
-        <link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
-        <link href="themes/css/bootstrappage.css" rel="stylesheet"/>
-        <link href="themes/css/flexslider.css" rel="stylesheet"/>
-        <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}" >
-        <script src="resources/js/jquery-1.7.2.min.js"></script>      
-        <script src="resources/js/bootstrap.min.js"></script>	
-        -->
+        <link href="{{asset('css/bootstrap/css/bootstrap-responsive.min.css')}}" rel="stylesheet">
+        <link href="{{asset('css/themes/css/bootstrappage.css')}}" rel="stylesheet"/>
+        <link href="{{asset('css/themes/css/flexslider.css')}}" rel="stylesheet"/>
+        <script src="{{asset('css/themes/js/js/jquery-1.7.2.min.js')}}"></script>
+        <script src="{{asset('css/bootstrap/js/bootstrap.min.js')}}  "></script>
     </head>
     <body>
         @include('layouts/header')
-        @yield('content')
-        @include('layouts/footer')
+        <div id="wrapper" class="container">
+            @include('layouts/navbar')
+            @yield('content')
+            @include('layouts/footer')
+        </div>
     </body>
 </html>
