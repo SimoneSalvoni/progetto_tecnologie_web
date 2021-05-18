@@ -4,7 +4,10 @@
 <section  class="main-content">		<!-- style=main.css c'era dentro, perché? -->		
     <div class="row">						
         <div class="span9">
-            <a href="themes/images/ladies/1.jpg" class="thumbnail" data-fancybox-group="group1" title="Description 1"><img alt="" src="themes/images/ladies/1.jpg"></a>												
+            @if (empty($event->immagine){
+                       $event->immagine = 'default.jpg';
+            }
+            <img src="{{ asset('public/locandine/' . $event->immagine) }}" {class="thumbnail"}>										
         </div>
         <div class="single_event">
             <h3><span>{{$event->nome}}</span></h3>
@@ -12,16 +15,7 @@
             <h5><strong>Data: {{$event->data}}</strong></h5>
             <h5><strong>Luogo: {{$event->regione.", ".$event->provincia.", ".$event->indirizzo." ".$event->numciv}}</strong></h5>								
             <h5><strong>Prezzo: 
-                    @if(data>datascont) <!-- specifica!-->
-                    <span style="font-size: large">
-                        {{$event->costo-($event->costo*$event->sconto/100)}}&nbsp&nbsp&nbsp&nbsp
-                    </span>
-                    <span style="font-size: small">
-                        <s>{{$event->costo}}</s>
-                    </span>     
-                    @else
-                    {{$events->costo}}
-                    @endif
+                @include('helpers/prezzoEvento', ['dataEvento' => $event->data, 'giorniSconto' => $event->giornisconto]
                 </strong></h5>
             <form class="form-inline" action="#">
                 <!-- per il GUEST DEVE LINKARE AL LOGIN-->
