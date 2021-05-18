@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PublicController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,9 +20,9 @@ Route::get('/', function () {
  
  */
 
-Route::get('/', 'PublicController@showHomePage') -> name('home');
-Route::get('/listaEventi', 'PublicController@showEventsList') -> name('list');
-Route::post('/listaEventi', 'PublicController@showEventsListFiltered') -> name('list.search');
-Route::get('/listaEventi/Evento/{eventId}', 'PublicController@showEvent') -> name('event');
+Route::get('/', [PublicController::class,'showHomePage']) -> name('home');
+Route::get('/listaEventi', [PublicController::class,'showEventsList']) -> name('list');
+Route::post('/listaEventi', [PublicController::class,'showEventsListFiltered']) -> name('list.search');
+Route::get('/listaEventi/Evento/{eventId}', [PublicController::class,'showEvent']) -> name('event');
 //Route::get('/Evento/{eventId}','PublicController@showEvent') -> name('event'); non so se serve...
-Route::get('/info', 'PublicController@showInfo') -> name('info');
+Route::get('/info', [PublicController::class,'showInfo']) -> name('info');

@@ -1,4 +1,4 @@
-@extends(layouts.public)
+@extends('layouts.public')
 
 @section (content)
 <section class="main-content">
@@ -42,8 +42,7 @@
     <section class="single_product">
         <div class="product_container clickable" >
             <!--<div class="image_item"><img src="concert.jpg" alt="Immagine dell'evento" class="product_image"></div>-->
-            <div class="image item">            
-            </div>
+            <div class="image item"> <img src="{{asset('locandine/'.$event->immagine)}}" class="product image"></div>
             <div class="descr_container">
                 <div class="title_item"><h4>{{$event->nome}}
                     </h4></div>

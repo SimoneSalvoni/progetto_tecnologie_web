@@ -49,7 +49,7 @@ class EventsList{
     }
     
     public function getNearEvents(){
-        return Event::orderBy('data')->take(8); //non dovrebbe servire ->get()
+        return Event::orderBy('data')->take(8)->get(); //non dovrebbe servire ->get()
     }
     
     public function getEventById($eventId){
