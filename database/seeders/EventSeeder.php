@@ -14,7 +14,7 @@ class EventSeeder extends Seeder {
      */
     public function run() {
         $regions = array('Marche', 'Marche', 'Marche', 'Marche', 'Lazio', 'Lazio', 'Lazio', 'Abruzzo', 'Abruzzo', 'Molise');
-        $date = array('2021-04-22', '2021-04-23', '2021-04-24', '2021-03-25', '2021-03-25', '2021-03-25', '2021-04-20', '2021-02-20', '2021-02-27', '2021-02-26');
+        $date = array('2021-07-22', '2021-07-23', '2021-07-24', '2021-07-25', '2021-07-25', '2021-07-25', '2021-07-20', '2021-07-20', '2021-08-27', '2021-08-26');
         $organizzatori = array('Acme', 'Acme', 'Acme', 'Acme', 'Acme', 'SConcert', 'SConcert', 'SConcert', 'SConcert', 'Sup');
         for ($i=0; $i<10; $i++){
         DB::table('events')->insert([

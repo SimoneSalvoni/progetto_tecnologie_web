@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\EventsList; 
 use App\Models\FAQList;
+use Illuminate\Support\Facades\Log;
 use App\Http\Requests\AdvancedSearchRequest;
 
 class PublicController extends Controller
@@ -24,12 +25,13 @@ class PublicController extends Controller
     
     public function showEventsList(){
         $events=$this->eventsList->getEvents();
-        return view('event-list')->with('events', $events);
+        return view('list')->with('events', $events);
     }
    
-    public function showEventsListFiltered(AdvancedSearchRequest $request){    
+    public function showEventsListFiltered(AdvancedSearchRequest $request){
+        Log::debug('Nel controller');
         $events = $this->eventsList->getEventsFiltered($request->date, $request->reg, $request->org, $request->desc);
-        return view ('event-list')->with ('events', $events);
+        return view ('list')->with ('events', $events);
     }
     
     public function showEvent($eventId){

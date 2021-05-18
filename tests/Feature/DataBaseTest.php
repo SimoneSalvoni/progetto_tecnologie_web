@@ -4,6 +4,7 @@ namespace Tests\Feature;
 use App\Models\EventsList; 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Facades\Log;
 use Tests\TestCase;
 
 class DataBaseTest extends TestCase
@@ -131,6 +132,23 @@ class DataBaseTest extends TestCase
             array_push($QueryResult, $result->nome, $result->data);
         }
         $this->assertEquals($QueryAssert, $QueryResult );
+    }
+    
+    /**
+     * Testa gli eventi recenti
+     */
+    public function test_recenti() {
+        $eventlist = new EventsList;
+        $this->seed();
+        $QueryAssert = ['2021-07-20', '2021-07-20','2021-07-22', '2021-07-23', '2021-07-24', '2021-07-25', '2021-07-25', '2021-07-25'];
+        $QueryResult = [];
+        $resultsList = $eventlist->getNearEvents();
+        foreach ($resultsList as $result){
+            array_push($QueryResult, $result->data);
+            Log::debug($result->nome);
+        }
+        $this->assertEquals($QueryAssert, $QueryResult );
+        
     }
     
     

@@ -873,7 +873,7 @@ section.our_client .row{
 		max-height: 80px;
 		height: fit-content;
 		/*Si può togliere per avere una rappresentazione diversa*/
-		white-space:pre-wrap;
+		white-space:normal;
 		overflow: hidden;
 
 	}
