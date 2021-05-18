@@ -22,7 +22,7 @@ class Event extends Model
     
     //forse serve per modificare gli incassi totali con gli acquisti?
     public function getOrganizzatore(){
-        return $this->belongsTo(User::class, "nomeorganizzatore", "nomeutente");
+        return $this->belongsTo(User::class, "nomeorganizzatore", "organizzazione");
     }
 }
 

@@ -13,6 +13,11 @@ class FaqSeeder extends Seeder
      */
     public function run()
     {
-        //
+        for ($i=1; $i<=3; $i++){
+            DB::table('faqs')->insert([
+               'domanda' => 'Domanda numero '.$i,
+                'risposta' => 'Risposta numero '.$i
+            ]);
+        }
     }
 }

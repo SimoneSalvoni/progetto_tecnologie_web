@@ -35,5 +35,4 @@ class User extends Model
      * @var string
      */
     public $keyType = 'string';    
-    //use HasFactory;
 }

@@ -30,7 +30,7 @@ class EventsList{
                         $queryFilters[]=["regione", "LIKE", strval($regione)];
                         break;
                     case "organizzazione":
-                        $queryFilters[]=["nomeorganizzazione", "LIKE", strval($organizzazione)];
+                        $queryFilters[]=["nomeorganizzatore", "LIKE", strval($organizzazione)];
                         break;
                     case "descrizione":
                         $queryFilters[]=["descrizione", "LIKE", "%".strval($descrizione)."%"];
@@ -54,6 +54,14 @@ class EventsList{
     
     public function getEventById($eventId){
         return Event::where('id', $eventId);
+    }
+    
+    /**
+     * Ritorna tutti gli eventi
+     * @return type
+     */
+    public function getAllEvents(){
+        return Event::all();
     }
     
     /*
