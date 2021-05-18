@@ -1,7 +1,7 @@
 <?php
 
 namespace Tests\Feature;
-use \App\Models\EventsList; 
+use App\Models\EventsList; 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -13,7 +13,6 @@ class DataBaseTest extends TestCase
      * test precedenti non interferiscano con i successivi
      */
     use RefreshDatabase;
-    protected $eventlist;
     /**
      * A basic feature test example.
      *
@@ -21,12 +20,14 @@ class DataBaseTest extends TestCase
      */
     public function test_example()
     {
-        $this->$eventlist = new EventsList;
+        $eventlist = new EventsList;
         $this->seed();
-        $firstQueryAssert = 'Marche';
-        $resultsList = $eventList->getEventsFiltered(null, 'Marche');
+        $QueryAssert = ['Marche','Marche'];
+        $QueryResult = [];
+        $resultsList = $eventlist->getEventsFiltered(null, 'Marche');
         foreach ($resultsList as $result){
-            $this->assertEquals($firstQueryAssert, $result->regione );
+            array_push($QueryResult, $result->regione);
         }
+        $this->assertEquals($QueryAssert, $QueryResult );
     }
 }

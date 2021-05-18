@@ -41,8 +41,9 @@ class EventsList{
             
            //Controllo se non è presente alcun filtro
             if(empty($queryFilters)){$eventList = Event::all();}
-            //Caso in cui l'array non sia vuoto
-            else{$eventList = Event::where($queryFilters.values())->get();}
+            
+            //Caso in cui sia presente almeno un filtro
+            else{$eventList = Event::where($queryFilters)->get();}
             
             return $eventList;
     }

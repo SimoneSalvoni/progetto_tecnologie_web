@@ -1,8 +1,9 @@
 <?php
 
 namespace Database\Seeders;
-
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 
 class EventSeeder extends Seeder {
 
@@ -12,7 +13,7 @@ class EventSeeder extends Seeder {
      * @return void
      */
     public function run() {
-        DB::table('users')->insert([
+        DB::table('events')->insert([
             'nome' => Str::random(10),
             'descrizione' => 'Descrizione del primo evento di prova',
             'urlluogo' => Str::random(10),
@@ -28,7 +29,7 @@ class EventSeeder extends Seeder {
             'nomeorganizzatore' => 'Lorenzo'
         ]);
         
-        DB::table('users')->insert([
+        DB::table('events')->insert([
             'nome' => Str::random(10),
             'descrizione' => 'Descrizione del secondo evenot di prova',
             'urlluogo' => Str::random(10),
@@ -44,7 +45,7 @@ class EventSeeder extends Seeder {
             'nomeorganizzatore' => 'Lorenzo'
         ]);
         
-        DB::table('users')->insert([
+        DB::table('events')->insert([
             'nome' => Str::random(10),
             'descrizione' => 'Terzo della serie',
             'urlluogo' => Str::random(10),
