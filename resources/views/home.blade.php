@@ -24,7 +24,7 @@
                                 <li class="span3">
                                     <div class="product-box">
                                         <span class="sale_tag"></span>
-                                        <p><a href="{{route('event',[$nearEvents[$i]->id])}}"><img src="{{ asset('locandine/'.$nearEvents[i]->immagine)}}" alt="" /></a></p>
+                                        <p><a href="{{route('event',[$nearEvents[$i]->id])}}"><img src="{{ asset('locandine/'.$nearEvents[$i]->immagine)}}" alt="" /></a></p>
                                         <a href="{{route('event',[$nearEvents[$i]->id])}}" class="title">{{$nearEvents[$i]->nome}}</a><br/>
                                     </div>
                                 </li>
@@ -37,7 +37,7 @@
                                 @if (@isset($nearEvents[$i]))
                                 <li class="span3">
                                     <div class="product-box">
-                                        <p><a href="{{route('event',[$nearEvents[$i]->id])}}"><img src="{{ asset('locandine/'.$nearEvents[i]->immagine)}}" alt="" /></a></p>
+                                        <p><a href="{{route('event',[$nearEvents[$i]->id])}}"><img src="{{ asset('locandine/'.$nearEvents[$i]->immagine)}}" alt="" /></a></p>
                                         <a href="{{route('event',[$nearEvents[$i]->id])}}" class="title">{{$nearEvents[$i]->nome}}</a><br/>
                                     </div>
                                 </li>

@@ -12,14 +12,13 @@
             <div>
                 <!-- action= della forma {{route('nome della rotta in web.php')}} -->
                 <form method="post" id="search" name="search"enctype="multipart/form-data" action="#">
-                    @csfr
+                    @csrf
                     <span class="search">
                         <label for=date class="control">Data</label>
                         <input type=month name=date id=date value="{{old('date')}}"/>
                     </span>
                     <span class="search">
                         <label for=reg class="control">Regione</label>
-                        <!<!-- PER LA REGIONE DOVREMMO METTERE L'AUTO COMPLETAMENTO -->
                         <input type=text name=reg id=reg value="{{old('reg')}}" />
                     </span>
                     <span class="search">
@@ -53,16 +52,7 @@
                     <div>REGIONE: {{$events->regione}} </div>
                     <div>DATA: {{$event->data}}</div>
                     <div>COSTO: 
-                        @if(data>datascont) <!-- specifica!-->
-                        <span style="font-size: large">
-                            {{$event->costo-($event->costo*$event->sconto/100)}}&nbsp&nbsp&nbsp&nbsp
-                        </span>
-                        <span style="font-size: small">
-                            <s>{{$event->costo}}</s>
-                        </span>     
-                        @else
-                        {{$events->costo}}
-                        @endif
+                        @include('helpers/prezzoEvento', ['evento' => $event])
                     </div>
                 </div>
             </div>

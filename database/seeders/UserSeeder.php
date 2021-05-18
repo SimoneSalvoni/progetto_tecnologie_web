@@ -42,6 +42,8 @@ class UserSeeder extends Seeder
             'email'=>'Pluto2@studenti.univpm.it',
             'password' => Hash::make('passworddiprova'),
             'livello' => 2,
+            'nome' =>'Paolo',
+            'cognome' => 'Fresca',
             'email_verified_at' => now(),
             //'remembertoken'=> Str::random(10),
             //'timestamps'=> time()

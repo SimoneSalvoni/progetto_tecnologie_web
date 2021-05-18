@@ -15,7 +15,7 @@
             <h5><strong>Data: {{$event->data}}</strong></h5>
             <h5><strong>Luogo: {{$event->regione.", ".$event->provincia.", ".$event->indirizzo." ".$event->numciv}}</strong></h5>								
             <h5><strong>Prezzo: 
-                @include('helpers/prezzoEvento', ['dataEvento' => $event->data, 'giorniSconto' => $event->giornisconto]
+                @include('helpers/prezzoEvento', ['dataEvento' => $event->data, 'giorniSconto' => $event->giornisconto])
                 </strong></h5>
             <form class="form-inline" action="#">
                 <!-- per il GUEST DEVE LINKARE AL LOGIN-->
