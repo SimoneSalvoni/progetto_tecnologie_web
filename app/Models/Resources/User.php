@@ -7,12 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class User extends Model
 {   
+    use HasFactory;
     /**
      * Primary key della tabella associata al modello
      * 
      * @var string
      */
-    protected $primarykey = 'email';
+    protected $primarykey = 'nomeutente';
     
     /**
      * Indica se la primary key è un auto increment o no
@@ -33,6 +34,6 @@ class User extends Model
      * 
      * @var string
      */
-    public $keyType = 'string';
+    public $keyType = 'string';    
     //use HasFactory;
 }

@@ -14,13 +14,15 @@ class Purchases extends Migration {
     public function up() {
         Schema::create('purchases', function (Blueprint $table) {
             $table->id();
-            $table->string('emailutente');
+            $table->string('nomeutente');
             $table->unsignedBigInteger('idevento');
             $table->string('nomeevento');
             $table->integer('numerobiglietti');
             $table->float('costototale');
             $table->date('data');
-            $table->foreign('emailutente')->references('email')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('nomeutente')->references('nomeutente')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            
+//Non sono così sicuro della chiave esterna con evento perchè la relazione è "0 a uno"
             $table->foreign('idevento')->references('id')->on('events')->onUpdate('cascade');
             $table->foreign('nomeevento')->references('nome')->on('events')->onUpdate('cascade');
         });

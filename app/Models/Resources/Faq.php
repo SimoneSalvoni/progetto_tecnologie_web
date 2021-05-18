@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Faq extends Model
 {
+    use HasFactory;
     /**
      * Primary key della tabella associata al modello
      * 

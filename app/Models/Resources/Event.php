@@ -7,13 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Event extends Model
 {    
+    use HasFactory;
     /**
      * Indica che il modello non devere cercare delle colonne con il time stamp
      * 
      * @var boolean
      */
     public $timestamps = false;
-    //use HasFactory;
+
     
     public function getDiscountedPrice(){
         return ($this->costo) - ($this->costo)*($this->sconto/100);
@@ -21,7 +22,7 @@ class Event extends Model
     
     //forse serve per modificare gli incassi totali con gli acquisti?
     public function getOrganizzatore(){
-        return $this->hasOne(User::class, "email", "emailorganizzatore");
+        return $this->belongsTo(User::class, "nomeorganizzatore", "nomeutente");
     }
 }
 

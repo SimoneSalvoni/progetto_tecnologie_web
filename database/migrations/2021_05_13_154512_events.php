@@ -30,7 +30,7 @@ class Events extends Migration {
             $table->integer('bigliettitotali')->default(0);
             $table->float('incassototale')->default(0);
             $table->integer('parteciperò')->default(0);
-            $table->string('nomeorganizzazione');
+            $table->string('nomeorganizzatore');
             $table->foreign('nomeorganizzatore')->references("nomeutente")->on('users')->onDelete('cascade')->onUpdate('cascade');
         });
     }

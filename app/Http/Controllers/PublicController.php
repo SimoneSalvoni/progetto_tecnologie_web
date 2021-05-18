@@ -12,7 +12,7 @@ class PublicController extends Controller
     protected $FAQList;
     
     public function __construct() {
-        $this->eventsList = new EventList; 
+        $this->eventsList = new EventsList; 
         $this->FAQList = new FAQList;
     }
     

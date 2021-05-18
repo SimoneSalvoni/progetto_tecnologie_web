@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Purchase extends Model
 {       
+    use HasFactory;
     /**
      * Indica che il modello non devere cercare delle colonne con il time stamp
      * 
@@ -20,16 +21,9 @@ class Purchase extends Model
      * @return User
      */
     public function getUtente(){
-        return $this->hasOne(User::class,'email', 'emailutente');
+        return $this->belongsTo(User::class,'nomeutente', 'nomeutente');
     }
     
-    /**
-     * Recupera il modello dell'evento acquistato
-     * 
-     * @return Event
-     */
-    public function getEvento(){
-        return $this->hasOne(Event::class, 'id','idevento');
-    }
+    //ho dovuto eliminare la relazione con evento perchè non è "uno a uno" oppure "un a molti"
     //use HasFactory;
 }

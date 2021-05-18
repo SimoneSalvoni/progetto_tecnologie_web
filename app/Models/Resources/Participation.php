@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Participation extends Model
 {
+    use HasFactory;
     /**
      * Indica che il modello non devere cercare delle colonne con il time stamp
      *  
@@ -20,7 +21,7 @@ class Participation extends Model
      * @return User
      */
     public function getPartecipante(){
-        return $this->hasOne(User::class, 'email', 'emailutente'); // TODO provare se funziona
+        return $this->belongsTo(User::class, 'nomeutente', ''); // TODO provare se funziona
     }
     
     /**
@@ -29,7 +30,7 @@ class Participation extends Model
      * @return Event
      */
     public function getEvento(){
-        return $this->hasOne(Event::class, 'id', 'idevento'); // TODO provare se funziona
+        return $this->belongsTo(Event::class, 'idevento', 'id'); // TODO provare se funziona
     }
     //use HasFactory;
 }
