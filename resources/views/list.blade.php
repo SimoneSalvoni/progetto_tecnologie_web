@@ -1,6 +1,6 @@
 @extends('layouts.public')
 
-@section (content)
+@section ('content')
 <section class="main-content">
     <section>
         <div class="outer_search">
@@ -9,10 +9,9 @@
                     <b>Ricerca<br>avanzata</b>
                 </p>
             </div>
-            <div>
-                <!-- action= della forma {{route('nome della rotta in web.php')}} -->
-                <form method="post" id="search" name="search"enctype="multipart/form-data" action="#">
-                    @csrf
+
+                <form method="post" id="search" name="search"enctype="multipart/form-data" action="{{route('list.search')}}">
+                @csrf   
                     <span class="search">
                         <label for=date class="control">Data</label>
                         <input type=month name=date id=date value="{{old('date')}}"/>
@@ -31,17 +30,16 @@
                     </span>
                     <input type= submit class="btn btn-inverse" style="vertical-align: super" value="Cerca"> 
                 </form>
-            </div>
+
         </div>
     </section>
-    <!-- Qui inizia la lista degli eventi PLACEHOLDER. NON SO QUANTO MANUALE SIA LA GESTIONE DELLA PAGINAZIONE. IN OGNI CASO
-    FOR EACH PENSO PER FARE LA LISTA DEGLI EVENTI-->
     <h4><span>Lista degli eventi</span></h4>
+    @isset($events)
     @foreach($events as $event)
     <section class="single_product">
         <div class="product_container clickable" >
             <!--<div class="image_item"><img src="concert.jpg" alt="Immagine dell'evento" class="product_image"></div>-->
-            <div class="image item"> <img src="{{asset('locandine/'.$event->immagine)}}" class="product image"></div>
+            <div class="image_item"> <img src="{{asset('locandine/'.$event->immagine)}}" class="product_image"></div>
             <div class="descr_container">
                 <div class="title_item"><h4>{{$event->nome}}
                     </h4></div>
@@ -49,17 +47,23 @@
                     {{$event->descrizione}}
                 </div>
                 <div class="info-container">
-                    <div>REGIONE: {{$events->regione}} </div>
+                    <div>REGIONE: {{$event->regione}} </div>
                     <div>DATA: {{$event->data}}</div>
-                    <div>COSTO: 
-                        @include('helpers/prezzoEvento', ['evento' => $event])
+                     <!--   @include('helpers/prezzoEvento', ['evento' => $event])-->
+                    <div>COSTO: {{$event->costo}}€
+                        <!-- TODO: Lo sconto è da fare -->
                     </div>
                 </div>
             </div>
         </div>
     </section>
     @endforeach
+    
+    @include('pagination.paginator', ['paginator' => $events])  
+    
+    @endisset
     <hr>
+    <!--
     <div class="pagination pagination-small pagination-centered">
         <ul>
             <li><a href="#">Prev</a></li>
@@ -70,6 +74,6 @@
             <li><a href="#">Next</a></li>
         </ul>
     </div>
-</div>
+    -->
 </section>
 @endsection

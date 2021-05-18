@@ -1,4 +1,5 @@
 @php
+<<<<<<< HEAD
 $data = date('Y-m-d', strToTime($evento->data));
 $costo=$evento->costo;
 $sconto=$evento->sconto;

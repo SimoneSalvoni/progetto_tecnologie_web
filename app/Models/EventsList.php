@@ -5,12 +5,11 @@ use App\Models\Resources\Event;
 class EventsList{
     
     public function getEvents(){
-       $events= Event::all()->paginate(10);
+       $events= Event::orderBy('data')->paginate(10);
        return $events;
     }
     
     
-    //NON RIESCO..
     public function getEventsFiltered($data=null, $regione=null, $organizzazione=null, $descrizione=null){
             $filters = array("data" => $data, "regione" => $regione, "organizzazione" => $organizzazione, "descrizione" => $descrizione);
             
@@ -40,12 +39,12 @@ class EventsList{
             }
             
            //Controllo se non è presente alcun filtro
-            if(empty($queryFilters)){$eventList = Event::all();}
+            if(empty($queryFilters)){$eventList = Event::orderBy('data');}
             
             //Caso in cui sia presente almeno un filtro
-            else{$eventList = Event::where($queryFilters)->get();}
+            else{$eventList = Event::where($queryFilters);}
             
-            return $eventList;
+            return $eventList->paginate(8);
     }
     
     public function getNearEvents(){
@@ -54,14 +53,6 @@ class EventsList{
     
     public function getEventById($eventId){
         return Event::where('id', $eventId);
-    }
-    
-    /**
-     * Ritorna tutti gli eventi
-     * @return type
-     */
-    public function getAllEvents(){
-        return Event::all();
     }
     
     /*
