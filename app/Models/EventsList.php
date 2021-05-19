@@ -52,7 +52,7 @@ class EventsList{
     }
     
     public function getEventById($eventId){
-        return Event::where('id', $eventId);
+        return Event::where('id', $eventId)->first();
     }
     
     /*
