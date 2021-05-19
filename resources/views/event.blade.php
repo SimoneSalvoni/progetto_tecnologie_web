@@ -4,16 +4,16 @@
 <section  class="main-content">		<!-- style=main.css c'era dentro, perché? -->	
     @foreach ($events as $event)
     <div class="row">						
-        <div class="span9">
+        <div class="span ">
             @if (empty($event->immagine))
                 $event->immagine = 'default.jpg';
             @else
-            <img src="{{ asset('locandine/' . $event->immagine) }}" {class="thumbnail"}>	
+            <img src="{{ asset('locandine/' . $event->immagine) }}" class="thumbnail event-image">	
             @endif
         </div>
         <div class="single_event">
             <h3><span>{{$event->nome}}</span></h3>
-            <h5><strong>Organizzazione: {{$event->nomeorganizzazione}}</strong></h5>				
+            <h5><strong>Organizzazione: {{$event->nomeorganizzatore}}</strong></h5>				
             <h5><strong>Data: {{$event->data}}</strong></h5>
             <h5><strong>Luogo: {{$event->regione.", ".$event->provincia.", ".$event->indirizzo." ".$event->numciv}}</strong></h5>								
             <h5><strong>Prezzo: {{$event->costo}}€
@@ -40,8 +40,9 @@
                 <p class="desc">
                     {{$event->descrizione}}
                 </p>
+                
                 <div>  
-                    <iframe width="400" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="{{$event->urlluogo}}"></iframe>  
+                    <iframe width="400" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="{{$event->urlluogo}}"></iframe><small><a href="{{$event->urlluogo}}"""></a></small>  
                 </div>
             </div>     
         </div>

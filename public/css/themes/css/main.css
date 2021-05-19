@@ -923,4 +923,12 @@ section.our_client .row{
     line-height: 100%;
 }
 
+/*---- Sinoglo evento ---*/
+
+.event-image{
+    height: 354px;
+    width: 243.6px;
+    margin-right: 50px;
+}
+
 
