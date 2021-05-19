@@ -29,7 +29,6 @@ class PublicController extends Controller
     }
    
     public function showEventsListFiltered(AdvancedSearchRequest $request){
-        Log::debug('Nel controller');
         $events = $this->eventsList->getEventsFiltered($request->date, $request->reg, $request->org, $request->desc);
         return view ('list')->with ('events', $events);
     }

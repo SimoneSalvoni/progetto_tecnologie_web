@@ -4,7 +4,7 @@
 <section  class="main-content">		<!-- style=main.css c'era dentro, perché? -->		
     <div class="row">						
         <div class="span9">
-            @if (isset($event->immagine))
+            @if (!isset($event->immagine))
            <?php $event->immagine= 'default.jpg'; ?>
             @endif
             <img src="{{ asset('locandine/'.$event->immagine) }}" {class="thumbnail"}>		
