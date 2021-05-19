@@ -827,6 +827,8 @@ section.our_client .row{
     margin: auto auto auto 0;
 }
 /*--- Evento nella lista ---*/
+
+
 .single_product{
     display: block;
     border-style:solid;
@@ -921,4 +923,31 @@ section.our_client .row{
     line-height: 100%;
 }
 
+/*---- Sinoglo evento ---*/
+
+.event-image{
+    height: 354px;
+    width: 243.6px;
+    margin-right: 50px;
+}
+
+/*---- Pagina Info ----*/
+.info-element{
+    padding: 4px 4px 4px 4px;
+    margin: 5px 3px 5px 3px;
+
+}
+
+.info-paragraph{
+    font-size:small;
+}
+
+.faq-element{
+    padding: 4px 4px 4px 4px;
+    margin: 5px 3px 5px 3px;
+}
+
+.risposta{
+    font-size:small;
+}
 

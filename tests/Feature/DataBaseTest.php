@@ -33,6 +33,22 @@ class DataBaseTest extends TestCase
     }
     
     /**
+     * Testa la ricerca di un evento per id
+     * 
+     * @return void 
+     */
+    public function test_id() { 
+        $eventlist = new EventsList;
+        $this->seed();
+        $QueryAssert = ['Marche','Marche','Marche','Marche'];
+        $QueryResult = [];
+        $resultsList = $eventlist->getEventsFiltered(null, 'Marche');
+        foreach ($resultsList as $result){
+            array_push($QueryResult, $result->regione);
+        }
+        $this->assertEquals($QueryAssert, $QueryResult );
+    }    
+    /**
      * Testa la ricerca per regione
      * 
      * @return void 
