@@ -2,15 +2,18 @@
 
 
 @section ('content')
-@include(layouts.info)
+@include('layouts.info')
 <section id="faq">
     @foreach($FAQ as $q)
-    <h1>
+    <div class="faq-element">
+    <h3>
         <b>{{$q->domanda}}</b>
-    </h1>
-    <h2>
+    </h3>
+    <p class="risposta">
         {{$q->risposta}}
-    </h2>
+    </p>
+    </div>
     @endforeach
+
 </section>
 @endsection

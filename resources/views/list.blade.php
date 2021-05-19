@@ -13,22 +13,22 @@
                 <form method="post" id="search" name="search"enctype="multipart/form-data" action="{{route('list.search')}}">
                 @csrf   
                     <span class="search">
-                        <label for=date class="control">Data</label>
-                        <input type=month name=date id=date value="{{old('date')}}"/>
+                        <label for="date" class="control">Data</label>
+                        <input type="month" name="date" id="date" value="{{old('date')}}"/>
                     </span>
                     <span class="search">
-                        <label for=reg class="control">Regione</label>
-                        <input type=text name=reg id=reg value="{{old('reg')}}" />
+                        <label for="reg" class="control">Regione</label>
+                        <input type="text" name="reg" id="reg" value="{{old('reg')}}" />
                     </span>
                     <span class="search">
-                        <label for=org class="control">Società organizzatrice</label>
-                        <input type=text name=org id=org value="{{old('org')}}" />
+                        <label for="org" class="control">Società organizzatrice</label>
+                        <input type="text" name="org" id="org" value="{{old('org')}}" />
                     </span>
                     <span class="search">
-                        <label for=desc class="control">Descrizione</label>
-                        <input type=text name=desc id=desc value="{{old('desc')}}"/>
+                        <label for="desc" class="control">Descrizione</label>
+                        <input type="text" name="desc" id="desc" value="{{old('desc')}}"/>
                     </span>
-                    <input type= submit class="btn btn-inverse" style="vertical-align: super" value="Cerca"> 
+                    <input type= "submit" class="btn btn-inverse" style="vertical-align: super" value="Cerca"> 
                 </form>
 
         </div>

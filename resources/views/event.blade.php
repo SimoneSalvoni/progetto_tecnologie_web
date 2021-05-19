@@ -2,13 +2,12 @@
 
 @section ('content')
 <section  class="main-content">		<!-- style=main.css c'era dentro, perché? -->	
-    @foreach ($events as $event)
     <div class="row">						
-        <div class="span">
-            @if (isset($event->immagine))
+        <div class="event-image span">
+            @if (!isset($event->immagine))
            <?php $event->immagine= 'default.jpg'; ?>
             @endif
-            <img src="{{ asset('locandine/'.$event->immagine) }}" {class="thumbnail"}>		
+            <img src="{{ asset('locandine/'.$event->immagine) }}" class="thumbnail"> 		
         </div>
         <div class="single_event">
             <h3><span>{{$event->nome}}</span></h3>
@@ -46,7 +45,6 @@
             </div>     
         </div>
     </div>
-    @endforeach
 </section>
 @endsection
 

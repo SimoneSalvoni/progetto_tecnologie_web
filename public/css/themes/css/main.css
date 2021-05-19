@@ -931,4 +931,23 @@ section.our_client .row{
     margin-right: 50px;
 }
 
+/*---- Pagina Info ----*/
+.info-element{
+    padding: 4px 4px 4px 4px;
+    margin: 5px 3px 5px 3px;
+
+}
+
+.info-paragraph{
+    font-size:small;
+}
+
+.faq-element{
+    padding: 4px 4px 4px 4px;
+    margin: 5px 3px 5px 3px;
+}
+
+.risposta{
+    font-size:small;
+}
 

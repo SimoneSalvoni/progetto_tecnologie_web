@@ -35,8 +35,9 @@ class PublicController extends Controller
     
     public function showEvent($eventId){
         Log::debug(strval($eventId));
-        $events=$this->eventsList->getEventById($eventId);
-        return view('event')->with('events', $events);
+        $event = $this->eventsList->getEventById($eventId);
+        Log::debug($event->immagine);
+        return view('event')->with('event', $event);
     }
    
     public function showInfo(){
