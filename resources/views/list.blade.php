@@ -14,21 +14,21 @@
                 @csrf   
                     <span class="search">
                         <label for="date" class="control">Data</label>
-                        <input type="month" name="date" id="date" value="{{old('date')}}"/>
+                       <input type="month" name="date" id="date" value ="<?php echo isset($_POST['date'])? $_POST['date']:''?>"/>
                     </span>
                     <span class="search">
                         <label for="reg" class="control">Regione</label>
-                        <input type="text" name="reg" id="reg" value="{{old('reg')}}" />
+                        <input type="text" name="reg" id="reg" value="<?php echo isset($_POST['reg'])? $_POST['reg']:''?>" />
                     </span>
                     <span class="search">
                         <label for="org" class="control">Società organizzatrice</label>
-                        <input type="text" name="org" id="org" value="{{old('org')}}" />
+                        <input type="text" name="org" id="org" value="<?php echo isset($_POST['org'])? $_POST['org']:''?>" />
                     </span>
                     <span class="search">
                         <label for="desc" class="control">Descrizione</label>
-                        <input type="text" name="desc" id="desc" value="{{old('desc')}}"/>
+                        <input type="text" name="desc" id="desc" value="<?php echo isset($_POST['desc'])? $_POST['desc']:''?>"/>
                     </span>
-                    <input type= "submit" class="btn btn-inverse" style="vertical-align: super" value="Cerca"> 
+                    <input type="submit" class="btn btn-inverse" style="vertical-align: super" value="Cerca"> 
                 </form>
 
         </div>
