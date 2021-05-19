@@ -5,7 +5,7 @@ use App\Models\Resources\Event;
 class EventsList{
     
     public function getEvents(){
-       $events= Event::orderBy('data')->paginate(10);
+       $events= Event::orderBy('data')->paginate(8);
        return $events;
     }
     
