@@ -4,10 +4,11 @@
 <section  class="main-content">		<!-- style=main.css c'era dentro, perché? -->		
     <div class="row">						
         <div class="span9">
-            @if (empty($event->immagine)){
-                       $event->immagine = 'default.jpg';
-            }
-            <img src="{{ asset('public/locandine/' . $event->immagine) }}" {class="thumbnail"}>										
+            @if (empty($event->immagine))
+                $event->immagine = 'default.jpg';
+            @else
+            <img src="{{ asset('public/locandine/' . $event->immagine) }}" {class="thumbnail"}>	
+            @endif
         </div>
         <div class="single_event">
             <h3><span>{{$event->nome}}</span></h3>

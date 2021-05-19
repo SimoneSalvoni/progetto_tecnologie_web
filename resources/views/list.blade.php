@@ -59,8 +59,9 @@
     </section>
     @endforeach
     
+
     @include('pagination.paginator', ['paginator' => $events])  
-    
+
     @endisset
     <hr>
     <!--
