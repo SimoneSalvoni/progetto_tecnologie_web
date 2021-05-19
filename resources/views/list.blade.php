@@ -37,7 +37,7 @@
     @isset($events)
     @foreach($events as $event)
     <section class="single_product">
-        <div class="product_container clickable" >
+        <div class="product_container clickable"; onclick="location.href='{{route('event',[$event->id])}}'">
             <!--<div class="image_item"><img src="concert.jpg" alt="Immagine dell'evento" class="product_image"></div>-->
             <div class="image_item"> <img src="{{asset('locandine/'.$event->immagine)}}" class="product_image"></div>
             <div class="descr_container">
