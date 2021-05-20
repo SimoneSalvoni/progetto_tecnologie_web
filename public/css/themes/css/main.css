@@ -950,4 +950,25 @@ section.our_client .row{
 .risposta{
     font-size:small;
 }
+.container_payment{
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	height:inherit; 
+	height:150px
+}
+.payment{
+	height:inherit;
+}
+.num_biglietti{
+	margin-left:1em;
+	margin-top:0.4em;
+	width:3em
+}
+
+.tot_price{
+	float:right;
+	width:fit-content;
+	margin-top:10px
+}
 
