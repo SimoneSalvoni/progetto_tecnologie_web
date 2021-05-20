@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class LoginController extends Controller
@@ -21,18 +20,34 @@ class LoginController extends Controller
 
     use AuthenticatesUsers;
 
+
     /**
-     * Where to redirect users after login.
+     * Override:: definisce la homepage per i diversi utenti divisi per livello.
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    
+    protected function redirectTo() {        
+        $role = auth()->users()->livello;
+        switch ($livello) {
+            case 4: return '/admin';
+                break;
+            case 3: return '/org';
+                break;
+            case 2: return '/user';
+                break;
+            default: return '/';
+        };
+    }
 
     /**
-     * Create a new controller instance.
+     * Override:: Login con 'nomeutente' al posto di 'email'.
      *
-     * @return void
      */
+    
+    public function username() {
+        return 'nomeutente';
+    }
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
