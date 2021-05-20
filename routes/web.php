@@ -26,3 +26,6 @@ Route::post('/listaEventi', [PublicController::class,'showEventsListFiltered']) 
 Route::get('/listaEventi/Evento/{eventId}', [PublicController::class,'showEvent']) -> name('event');
 //Route::get('/Evento/{eventId}','PublicController@showEvent') -> name('event'); non so se serve...
 Route::get('/info', [PublicController::class,'showInfo']) -> name('info');
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
