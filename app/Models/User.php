@@ -17,9 +17,11 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name',
+        'nome',
+        'cognome',
+        'nomeutente',
         'email',
-        'password',
+        'password'        
     ];
 
     /**
@@ -28,6 +30,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
+        'username',
         'password',
         'remember_token',
     ];
@@ -40,4 +43,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    
+    public function hasRole($livello){
+        $livello=(array)$livello;
+        return in_array($this->livello, $livello);
+    }
 }
