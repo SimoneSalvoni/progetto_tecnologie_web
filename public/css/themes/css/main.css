@@ -806,13 +806,16 @@ section.our_client .row{
     border-radius: 20px;
     font-family:Helvetica
 }
+/*
 .site_logo{
+    height:inherit;
     float:left;
 }
+*/
 .right_header{
     float:right;
     width:inherit;
-    margin-top:5px;
+    margin-top:5px
 }
 .search{
     display:inline-block
@@ -893,25 +896,28 @@ section.our_client .row{
     flex-direction: row;
     justify-content: space-around;
     flex-wrap: wrap;
+    height:fit-content;
+    margin-left: 2em
 }
 
 @media (max-width: 180px){
     .navbar-inner.main-menu{
         height: fit-content;
     }
-    .single_event{
-        display: block;
-        margin-top: 1em;
-        margin-left: 45%;		
-    }
 }
 
+.single_event{
+    display: block;
+    margin-top: 1em;
+    margin-left: auto;
+    margin-bottom:2em;
+    height:354px
+}
 
 .desc{
     width: 50%;
-    float: left;
     overflow-wrap: break-word;
-    margin-right: 10px;
+    
 }
 
 .errors {
@@ -951,24 +957,24 @@ section.our_client .row{
     font-size:small;
 }
 .container_payment{
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: space-between;
-	height:inherit; 
-	height:150px
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    height:inherit; 
+    height:150px
 }
 .payment{
-	height:inherit;
+    height:inherit;
 }
 .num_biglietti{
-	margin-left:1em;
-	margin-top:0.4em;
-	width:3em
+    margin-left:1em;
+    margin-top:0.4em;
+    width:3em
 }
 
 .tot_price{
-	float:right;
-	width:fit-content;
-	margin-top:10px
+    float:right;
+    width:fit-content;
+    margin-top:10px
 }
 

@@ -25,21 +25,20 @@
             <div class="form-inline">
                 <form class="form-inline">
                     <!-- IMPLEMENTA IL SUBMIT -->
-                    <input class="btn btn-inverse" type="submit" value="Parteciper&ograve"></input>
+                    <input  type="submit" value="Parteciper&ograve"></input>
                     <p>
-                        Persone che parteciperanno: {{$event->partecipero}}
+                        Persone che parteciperanno: {{$event->parteciperò}}
                     </p>
                 </form>
             </div>	
         </div>							 
-        <div class="span9">	
+        <div class="info-container">	
             <hr>
             <div class="container" style="width: 100%;">
                 <p class="desc">
                     {{$event->descrizione}}
-                </p>
-                
-                <div>  
+                </p>            
+                <div style="float: right">  
                     <iframe width="400" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="{{$event->urlluogo}}"></iframe><small><a href="{{$event->urlluogo}}"""></a></small>  
                 </div>
             </div>     

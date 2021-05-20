@@ -1,5 +1,3 @@
-
-<!--<div id="wrapper" class="container"> -->
     <section id="footer-bar">
         <div class="row">
             <div class="span3">
@@ -11,5 +9,3 @@
             </div>				
         </div>
     </section>
-<!--</div>-->
-
