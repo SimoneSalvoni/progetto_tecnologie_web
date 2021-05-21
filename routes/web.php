@@ -42,7 +42,7 @@ Route::get('/user', 'UserController@index') ->name('user')->middleware('can:isUs
 //Areriservata
 Route::get('/areriservata.user', 'UserController@AreaRiservata')->name('areariservata.user')->middleware('can:isUser');
 
-Route::get('/areriservata.org', 'UserController@AreaRiservata')->name('areariservata.org')->middleware('can:isOrg');
+Route::get('/areriservata.org', 'OrgController@AreaRiservata')->name('areariservata.org')->middleware('can:isOrg');
 
-Route::get('/areriservata.admin', 'UserController@AreaRiservata')->name('areariservata.admin')->middleware('can:isAdmin');
+Route::get('/areriservata.admin', 'AdminController@AreaRiservata')->name('areariservata.admin')->middleware('can:isAdmin');
 
