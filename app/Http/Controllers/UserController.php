@@ -9,7 +9,8 @@ class userController extends Controller {
     }
 
     public function index() {
-        return view('user');
+        $nearEvents=$this->eventsList->getNearEvents();
+        return view('home')->with('nearEvents', $nearEvents);
     }
 
 }

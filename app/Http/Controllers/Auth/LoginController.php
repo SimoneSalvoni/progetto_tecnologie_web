@@ -28,8 +28,8 @@ class LoginController extends Controller
      */
     
     protected function redirectTo() {        
-        $role = auth()->users()->livello;
-        switch ($livello) {
+        $role = auth()->user()->livello;
+        switch ($role) {
             case 4: return '/admin';
                 break;
             case 3: return '/org';
@@ -37,7 +37,7 @@ class LoginController extends Controller
             case 2: return '/user';
                 break;
             default: return '/';
-        };
+        }
     }
 
     /**

@@ -1,4 +1,4 @@
-@extends('layouts.client')
+@extends('layouts.user')
 
 @section('content')
 <section name='main_content'>
