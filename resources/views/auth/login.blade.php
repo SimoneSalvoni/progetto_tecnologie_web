@@ -2,10 +2,7 @@
 
 @section('content')
 <link href="{{asset('css/themes/css/main.css')}}" rel="stylesheet"/>
-<<<<<<< HEAD
-=======
 {{--
->>>>>>> b43d0323975591738b78d6ae21d9db7f55fa613c
 <div class="container">
     <div class="center">
 
@@ -17,11 +14,8 @@
                             <label for="Nome utente" class="form-text col-md-4 col-form-label text-md-right">{{ __('Nome utente') }}</label>
 
                             <div class="col-md-6">
-<<<<<<< HEAD
-                                <input type="text" placeholder="Inserisci il tuo nome utente"  class="form-control @error('email') is-invalid @enderror" name="nomeutente" value="{{ old('nomeutente') }}" required autocomplete="nomeutente" autofocus>
-=======
+
                                 <input type="text" placeholder="Inserisci il tuo nome utente"  class="form-control" name="nomeutente" value="{{ old('nomeutente') }}" required autocomplete="nomeutente" autofocus>
->>>>>>> b43d0323975591738b78d6ae21d9db7f55fa613c
 
                                 @error('email')
                                 <span class="invalid-feedback" role="alert">
@@ -34,11 +28,8 @@
                             <label for="password" class="form-text col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
                             <div class="col-md-6">
-<<<<<<< HEAD
-                                <input id="password" type="password" placeholder="Inserisci la tua password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-=======
+
                                 <input id="password" type="password" placeholder="Inserisci la tua password" class="form-control"name="password" required autocomplete="current-password">
->>>>>>> b43d0323975591738b78d6ae21d9db7f55fa613c
 
                                 @error('password')
                                 <span class="invalid-feedback" role="alert">
@@ -62,11 +53,7 @@
                 </div>
 
 
-</div>
-<<<<<<< HEAD
-
-=======
---}}
+</div>--}}
 {{-- Prova della form con laravel collective --}}
 <div class="container">
     <div class="center">
@@ -111,7 +98,6 @@
     </div>
     </div>
 </div>
->>>>>>> b43d0323975591738b78d6ae21d9db7f55fa613c
 
     @endsection
 
