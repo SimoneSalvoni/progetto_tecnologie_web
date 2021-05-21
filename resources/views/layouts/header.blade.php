@@ -18,16 +18,16 @@
                         @endcan
                         @can('isOrg')
                         <li><a href="{{route('areariservata.org')}}">Area organizzatore</a></li>
-                        <li><a href="{{route('logout')}}">Logout</a></li>
+                        <li><a href="" title="Esci dal sito" class="highlight" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a></li>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        {{ csrf_field() }}
                         @endcan
                         @can('isAdmin')
                         <li><a href="{{route('areariservata.admin')}}">Area admin</a></li>
-                        <li><a href="{{route('logout')}}">Logout</a></li>
+                        <li><a href="" title="Esci dal sito" class="highlight" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a></li>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        {{ csrf_field() }}
                         @endcan
-
-
-
-
                     </ul>
                 </div>
             </div>
