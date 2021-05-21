@@ -1,6 +1,10 @@
 <?php
 
 namespace App\Http\Middleware;
+<<<<<<< HEAD
+=======
+use Illuminate\Support\Facades\Log;
+>>>>>>> b43d0323975591738b78d6ae21d9db7f55fa613c
 
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
 

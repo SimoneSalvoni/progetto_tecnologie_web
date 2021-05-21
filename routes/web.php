@@ -37,5 +37,5 @@ Route::get('register', 'Auth\RegisterController@showRegistrationForm')
 
 Route::post('register', 'Auth\RegisterController@register');
 
-Route::get('/user', 'UserController@index')
-        ->name('user')->middleware('can:isUser');
+
+Route::get('/user', 'UserController@index') ->name('user')->middleware('can:isUser');
