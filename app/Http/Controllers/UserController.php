@@ -11,8 +11,6 @@ class UserController extends Controller {
     public function __construct() {
         $this->middleware('auth');
         $this->eventsList = new EventsList;
-
-        // TODO creare la classe che prende dal
     }
 
     public function index() {
@@ -23,6 +21,7 @@ class UserController extends Controller {
 
     public function AreaRiservata(){
         $user = auth()->user();
+        //TODO creare la view dello user
         return view('User')->with('user',$user);
     }
 
