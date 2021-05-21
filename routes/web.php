@@ -28,7 +28,7 @@ Route::get('login', 'Auth\LoginController@showLoginForm')
 
 Route::post('login', 'Auth\LoginController@login');
 
-Route::get('logout', 'Auth\LoginController@logout')
+Route::post('logout', 'Auth\LoginController@logout')
         ->name('logout');
 
 //registrazione
@@ -39,3 +39,11 @@ Route::post('register', 'Auth\RegisterController@register');
 
 
 Route::get('/user', 'UserController@index') ->name('user')->middleware('can:isUser');
+
+//Areriservata
+Route::get('/areriservata.user', 'UserController@AreaRiservata')->name('areariservata.user')->middleware('can:isUser');
+
+Route::get('/areriservata.org', 'OrgController@AreaRiservata')->name('areariservata.org')->middleware('can:isOrg');
+
+Route::get('/areriservata.admin', 'AdminController@AreaRiservata')->name('areariservata.admin')->middleware('can:isAdmin');
+
