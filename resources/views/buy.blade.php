@@ -1,5 +1,5 @@
 @extends('layouts.user')
-
+@section('title', 'Acquisto')
 @section('content')
 <section name='main_content'>
     <div name="dati-evento" class="raw">

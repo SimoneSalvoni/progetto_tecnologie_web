@@ -1,5 +1,5 @@
 @extends ('layouts.public')
-
+@section('title', 'Evento')
 @section ('content')
 <section  class="main-content">		<!-- style=main.css c'era dentro, perché? -->	
     <div class="row">						
