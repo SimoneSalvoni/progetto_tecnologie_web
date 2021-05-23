@@ -12,6 +12,7 @@
         <link href="{{asset('css/themes/css/flexslider.css')}}" rel="stylesheet"/>
         <script src="{{asset('css/themes/js/jquery-1.7.2.min.js')}}"></script>
         <script src="{{asset('css/bootstrap/js/bootstrap.min.js')}}  "></script>
+        @yield('scripts')
     </head>
     <body>
         @include('layouts/header')

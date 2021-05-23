@@ -38,6 +38,11 @@ Route::post('register', 'Auth\RegisterController@register');
 
 Route::get('/user', 'UserController@index') ->name('user')->middleware('can:isUser');
 
+//acquisto
+Route::get('/listaEventi/Evento/{eventId}/Acquista', 'UserController@showPurchaseScreen')->name('buy')->middleware('can:isUser');
+Route::post('buy', 'UserController@buy')->middleware('can:isUser');
+Route::get('/RiepilogoAcquisto', 'UserController@showRiepilogo')->name('riepilogo')->middleware('can:isUser');
+
 //Areriservata
 Route::get('/areriservata/user', 'UserController@AreaRiservata')->name('areariservata.user')->middleware('can:isUser');
 

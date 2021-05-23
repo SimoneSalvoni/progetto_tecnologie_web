@@ -1,6 +1,7 @@
 <?php
 namespace App\Models;
 use App\Models\Resources\Event;
+use App\Models\Resources\User;
 
 class EventsList{
     
@@ -56,12 +57,11 @@ class EventsList{
 
     }
     
-    /*
-    public function getOrganizzatore($eventId){
-        $event= Event::where('id', $eventId);
-        return $event->getOrganizzatore()->nomeutente;
+    public function updateOnPurchase ($eventId, $biglietti, $importo){
+        $event = Event::where('id', $eventId)->first();
+        $event->bigliettivenduti+=$biglietti;
+        $event->incassototale+=$importo;
+        $event->save();
     }
-     * */
-
                 
 }
