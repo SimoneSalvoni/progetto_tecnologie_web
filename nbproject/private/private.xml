@@ -2,6 +2,19 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/xampp/htdocs/laraProj0/app/Models/Resources/User.php</file>
+            <file>file:/C:/xampp/htdocs/laraProj0/resources/views/org.blade.php</file>
+            <file>file:/C:/xampp/htdocs/laraProj0/app/Http/Controllers/UserController.php</file>
+            <file>file:/C:/xampp/htdocs/laraProj0/database/seeds/UserSeeder.php</file>
+            <file>file:/C:/xampp/htdocs/laraProj0/resources/views/home.blade.php</file>
+            <file>file:/C:/xampp/htdocs/laraProj0/app/Http/Controllers/OrgController.php</file>
+            <file>file:/C:/xampp/htdocs/laraProj0/app/Http/Controllers/PublicController.php</file>
+            <file>file:/C:/xampp/htdocs/laraProj0/app/Models/Resources/Purchase.php</file>
+            <file>file:/C:/xampp/htdocs/laraProj0/app/Http/Controllers/HomeController.php</file>
+            <file>file:/C:/xampp/htdocs/laraProj0/database/seeds/EventSeeder.php</file>
+            <file>file:/C:/xampp/htdocs/laraProj0/app/Models/Resources/Participation.php</file>
+            <file>file:/C:/xampp/htdocs/laraProj0/app/Models/Resources/Event.php</file>
+        </group>
     </open-files>
 </project-private>
