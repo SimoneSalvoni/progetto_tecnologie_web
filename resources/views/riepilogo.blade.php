@@ -1,5 +1,5 @@
 @extends('layouts.user')
-
+@section('title', 'Riepilogo acquisto')
 @section('content')
 <section name="main_content">
             <h2>

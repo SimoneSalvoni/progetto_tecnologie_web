@@ -1,11 +1,14 @@
 @extends('layouts.public')
 
 @section('content')
-<link href="{{asset('css/themes/css/main.css')}}" rel="stylesheet"/>
-{{--
 <div class="container">
     <div class="center">
+        <h4 class=" left title"><span class="text"><strong>Login</strong></h4>
+        <div class="container-contact">
+            <div class="wrap-contact1">
+                {{ Form::open(array('route' => 'login', 'class' => 'contact-form')) }}
 
+<<<<<<< HEAD
                 <h4 class=" left title"><span class="text"><strong>Login</strong></h4>
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">
@@ -50,9 +53,35 @@
                     <div  class="wrap-input">
                         <p> Se non hai già un account <a  href="{{ route('register') }}">registrati</a></p>
                     </div>
+=======
+                <div  class="wrap-input">
+                </div>
+                <div  class="wrap-input">
+                    {{ Form::label('nomeutente', 'Nome Utente', ['class' => 'label-input']) }}
+                    {{ Form::text('nomeutente', '', ['class' => 'input','id' => 'nomeutente']) }}
+                    @if ($errors->first('nomeutente'))
+                    <ul class="errors">
+                        @foreach ($errors->get('nomeutente') as $message)
+                        <li>{{ $message }}</li>
+                        @endforeach
+                    </ul>
+                    @endif
+>>>>>>> 7e1b4544963126cb9497e26bca9978faa127ac3d
                 </div>
 
+                <div  class="wrap-input">
+                    {{ Form::label('password', 'Password', ['class' => 'label-input']) }}
+                    {{ Form::password('password', ['class' => 'input', 'id' => 'password']) }}
+                    @if ($errors->first('password'))
+                    <ul class="errors">
+                        @foreach ($errors->get('password') as $message)
+                        <li>{{ $message }}</li>
+                        @endforeach
+                    </ul>
+                    @endif
+                </div>
 
+<<<<<<< HEAD
 </div>--}}
 {{-- Prova della form con laravel collective --}}
 <div class="container">
@@ -87,17 +116,18 @@
                 </ul>
                 @endif
             </div>
+=======
+                <div class="container-form-btn">
+                    {{ Form::submit('Login', ['class' => 'form-btn1']) }}
+                </div>
+>>>>>>> 7e1b4544963126cb9497e26bca9978faa127ac3d
 
-            <div class="container-form-btn">
-                {{ Form::submit('Login', ['class' => 'form-btn1']) }}
+                {{ Form::close() }}
             </div>
-
-            {{ Form::close() }}
+            <p> Se non hai già un account <a  href="{{ route('register') }}">registrati</a></p>
         </div>
-        <p> Se non hai già un account <a  href="{{ route('register') }}">registrati</a></p>
-    </div>
     </div>
 </div>
 
-    @endsection
+@endsection
 

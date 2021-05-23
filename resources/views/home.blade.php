@@ -1,5 +1,5 @@
 @extends('layouts.public')
-
+@section('title', 'Homepage')
 @section ('content')
 <!--<div id="wrapper" class="container">-->
     <img class="home_img" src="{{ asset('siteimgs/concert.jpg') }}" alt="">

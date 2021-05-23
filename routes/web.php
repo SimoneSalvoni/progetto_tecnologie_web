@@ -19,7 +19,6 @@ Route::get('/', 'PublicController@showHomePage') -> name('home');
 Route::get('/listaEventi', 'PublicController@showEventsList') -> name('list');
 Route::post('/listaEventi', 'PublicController@showEventsListFiltered') -> name('list.search');
 Route::get('/listaEventi/Evento/{eventId}', 'PublicController@showEvent') -> name('event');
-//Route::get('/Evento/{eventId}','PublicController@showEvent') -> name('event'); non so se serve...
 Route::get('/info', 'PublicController@showInfo') -> name('info');
 
 //login
@@ -41,9 +40,9 @@ Route::post('register', 'Auth\RegisterController@register');
 Route::get('/user', 'UserController@index') ->name('user')->middleware('can:isUser');
 
 //Areriservata
-Route::get('/areriservata.user', 'UserController@AreaRiservata')->name('areariservata.user')->middleware('can:isUser');
+Route::get('/areriservata/user', 'UserController@AreaRiservata')->name('areariservata.user')->middleware('can:isUser');
 
-Route::get('/areriservata.org', 'OrgController@AreaRiservata')->name('areariservata.org')->middleware('can:isOrg');
+Route::get('/areriservata/org', 'OrgController@AreaRiservata')->name('areariservata.org')->middleware('can:isOrg');
 
-Route::get('/areriservata.admin', 'AdminController@AreaRiservata')->name('areariservata.admin')->middleware('can:isAdmin');
+Route::get('/areriservata/admin', 'AdminController@AreaRiservata')->name('areariservata.admin')->middleware('can:isAdmin');
 

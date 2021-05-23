@@ -34,6 +34,14 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+
+    /**
+     * Primary key della tabella associata al modello
+     *
+     * @var string
+     */
+    protected $primarykey = 'nomeutente';
+
     /**
      * The attributes that should be cast to native types.
      *

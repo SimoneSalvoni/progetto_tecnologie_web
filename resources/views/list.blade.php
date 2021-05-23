@@ -1,5 +1,5 @@
 @extends('layouts.public')
-
+@section('title, 'Lista eventi')
 @section ('content')
 <section class="main-content">
     <section>

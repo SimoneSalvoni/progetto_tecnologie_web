@@ -1,5 +1,5 @@
 @extends('layouts.public')
-
+@section('title', 'Informazioni')
 
 @section ('content')
 @include('layouts.info')
