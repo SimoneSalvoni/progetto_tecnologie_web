@@ -34,9 +34,7 @@ class PublicController extends Controller
     }
     
     public function showEvent($eventId){
-        Log::debug(strval($eventId));
         $event = $this->eventsList->getEventById($eventId);
-        Log::debug($event->immagine);
         return view('event')->with('event', $event);
     }
    

@@ -31,9 +31,7 @@ class LoginController extends Controller
 
 
     protected function redirectTo() {
-        Log::debug("RedirectTo login controller");
         $role = auth()->user()->livello;
-        Log::debug("Nell login controller: " .strval(Auth::check()));
         switch ($role) {
             case 4: return '/admin';
                 break;
