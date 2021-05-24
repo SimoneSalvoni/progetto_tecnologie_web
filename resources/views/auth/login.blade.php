@@ -4,46 +4,46 @@
 <div class="container">
     <div class="center">
         <h4 class=" left title"><span class="text"><strong>Login</strong></h4>
-    <div class="container-contact">
-        <div class="wrap-contact1">
-            {{ Form::open(array('route' => 'login', 'class' => 'contact-form')) }}
+        <div class="container-contact">
+            <div class="wrap-contact1">
+                {{ Form::open(array('route' => 'login', 'class' => 'contact-form')) }}
 
-             <div  class="wrap-input">
-             </div>
-             <div  class="wrap-input">
-                {{ Form::label('nomeutente', 'Nome Utente', ['class' => 'label-input']) }}
-                {{ Form::text('nomeutente', '', ['class' => 'input','id' => 'nomeutente']) }}
-                @if ($errors->first('nomeutente'))
-                <ul class="errors">
-                    @foreach ($errors->get('nomeutente') as $message)
-                    <li>{{ $message }}</li>
-                    @endforeach
-                </ul>
-                @endif
+                <div  class="wrap-input">
+                </div>
+                <div  class="wrap-input">
+                    {{ Form::label('nomeutente', 'Nome Utente', ['class' => 'label-input']) }}
+                    {{ Form::text('nomeutente', '', ['class' => 'input','id' => 'nomeutente']) }}
+                    @if ($errors->first('nomeutente'))
+                    <ul class="errors">
+                        @foreach ($errors->get('nomeutente') as $message)
+                        <li>{{ $message }}</li>
+                        @endforeach
+                    </ul>
+                    @endif
+                </div>
+
+                <div  class="wrap-input">
+                    {{ Form::label('password', 'Password', ['class' => 'label-input']) }}
+                    {{ Form::password('password', ['class' => 'input', 'id' => 'password']) }}
+                    @if ($errors->first('password'))
+                    <ul class="errors">
+                        @foreach ($errors->get('password') as $message)
+                        <li>{{ $message }}</li>
+                        @endforeach
+                    </ul>
+                    @endif
+                </div>
+
+                <div class="container-form-btn">
+                    {{ Form::submit('Login', ['class' => 'form-btn1']) }}
+                </div>
+
+                {{ Form::close() }}
             </div>
-
-             <div  class="wrap-input">
-                {{ Form::label('password', 'Password', ['class' => 'label-input']) }}
-                {{ Form::password('password', ['class' => 'input', 'id' => 'password']) }}
-                @if ($errors->first('password'))
-                <ul class="errors">
-                    @foreach ($errors->get('password') as $message)
-                    <li>{{ $message }}</li>
-                    @endforeach
-                </ul>
-                @endif
-            </div>
-
-            <div class="container-form-btn">
-                {{ Form::submit('Login', ['class' => 'form-btn1']) }}
-            </div>
-
-            {{ Form::close() }}
+            <p> Se non hai già un account <a  href="{{ route('register') }}">registrati</a></p>
         </div>
-        <p> Se non hai già un account <a  href="{{ route('register') }}">registrati</a></p>
-    </div>
     </div>
 </div>
 
-    @endsection
+@endsection
 

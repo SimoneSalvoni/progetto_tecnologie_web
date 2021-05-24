@@ -1,5 +1,5 @@
 @extends ('layouts.public')
-
+@section('title', 'Evento')
 @section ('content')
 <section  class="main-content">		<!-- style=main.css c'era dentro, perché? -->	
     <div class="row">						
@@ -17,7 +17,7 @@
             <h5><strong>Prezzo: {{$event->costo}}€
                     <?php //@include('helpers/prezzoEvento', 'evento' => $event)?>
                 </strong></h5>
-            <form class="form-inline" action="#">
+            <form class="form-inline" method="get">
                 <!-- per il GUEST DEVE LINKARE AL LOGIN-->
                 <h5>Biglietti rimanenti: {{$event->bigliettitotali-$event->bigliettivenduti}}</h5>
                 
@@ -26,12 +26,12 @@
                 @endguest
 
                 @can('isUser')
-                 <input class="btn btn-inverse" type="submit" value="Acquista" formaction="{{ route('logout') }}"></input>
-                 //Qua va passata la rotta di acquista con i dati dell'evento, per ora lascio logout come rotta almeno fa qualcosa di diverso
+                 <input class="btn btn-inverse" type="submit" value="Acquista" formaction="{{ route('buy'), [$event->id->eventId] }}"></input>
+                 <!--Qua va passata la rotta di acquista con i dati dell'evento, per ora lascio logout come rotta almeno fa qualcosa di diverso-->
                 @endcan
                 
                 @can('isOrg')
-                //tasti modifica e cancella?
+                <!--tasti modifica e cancella? -->
                 @endcan
             </form>
             <div class="form-inline">

@@ -8,7 +8,6 @@
                         @guest
                         <li><a href="{{route('login')}}">Accedi</a></li>
                         @endguest
-
                         @can('isUser')
                         <li><a href="{{route('areariservata.user')}}">Area utente</a></li>
                         <li><a href="" title="Esci dal sito" class="highlight" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a></li>
@@ -33,7 +32,5 @@
             </div>
         </div>
     </div>
-   <!-- <div id="wrapper" class="container">-->
-        <!--  </div> -->
 </section>
 
