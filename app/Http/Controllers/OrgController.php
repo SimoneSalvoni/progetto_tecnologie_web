@@ -15,10 +15,12 @@ class AdminController extends Controller {
         $this->_orgModel = new Org;
     }
 
-    public function index() {
-        return view('org');
+    public function AreaRiservata(){
+        $user = auth()->org();
+      //  $nearEvents = ;
+        //TODO creare la view dello user
+        return view('org')->with('org',$user);
     }
-
     /*
      * Qui mettiamo di default l'attributo dell'evento
      * che specifica il nome dell'organizzazione 

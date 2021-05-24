@@ -25,7 +25,7 @@
                 <div class="info-container">
                     <div>LUOGO: {{route('event',[$nearEvents[$i]->regione])}}</div>
                     <div>DATA: {{route('event',[$nearEvents[$i]->data])}}</div>
-                    <div>BIGLIETTI VENDUTI: </div>
+                    <div>BIGLIETTI VENDUTI: {{route('event', [$nearEvents]) </div>
                     <div>INCASSO: </div>
                 </div>
             </div>

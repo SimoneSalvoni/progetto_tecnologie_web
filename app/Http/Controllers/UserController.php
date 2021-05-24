@@ -16,11 +16,7 @@ class UserController extends Controller {
     public function __construct() {
         $this->middleware('auth');
         $this->eventsList = new EventsList;
-<<<<<<< HEAD
-
-=======
         $this->purchases = new PurchaseList;
->>>>>>> 7e1b4544963126cb9497e26bca9978faa127ac3d
     }
 
 
