@@ -1,10 +1,12 @@
-@extends('layouts.user')
+@extends('layouts.public')
 
 @section('title', 'Acquisto')
 
 @section ('scripts')
-<script src='resources/js/purchase.js'></script>
-endsection
+<script src='{{asset('js/purchase.js')}}'></script>
+@endsection
+
+
 
 @section('content')
 <section name='main_content'>
@@ -18,45 +20,54 @@ endsection
     </div>
     <h3><b>Seleziona il metodo di pagamento:</b></h3>
     <div class="container">
-        <form class="container" id="form" action="{{route('buy')"}}>
-              <div class="container_payment">
-            <div style="height:inherit;float:left">
-                <input type="radio" id="pay" name="pay" value="poste">
-                <img class="payment" src="postepay.jpg">
+        <form class="container" id="form" method="POST" action="{{route('buy')}}">
+            @csrf
+            <div class="container_payment">
+                <div style="height:inherit">
+                    <input type="radio" id="pay" name="pay" value="poste">
+                    <img class="payment" src="{{asset('siteimgs/postepay.jpg')}}">
+                </div>
+                <div style="height:inherit">
+                    <input type="radio" id="pay" name="pay" value="pay">
+                    <img src="{{asset('siteimgs/paypal.png')}}" class="payment">
+                </div>
+                <div style="height:inherit">
+                    <input type="radio" id="pay" name="pay" value="conto">
+                    <img src="{{asset('siteimgs/conto.png')}}" class="payment">
+                </div>
             </div>
-            <div style="height:inherit;float:left">
-                <input type="radio" id="pay" name="pay" value="pay">
-                <img src="paypal.png" class="payment">
+            @if ($errors->first('pay'))
+            <ul class="errors">
+                @foreach ($errors->get('pay') as $message)
+                <li>{{ $message }}</li>
+                @endforeach
+            </ul>
+            @endif
+            <div style="margin:auto">
+                <br>
+                <label style="float:left" for="num"><h5>Numero di biglietti: </h5></label>
+                <input class="num_biglietti" type="number" id='numBiglietti' name="numerobiglietti" value='1' min='1'">
             </div>
-            <div style="height:inherit">
-                <input type="radio" id="pay" name="pay" value="conto">
-                <img src="conto.png" class="payment">
+            <div style="height: fit-content; width: fit-content">
+                <h4 style="float:left">Costo complessivo: &nbsp</h4>
+                <h4 class="tot_price" id="tot">{{$event->costo}}</h4>
             </div>
+            <input type="hidden" name="costototale" id="costototale" value="{{$event->costo}}">
+            <input type='hidden' name='nomeutente' value='{{auth()->user()->nomeutente}}'>
+            <input type='hidden' name='idevento' value='{{$event->id}}'>
+            <input type='hidden' name='nomeevento' value='{{$event->nome}}'>
+            <input type='hidden' name='data' value='{{$event->data}}'>
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <div class="submit_goback">
+                <button type="submit" class="bigbutton clickable" style="width:15em">COMPRA</button>
+            <!--    <input type='submit' class='bigbutton clickable' style='width:15em' value='COMPRA' id='buy' name='buy' \> -->
+                <input style="width:15em"  class="bigbutton clickable" type="submit" formmethod="GET" id="annulla" name="annulla" value="ANNULLA" formaction='{{route('event', $event->id)}}' />
+            </div>
+        </form>
     </div>
-    <div style="margin:auto">
-        <br>
-        <label style="float:left" for="num"><h5>Numero di biglietti: </h5></label>
-        <input class="num_biglietti" type="number" id="numBiglietti" name="numBiglietti" value="1" min='1'">
-    </div>
-    <div style="height: fit-content; width: fit-content">
-        <h4 style="float:left">Costo complessivo: &nbsp</h4>
-        <h4 class="tot_price" id="tot">{{$event->costo}}</h4>
-    </div>
-    <input type="hidden" name="costototale" id="costototale" value="{{$event->costo}}">
-    <input type='hidden' name='nomeutente' value='{{auth()->user()->nomeutente}}'>
-    <input type='hidden' name='idevento' value='{{$event->id}}'>
-    <input type='hidden' name='nomeevento' value='{{$event->nome}}'>
-    <input type='hidden' name='data' value='{{$event->data}}'>
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <div style="display: flex;flex-wrap: wrap;justify-content: space-evenly">
-        <input style="width:15em;height:3em" class="button" type="submit" id="buy" name="buy" value="COMPRA" />
-        <input style="width:15em;height:3em" class="button" type="reset" id="annulla" name="annulla" value="ANNULLA" />
-    </div>
-</form>
-</div>
 </section>
 @endsection
