@@ -6,31 +6,36 @@ use App\Models\Org;
 use App\Models\Resources\Event;
 use App\Http\Requests\NewEventRequest;
 
-class AdminController extends Controller {
+class OrgController extends Controller
+{
 
     protected $_orgModel;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->middleware('can:isOrg');
         $this->_orgModel = new Org;
     }
 
-    public function index() {
+    public function index()
+    {
         return view('org');
     }
 
     /*
      * Qui mettiamo di default l'attributo dell'evento
-     * che specifica il nome dell'organizzazione 
+     * che specifica il nome dell'organizzazione
      */
-    public function addEvent() {
+    public function addEvent()
+    {
         $nomeOrg = $this->_orgModel->getOrg()->pluck('nomeorganizzatore');
         return view('event.insert')
-                        ->with('nomeorganizzatore', $nomeOrg);
+            ->with('nomeorganizzatore', $nomeOrg);
     }
 
     //Qua va capito meglio il funzionamento della store
-    public function storeProduct(NewProductRequest $request) {
+    public function storeProduct(NewProductRequest $request)
+    {
 
         if ($request->hasFile('image')) {
             $image = $request->file('image');
@@ -52,4 +57,10 @@ class AdminController extends Controller {
         return redirect()->action('OrgController@index');
     }
 
+    public function getOrgEvents()
+    {
+        $org = auth()->user();
+        $events = $this->_orgModel->getOrgEvents($org->organizzazione);
+        return view('org_events_list')->with('events', $events);
+    }
 }

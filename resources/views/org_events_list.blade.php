@@ -16,13 +16,13 @@
                 </div>
                 <div class="inner_descr_container">
                     <div class="purchase_descr_item">
-                        Biglietti venduti/ biglietti totali: {{$purchase->data}}
+                        Biglietti venduti/biglietti totali: {{$event->bigliettivenduti / $event->bigliettitotali}}
                     </div>
                     <div class="purchase_descr_item">
-                        Percentuale biglietti venduti: {{$purchase->numerobiglietti}}
+                        Percentuale biglietti venduti: {{$event->bigliettivenduti}}
                     </div>
                     <div class="purchase_descr_item">
-                        Incasso totale: {{$purchase->costototale}}
+                        Incasso totale: {{$event->incassototale}}
                     </div>
                 </div>
             </div>

@@ -54,3 +54,6 @@ Route::get('/areriservata/admin', 'AdminController@AreaRiservata')->name('areari
 
 //Cronologia acquisti
 Route::get('/areariservata/CronologiaAcquisti', 'UserController@CronologiaAcquisti')->name('cronologiaAcquisti')->middleware('can:isUser');
+
+//Cronologia eventi organizzati
+Route::get('/areariservata/EventiOrganizzati', 'OrgController@EventiOrganizzati')->name('eventiorganizzati')->middleware('can:isOrg');
