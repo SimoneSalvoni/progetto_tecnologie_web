@@ -1,10 +1,10 @@
 @extends('layouts.public')
 @section('title','Cronologia Acquisti')
 @section('content')
+<h4><span>Eventi Organizzati</span></h4>
 @isset($events)
 @foreach ($events as $event)
 <section class="main-content">
-    <h4><span>Eventi Organizzati</span></h4>
     <section class="single_product">
         <div class="product_container clickable" ; onclick="location.href='{{route('event',[$event->id])}}'">
             <div class="image_item">
@@ -16,7 +16,11 @@
                 </div>
                 <div class="inner_descr_container">
                     <div class="purchase_descr_item">
+                        @if ($event->bigliettitotali !=0)
                         Biglietti venduti/biglietti totali: {{$event->bigliettivenduti / $event->bigliettitotali}}
+                        @else
+                        Biglietti venduti/biglietti totali: 0
+                        @endif
                     </div>
                     <div class="purchase_descr_item">
                         Percentuale biglietti venduti: {{$event->bigliettivenduti}}
@@ -26,12 +30,14 @@
                     </div>
                 </div>
             </div>
-            <div class="action_div" ; onclick="location.href='{{route('event',[$event->id])}}'">
-                <div id="pencil_item">
-                    <img id="pencil" class="action_item_clickable" src="themes/images/pencil.png" alt="modifica evento">
+            <div class="action_div">
+                <div id="pencil_item" ; onclick="location.href='{{route('event',[$event->id])}}'">
+                    <img id="pencil" class="action_item_clickable" src="{{asset('css/themes/images/pencil.png')}}"
+                        alt="modifica evento">
                 </div>
-                <div id="cross_item">
-                    <img id="cross" class="action_item_clickable" src="themes/images/cross.png" alt="cancella evento">
+                <div id="cross_item" ; onclick="location.href='{{route('delete',[$event->id])}}'">
+                    <img id="cross" class="action_item_clickable" src="{{asset('css/themes/images/cross.png')}}"
+                        alt="cancella evento">
                 </div>
 
             </div>
@@ -40,3 +46,4 @@
 </section>
 @endforeach
 @endisset
+@endsection

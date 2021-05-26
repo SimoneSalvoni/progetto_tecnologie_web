@@ -40,6 +40,8 @@ Route::post('register', 'Auth\RegisterController@register');
 
 Route::get('/user', 'UserController@index')->name('user')->middleware('can:isUser');
 
+Route::get('/org', 'OrgController@index')->name('org')->middleware('can:isOrg');
+
 //acquisto
 Route::get('/listaEventi/Evento/{eventId}/Acquista', 'UserController@showPurchaseScreen')->name('buy')->middleware('can:isUser');
 Route::post('buy', 'UserController@buy')->middleware('can:isUser');
@@ -57,3 +59,5 @@ Route::get('/areariservata/CronologiaAcquisti', 'UserController@CronologiaAcquis
 
 //Cronologia eventi organizzati
 Route::get('/areariservata/EventiOrganizzati', 'OrgController@EventiOrganizzati')->name('eventiorganizzati')->middleware('can:isOrg');
+
+Route::get('delete/{evetId}', 'OrgController@EliminaEvento')->name('delete')->middleware('can:isOrg');
