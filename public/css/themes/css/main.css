@@ -1106,6 +1106,12 @@ section.our_client .row {
 #pencil_text {
     align-self: center;
 }
+
+.tot_price {
+    float: left;
+    width: fit-content;
+    margin-top: 10px;
+}
 #cross {
     margin-top: 30px;
     margin-bottom: 5px;
@@ -1122,6 +1128,7 @@ section.our_client .row {
     border-radius: 10%;
     border-color: #ffc9c9;
 }
+
 .submit_goback {
     display: flex;
     flex-wrap: wrap;

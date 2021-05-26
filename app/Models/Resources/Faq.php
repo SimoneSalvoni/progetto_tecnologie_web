@@ -29,6 +29,11 @@ class Faq extends Model
      */
     public $timestamps = false;
     
+    protected $fillable = [
+        'domanda',
+        'risposta'
+    ];
+    
     /**
      * Il tipo di dato della chiave
      * 
