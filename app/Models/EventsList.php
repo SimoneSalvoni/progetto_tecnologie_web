@@ -64,4 +64,11 @@ class EventsList{
         $event->save();
     }
                 
+    public function getEventsManaged($organizzazione){
+           
+    $manageEvent = Event::where('nomeorganizzatore','==',$organizzazione)->orderBy('data')->take(2)->get();
+     
+    return $manageEvent;
+        
+    }
 }

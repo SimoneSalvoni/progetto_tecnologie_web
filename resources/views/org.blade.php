@@ -1,45 +1,44 @@
 @extends('layouts.public')
+@section('title', 'Area organizzazione')
+@section ('content')
 
-<h3>
-    Informazioni organizzazione
-</h3>
+<section  class="main-content">	
+    <section>
+        <div class="raw">
+    
+        <?php>
+        <p>Nome organizzazione: {{$user->organizzazione}} <p>
+        <p>Email di riferimento: {{$user->email}}<p>
+        <p>Password: {{$user->password}} <p>
+        <hr size="3" color="black" style="heinght:0.5px">
 
-<div class="raw">
-    <p>Nome organizzazione: {{$user->organizzazione}} <p>
-    <p>Email di riferimento: {{$user->email}}<p>
-    <p>Password: {{$user->password}} <p>
-        <button class="button" onclick="location.href = '{{route('newevent')}}'" type="button" > <b>CREA UN NUOVO EVENTO</b></button>
-    <hr size="3" color="black" style="heinght:0.5px">
-    <h4><span>Eventi imminenti</span></h4>
+//        <button class="button" onclick="location.href = '{{route('list')}}'" type="button" > <b>VAI ALLA LISTA COMPLETA DEGLI EVENTI</b></button>
 
+        <h4><span>Eventi imminenti</span></h4>
 
-    @for($i=0;$i<2;$i++)
-    @if(@isset($nearEvents[$i])
-    <section class="single_product">
-        <div class="product_container clickable"; onclick="location.href ='{{route('event',[$event->id])}}'">
-            <!--<div class="image_item"><img src="concert.jpg" alt="Immagine dell'evento" class="product_image"></div>-->
-            <div class="image_item"> <img src="{{asset('locandine/'.$nearEvents[$i]->immagine)}}" class="product_image"></div>
-            <div class="descr_container">
-                <div class="title_item"><h4>{{$event->nome}}
-                    </h4></div>
-                <div class="info-container">
-                    <div>LUOGO: {{route('event',[$nearEvents[$i]->regione])}}</div>
-                    <div>DATA: {{route('event',[$nearEvents[$i]->data])}}</div>
-                    <div>BIGLIETTI VENDUTI: {{route('event', [$nearEvents]) </div>
-                    <div>INCASSO: </div>
+        @isset($events)
+        @for($i=0;$i<2;$i++)
+            <section class="single_product">
+                <div class="product_container clickable"; onclick="location.href ='{{route('event',[$events[$i]->id])}}'">
+                    <!--<div class="image_item"><img src="concert.jpg" alt="Immagine dell'evento" class="product_image"></div>-->
+                    <div class="image_item"> <img src="{{asset('locandine/'.$nearEvents[$i]->immagine)}}" class="product_image"></div>
+                <div class="descr_container">
+                    <div class="title_item"><h4>{{route('event',[$event[$i]->nome])}}
+                        </h4></div>
+                    <div class="info-container">
+                        <div>LUOGO: {{route('event',[$events[$i]->regione])}}</div>
+                        <div>DATA: {{route('event',[$events[$i]->data])}}</div>
+                        <div>BIGLIETTI VENDUTI: {{route('event', [$events[$i]->bigliettiventuti])}} </div>
+                        <div>INCASSO: {{route('event',[$events[$i]->incassototale])}}€ </div>
+                    </div>
+                    </div>
                 </div>
-            </div>
-        </div>
+                </div> 
+            </section>
+        @endfor
+        @endisset
+    </div>
     </section>
-    @endif
-    @endfor
+</section>
 
-
-
-
-                /* 
-                * To change this license header, choose License Headers in Project Properties.
-                * To change this template file, choose Tools | Templates
-                * and open the template in the editor.
-                */
-
+@endsection

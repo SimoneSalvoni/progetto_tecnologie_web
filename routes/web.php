@@ -45,9 +45,9 @@ Route::post('buy', 'UserController@buy')->middleware('can:isUser');
 Route::get('/RiepilogoAcquisto', 'UserController@showRiepilogo')->name('riepilogo')->middleware('can:isUser');
 
 //Areriservata
-Route::get('/areriservata/user', 'UserController@AreaRiservata')->name('areariservata.user')->middleware('can:isUser');
+Route::get('/areariservata/user', 'UserController@AreaRiservata')->name('areariservata.user')->middleware('can:isUser');
 
-Route::get('/areriservata/org', 'OrgController@AreaRiservata')->name('areariservata.org')->middleware('can:isOrg');
+Route::get('/areariservata/org', 'OrgController@AreaRiservata')->name('areariservata.org')->middleware('can:isOrg');
 
-Route::get('/areriservata/admin', 'AdminController@AreaRiservata')->name('areariservata.admin')->middleware('can:isAdmin');
+Route::get('/areariservata/admin', 'AdminController@AreaRiservata')->name('areariservata.admin')->middleware('can:isAdmin');
 

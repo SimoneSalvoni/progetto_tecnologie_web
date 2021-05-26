@@ -2,33 +2,38 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Org;
+use App\User;
 use App\Models\Resources\Event;
+use App\Models\EventsList; 
 use App\Http\Requests\NewEventRequest;
 
-class AdminController extends Controller {
+class OrgController extends Controller {
 
     protected $_orgModel;
+    protected $eventsList;
 
     public function __construct() {
         $this->middleware('can:isOrg');
-        $this->_orgModel = new Org;
+        $this->_orgModel = new User;
+        $this->eventsList = new EventsList;
     }
-
     public function AreaRiservata(){
-        $user = auth()->org();
-      //  $nearEvents = ;
+        $user = auth()->user();
+        //  $nearEvents = ;
         //TODO creare la view dello user
-        return view('org')->with('org',$user);
+        $events = $this->eventsList->getEventsManaged($user->organizzazione);
+
+        return view('org')->with('user',$user)->with('events', $events);
+        
     }
     /*
      * Qui mettiamo di default l'attributo dell'evento
      * che specifica il nome dell'organizzazione 
      */
     public function addEvent() {
-        $nomeOrg = $this->_orgModel->getOrg()->pluck('nomeorganizzatore');
+        $nomeOrg = $this->_orgModel->getOrg()->pluck('organizzazione');
         return view('event.insert')
-                        ->with('nomeorganizzatore', $nomeOrg);
+                        ->with('organizzazione', $nomeOrg);
     }
 
     //Qua va capito meglio il funzionamento della store
@@ -53,5 +58,10 @@ class AdminController extends Controller {
 
         return redirect()->action('OrgController@index');
     }
-
+    
+    public function showEventsListManaged($request){
+        $events = $this->eventsList->getEventsManaged($request->organizzazione);
+        return view ('list')->with ('events', $events);
+    }
+    
 }
