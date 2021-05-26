@@ -8,7 +8,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use App\Models\EventsList;
 
-class LoginController extends Controller {
+class LoginController extends Controller
+{
     /*
       |--------------------------------------------------------------------------
       | Login Controller
@@ -20,28 +21,24 @@ class LoginController extends Controller {
       |
      */
 
-use AuthenticatesUsers;
+    use AuthenticatesUsers;
 
     /**
      * Override:: definisce la homepage per i diversi utenti divisi per livello.
      *
      * @var string
      */
-    protected function redirectTo() {
-        $role = auth()->user()->livello;
-        switch ($role) {
-            case 4: return '/admin';
-            case 3:  return '/org';
-            case 2: return '/user';
-            default: return '/';
-        }
+    protected function redirectTo()
+    {
+        return '/';
     }
 
     /**
      * Override:: Login con 'nomeutente' al posto di 'email'.
      *
      */
-    public function username() {
+    public function username()
+    {
         return 'nomeutente';
     }
 
@@ -50,8 +47,8 @@ use AuthenticatesUsers;
      *
      * @return void
      */
-    public function __construct() {
+    public function __construct()
+    {
         $this->middleware('guest')->except('logout');
     }
-
 }

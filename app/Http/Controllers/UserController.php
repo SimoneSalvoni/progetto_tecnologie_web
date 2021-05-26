@@ -22,6 +22,7 @@ class UserController extends Controller
         $this->middleware('auth');
         $this->eventsList = new EventsList;
         $this->purchases = new PurchaseList;
+        $this->userModel = new User();
     }
 
 
@@ -34,8 +35,10 @@ class UserController extends Controller
     public function AreaRiservata()
     {
         $user = auth()->user();
-        //  $nearEvents = ;
-        //TODO creare la view dello user
+        $nearEvents = $this->userModel->nearEvents($user->nomeutente);
+        if ($nearEvents != null) {
+            return view('user')->with('user', $user)->with('nearEvents', $nearEvents);
+        }
         return view('user')->with('user', $user);
     }
 

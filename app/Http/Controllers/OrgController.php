@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Models\Resources\Event;
+use App\Models\Org;
 use App\Models\EventsList;
 use App\Http\Requests\NewEventRequest;
 
@@ -16,7 +17,7 @@ class OrgController extends Controller
     public function __construct()
     {
         $this->middleware('can:isOrg');
-        $this->_orgModel = new User;
+        $this->_orgModel = new Org;
         $this->eventsList = new EventsList;
     }
     public function AreaRiservata()

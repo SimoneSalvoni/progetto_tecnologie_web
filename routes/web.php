@@ -40,9 +40,9 @@ Route::get('/RiepilogoAcquisto', 'UserController@showRiepilogo')->name('riepilog
 
 //Areriservata
 
-Route::get('/areriservata/user', 'UserController@AreaRiservata')->name('areariservata.user')->middleware('can:isUser');
-Route::get('/areriservata/org', 'OrgController@AreaRiservata')->name('areariservata.org')->middleware('can:isOrg');
-Route::get('/areriservata/admin', 'AdminController@AreaRiservata')->name('areariservata.admin')->middleware('can:isAdmin');
+Route::get('/areariservata/user', 'UserController@AreaRiservata')->name('areariservata.user')->middleware('can:isUser');
+Route::get('/areariservata/org', 'OrgController@AreaRiservata')->name('areariservata.org')->middleware('can:isOrg');
+Route::get('/areariservata/admin', 'AdminController@AreaRiservata')->name('areariservata.admin')->middleware('can:isAdmin');
 
 //Cronologia acquisti
 Route::get('/areariservata/CronologiaAcquisti', 'UserController@CronologiaAcquisti')->name('cronologiaAcquisti')->middleware('can:isUser');
@@ -51,3 +51,7 @@ Route::get('/areariservata/CronologiaAcquisti', 'UserController@CronologiaAcquis
 Route::get('/areariservata/EventiOrganizzati', 'OrgController@EventiOrganizzati')->name('eventiorganizzati')->middleware('can:isOrg');
 
 Route::get('delete/{evetId}', 'OrgController@EliminaEvento')->name('delete')->middleware('can:isOrg');
+
+//Modifica Profilo
+Route::get('ModificaProfilo', 'UserController@mostraModificaProfilo')->name('ModificaProfilo')->middleware('can:isUser');
+Route::post('modificaprofilo', 'UserController@ModificaProfilo')->middleware('can:isUser');

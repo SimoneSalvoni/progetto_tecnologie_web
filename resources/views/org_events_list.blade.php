@@ -32,12 +32,21 @@
             </div>
             <div class="action_div">
                 <div id="pencil_item" title="Modifica evento">
-                    <img id="pencil" class="action_item_clickable" src="{{asset('css/themes/images/pencil.png')}}" ;
-                        onclick=" location.href='{{route('event',[$event->id])}}'" alt="modifica evento">
+                    <img id="pencil" name="pencil" class="action_item_clickable"
+                        onclick="location.href = '{{route('event',[$event->id])}}'"
+                        src="{{asset('css/themes/images/pencil.png')}}" alt="modifica evento">
                 </div>
+                <p id="pencil_text">Modifica</p>
                 <div id="cross_item" title="Elimina evento">
-                    <img id="cross" class="action_item_clickable" src="{{asset('css/themes/images/cross.png')}}" ;
-                        onclick=" location.href='{{route('delete',[$event->id])}}'" alt="cancella evento">
+                    <img id="cross" name="cross" class="action_item_clickable"
+                        src="{{asset('css/themes/images/cross.png')}}" alt="cancella evento"
+                        onclick="if(confirm('Eliminare l\'evento definitivamente?')){location.href = '{{route('delete',[$event->id])}}'}">
+                    <p id="cross_text">Elimina</p>
+                </div>
+                <div title="Visualizza dettagli evento">
+                    <button id="info_button" class="bigbutton clickable"
+                        onclick="location.href='{{route('event',[$event->id])}}'" type="button">Visualizza
+                        dettagli</button>
                 </div>
 
             </div>
@@ -45,5 +54,6 @@
     </section>
 </section>
 @endforeach
+@include('pagination.paginator', ['paginator' => $events])
 @endisset
 @endsection
