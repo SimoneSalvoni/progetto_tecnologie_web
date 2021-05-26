@@ -21,8 +21,8 @@
                     </h5>
                 </div>
                 <div style="display:inline-block;margin-left:25em;margin-top:1.5em">
-                    <h5>Numero di biglietti: {{$numBiglietti}}</h5>
-                    <h5>Importo complessivo: {{$importo}}</h5>
+                    <h5>Numero di biglietti: {{$numerobiglietti}}</h5>
+                    <h5>Importo complessivo: {{$importo}}€</h5>
                 </div>
             </div>
             <br />

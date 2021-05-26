@@ -22,6 +22,11 @@ class User extends Authenticatable
         'email',
         'nomeutente',
         'password',
+        'organizzazione'
+    ];
+    protected $guarded =[
+        'id',
+        'livello'
     ];
 
     /**

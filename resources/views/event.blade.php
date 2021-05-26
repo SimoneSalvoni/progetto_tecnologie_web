@@ -6,8 +6,7 @@
         <div class="event-image span">
             @if (!isset($event->immagine))
             <?php $event->immagine = 'default.jpg'; ?>
-            @endif
-            
+            @endif            
             <img src="{{ asset('locandine/'.$event->immagine) }}" class="thumbnail"> 		
         </div>
         <div class="single_event">

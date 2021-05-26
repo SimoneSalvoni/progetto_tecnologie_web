@@ -1,4 +1,4 @@
-@extends('layouts.user')
+@extends('layouts.public')
 @section('title', 'Area riservata')
 @section('content')
 <section name="main content">

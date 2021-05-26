@@ -14,6 +14,29 @@ class Event extends Model
      * @var boolean
      */
     public $timestamps = false;
+    
+    protected $fillable = [
+        'nome',
+        'descrizione',
+        'urlluogo',
+        'regione',
+        'indirizzo',
+        'provincia',
+        'numciv',
+        'data',
+        'immagine',
+        'costo',
+        'sconto',
+        'giornisconto',
+        'bigliettivenduti',
+        'bigliettitotali',
+        'incassototale',
+        'parteciperò',
+        'nomeorganizzatore'
+    ];
+    protected $guarded = [
+        'id'
+    ];
 
     
     public function getDiscountedPrice(){

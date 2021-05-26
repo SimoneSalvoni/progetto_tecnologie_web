@@ -998,7 +998,7 @@ section.our_client .row{
 }
 
 .tot_price{
-    float:right;
+    float:left;
     width:fit-content;
     margin-top:10px
 }

@@ -8,6 +8,7 @@ use App\Models\Resources\Purchase;
 use App\Http\Requests\PurchaseRequest;
 use App\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller {
     
@@ -39,25 +40,21 @@ class UserController extends Controller {
     }
     
     public function buyTickets (PurchaseRequest $request){
-        $request->validated();
-        /*
         $acquisto = new Purchase;
         $acquisto->fill($request->validated());
         $acquisto->save();
-        $this->$this->eventsList->updateOnPurchase($request->idevento, $request->numerobiglietti, $request->costotoale);
-         * 
-         */
-        Log::debug('dentro buyTickets');
+        $this->eventsList->updateOnPurchase($request->idevento, $request->numerobiglietti, $request->costototale);
         $event=$this->eventsList->getEventById($request->idevento);
-        return redirect()->route('riepilogo')->with('event', $event)->with('numBiglietti', $request->numerobiglietti)
-                ->with('importo', $request->costototale); //DATI PASSATI SU SESSION, SI OTTENOGNO CON session('nomedato')
+        Session::put('evento', $event);
+        Session::put('numerobiglietti', $request->numerobiglietti);
+        Session::put('importo', $request->costototale);
+        return redirect()->route('riepilogo');
     }
     
-    public function showRiepilogo (){
-        Log::debug('dentro showRiepilgo');
-        $event = session('event');
-        $numBiglietti = session('numBiglietti');
-        $importo = session('importo');
-        return view('riepilogo')->with('event', $event)->with('numBiglietti',$numBiglietti)->with('importo', $importo);
+    public function showRiepilogo (){ 
+        $event = Session::get('evento');
+        $numBiglietti = Session::get('numerobiglietti');
+        $importo = Session::get('importo');
+        return view('riepilogo')->with('event', $event)->with('numerobiglietti',$numBiglietti)->with('importo', $importo);
     }
 }
