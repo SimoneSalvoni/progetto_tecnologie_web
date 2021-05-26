@@ -3,18 +3,19 @@
 @section ('content')
 
 <section  class="main-content">	
-    <section>
-        <div class="raw">
-    
-        <?php>
-        <p>Nome organizzazione: {{$user->organizzazione}} <p>
-        <p>Email di riferimento: {{$user->email}}<p>
-        <p>Password: {{$user->password}} <p>
-        <hr size="3" color="black" style="heinght:0.5px">
 
-//        <button class="button" onclick="location.href = '{{route('list')}}'" type="button" > <b>VAI ALLA LISTA COMPLETA DEGLI EVENTI</b></button>
+    <div  class="user_info">
+        <h4>Nome utente: {{$user->organizzazione}}</h4>
+        <h4>Email: {{$user->email}}</h4>
+        <form>
+            <input class="button" type="submit" value="Modifica dati personali" formaction="#" />
+        </form>
+        <hr size="3" color="black" style="height:0.5px" />
+    </div>
+        <?php>               
+                <h4><span>Eventi imminenti</span></h4>
+        <button class="button" onclick="location.href = '{{route('list')}}'" type="button" > <b>VAI ALLA LISTA COMPLETA DEGLI EVENTI</b></button>
 
-        <h4><span>Eventi imminenti</span></h4>
 
         @isset($events)
         @for($i=0;$i<2;$i++)
@@ -37,6 +38,7 @@
             </section>
         @endfor
         @endisset
+
     </div>
     </section>
 </section>

@@ -1018,3 +1018,9 @@ section.our_client .row{
     flex-wrap: wrap;
     justify-content: space-evenly
 }
+
+.user_info{
+    margin: auto;
+    margin-bottom:500000em;
+    height:2000px
+}

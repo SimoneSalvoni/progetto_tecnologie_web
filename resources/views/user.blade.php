@@ -2,15 +2,13 @@
 @extends('layouts.public')
 @section('title', 'Area riservata')
 @section('content')
-<section name="main content">
-<section  class="main-content">	
-    
-        <p>Nome utente: {{$user->nomeutente}}</p>
-        <p>Email: {{$user->email}}</p>
-        <p>Password: {{$user->password}}</p> <|<!-- ARRIVA CON HASH? NON PENSO. MA SOPRATTUTTO DOVREMMO 
-                                               NASCONDERLA E RENDERLA VISIBILE CON UN PULSANTE -->
-        <p>Nome: {{$user->nome}} </p>
-        <p>Cognome: {{$user->cognome}}</p>
+
+<section id="main-content">
+    <div   margin: auto>
+        <h4>Nome utente: {{$user->nomeutente}}</h4>
+        <h4>Email: {{$user->email}}</h4>
+        <h4>Nome: {{$user->nome}}</h4>
+        <h4>Cognome: {{$user->cognome}}</h4>
         <form>
             <input class="button" type="submit" value="Modifica dati personali" formaction="#" />
         </form>
@@ -19,7 +17,7 @@
     <div>
                     <span class="pull-left"><span class="text"><span class="line">Eventi in programma</span></span></span>
         <ul class="thumbnails">
-            @if (isset($nearEvents)
+            @if (isset($nearEvents))
             @foreach($nearEvents as $event)
             <li class="span3">
                 <div class="product-box">
