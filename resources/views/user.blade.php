@@ -1,11 +1,10 @@
-@extends('layouts.user')
+
+@extends('layouts.public')
 @section('title', 'Area riservata')
 @section('content')
 <section name="main content">
-    <h3>
-        Informazioni account
-    </h3>
-    <div>
+<section  class="main-content">	
+    
         <p>Nome utente: {{$user->nomeutente}}</p>
         <p>Email: {{$user->email}}</p>
         <p>Password: {{$user->password}}</p> <|<!-- ARRIVA CON HASH? NON PENSO. MA SOPRATTUTTO DOVREMMO 
@@ -18,7 +17,7 @@
         <hr size="3" color="black" style="height:0.5px" />
     </div>
     <div>
-        <h3>Eventi in programma</h3>
+                    <span class="pull-left"><span class="text"><span class="line">Eventi in programma</span></span></span>
         <ul class="thumbnails">
             @if (isset($nearEvents)
             @foreach($nearEvents as $event)
@@ -37,5 +36,5 @@
         </form>
     </div>
 </section>
-@endsection
 
+@endsection

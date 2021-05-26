@@ -5,8 +5,9 @@
     <div class="row">						
         <div class="event-image span">
             @if (!isset($event->immagine))
-           <?php $event->immagine= 'default.jpg'; ?>
+            <?php $event->immagine = 'default.jpg'; ?>
             @endif
+            
             <img src="{{ asset('locandine/'.$event->immagine) }}" class="thumbnail"> 		
         </div>
         <div class="single_event">
@@ -26,10 +27,9 @@
                 @endguest
 
                 @can('isUser')
-                 <input class="btn btn-inverse" type="submit" value="Acquista" formaction="{{ route('buy'), [$event->id->eventId] }}"></input>
-                 <!--Qua va passata la rotta di acquista con i dati dell'evento, per ora lascio logout come rotta almeno fa qualcosa di diverso-->
+                <input class="btn btn-inverse" type="submit" value="Acquista" formaction='{{ route('purchase', ['eventId' => $event->id])}}'></input>
                 @endcan
-                
+
                 @can('isOrg')
                 <!--tasti modifica e cancella? -->
                 @endcan
@@ -40,12 +40,12 @@
                     @guest
                     <input class="btn btn-inverse" type="submit" value="Parteciper&ograve" formaction="{{ route('login') }}"></input>
                     @endguest
-                    
+
                     @can('isUser')
                     <input class="btn btn-inverse" type="submit" value="Parteciper&ograve" formaction="{{ route('logout') }}"></input>
-                    //Qua deve creare la partecipazione, forse va fatto da userController (come fatto per le creazioni di altri elementi)
+                    <!--Qua deve creare la partecipazione, forse va fatto da userController (come fatto per le creazioni di altri elementi)-->
                     @endcan
-                    
+
                     <p>
                         Persone che parteciperanno: {{$event->partecipero}}
                     </p>
@@ -55,16 +55,16 @@
         <div class="span9">	
             <hr>
             <div class="container" style="width: 100%; display:flex;">
-                    <div style="display:flex; flex-direction:column; width: 50%; float: left; margin-right: 50px;">
-                        <div style="overflow-wrap: break-word;">
-                            <h5>Descrizione</h5>
-                            <p>{{$event->descrizione}}</p>
-                        </div>                                                               
-                        <div style="overflow-wrap: break-word;">
-                            <h5>Come raggiungerci</h5>
-                            <p>{{$event->indicazioni}}</p>
-                        </div>
+                <div style="display:flex; flex-direction:column; width: 50%; float: left; margin-right: 50px;">
+                    <div style="overflow-wrap: break-word;">
+                        <h5>Descrizione</h5>
+                        <p>{{$event->descrizione}}</p>
+                    </div>                                                               
+                    <div style="overflow-wrap: break-word;">
+                        <h5>Come raggiungerci</h5>
+                        <p>{{$event->indicazioni}}</p>
                     </div>
+                </div>
                 <div>  
                     <iframe width="400" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="{{$event->urlluogo}}"></iframe><small><a href="{{$event->urlluogo}}"""></a></small>  
                 </div>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Log;
+
 use App\Models\EventsList;
 use App\Models\PurchaseList;
 use App\Models\Resources\Purchase;
@@ -23,6 +24,7 @@ class UserController extends Controller
         $this->purchases = new PurchaseList;
     }
 
+
     public function index()
     {
         $nearEvents = $this->eventsList->getNearEvents();
@@ -39,17 +41,25 @@ class UserController extends Controller
 
     public function showPurchaseScreen($eventId)
     {
-        $event = $this->eventsList->getEventById($eventId)->first();
+        Log::debug('dentro showPurchaseScreen');
+        $event = $this->eventsList->getEventById($eventId);
         return view('buy')->with('event', $event);
     }
 
-    public function buy(PurchaseRequest $request)
+    public function buyTickets(PurchaseRequest $request)
     {
+        $request->validated();
+        /*
         $acquisto = new Purchase;
         $acquisto->fill($request->validated());
         $acquisto->save();
         $this->$this->eventsList->updateOnPurchase($request->idevento, $request->numerobiglietti, $request->costotoale);
-        $event = $this->eventsList->getEventById($request->idevento);
+
+        Log::debug('dentro buyTickets');
+        $event=$this->eventsList->getEventById($request->idevento);
+        return redirect()->route('riepilogo')->with('event', $event)->with('numBiglietti', $request->numerobiglietti)
+                ->with('importo', $request->costototale); //DATI PASSATI SU SESSION, SI OTTENOGNO CON session('nomedato')
+$event = $this->eventsList->getEventById($request->idevento);
         return redirect()->route('riepilogo')->with('event', $event)->with('numBiglietti', $request->numeroBiglietti)
             ->with('importo', $request->costototale); //DATI PASSATI SU SESSION, SI OTTENOGNO CON session('nomedato')
     }
@@ -60,6 +70,7 @@ class UserController extends Controller
     /**
      * Ritorna la view della cronologia degli acquisti dell'utente attualmente loggato
      */
+    }
     public function CronologiaAcquisti()
     {
         $user = auth()->user();
@@ -68,5 +79,14 @@ class UserController extends Controller
 
         return view('purchase_list')->with('purchases', $lista_acquisti["purchases"])
             ->with('images', $lista_acquisti["images"]);
+    }
+
+    public function showRiepilogo()
+    {
+        Log::debug('dentro showRiepilgo');
+        $event = session('event');
+        $numBiglietti = session('numBiglietti');
+        $importo = session('importo');
+        return view('riepilogo')->with('event', $event)->with('numBiglietti', $numBiglietti)->with('importo', $importo);
     }
 }

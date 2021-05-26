@@ -18,6 +18,7 @@ textarea {
 ul li a,
 a {
     color: #333;
+
     outline: 0;
     -webkit-transition: all 0.2s linear;
     -moz-transition: all 0.2s linear;
@@ -105,6 +106,7 @@ section.homepage-slider {
     position: relative;
     top: 0;
     z-index: 99;
+
     border-bottom: 2px solid #ddd;
     background-color: #efeeed;
     min-height: 100px;
@@ -131,6 +133,7 @@ section.homepage-slider p {
 }
 section.homepage-slider span {
     background-color: #fff;
+
     color: #000;
     padding: 2px 10px;
     line-height: 30px;
@@ -138,9 +141,24 @@ section.homepage-slider span {
     float: left;
     width: auto;
 }
-section.header_text.sub {
-    font-size: 14px;
-    margin-bottom: 40px;
+section.homepage-slider p {
+    overflow: hidden;
+    width: 100%;
+    margin-bottom: 2px;
+}
+section.homepage-slider span {
+    background-color: #fff;
+    color: #000;
+    padding: 2px 10px;
+    line-height: 30px;
+    font-size: 28px;
+    float: left;
+    width: auto;
+}
+section.header_text.sub h4 {
+    text-transform: uppercase;
+
+    margin: 0;
 }
 section.header_text.sub h4 {
     text-transform: uppercase;
@@ -175,6 +193,7 @@ iframe {
 #top-bar .user-menu li:last-child {
     border-right: 0;
 }
+
 /* footer
 ----------------------------------------------------------------------------- */
 section#footer-bar,
@@ -214,6 +233,7 @@ section#footer-bar a {
 }
 section#footer-bar a:hover {
     color: #999;
+
     text-decoration: underline;
 }
 section#footer-bar .nav a {
@@ -224,6 +244,7 @@ section#footer-bar h4 {
     font-size: 16px;
     color: #fff;
     font-weight: normal;
+
     margin: 10px 0 18px;
 }
 section#footer-bar .social_icons a {
@@ -266,6 +287,7 @@ section#copyright {
     background-color: #111111;
     color: #fff;
     font-size: 10px;
+
     text-transform: uppercase;
 }
 /* end footer */
@@ -275,6 +297,7 @@ section#copyright {
 section.navbar {
     margin-bottom: 0;
 }
+
 .navbar-inner.main-menu {
     height: 40px;
     padding-left: 10px;
@@ -284,6 +307,7 @@ section.navbar {
     border-top: 0;
     border-bottom: 5px solid #eb4800;
     -webkit-border-radius: 0;
+
     -moz-border-radius: 0;
     border-radius: 0;
     filter: none;
@@ -424,6 +448,7 @@ section.navbar {
     transition: all 0.7s;
     transform: rorate(6.28rad);
 }
+
 .feature_box .service div {
     padding: 5px 5px 0 5px;
 }
@@ -813,7 +838,6 @@ section.our_client .row {
 }
 
 /*--- NUOVI ---*/
-
 .pagination {
     margin-top: 20px;
     margin-bottom: 10px;
@@ -838,6 +862,31 @@ section.our_client .row {
     background-color: #e16c0b;
     border-radius: 20px;
     font-family: Helvetica;
+    font-weight: bold;
+}
+.button:clickable:hover {
+    background-color: #e16c0b;
+    border-radius: 20px;
+    font-family: Helvetica;
+    cursor: pointer;
+    box-shadow: 5px 5px #eb470054;
+    font-weight: bold;
+}
+.bigbutton {
+    background-color: #e16c0b;
+    border-radius: 20px;
+    font-family: Helvetica;
+    height: 3em;
+    font-weight: bold;
+}
+.bigbutton.clickable:hover {
+    background-color: #e16c0b;
+    border-radius: 20px;
+    font-family: Helvetica;
+    box-shadow: 5px 5px #eb470054;
+    height: 3em;
+    cursor: pointer;
+    font-weight: bold;
 }
 /*
 .site_logo{
@@ -1056,4 +1105,9 @@ section.our_client .row {
     margin-bottom: 30px;
     width: 20px;
     height: 20px;
+}
+.submit_goback {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
 }

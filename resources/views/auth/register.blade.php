@@ -2,6 +2,7 @@
 
 @section('content')
 <div class="container">
+
     <div class="center">
         <h4 class=" left title"><span class="text"><strong>Registrazione</strong></h4>
         <div class="container-contact">

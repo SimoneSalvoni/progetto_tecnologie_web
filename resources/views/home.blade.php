@@ -51,7 +51,7 @@
             </div>
         </div>
         @endisset
-        <button class="button" onclick="location.href = '{{route('list')}}'" type="button" > <b>VAI ALLA LISTA COMPLETA DEGLI EVENTI</b></button>
+        <button class="button clickable" onclick="location.href = '{{route('list')}}'" type="button" > <b>VAI ALLA LISTA COMPLETA DEGLI EVENTI</b></button>
     </section>
 <!--</div>-->
 @endsection 
