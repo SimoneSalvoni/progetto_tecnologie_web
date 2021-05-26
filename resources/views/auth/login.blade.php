@@ -8,6 +8,7 @@
             <div class="wrap-contact1">
                 {{ Form::open(array('route' => 'login', 'class' => 'contact-form')) }}
 
+
                 <div  class="wrap-input">
                 </div>
                 <div  class="wrap-input">
@@ -33,6 +34,7 @@
                     </ul>
                     @endif
                 </div>
+
 
                 <div class="container-form-btn">
                     {{ Form::submit('Login', ['class' => 'form-btn1']) }}
