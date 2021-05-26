@@ -1,0 +1,49 @@
+@extends('layouts.public')
+@section('title','Cronologia Acquisti')
+@section('content')
+<h4><span>Eventi Organizzati</span></h4>
+@isset($events)
+@foreach ($events as $event)
+<section class="main-content">
+    <section class="single_product">
+        <div class="product_container">
+            <div class="image_item">
+                <img src="{{ asset('locandine/'.$event->immagine)}}" class="product_image" alt="">
+            </div>
+            <div class="descr_container">
+                <div class="title_item">
+                    <h4>{{$event->nome}}</h4>
+                </div>
+                <div class="inner_descr_container">
+                    <div class="purchase_descr_item">
+                        @if ($event->bigliettitotali !=0)
+                        Biglietti venduti/biglietti totali: {{$event->bigliettivenduti / $event->bigliettitotali}}
+                        @else
+                        Biglietti venduti/biglietti totali: 0
+                        @endif
+                    </div>
+                    <div class="purchase_descr_item">
+                        Percentuale biglietti venduti: {{$event->bigliettivenduti}}
+                    </div>
+                    <div class="purchase_descr_item">
+                        Incasso totale: {{$event->incassototale}}
+                    </div>
+                </div>
+            </div>
+            <div class="action_div">
+                <div id="pencil_item" title="Modifica evento">
+                    <img id="pencil" class="action_item_clickable" src="{{asset('css/themes/images/pencil.png')}}" ;
+                        onclick=" location.href='{{route('event',[$event->id])}}'" alt="modifica evento">
+                </div>
+                <div id="cross_item" title="Elimina evento">
+                    <img id="cross" class="action_item_clickable" src="{{asset('css/themes/images/cross.png')}}" ;
+                        onclick=" location.href='{{route('delete',[$event->id])}}'" alt="cancella evento">
+                </div>
+
+            </div>
+        </div>
+    </section>
+</section>
+@endforeach
+@endisset
+@endsection
