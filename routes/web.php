@@ -26,7 +26,6 @@ Route::post('logout', 'Auth\LoginController@logout')
 //registrazione
 Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
 Route::post('register', 'Auth\RegisterController@register');
-
 Route::get('/user', 'UserController@index') ->name('user')->middleware('can:isUser');
 
 //acquisto
@@ -36,7 +35,7 @@ Route::get('/RiepilogoAcquisto', 'UserController@showRiepilogo')->name('riepilog
 
 //Areriservata
 
-Route::get('/areariservata/user', 'UserController@AreaRiservata')->name('areariservata.user')->middleware('can:isUser');
-Route::get('/areariservata/org', 'OrgController@AreaRiservata')->name('areariservata.org')->middleware('can:isOrg');
-Route::get('/areariservata/admin', 'AdminController@AreaRiservata')->name('areariservata.admin')->middleware('can:isAdmin');
+Route::get('/areriservata/user', 'UserController@AreaRiservata')->name('areariservata.user')->middleware('can:isUser');
+Route::get('/areriservata/org', 'OrgController@AreaRiservata')->name('areariservata.org')->middleware('can:isOrg');
+Route::get('/areriservata/admin', 'AdminController@AreaRiservata')->name('areariservata.admin')->middleware('can:isAdmin');
 
