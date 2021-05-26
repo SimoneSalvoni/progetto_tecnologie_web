@@ -6,7 +6,7 @@
 @foreach ($events as $event)
 <section class="main-content">
     <section class="single_product">
-        <div class="product_container clickable" ; onclick="location.href='{{route('event',[$event->id])}}'">
+        <div class="product_container">
             <div class="image_item">
                 <img src="{{ asset('locandine/'.$event->immagine)}}" class="product_image" alt="">
             </div>
@@ -31,13 +31,13 @@
                 </div>
             </div>
             <div class="action_div">
-                <div id="pencil_item" ; onclick="location.href='{{route('event',[$event->id])}}'">
-                    <img id="pencil" class="action_item_clickable" src="{{asset('css/themes/images/pencil.png')}}"
-                        alt="modifica evento">
+                <div id="pencil_item" title="Modifica evento">
+                    <img id="pencil" class="action_item_clickable" src="{{asset('css/themes/images/pencil.png')}}" ;
+                        onclick=" location.href='{{route('event',[$event->id])}}'" alt="modifica evento">
                 </div>
-                <div id="cross_item" ; onclick="location.href='{{route('delete',[$event->id])}}'">
-                    <img id="cross" class="action_item_clickable" src="{{asset('css/themes/images/cross.png')}}"
-                        alt="cancella evento">
+                <div id="cross_item" title="Elimina evento">
+                    <img id="cross" class="action_item_clickable" src="{{asset('css/themes/images/cross.png')}}" ;
+                        onclick=" location.href='{{route('delete',[$event->id])}}'" alt="cancella evento">
                 </div>
 
             </div>

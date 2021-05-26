@@ -1028,6 +1028,7 @@ section.our_client .row {
     display: flex;
     flex-direction: column;
     align-content: space-between;
+    justify-content: center;
     flex-shrink: 0;
     height: 192px;
 }
@@ -1036,6 +1037,12 @@ section.our_client .row {
     cursor: pointer;
     filter: invert(63%) sepia(80%) saturate(1000%) hue-rotate(343deg)
         brightness(96%) contrast(81%);
+}
+
+#pencil_item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 #pencil {
