@@ -815,7 +815,32 @@ section.our_client .row{
 .button{
     background-color: #E16C0B;
     border-radius: 20px;
-    font-family:Helvetica
+    font-family:Helvetica; 
+    font-weight:bold
+}
+.button:clickable:hover{
+    background-color: #E16C0B;
+    border-radius: 20px;
+    font-family:Helvetica;
+    cursor: pointer;
+    box-shadow: 5px 5px #eb470054;
+    font-weight:bold
+}
+.bigbutton{
+    background-color: #E16C0B;
+    border-radius: 20px;
+    font-family:Helvetica;
+    height:3em;
+    font-weight:bold
+}
+.bigbutton.clickable:hover{
+    background-color: #E16C0B;
+    border-radius: 20px;
+    font-family:Helvetica;
+    box-shadow: 5px 5px #eb470054;
+    height:3em;
+    cursor: pointer;
+    font-weight:bold
 }
 /*
 .site_logo{
@@ -928,7 +953,7 @@ section.our_client .row{
 .desc{
     width: 50%;
     overflow-wrap: break-word;
-    
+
 }
 
 .errors {
@@ -988,4 +1013,8 @@ section.our_client .row{
     width:fit-content;
     margin-top:10px
 }
-
+.submit_goback{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly
+}

@@ -35,21 +35,31 @@ class UserController extends Controller {
     }
     
     public function showPurchaseScreen ($eventId){
-        $event = $this->eventsList->getEventById($eventId)->first();
+        Log::debug('dentro showPurchaseScreen');
+        $event = $this->eventsList->getEventById($eventId);
         return view ('buy')->with('event', $event);
     }
     
-    public function buy (PurchaseRequest $request){
+    public function buyTickets (PurchaseRequest $request){
+        $request->validated();
+        /*
         $acquisto = new Purchase;
         $acquisto->fill($request->validated());
         $acquisto->save();
         $this->$this->eventsList->updateOnPurchase($request->idevento, $request->numerobiglietti, $request->costotoale);
-        $event->$this->eventsList->getEventById($request->idevento);
-        return redirect()->route('riepilogo')->with('event', $event)->with('numBiglietti', $request->numeroBiglietti)
+         * 
+         */
+        Log::debug('dentro buyTickets');
+        $event=$this->eventsList->getEventById($request->idevento);
+        return redirect()->route('riepilogo')->with('event', $event)->with('numBiglietti', $request->numerobiglietti)
                 ->with('importo', $request->costototale); //DATI PASSATI SU SESSION, SI OTTENOGNO CON session('nomedato')
     }
     
     public function showRiepilogo (){
-        
+        Log::debug('dentro showRiepilgo');
+        $event = session('event');
+        $numBiglietti = session('numBiglietti');
+        $importo = session('importo');
+        return view('riepilogo')->with('event', $event)->with('numBiglietti',$numBiglietti)->with('importo', $importo);
     }
 }
