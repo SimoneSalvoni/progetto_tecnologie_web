@@ -13,6 +13,7 @@ $(document).ready(function () {
         $('#tot').html(totCosto.toString());
         $('#costototale').val(totCosto);
     });
+    
     $("#img1").click(function () {
         $(this).css('border', 'solid 4px orange');
         $("#img2").css('border', '');

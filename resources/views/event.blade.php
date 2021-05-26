@@ -1,7 +1,12 @@
 @extends ('layouts.public')
 @section('title', 'Evento')
+
+@section ('scripts')
+<script src='{{asset('js/block_purchase.js')}}'></script>
+@endsection
+
 @section ('content')
-<section  class="main-content">		<!-- style=main.css c'era dentro, perché? -->	
+<section  class="main-content">			
     <div class="row">						
         <div class="event-image span">
             @if (!isset($event->immagine))
@@ -11,22 +16,26 @@
         </div>
         <div class="single_event">
             <h3><span>{{$event->nome}}</span></h3>
-            <h5><strong>Organizzazione: {{$event->nomeorganizzatore}}</strong></h5>				
-            <h5><strong>Data: {{$event->data}}</strong></h5>
-            <h5><strong>Luogo: {{$event->regione.", ".$event->provincia.", ".$event->indirizzo." ".$event->numciv}}</strong></h5>								
-            <h5><strong>Prezzo: {{$event->costo}}€
-                    <?php //@include('helpers/prezzoEvento', 'evento' => $event)?>
-                </strong></h5>
+            <h5>Organizzazione: {{$event->nomeorganizzatore}}</h5>				
+            <h5>Data: {{$event->data}}</h5>
+            <h5>Luogo: {{$event->regione.", ".$event->provincia.", ".$event->indirizzo." ".$event->numciv}}</h5>								
+            <h5>Prezzo: {{$event->costo}}€</h5>
+            <h5 style='display: inline'>Biglietti rimanenti:&nbsp</h5>
+            <h5 id="biglietti" style='display: inline'>{{$event->bigliettitotali-$event->bigliettivenduti}}</h5>
+            <br/><br/>
+
             <form class="form-inline" method="get">
-                <!-- per il GUEST DEVE LINKARE AL LOGIN-->
-                <h5>Biglietti rimanenti: {{$event->bigliettitotali-$event->bigliettivenduti}}</h5>
-                
                 @guest
-                <input class="btn btn-inverse" type="submit" value="Acquista" formaction="{{ route('login') }}"></input>
+                <input class="bigbutton clickable" type="submit" value="Acquista" formaction="{{ route('login') }}"></input>
                 @endguest
 
                 @can('isUser')
-                <input class="btn btn-inverse" type="submit" value="Acquista" formaction='{{ route('purchase', ['eventId' => $event->id])}}'></input>
+                @if (($event->bigliettitotali-$event->bigliettivenduti)>0)
+                <input class="bigbutton clickable" id="buy" type="submit" value="ACQUISTA" formaction='{{ route('purchase', ['eventId' => $event->id])}}'></input>
+                @else
+                <input class="bigbutton clickable" style="display:inline" id="buy" type="submit" value="ACQUISTA" formaction=''></input>
+                <h5 style="display:inline;color: red">&nbspBiglietti esauriti!</h5>
+                @endif
                 @endcan
 
                 @can('isOrg')

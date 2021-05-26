@@ -7,7 +7,6 @@
 @endsection
 
 
-
 @section('content')
 <section name='main_content'>
     <div name="dati-evento">
@@ -21,7 +20,7 @@
     </div>
     <h3><b>Seleziona il metodo di pagamento:</b></h3>
     <div class="container">
-        <form class="container" id="form" method="POST" action="{{route('buy')}}">
+        <form class="container" method="POST" action="{{route('buy')}}">
             @csrf
             <div class="container_payment">
                 <div style="height:inherit">

@@ -17,7 +17,7 @@
         <div>
             <span class="pull-left"><span class="text"><span class="line">Eventi in programma</span></span></span>
             <ul class="thumbnails">
-                @if (isset($nearEvents)
+                @if (isset($nearEvents))
                 @foreach($nearEvents as $event)
                 <li class="span3">
                     <div class="product-box">
