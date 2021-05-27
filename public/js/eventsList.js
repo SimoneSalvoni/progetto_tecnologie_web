@@ -1,7 +1,5 @@
-window.onload = function () {
-    document.getElementById("reg").value =
-        "<?php echo isset($_POST['reg']) ? $_POST['reg'] : '' ?>";
+function UpdateFormFileds() {
+    document.getElementById("reg").value = "pippo";
     document.getElementById("org").value =
         "<?php echo isset($_POST['org']) ? $_POST['org'] : '' ?>";
-    console.log("in javascript");
-};
+}

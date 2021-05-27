@@ -1,6 +1,7 @@
 @extends('layouts.public')
 @section('title', 'Lista eventi')
 @section('scripts')
+
 <script src='{{asset('js/eventsList.js')}}'></script>
 <script>
     window.onload = function () {
@@ -8,9 +9,9 @@
         "<?php echo isset($_POST['reg']) ? $_POST['reg'] : '' ?>";
     document.getElementById("org").value =
         "<?php echo isset($_POST['org']) ? $_POST['org'] : '' ?>";
-    console.log("in javascript");
-};
+ };
 </script>
+@endsection
 @section ('content')
 <section class="main-content">
     <section>
@@ -27,11 +28,11 @@
                 <span class="search">
                     <label for="date" class="control">Data</label>
                     <input type="month" name="date" id="date"
-                        value="<?php echo isset($_POST['date']) ? $_POST['date'] : '' ?>" />
+                        value="<?php echo isset($_POST['date']) ? $_POST['date'] : '' ?>">
                 </span>
                 <span class="search">
                     <label for="reg" class="control">Regione</label>
-                    <select name="reg" id="reg" value="<?php echo isset($_POST['reg']) ? $_POST['reg'] : '' ?>">
+                    <select name="reg" id="reg">
                         @foreach ($regions as $region)
                         <option>{{$region}}</option>
                         @endforeach
@@ -39,9 +40,9 @@
                 </span>
                 <span class="search">
                     <label for="org" class="control">Società organizzatrice</label>
-                    <select name="org" id="org" value="<?php echo isset($_POST['org']) ? $_POST['org'] : '' ?>">
+                    <select name="org" id="org">
                         @foreach ($organizzatori as $organizzatore)
-                        <option value="">{{$organizzatore->nomeorganizzatore}}</option>
+                        <option>{{$organizzatore->nomeorganizzatore}}</option>
                         @endforeach
                     </select>
                 </span>
