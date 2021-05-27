@@ -52,6 +52,9 @@
         </div>
         @endisset
         <button class="button clickable" onclick="location.href = '{{route('list')}}'" type="button" > <b>VAI ALLA LISTA COMPLETA DEGLI EVENTI</b></button>
+        <div style="margin-top: 2em">
+        <h5> Nel caso volessi organizzare eventi nel sito contatta l'amministratore alla mail <a href="mailto:admin@r3stickets.it?subject=Richiesta nuovo organizzatore.&body=Salve con la presente chiedo maggiori informazioni sul ruolo di organizzatore all'interno del sito."> admin@r3stickets.it </a></h5>
+        </div>
     </section>
 <!--</div>-->
 @endsection 
