@@ -834,9 +834,7 @@ section.our_client .row {
         .feature_box .service{
                 border-bottom:1px solid #eee;
         }
-
 }
-
 /*--- NUOVI ---*/
 .pagination {
     margin-top: 20px;
@@ -1091,29 +1089,46 @@ section.our_client .row {
 #pencil_item {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+}
+#cross_item {
+    display: flex;
+    flex-direction: column;
 }
 
 #pencil {
     margin-top: 30px;
     width: 20px;
     height: 20px;
+    align-self: center;
+}
+#pencil_text {
+    align-self: center;
 }
 
+.tot_price {
+    float: left;
+    width: fit-content;
+    margin-top: 10px;
+}
 #cross {
-    margin-top: 80px;
-    margin-bottom: 30px;
+    margin-top: 30px;
+    margin-bottom: 5px;
     width: 20px;
     height: 20px;
+    align-self: center;
 }
+#cross_text {
+    margin-bottom: 20px;
+    align-self: center;
+}
+#info_button {
+    margin-bottom: 10px;
+    border-radius: 10%;
+    border-color: #ffc9c9;
+}
+
 .submit_goback {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
-}
-
-.user_info{
-    margin: auto;
-    margin-bottom:500000em;
-    height:2000px
 }
