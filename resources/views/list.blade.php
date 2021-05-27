@@ -1,5 +1,16 @@
 @extends('layouts.public')
 @section('title', 'Lista eventi')
+@section('scripts')
+<script src='{{asset('js/eventsList.js')}}'></script>
+<script>
+    window.onload = function () {
+    document.getElementById("reg").value =
+        "<?php echo isset($_POST['reg']) ? $_POST['reg'] : '' ?>";
+    document.getElementById("org").value =
+        "<?php echo isset($_POST['org']) ? $_POST['org'] : '' ?>";
+    console.log("in javascript");
+};
+</script>
 @section ('content')
 <section class="main-content">
     <section>
@@ -20,13 +31,19 @@
                 </span>
                 <span class="search">
                     <label for="reg" class="control">Regione</label>
-                    <input type="text" name="reg" id="reg"
-                        value="<?php echo isset($_POST['reg']) ? $_POST['reg'] : '' ?>" />
+                    <select name="reg" id="reg" value="<?php echo isset($_POST['reg']) ? $_POST['reg'] : '' ?>">
+                        @foreach ($regions as $region)
+                        <option>{{$region}}</option>
+                        @endforeach
+                    </select>
                 </span>
                 <span class="search">
                     <label for="org" class="control">Società organizzatrice</label>
-                    <input type="text" name="org" id="org"
-                        value="<?php echo isset($_POST['org']) ? $_POST['org'] : '' ?>" />
+                    <select name="org" id="org" value="<?php echo isset($_POST['org']) ? $_POST['org'] : '' ?>">
+                        @foreach ($organizzatori as $organizzatore)
+                        <option value="">{{$organizzatore->nomeorganizzatore}}</option>
+                        @endforeach
+                    </select>
                 </span>
                 <span class="search">
                     <label for="desc" class="control">Descrizione</label>

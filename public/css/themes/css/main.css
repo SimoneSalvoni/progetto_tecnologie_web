@@ -1132,4 +1132,13 @@ section.our_client .row {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
+
+}
+
+#date {
+    height: 30px;
+}
+
+#desc {
+    height: 30px;
 }

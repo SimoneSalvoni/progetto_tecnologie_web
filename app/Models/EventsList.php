@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Resources\Event;
 use App\Models\Resources\User;
+use Illuminate\Support\Facades\Log;
 
 class EventsList
 {
@@ -79,9 +80,20 @@ class EventsList
 
     public function getEventsManaged($organizzazione)
     {
-
         $manageEvent = Event::where('nomeorganizzatore', '==', $organizzazione)->orderBy('data')->take(2)->get();
-
         return $manageEvent;
+    }
+
+    public function getRegionList()
+    {
+        $regioni = array('Abruzzo', 'Basilicata', 'Calabria', 'Campania', 'Emilia-Romagna', 'Friuli-Venezia Giulia', 'Lazio', 'Liguria', 'Lombardia', 'Marche', 'Molise', 'Piemonte', 'Puglia', 'Sardegna', 'Sicilia', 'Toscana', 'Trentino-Alto Adige', 'Umbria', "Valle d'Aosta", 'Veneto');
+        return $regioni;
+    }
+
+    public function getOrganizzatori()
+    {
+        $organizzatori = Event::select('nomeorganizzatore')->distinct()->get();
+        Log::debug($organizzatori);
+        return $organizzatori;
     }
 }
