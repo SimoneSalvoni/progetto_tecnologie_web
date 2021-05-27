@@ -9,9 +9,8 @@
         <!-- ARRIVA CON HASH? NON PENSO. MA SOPRATTUTTO DOVREMMO NASCONDERLA E RENDERLA VISIBILE CON UN PULSANTE -->
         <p>Nome: {{$user->nome}} </p>
         <p>Cognome: {{$user->cognome}}</p>
-        <form>
-            <input class="button clickable" type="submit" value="Modifica dati personali" formaction="#" />
-        </form>
+        <button class="button" type="button" onclick="location.href='{{route('ModificaProfilo')}}'">Modifcia dati
+            personali</button>
         <hr size="3" color="black" style="height:0.5px" />
         <div>
             <h3>Eventi in porgramma</h3>

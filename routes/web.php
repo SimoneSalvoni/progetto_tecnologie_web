@@ -53,9 +53,11 @@ Route::get('/areariservata/org/EventiOrganizzati', 'OrgController@EventiOrganizz
 Route::get('delete/{evetId}', 'OrgController@EliminaEvento')->name('delete')->middleware('can:isOrg');
 
 //Modifica Profilo
-Route::get('ModificaProfilo', 'UserController@mostraModificaProfilo')->name('ModificaProfilo')->middleware('can:isUser');
-Route::post('modificaprofilo', 'UserController@ModificaProfilo')->middleware('can:isUser');
+Route::get('ModificaProfilo', 'UserController@showModifyProfile')->name('ModificaProfilo')->middleware('can:isUser');
+Route::post('modificaprofilo', 'UserController@ModifyProfile')->name('modificaprofilo')->middleware('can:isUser');
 
 //Creazione e modifica eventi
 Route::get("/areariservata/org/nuovoEvento", "OrgController@showNewEventScreen")->name('newEvent')->middleware('can:isOrg');
 Route::post("storeNewEvent", "OrgController@addEvent")->name('addNewEvent')->middleware('can:isOrg');
+
+

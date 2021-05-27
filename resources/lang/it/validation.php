@@ -133,6 +133,13 @@ return [
         ],
     ],
 
+    //Messaggio di errore custom per la form che modifica i dati del profilo dell'utente
+    'custom' => [
+        'vecchia-password' => [
+            'password' => "La password inserita non è valida",
+        ],
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Attributes

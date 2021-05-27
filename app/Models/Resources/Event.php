@@ -47,6 +47,11 @@ class Event extends Model
     public function getOrganizzatore(){
         return $this->belongsTo(User::class, "nomeorganizzatore", "organizzazione");
     }
+    
+    public function isFull($event) {
+        $rimanenti = $event->bigliettitotali - $event->bigliettivenduti;
+        return (rimanenti == 0);
+    }
 }
 
 //RICORDA, BISOGNA (PENSO) METTERE LE PROPRIETA' $guarded IN TUTTI 
