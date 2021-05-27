@@ -51,3 +51,7 @@ Route::get('/areariservata/CronologiaAcquisti', 'UserController@CronologiaAcquis
 Route::get('/areariservata/EventiOrganizzati', 'OrgController@EventiOrganizzati')->name('eventiorganizzati')->middleware('can:isOrg');
 
 Route::get('delete/{evetId}', 'OrgController@EliminaEvento')->name('delete')->middleware('can:isOrg');
+
+//Modifica Profilo
+Route::get('ModificaProfilo', 'UserController@showModifyProfile')->name('ModificaProfilo')->middleware('can:isUser');
+Route::post('modificaprofilo', 'UserController@ModifyProfile')->name('modificaprofilo')->middleware('can:isUser');

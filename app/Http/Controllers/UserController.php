@@ -3,13 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Log;
-
 use App\Models\EventsList;
 use App\Models\PurchaseList;
 use App\Models\Resources\Purchase;
 use App\Http\Requests\PurchaseRequest;
 use App\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
+use App\Http\Requests\ModifyProfileRequest;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -22,8 +24,8 @@ class UserController extends Controller
         $this->middleware('auth');
         $this->eventsList = new EventsList;
         $this->purchases = new PurchaseList;
+        $this->userModel = new User();
     }
-
 
     public function index()
     {
@@ -34,8 +36,10 @@ class UserController extends Controller
     public function AreaRiservata()
     {
         $user = auth()->user();
-        //  $nearEvents = ;
-        //TODO creare la view dello user
+        $nearEvents = $this->userModel->nearEvents($user->nomeutente);
+        if ($nearEvents != null) {
+            return view('user')->with('user', $user)->with('nearEvents', $nearEvents);
+        }
         return view('user')->with('user', $user);
     }
 
@@ -48,45 +52,54 @@ class UserController extends Controller
 
     public function buyTickets(PurchaseRequest $request)
     {
-        $request->validated();
-        /*
         $acquisto = new Purchase;
         $acquisto->fill($request->validated());
         $acquisto->save();
-        $this->$this->eventsList->updateOnPurchase($request->idevento, $request->numerobiglietti, $request->costotoale);
-
-        Log::debug('dentro buyTickets');
-        $event=$this->eventsList->getEventById($request->idevento);
-        return redirect()->route('riepilogo')->with('event', $event)->with('numBiglietti', $request->numerobiglietti)
-                ->with('importo', $request->costototale); //DATI PASSATI SU SESSION, SI OTTENOGNO CON session('nomedato')
-$event = $this->eventsList->getEventById($request->idevento);
-        return redirect()->route('riepilogo')->with('event', $event)->with('numBiglietti', $request->numeroBiglietti)
-            ->with('importo', $request->costototale); //DATI PASSATI SU SESSION, SI OTTENOGNO CON session('nomedato')
+        $this->eventsList->updateOnPurchase($request->idevento, $request->numerobiglietti, $request->costototale);
+        $event = $this->eventsList->getEventById($request->idevento);
+        Session::put('evento', $event);
+        Session::put('numerobiglietti', $request->numerobiglietti);
+        Session::put('importo', $request->costototale);
+        return redirect()->route('riepilogo');
     }
 
     public function showRiepilogo()
     {
+        $event = Session::get('evento');
+        $numBiglietti = Session::get('numerobiglietti');
+        $importo = Session::get('importo');
+        return view('riepilogo')->with('event', $event)->with('numerobiglietti', $numBiglietti)->with('importo', $importo);
     }
-    /**
-     * Ritorna la view della cronologia degli acquisti dell'utente attualmente loggato
-     */
-    }
+
     public function CronologiaAcquisti()
     {
         $user = auth()->user();
         //Ricordarsi di fare la paginazione
         $lista_acquisti = $this->purchases->getPurchases($user->id);
-
         return view('purchase_list')->with('purchases', $lista_acquisti["purchases"])
             ->with('images', $lista_acquisti["images"]);
     }
 
-    public function showRiepilogo()
+    public function showModifyProfile()
     {
-        Log::debug('dentro showRiepilgo');
-        $event = session('event');
-        $numBiglietti = session('numBiglietti');
-        $importo = session('importo');
-        return view('riepilogo')->with('event', $event)->with('numBiglietti', $numBiglietti)->with('importo', $importo);
+        $user = auth()->user();
+        return view('modify_profile')->with('user', $user);
+    }
+
+    public function ModifyProfile(ModifyProfileRequest $request)
+    {
+        $user = auth()->user();
+        $this->userModel->fill($request->validated());
+        Log::debug("USER PRIMA DELLA MODIFICA: " . strval($user));
+        $user->nome = $this->userModel->nome;
+        $user->cognome = $this->userModel->cognome;
+        $user->email = $this->userModel->email;
+        $user->nomeutente = $this->userModel->nomeutente;
+        if (isset($this->userModel->password)) {
+            $user->password = Hash::make($this->userModel->password);
+        }
+        $user->save();
+        Log::debug("USER DOPO LA MODIFICA: " . strval($user));
+        return $this->AreaRiservata();
     }
 }

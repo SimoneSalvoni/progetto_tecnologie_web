@@ -15,6 +15,13 @@ class Participation extends Model
      */
     public $timestamps = false;
     
+    protected $fillable = [
+        'nomeutente',
+        'idevento'
+    ];
+    protected $guarded = [
+        'id'
+    ];
     /**
      * Recupera il modello del partecipante
      * 

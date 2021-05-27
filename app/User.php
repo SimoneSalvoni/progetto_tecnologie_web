@@ -2,9 +2,13 @@
 
 namespace App;
 
+use App\Models\Resources\Event;
+use App\Models\Resources\Purchase;
+use Carbon\Carbon;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Log;
 
 class User extends Authenticatable
 {
@@ -22,6 +26,11 @@ class User extends Authenticatable
         'email',
         'nomeutente',
         'password',
+        'organizzazione'
+    ];
+    protected $guarded =[
+        'id',
+        'livello'
     ];
 
     /**
@@ -36,13 +45,6 @@ class User extends Authenticatable
     ];
 
     /**
-     * Primary key della tabella associata al modello
-     *
-     * @var string
-     */
-    protected $primarykey = 'nomeutente';
-
-    /**
      * The attributes that should be cast to native types.
      *
      * @var array
@@ -51,9 +53,41 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function hasRole($livello){
-        $livello=(array)$livello;
+    public function hasRole($livello)
+    {
+        $livello = (array)$livello;
         return in_array($this->livello, $livello);
     }
-}
 
+    public function nearEvents($user)
+    {
+        $currentDate = Carbon::now()->toDateString();
+        $filters[] = ['data', '>=', $currentDate];
+        $filters[] = ['nomeutente', 'LIKE', $user];
+        $purchases = Purchase::where($filters)->orderBy('data')->select('idevento')->distinct()->take(2)->get();
+        switch (count($purchases)) {
+            case 1:
+                $events = Event::where('id', '=', $purchases[0]->idevento)->get();
+                break;
+            case 2:
+                $events = Event::where('id', '=', $purchases[0]->idevento)
+                    ->orWhere('id', '=', $purchases[1]->idevento)->get();
+                break;
+            case 3:
+                $events = Event::where('id', '=', $purchases[0]->idevento)
+                    ->orWhere('id', '=', $purchases[1]->idevento)
+                    ->orWhere('id', '=', $purchases[2]->idevento)->get();
+                break;
+            case 4:
+                $events = Event::where('id', '=', $purchases[0]->idevento)
+                    ->orWhere('id', '=', $purchases[1]->idevento)
+                    ->orWhere('id', '=', $purchases[2]->idevento)
+                    ->orWhere('id', '=', $purchases[3]->idevento)->take(4)->get();
+                break;
+            default:
+                $events = null;
+        }
+        Log::debug("Eventi:" . strval($events));
+        return $events;
+    }
+}

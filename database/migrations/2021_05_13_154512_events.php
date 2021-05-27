@@ -4,14 +4,16 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Events extends Migration {
+class Events extends Migration
+{
 
     /**
      * Run the migrations.
      *
      * @return void
      */
-    public function up() {
+    public function up()
+    {
         Schema::create('events', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nome')->index();
@@ -30,6 +32,7 @@ class Events extends Migration {
             $table->integer('bigliettitotali')->default(0);
             $table->float('incassototale')->default(0);
             $table->integer('parteciperò')->default(0);
+            $table->string('comeraggiungerci');
             $table->string('nomeorganizzatore');
             $table->foreign('nomeorganizzatore')->references('organizzazione')->on('users')->onDelete('cascade')->onUpdate('cascade');
         });
@@ -40,8 +43,8 @@ class Events extends Migration {
      *
      * @return void
      */
-    public function down() {
+    public function down()
+    {
         Schema::dropIfExists('events');
     }
-
 }
