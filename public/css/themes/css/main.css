@@ -1017,6 +1017,27 @@ section.our_client .row {
     margin-right: 50px;
 }
 
+.event-top{
+    display:flex;
+    flex-direction:column;
+    width: 50%;
+    float: righty;
+    margin-right: 50px;
+}
+
+.event-bottom{
+    display:flex;
+    flex-direction:column;
+    width: 50%;
+    float: left;
+    margin-right: 50px;
+    overflow-wrap: break-word;
+}
+
+.event-container{
+    width: 100%;
+    display:flex;
+}
 /*---- Pagina Info ----*/
 .info-element {
     padding: 4px 4px 4px 4px;
