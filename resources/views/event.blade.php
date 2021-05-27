@@ -48,12 +48,14 @@
                     @guest
                     <input class="btn btn-inverse" type="submit" value="Parteciper&ograve" formaction="{{ route('login') }}"></input>
                     @endguest
-
-                    @can('isUser')
+                    
+                    @can('Part')
+                    <input class="btn btn-inverse" type="submit" value="Cancella" formaction="{{ route('logout') }}"></input>
+                    else @can('isUser')
                     <input class="btn btn-inverse" type="submit" value="Parteciper&ograve" formaction="{{ route('logout') }}"></input>
                     <!--Qua deve creare la partecipazione, forse va fatto da userController (come fatto per le creazioni di altri elementi)-->
                     @endcan
-
+                    @endcan
                     <p>
                         Persone che parteciperanno: {{$event->partecipero}}
                     </p>
@@ -62,13 +64,13 @@
         </div>							 
         <div class="span9">	
             <hr>
-            <div class="container" style="width: 100%; display:flex;">
-                <div style="display:flex; flex-direction:column; width: 50%; float: left; margin-right: 50px;">
-                    <div style="overflow-wrap: break-word;">
+            <div class="event-container">
+                <div class='event-bottom'>
+                    <div>
                         <h5>Descrizione</h5>
                         <p>{{$event->descrizione}}</p>
                     </div>                                                               
-                    <div style="overflow-wrap: break-word;">
+                    <div>
                         <h5>Come raggiungerci</h5>
                         <p>{{$event->indicazioni}}</p>
                     </div>

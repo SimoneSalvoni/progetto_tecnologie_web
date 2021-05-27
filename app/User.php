@@ -58,6 +58,13 @@ class User extends Authenticatable
         $livello = (array)$livello;
         return in_array($this->livello, $livello);
     }
+    
+    public function hasPart($user, $evento) {
+        $filters[] = ['id', 'LIKE', $user->id];
+        $filters[] = ['idevento', 'LIKE', $evento->idevento];
+        $participation = Participation::where($filters)->get();
+        return isset($participation);
+    }
 
     public function nearEvents($user)
     {

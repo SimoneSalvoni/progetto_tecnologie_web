@@ -37,6 +37,12 @@ class AuthServiceProvider extends ServiceProvider
             return $user->hasRole(2);
         });
 
-
+        Gate::define('hasPart', function($user, $event){
+            return $user->hasPart(true);
+        });
+        
+        Gate::define('notFull', function($event){
+            return $event->isFull(false);
+        });
     }
 }

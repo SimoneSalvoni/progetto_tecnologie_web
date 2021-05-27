@@ -25,6 +25,7 @@ class EventSeeder extends Seeder
                 'urlluogo' => 'http://maps.google.it/maps?f=q&source=s_q&hl=it&geocode=&q=Via+SanBiagio,+5,+Osimo+Marche&output=embed',
                 'regione' => $regions[$i],
                 'provincia' => 'AN',
+                'città' => 'Ancona',
                 'indirizzo' => 'via Prova',
                 'numciv' => '112',
                 'data' => $date[$i],
