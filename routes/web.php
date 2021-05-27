@@ -45,13 +45,17 @@ Route::get('/areariservata/org', 'OrgController@AreaRiservata')->name('areariser
 Route::get('/areariservata/admin', 'AdminController@AreaRiservata')->name('areariservata.admin')->middleware('can:isAdmin');
 
 //Cronologia acquisti
-Route::get('/areariservata/CronologiaAcquisti', 'UserController@CronologiaAcquisti')->name('cronologiaAcquisti')->middleware('can:isUser');
+Route::get('/areariservata/user/CronologiaAcquisti', 'UserController@CronologiaAcquisti')->name('cronologiaAcquisti')->middleware('can:isUser');
 
 //Cronologia eventi organizzati
-Route::get('/areariservata/EventiOrganizzati', 'OrgController@EventiOrganizzati')->name('eventiorganizzati')->middleware('can:isOrg');
+Route::get('/areariservata/org/EventiOrganizzati', 'OrgController@EventiOrganizzati')->name('eventiorganizzati')->middleware('can:isOrg');
 
 Route::get('delete/{evetId}', 'OrgController@EliminaEvento')->name('delete')->middleware('can:isOrg');
 
 //Modifica Profilo
 Route::get('ModificaProfilo', 'UserController@mostraModificaProfilo')->name('ModificaProfilo')->middleware('can:isUser');
 Route::post('modificaprofilo', 'UserController@ModificaProfilo')->middleware('can:isUser');
+
+//Creazione e modifica eventi
+Route::get("/areariservata/org/nuovoEvento", "OrgController@showNewEventScreen")->name('newEvent')->middleware('can:isOrg');
+Route::post("storeNewEvent", "OrgController@addEvent")->name('addNewEvent')->middleware('can:isOrg');
