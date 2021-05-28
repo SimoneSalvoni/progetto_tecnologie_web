@@ -23,6 +23,7 @@ class Events extends Migration
             $table->string('provincia');
             $table->string('indirizzo');
             $table->string('numciv');
+            $table->string('città');
             $table->string('data');
             $table->string('immagine');
             $table->float('costo');

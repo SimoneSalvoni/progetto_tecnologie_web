@@ -22,7 +22,7 @@ class EventSeeder extends Seeder
             DB::table('events')->insert([
                 'nome' => 'Evento di prova ' . strval($i),
                 'descrizione' => 'Descrizione dell\'evento di prova numero: ' . strval($i),
-                'urlluogo' => 'http://maps.google.it/maps?f=q&source=s_q&hl=it&geocode=&q=Via+Brecce+Bianche,+12,+Ancona&aq=0&sll=41.442726,12.392578&sspn=23.377375,53.657227&ie=UTF8&hq=&hnear=Via+Brecce+Bianche,+12,+60131+Ancona,+Marche&z=14&ll=43.581248,13.515684&output=embed',
+                'urlluogo' => 'http://maps.google.it/maps?f=q&source=s_q&hl=it&geocode=&q=Via+SanBiagio,+5,+Osimo+Marche&output=embed',
                 'regione' => $regions[$i],
                 'provincia' => 'AN',
                 'indirizzo' => 'via Prova',
