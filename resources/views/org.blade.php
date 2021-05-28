@@ -2,44 +2,39 @@
 @section('title', 'Area organizzazione')
 @section ('content')
 
-<section  class="main-content">	
+<section name="main content">
+    <section class="main-content">
+        <h3>Informazioni Organizzatore</h3>
+        <p>Nome organizzazione: {{$user->organizzazione}}</p>
+        <p>Email di riferimento: {{$user->email}}</p>
+        <hr size="3" color="black" style="height:0.5px" />
 
-    <section>
-        <div class="raw">
-    
-
-        <p>Nome organizzazione: {{$user->organizzazione}} <p>
-        <p>Email di riferimento: {{$user->email}}<p>
-        <p>Password: {{$user->password}} <p>
-        <hr size="3" color="black" style="height:0.5px">
-
-        <button class="button" onclick="location.href = '{{route('eventiorganizzati')}}'" type="button" > <b>VAI ALLA LISTA COMPLETA DEGLI EVENTI</b></button>
-
-
-        @isset($events)
-        @for($i=0;$i<2;$i++)
-            <section class="single_product">
-                <div class="product_container clickable"; onclick="location.href ='{{route('event',[$events[$i]->id])}}'">
-                    <!-- <div class="image_item"><img src="concert.jpg" alt="Immagine dell'evento" class="product_image"></div> -->
-                    <div class="image_item"> <img src="{{asset('locandine/'.$nearEvents[$i]->immagine)}}" class="product_image"></div>
-                <div class="descr_container">
-                    <div class="title_item"><h4>{{route('event',[$event[$i]->nome])}}
-                        </h4></div>
-                    <div class="info-container">
-                        <div>LUOGO: {{route('event',[$events[$i]->regione])}}</div>
-                        <div>DATA: {{route('event',[$events[$i]->data])}}</div>
-                        <div>BIGLIETTI VENDUTI: {{route('event', [$events[$i]->bigliettiventuti])}} </div>
-                        <div>INCASSO: {{route('event',[$events[$i]->incassototale])}}€ </div>
+       <div>
+            <h3>Eventi in porgramma organizzati</h3>
+            <ul class="thumbnails">
+                @if (isset($events))
+                @for($i=0;$i<2;$i++)
+                <li class="span3">
+                    <div class="product-box">
+                        <span class="sale_tag"></span>
+                        <p><a href="{{route('event', [$events[$i]->id])}}"><img
+                                    src="{{asset('locandine/'.$events[$i]->immagine)}}" alt="" /></a></p>
+                        <a href="{{route('event', [$events[$i]->id])}}" class="title">{{$events[$i]->nome}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{$events[$i]->data}}</a><br />
+                        <a href="{{route('event', [$events[$i]->id])}}" class="title">BIGLIETTI VENDUTI: {{$events[$i]->bigliettivenduti}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; INCASSO: {{$events[$i]->incasso}}€</a><br />
                     </div>
-                    </div>
-                </div>
-                </div> 
-            </section>
-        @endfor
-        @endisset
-
-    </div>
+                </li>
+                @endfor
+                @endif
+            </ul>
+        @if (!isset($events)||count($events) == 0)
+        <h5 class="center">NON HAI NESSUN EVENTO IN PROGRAMMA ORGANIZZATO</h5>
+        {{-- <div id="filler"></div> --}}
+        @endif
+        <hr>
+        <button class="button" type="button" onclick="location.href='{{route('cronologiaAcquisti')}}'">Cronologia eventi organizzati</button>
+        </div>
     </section>
 </section>
 
 @endsection
+

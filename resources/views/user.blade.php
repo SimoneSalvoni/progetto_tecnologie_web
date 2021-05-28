@@ -6,7 +6,6 @@
         <h3>Informazioni Account</h3>
         <p>Nome utente: {{$user->nomeutente}}</p>
         <p>Email: {{$user->email}}</p>
-        <!-- ARRIVA CON HASH? NON PENSO. MA SOPRATTUTTO DOVREMMO NASCONDERLA E RENDERLA VISIBILE CON UN PULSANTE -->
         <p>Nome: {{$user->nome}} </p>
         <p>Cognome: {{$user->cognome}}</p>
         <button class="button" type="button" onclick="location.href='{{route('ModificaProfilo')}}'">Modifcia dati
@@ -29,8 +28,12 @@
                 @endforeach
                 @endif
             </ul>
-            <button class="button" type="button" onclick="location.href='{{route('cronologiaAcquisti')}}'">Cronologia
-                Acquisti</button>
+        @if (!isset($event)||count($event) == 0)
+        <h5 class="center">NON HAI NESSUN EVENTO IN PROGRAMMA</h5>
+        {{-- <div id="filler"></div> --}}
+        @endif
+        <hr>
+        <button class="button" type="button" onclick="location.href='{{route('cronologiaAcquisti')}}'">Cronologia Acquisti</button>
         </div>
     </section>
 </section>

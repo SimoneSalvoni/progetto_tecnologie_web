@@ -80,8 +80,8 @@ class EventsList
 
     public function getEventsManaged($organizzazione)
     {
-        $manageEvent = Event::where('nomeorganizzatore', '==', $organizzazione)->orderBy('data')->take(2)->get();
-        return $manageEvent;
+        $manageEvent = array("nomeorganizzatore" => $organizzazione);
+        return Event::where($manageEvent)->orderBy('data')->distinct()->get();
     }
 
     public function getRegionList()
