@@ -38,6 +38,10 @@ Route::get('/acquista/{eventId}', 'UserController@showPurchaseScreen')->name('pu
 Route::post('/compraBiglietti', 'UserController@buyTickets')->name('buy')->middleware('can:isUser');
 Route::get('/RiepilogoAcquisto', 'UserController@showRiepilogo')->name('riepilogo')->middleware('can:isUser');
 
+//partecipazione
+Route::post('/partecipa/{eventId}', 'UserController@Participate')->name('participate')->middleware('can:isUser');
+Route::post('/eliminapar/{eventId}', 'UserController@deletePart')->name('delPart')->middleware('can:isUser');
+
 //Areriservata
 
 Route::get('/areariservata/user', 'UserController@AreaRiservata')->name('areariservata.user')->middleware('can:isUser');
