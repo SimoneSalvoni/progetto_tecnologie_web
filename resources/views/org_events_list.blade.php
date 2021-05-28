@@ -23,7 +23,7 @@
                         @endif
                     </div>
                     <div class="purchase_descr_item">
-                        Percentuale biglietti venduti: {{$event->bigliettivenduti}}
+                        Percentuale biglietti venduti: {{($event->bigliettivenduti / $event->bigliettitotali)*100}}%
                     </div>
                     <div class="purchase_descr_item">
                         Incasso totale: {{$event->incassototale}}
@@ -44,9 +44,9 @@
                     <p id="cross_text">Elimina</p>
                 </div>
                 <div title="Visualizza dettagli evento">
-                    <button id="info_button" class="bigbutton clickable"
-                        onclick="location.href='{{route('event',[$event->id])}}'" type="button">Visualizza
-                        dettagli</button>
+                    <a href="{{route('event',[$event->id])}}"><button id="info_button" class="bigbutton clickable"
+                            type="button">Visualizza
+                            dettagli</button></a>
                 </div>
 
             </div>

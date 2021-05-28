@@ -4,12 +4,13 @@
 <section name="main content">
     <section class="main-content">
         <h3>Informazioni Account</h3>
-        <p>Nome utente: {{$user->nomeutente}}</p>
-        <p>Email: {{$user->email}}</p>
-        <p>Nome: {{$user->nome}} </p>
-        <p>Cognome: {{$user->cognome}}</p>
-        <button class="button" type="button" onclick="location.href='{{route('ModificaProfilo')}}'">Modifcia dati
-            personali</button>
+        <h6>Nome utente: {{$user->nomeutente}}</h6>
+        <h6>Email: {{$user->email}}</h6>
+        <h6>Nome: {{$user->nome}} </h6>
+        <h6>Cognome: {{$user->cognome}}</h6>
+        <a href="{{route('ModificaProfilo')}}"><button class="button clickable" type="button">Modifcia
+                dati
+                personali</button></a>
         <hr size="3" color="black" style="height:0.5px" />
         <div>
             <h3>Eventi in porgramma</h3>
@@ -28,12 +29,13 @@
                 @endforeach
                 @endif
             </ul>
-        @if (!isset($event)||count($event) == 0)
-        <h5 class="center">NON HAI NESSUN EVENTO IN PROGRAMMA</h5>
-        {{-- <div id="filler"></div> --}}
-        @endif
-        <hr>
-        <button class="button" type="button" onclick="location.href='{{route('cronologiaAcquisti')}}'">Cronologia Acquisti</button>
+            @if (!isset($nearEvents)||count($nearEvents) == 0)
+            <h5 class="center">NON HAI NESSUN EVENTO IN PROGRAMMA</h5>
+            {{-- <div id="filler"></div> --}}
+            @endif
+            <hr>
+            <a href="{{route('cronologiaAcquisti')}}"><button class="button clickable" type="button">Cronologia
+                    Acquisti</button></a>
         </div>
     </section>
 </section>

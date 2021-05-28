@@ -2,7 +2,7 @@
 @section('title','Cronologia Acquisti')
 @section('content')
 @isset ($purchases)
-<h4><span>Lista degli acquisti</span></h4>
+<h3><span>Lista degli acquisti</span></h3>
 @for($i = 0; $i<count($purchases); $i++) <section class="main-content">
     <section class="single_product">
         <div class="product_container {{--clickable--}}"
