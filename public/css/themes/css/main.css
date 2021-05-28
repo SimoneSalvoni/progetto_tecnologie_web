@@ -900,6 +900,7 @@ section.our_client .row {
 }
 .search {
     display: inline-block;
+    height: 6em;
 }
 .outer_search {
     display: block;
