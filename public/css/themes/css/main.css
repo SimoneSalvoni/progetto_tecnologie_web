@@ -1016,26 +1016,26 @@ section.our_client .row {
     margin-right: 50px;
 }
 
-.event-top{
-    display:flex;
-    flex-direction:column;
+.event-top {
+    display: flex;
+    flex-direction: column;
     width: 50%;
     float: righty;
     margin-right: 50px;
 }
 
-.event-bottom{
-    display:flex;
-    flex-direction:column;
+.event-bottom {
+    display: flex;
+    flex-direction: column;
     width: 50%;
     float: left;
     margin-right: 50px;
     overflow-wrap: break-word;
 }
 
-.event-container{
+.event-container {
     width: 100%;
-    display:flex;
+    display: flex;
 }
 /*---- Pagina Info ----*/
 .info-element {
@@ -1142,7 +1142,6 @@ section.our_client .row {
 #cross_text {
     margin-bottom: 20px;
     align-self: center;
-
 }
 #info_button {
     margin-bottom: 10px;
@@ -1154,13 +1153,7 @@ section.our_client .row {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
-
 }
-
-#date {
-    height: 30px;
-}
-
-#desc {
-    height: 30px;
+#filler {
+    height: 1000px;
 }

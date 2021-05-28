@@ -84,10 +84,13 @@
     </section>
     @endforeach
 
-
     @include('pagination.paginator', ['paginator' => $events])
 
     @endisset
+    @if (!isset($events)||count($events) == 0)
+    <h5 class="center">NESSUN EVENTO RISPETTA I PARAMETRI INSERITI</h5>
+    {{-- <div id="filler"></div> --}}
+    @endif
     <hr>
 
 </section>
