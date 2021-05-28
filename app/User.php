@@ -28,7 +28,7 @@ class User extends Authenticatable
         'password',
         'organizzazione'
     ];
-    protected $guarded =[
+    protected $guarded = [
         'id',
         'livello'
     ];
@@ -58,8 +58,9 @@ class User extends Authenticatable
         $livello = (array)$livello;
         return in_array($this->livello, $livello);
     }
-    
-    public function hasPart($user, $evento) {
+
+    public function hasPart($user, $evento)
+    {
         $filters[] = ['id', 'LIKE', $user->id];
         $filters[] = ['idevento', 'LIKE', $evento->idevento];
         $participation = Participation::where($filters)->get();
@@ -96,5 +97,15 @@ class User extends Authenticatable
         }
         Log::debug("Eventi:" . strval($events));
         return $events;
+    }
+
+    public function isFull($event)
+    {
+        $events = Event::where('id', '=', $event)->get();
+        foreach ($events as $event) {
+            $rimanenti = $event->bigliettitotali - $event->bigliettivenduti;
+        }
+
+        return ($rimanenti > 0);
     }
 }

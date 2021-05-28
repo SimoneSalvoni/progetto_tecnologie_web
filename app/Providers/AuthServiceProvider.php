@@ -38,11 +38,11 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         Gate::define('hasPart', function($user, $event){
-            return $user->hasPart(true);
+            return $user->hasPart($event);
         });
-        
-        Gate::define('notFull', function($event){
-            return $event->isFull(false);
+
+        Gate::define('buy', function($user, $event){
+            return $user->isFull($event);
         });
     }
 }

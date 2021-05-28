@@ -34,7 +34,7 @@ Route::get('/user', 'UserController@index')->name('user')->middleware('can:isUse
 Route::get('/org', 'OrgController@index')->name('org')->middleware('can:isOrg');
 
 //acquisto
-Route::get('/acquista/{eventId}', 'UserController@showPurchaseScreen')->name('purchase')->middleware('can:isUser');
+Route::get('/acquista/{eventId}', 'UserController@showPurchaseScreen')->name('purchase')->middleware('can:isUser')->middleware('can:buy,eventId');
 Route::post('/compraBiglietti', 'UserController@buyTickets')->name('buy')->middleware('can:isUser');
 Route::get('/RiepilogoAcquisto', 'UserController@showRiepilogo')->name('riepilogo')->middleware('can:isUser');
 
@@ -59,5 +59,3 @@ Route::post('modificaprofilo', 'UserController@ModifyProfile')->name('modificapr
 //Creazione e modifica eventi
 Route::get("/areariservata/org/nuovoEvento", "OrgController@showNewEventScreen")->name('newEvent')->middleware('can:isOrg');
 Route::post("storeNewEvent", "OrgController@addEvent")->name('addNewEvent')->middleware('can:isOrg');
-
-
