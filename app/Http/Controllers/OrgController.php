@@ -92,9 +92,13 @@ class OrgController extends Controller
         return redirect()->action('OrgController@EventiOrganizzati', ['result' => $result]);
     }
 
-    public function showEventsListManaged($request)
+    public function showEventsListManaged($request = null)
     {
-        $events = $this->eventsList->getEventsManaged($request->organizzazione);
+        $org = auth()->user();
+        $events = $this->eventsList->getEventsManaged($org->organizzazione);
+        if ($request == null) {
+            return view('list')->with('events', $events);
+        }
         return view('list')->with('events', $events);
     }
 }
