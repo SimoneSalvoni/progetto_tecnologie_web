@@ -26,9 +26,9 @@ a {
     -ms-transition: all 0.2s linear;
     transition: all 0.2s linear;
 }
-a {
+/* a {
     color: #eb4800;
-}
+} */
 a:hover {
     color: #fd4004;
     text-decoration: none;
