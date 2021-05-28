@@ -834,9 +834,7 @@ section.our_client .row {
         .feature_box .service{
                 border-bottom:1px solid #eee;
         }
-
 }
-
 /*--- NUOVI ---*/
 .pagination {
     margin-top: 20px;
@@ -902,6 +900,7 @@ section.our_client .row {
 }
 .search {
     display: inline-block;
+    height: 6em;
 }
 .outer_search {
     display: block;
@@ -1143,6 +1142,7 @@ section.our_client .row {
 #cross_text {
     margin-bottom: 20px;
     align-self: center;
+
 }
 #info_button {
     margin-bottom: 10px;
@@ -1154,6 +1154,7 @@ section.our_client .row {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
+
 }
 
 #date {

@@ -33,15 +33,16 @@ class OrgController extends Controller
      * Qui mettiamo di default l'attributo dell'evento
      * che specifica il nome dell'organizzazione
      */
-    public function addEvent()
+    public function showNewEventScreen()
     {
         $nomeOrg = $this->_orgModel->getOrg()->pluck('organizzazione');
-        return view('event.insert')
+        return view('newevent')
             ->with('organizzazione', $nomeOrg);
     }
+    
 
     //Qua va capito meglio il funzionamento della store
-    public function storeProduct(NewProductRequest $request)
+    public function addEvent (NewEventRequest $request)
     {
 
         if ($request->hasFile('image')) {
@@ -59,9 +60,8 @@ class OrgController extends Controller
         if (!is_null($imageName)) {
             $destinationPath = public_path() . '/images/products';
             $image->move($destinationPath, $imageName);
-        };
-
-        return redirect()->action('OrgController@index');
+        }
+        return redirect()->route('areariservata.org');
     }
 
     /**
