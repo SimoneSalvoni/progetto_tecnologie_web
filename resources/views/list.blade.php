@@ -61,34 +61,40 @@
     @isset($events)
     @foreach($events as $event)
     <section class="single_product">
-        <div class="product_container clickable" ; onclick="location.href ='{{route('event',[$event->id])}}'">
-            <!--<div class="image_item"><img src="concert.jpg" alt="Immagine dell'evento" class="product_image"></div>-->
-            <div class="image_item"> <img src="{{asset('locandine/'.$event->immagine)}}" class="product_image"></div>
-            <div class="descr_container">
-                <div class="title_item">
-                    <h4>{{$event->nome}}
-                    </h4>
+        <a href="{{route('event',[$event->id])}}">
+            <div class="product_container clickable">
+                <!--<div class="image_item"><img src="concert.jpg" alt="Immagine dell'evento" class="product_image"></div>-->
+                <div class="image_item"> <img src="{{asset('locandine/'.$event->immagine)}}" class="product_image">
                 </div>
-                <div class="descr_item">
-                    {{$event->descrizione}}
-                </div>
-                <div class="info-container">
-                    <div>REGIONE: {{$event->regione}} </div>
-                    <div>DATA: {{$event->data}}</div>
-                    <!--   @include('helpers/prezzoEvento', ['evento' => $event])-->
-                    <div>COSTO: {{$event->costo}}€
-                        <!-- TODO: Lo sconto è da fare -->
+                <div class="descr_container">
+                    <div class="title_item">
+                        <h4>{{$event->nome}}
+                        </h4>
+                    </div>
+                    <div class="descr_item">
+                        {{$event->descrizione}}
+                    </div>
+                    <div class="info-container">
+                        <div>REGIONE: {{$event->regione}} </div>
+                        <div>DATA: {{$event->data}}</div>
+                        <!--   @include('helpers/prezzoEvento', ['evento' => $event])-->
+                        <div>COSTO: {{$event->costo}}€
+                            <!-- TODO: Lo sconto è da fare -->
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </a>
     </section>
     @endforeach
-
 
     @include('pagination.paginator', ['paginator' => $events])
 
     @endisset
+    @if (!isset($events)||count($events) == 0)
+    <h5 class="center">NESSUN EVENTO RISPETTA I PARAMETRI INSERITI</h5>
+    {{-- <div id="filler"></div> --}}
+    @endif
     <hr>
 
 </section>

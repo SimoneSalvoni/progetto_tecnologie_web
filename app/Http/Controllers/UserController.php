@@ -62,6 +62,22 @@ class UserController extends Controller
         Session::put('importo', $request->costototale);
         return redirect()->route('riepilogo');
     }
+    
+    public function Participate($user, $event) {
+        $participation = new Participation;
+        $participation->userid = $user->id;
+        $participation->idevento = $event->id;
+        $participation->save();
+        return redirect()->route('event')->with('eventId', $event->id);
+    }
+    
+    public function deletePart($user, $event)
+    {
+        if (hasPart($user, $evento)) {
+            return table('Event')->where('id', $user->id)->where('name', $event->id)->delete();
+        }
+        return redirect()->route('event')->with('eventId', $event->id);
+    }
 
     public function showRiepilogo()
     {

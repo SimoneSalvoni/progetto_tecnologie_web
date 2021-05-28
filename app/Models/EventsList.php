@@ -80,8 +80,8 @@ class EventsList
 
     public function getEventsManaged($organizzazione)
     {
-        $manageEvent = Event::where('nomeorganizzatore', '==', $organizzazione)->orderBy('data')->take(2)->get();
-        return $manageEvent;
+        $manageEvent = array("nomeorganizzatore" => $organizzazione);
+        return Event::where($manageEvent)->orderBy('data')->distinct()->get();
     }
 
     public function getRegionList()
@@ -93,7 +93,12 @@ class EventsList
     public function getOrganizzatori()
     {
         $organizzatori = Event::select('nomeorganizzatore')->distinct()->get();
-        Log::debug($organizzatori);
         return $organizzatori;
+    }
+
+    public function getRemainTickets($eventId)
+    {
+        $event = Event::where('id', '=', $eventId)->first();
+        return $event->bigliettitotali - $event->bigliettivenduti;
     }
 }

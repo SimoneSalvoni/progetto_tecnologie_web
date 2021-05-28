@@ -12,7 +12,7 @@
     <div name="dati-evento">
         <h1 style="font-size:x-large">Dati evento</h1>
         <h2 style="font-size:medium">Data: {{$event->data}}</h2>
-        <h2 style="font-size:medium">Locazione: {{$event->regione}}, {{$event->provincia}}, 
+        <h2 style="font-size:medium">Locazione: {{$event->regione}}, {{$event->provincia}},
             {{$event->indirizzo}} {{$event->numciv}}</h2>
         <h2 style="font-size:medium;display: inline">Costo: </h2>
         <h2 style="font-size:medium;display: inline" id="costo">{{$event->costo}}</h2>
@@ -47,6 +47,11 @@
                 <br>
                 <label style="float:left" for="num"><h5>Numero di biglietti: </h5></label>
                 <input class="num_biglietti" type="number" id='numBiglietti' name="numerobiglietti" value='1' min='1'">
+                <ul class="errors">
+                    @foreach ($errors->get('numerobiglietti') as $message)
+                    <li>{{ $message }}</li>
+                    @endforeach
+                </ul>
             </div>
             <br />
                 <h4 style="display:inline">Costo complessivo: &nbsp</h4>
