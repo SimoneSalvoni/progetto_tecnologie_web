@@ -24,7 +24,20 @@ class NewEventRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'nome' => 'required|max:50',
+            'descrizione' => 'required|max:300',
+            'data' => 'required|date',
+            'regione' => 'required',
+            'provincia' => 'required',
+            'città' => 'required',
+            'indirizzo' => 'required',
+            'numciv' => 'required',
+            'comeraggiungerci' =>'',
+            'immagine' => 'required',
+            'bigliettitotali' =>'required|integer|min:0',
+            'costo' => 'required|numeric|min:0',
+            'sconto' => 'numeric|min:0|max:100',
+            'giornisconto' =>'numeric|min:0'
         ];
     }
 }

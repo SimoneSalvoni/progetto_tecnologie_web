@@ -3,48 +3,26 @@
 namespace App\Http\Controllers;
 
 use App\Models\Admin;
-use App\Models\Resources\Product;
-use App\Http\Requests\NewProductRequest;
+use App\Models\FAQList;
+use App\Http\Requests\UserSearchRequest;
 
 class AdminController extends Controller {
 
-    protected $_adminModel;
+    protected $FAQList;
 
     public function __construct() {
         $this->middleware('can:isAdmin');
-        $this->_adminModel = new Admin;
+        $this->FAQList = new FAQList;
     }
 
     public function index() {
         return view('admin');
     }
-
-    public function addProduct() {
-        $prodCats = $this->_adminModel->getProdsCats()->pluck('name', 'catId');
-        return view('product.insert')
-                        ->with('cats', $prodCats);
-    }
-
-    public function storeProduct(NewProductRequest $request) {
-
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $imageName = $image->getClientOriginalName();
-        } else {
-            $imageName = NULL;
-        }
-
-        $product = new Product;
-        $product->fill($request->validated());
-        $product->image = $imageName;
-        $product->save();
-
-        if (!is_null($imageName)) {
-            $destinationPath = public_path() . '/images/products';
-            $image->move($destinationPath, $imageName);
-        };
-
-        return redirect()->action('AdminController@index');
+    
+    public function AreaRiservata(){
+        $user = auth()->user();
+        $FAQ = $this->FAQList->getFAQ();
+        return;
     }
 
 }

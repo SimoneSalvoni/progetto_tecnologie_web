@@ -60,4 +60,6 @@ Route::post('modificaprofilo', 'UserController@ModifyProfile')->name('modificapr
 Route::get("/areariservata/org/nuovoEvento", "OrgController@showNewEventScreen")->name('newEvent')->middleware('can:isOrg');
 Route::post("storeNewEvent", "OrgController@addEvent")->name('addNewEvent')->middleware('can:isOrg');
 
+//Area admin
+Route::post("/areariservata/admin", 'AdminController@searchUser')->name('searchuser')->middleware('can:isAdmin');
 

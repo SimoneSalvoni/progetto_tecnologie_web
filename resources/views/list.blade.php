@@ -12,6 +12,7 @@
  };
 </script>
 @endsection
+
 @section ('content')
 <section class="main-content">
     <section>
