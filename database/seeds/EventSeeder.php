@@ -16,6 +16,7 @@ class EventSeeder extends Seeder
     public function run()
     {
         $regions = array('Marche', 'Marche', 'Marche', 'Marche', 'Lazio', 'Lazio', 'Lazio', 'Abruzzo', 'Abruzzo', 'Molise');
+        $cities = array('Ancona', 'Ancona', 'Ascoli', 'Urbino', 'Roma', 'Roma','Roma','L\'Aquila', 'L\'Acquila', 'Campobasso');
         $date = array('2021-07-22', '2021-07-23', '2021-07-24', '2021-07-25', '2021-07-25', '2021-07-25', '2021-07-20', '2021-07-20', '2021-08-27', '2021-08-26');
         $organizzatori = array('Acme', 'Acme', 'Acme', 'Acme', 'Acme', 'SConcert', 'SConcert', 'SConcert', 'SConcert', 'Sup');
         for ($i = 0; $i < 10; $i++) {
@@ -28,6 +29,7 @@ class EventSeeder extends Seeder
                 'città' => 'Ancona',
                 'indirizzo' => 'via Prova',
                 'numciv' => '112',
+                'città' => $cities[$i],
                 'data' => $date[$i],
                 'immagine' => 'concert.jpg',
                 'costo' => 7.50,

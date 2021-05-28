@@ -15,9 +15,9 @@
                     <h4>{{$event->nome}}</h4>
                 </div>
                 <div class="inner_descr_container">
-                    <div class="purchase_descr_item">
+                        <div class="purchase_descr_item">
                         @if ($event->bigliettitotali !=0)
-                        Biglietti venduti/biglietti totali: {{$event->bigliettivenduti / $event->bigliettitotali}}
+                        Biglietti venduti/biglietti totali: {{$event->bigliettivenduti}}/{{$event->bigliettitotali}}
                         @else
                         Biglietti venduti/biglietti totali: 0
                         @endif
@@ -48,7 +48,6 @@
                             type="button">Visualizza
                             dettagli</button></a>
                 </div>
-
             </div>
         </div>
     </section>

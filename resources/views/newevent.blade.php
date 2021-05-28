@@ -22,7 +22,7 @@
                 <div  class="wrap-input">
                     <!-- NON SONO CONVINTO: PENSO CHE LA CASELLA DIN INPUT NON CRESCE E FA ABBASTANZA PENA -->
                     {{ Form::label('descrizione', 'Descrizio dell\'evento', ['class' => 'label-input']) }}
-                    {{ Form::text('text', '', ['class' => 'input','id' => 'descrizone']) }}
+                    {{ Form::text('descrizione', '', ['class' => 'input','id' => 'descrizone', 'required' => '']) }}
                     @if ($errors->first('descrizione'))
                     <ul class="errors">
                         @foreach ($errors->get('descrizione') as $message)
@@ -32,7 +32,7 @@
                     @endif
                 </div>
                 <div  class="wrap-input">
-                    {{ Form::label('nome', 'Data', ['class' => 'label-input']) }}
+                    {{ Form::label('data', 'Data', ['class' => 'label-input']) }}
                     {{ Form::date('data', '', ['class' => 'input','id' => 'data', 'required' => '']) }}
                     @if ($errors->first('data'))
                     <ul class="errors">
@@ -99,22 +99,11 @@
                     @endif
                 </div>
                 <div  class="wrap-input">
-                    {{ Form::label('indicazioni', 'Indicazioni su come raggiungere il luogo', ['class' => 'label-input']) }} 
-                    {{ Form::image('indicazioni', '', ['class' => 'input','id' => 'indicazioni']) }}
-                    @if ($errors->first('indicazioni'))
+                    {{ Form::label('comeraggiungerci', 'Indicazioni su come raggiungere il luogo', ['class' => 'label-input']) }} 
+                    {{ Form::image('comeraggiungerci', '', ['class' => 'input','id' => 'indicazioni']) }}
+                    @if ($errors->first('comeraggiungerci'))
                     <ul class="errors">
-                        @foreach ($errors->get('indicazioni') as $message)
-                        <li>{{ $message }}</li>
-                        @endforeach
-                    </ul>
-                    @endif
-                </div>
-                <div  class="wrap-input">
-                    {{ Form::label('immagine', 'Seleziona la locandina', ['class' => 'label-input']) }} 
-                    {{ Form::image('immagine', '', ['class' => 'input','id' => 'locandina', 'required' => '']) }}
-                    @if ($errors->first('immagine'))
-                    <ul class="errors">
-                        @foreach ($errors->get('immagine') as $message)
+                        @foreach ($errors->get('comeraggiungerci') as $message)
                         <li>{{ $message }}</li>
                         @endforeach
                     </ul>

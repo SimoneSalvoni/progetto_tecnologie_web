@@ -38,6 +38,10 @@ Route::get('/acquista/{eventId}', 'UserController@showPurchaseScreen')->name('pu
 Route::post('/compraBiglietti', 'UserController@buyTickets')->name('buy')->middleware('can:isUser');
 Route::get('/RiepilogoAcquisto', 'UserController@showRiepilogo')->name('riepilogo')->middleware('can:isUser');
 
+//partecipazione
+Route::post('/partecipa/{eventId}', 'UserController@Participate')->name('participate')->middleware('can:isUser');
+Route::post('/eliminapar/{eventId}', 'UserController@deletePart')->name('delPart')->middleware('can:isUser');
+
 //Areriservata
 
 Route::get('/areariservata/user', 'UserController@AreaRiservata')->name('areariservata.user')->middleware('can:isUser');
@@ -59,3 +63,7 @@ Route::post('modificaprofilo', 'UserController@ModifyProfile')->name('modificapr
 //Creazione e modifica eventi
 Route::get("/areariservata/org/nuovoEvento", "OrgController@showNewEventScreen")->name('newEvent')->middleware('can:isOrg');
 Route::post("storeNewEvent", "OrgController@addEvent")->name('addNewEvent')->middleware('can:isOrg');
+
+
+//Area admin
+Route::post("/areariservata/admin", 'AdminController@searchUser')->name('searchuser')->middleware('can:isAdmin');
