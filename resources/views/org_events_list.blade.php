@@ -31,7 +31,7 @@
                 </div>
             </div>
             <div class="action_div">
-                <div id="pencil_item" title="Modifica evento">
+                <div class="pencil_item" title="Modifica evento">
                     <img id="pencil" name="pencil" class="action_item_clickable"
                         onclick="location.href = '{{route('event',[$event->id])}}'"
                         src="{{asset('css/themes/images/pencil.png')}}" alt="modifica evento">
