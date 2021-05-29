@@ -9,9 +9,9 @@
                 {{ Form::open(array('route' => 'login', 'class' => 'contact-form')) }}
 
 
-                <div  class="wrap-input">
+                <div class="wrap-input">
                 </div>
-                <div  class="wrap-input">
+                <div class="wrap-input">
                     {{ Form::label('nomeutente', 'Nome Utente', ['class' => 'label-input']) }}
                     {{ Form::text('nomeutente', '', ['class' => 'input','id' => 'nomeutente']) }}
                     @if ($errors->first('nomeutente'))
@@ -23,7 +23,7 @@
                     @endif
                 </div>
 
-                <div  class="wrap-input">
+                <div class="wrap-input">
                     {{ Form::label('password', 'Password', ['class' => 'label-input']) }}
                     {{ Form::password('password', ['class' => 'input', 'id' => 'password']) }}
                     @if ($errors->first('password'))
@@ -42,10 +42,9 @@
 
                 {{ Form::close() }}
             </div>
-            <p> Se non hai già un account <a  href="{{ route('register') }}">registrati</a></p>
+            <p> Se non hai già un account <a id="registrati" href="{{ route('register') }}">registrati</a></p>
         </div>
     </div>
 </div>
 
 @endsection
-

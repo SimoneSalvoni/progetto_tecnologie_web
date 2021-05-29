@@ -11,6 +11,8 @@
 |
 */
 
+use Illuminate\Support\Facades\Log;
+
 Route::get('/', 'PublicController@showHomePage')->name('home');
 Route::get('/listaEventi', 'PublicController@showEventsList')->name('list');
 Route::post('/listaEventi', 'PublicController@showEventsListFiltered')->name('list.search');
@@ -29,9 +31,9 @@ Route::get('register', 'Auth\RegisterController@showRegistrationForm')
 
 Route::post('register', 'Auth\RegisterController@register');
 
-Route::get('/user', 'UserController@index')->name('user')->middleware('can:isUser');
+//Route::get('/user', 'UserController@index')->name('user')->middleware('can:isUser');
 
-Route::get('/org', 'OrgController@index')->name('org')->middleware('can:isOrg');
+//Route::get('/org', 'OrgController@index')->name('org')->middleware('can:isOrg');
 
 //acquisto
 Route::get('/acquista/{eventId}', 'UserController@showPurchaseScreen')->name('purchase')->middleware('can:isUser')->middleware('can:buy,eventId');
@@ -62,8 +64,7 @@ Route::post('modificaprofilo', 'UserController@ModifyProfile')->name('modificapr
 
 //Creazione e modifica eventi
 Route::get("/areariservata/org/nuovoEvento", "OrgController@showNewEventScreen")->name('newEvent')->middleware('can:isOrg');
-Route::post("storeNewEvent", "OrgController@addEvent")->name('addNewEvent')->middleware('can:isOrg');
-
+Route::post("/storeNewEvent", "OrgController@addEvent")->name('addNewEvent')->middleware('can:isOrg');
 
 //Area admin
 Route::post("/areariservata/admin", 'AdminController@searchUser')->name('searchuser')->middleware('can:isAdmin');

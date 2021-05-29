@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Models\Resources\Event;
-use App\Models\Resources\User;
 
 
 class Org

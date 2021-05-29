@@ -1157,3 +1157,12 @@ section.our_client .row {
 #filler {
     height: 1000px;
 }
+
+.float_right {
+    float: right;
+    margin-right: 30%;
+}
+
+#registrati {
+    color: #df403d;
+}

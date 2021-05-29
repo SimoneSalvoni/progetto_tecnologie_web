@@ -43,7 +43,6 @@ class ModifyProfileRequest extends FormRequest
         $validationArray['cognome'] = 'required';
         $validationArray['password'] = 'sometimes|confirmed';
         $validationArray['vecchia-password'] = 'password';
-        Log::debug($validationArray);
         return $validationArray;
     }
 }

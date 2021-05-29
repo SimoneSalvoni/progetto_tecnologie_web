@@ -7,6 +7,7 @@ use App\Models\Resources\Event;
 use App\Models\Org;
 use App\Models\EventsList;
 use App\Http\Requests\NewEventRequest;
+use Illuminate\Support\Facades\Log;
 
 class OrgController extends Controller
 {
@@ -38,9 +39,9 @@ class OrgController extends Controller
 
     public function showNewEventScreen()
     {
-        $nomeOrg = $this->_orgModel->getOrg()->pluck('organizzazione');
-        return view('newevent')
-            ->with('organizzazione', $nomeOrg);
+        //$nomeOrg = $this->_orgModel->getOrg()->pluck('organizzazione');
+        return view('newevent');
+        //->with('organizzazione', $nomeOrg);
     }
 
     public function addEvent(NewEventRequest $request)
@@ -50,23 +51,25 @@ class OrgController extends Controller
             $revert = array('%21' => '!', '%2A' => '*', '%27' => "'", '%28' => '(', '%29' => ')');
             return strtr(rawurlencode($str), $revert);
         }
-
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
+        Log::debug($request->all());
+        if ($request->hasFile('immagine')) {
+            $image = $request->file('immagine');
             $imageName = $image->getClientOriginalName();
         } else {
-            $imageName = NULL;
+            $imageName = 'concert.jpg';
         }
         $luogo = ($request->indirizzo) . ', ' . ($request->numciv) . ', ' . ($request->città) . ' ' . ($request->provincia);
 
-        $product = new Product;
-        $product->fill($request->validated());
-        $product->urlluogo = 'http://maps.google.it/maps?f=q&source=s_q&hl=it&geocode=&q=' . encodeURIComponent($luogo) . "&output=embed";
-        $product->image = $imageName;
-        $product->bigliettivenduti = 0;
-        $product->parteciperò = 0;
-        $product->nomeorganizzazione = auth()->user()->organizzazione;
-        $product->save();
+        $event = new Event();
+        $event->fill($request->validated());
+        $event->urlluogo = 'http://maps.google.it/maps?f=q&source=s_q&hl=it&geocode=&q=' . encodeURIComponent($luogo) . "&output=embed";
+        $event->immagine = $imageName;
+        $event->bigliettivenduti = 0;
+        $event->parteciperò = 0;
+        $event->nomeorganizzatore = auth()->user()->organizzazione;
+        $event->città = $request->città;
+        $event->comeraggiungerci = $request->comeraggiungerci;
+        $event->save();
 
         if (!is_null($imageName)) {
             $destinationPath = public_path() . '/locandine';

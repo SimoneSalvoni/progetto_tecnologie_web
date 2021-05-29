@@ -5,12 +5,11 @@
 <section name="main content">
     <section class="main-content">
         <h3>Informazioni Organizzatore</h3>
-        <a href=""><button class="button clickable"></button></a>
-        <div class="left">
-            <h6>Nome organizzazione: {{$user->organizzazione}}</h6>
-            <h6>Email di riferimento: {{$user->email}}</h6>
-            <hr size="3" color="black" style="height:0.5px" />
-        </div>
+        <h6>Nome organizzazione: {{$user->organizzazione}}</h6>
+        <h6>Email di riferimento: {{$user->email}}</h6>
+        <hr size="3" color="black" style="height:0.5px" />
+
+
         <div>
             <h3>Eventi in programma organizzati</h3>
             <ul class="thumbnails">
@@ -37,9 +36,14 @@
             {{-- <div id="filler"></div> --}}
             @endif
             <hr>
-            <button class="button clickable" type="button"
-                onclick="location.href='{{route('eventiorganizzati')}}'">Cronologia
-                eventi organizzati</button>
+            <span>
+                <a href="{{route('eventiorganizzati')}}"><button class="button clickable" type="button">Cronologia
+                        eventi organizzati</button></a>
+            </span>
+            <span>
+                <a href="{{route('newEvent')}}"><button class="button clickable" type="button">Aggiungi un nuovo
+                        evento</button></a>
+            </span>
         </div>
     </section>
 </section>

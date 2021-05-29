@@ -32,12 +32,12 @@ class NewEventRequest extends FormRequest
             'città' => 'required',
             'indirizzo' => 'required',
             'numciv' => 'required',
-            'comeraggiungerci' =>'',
-            'immagine' => 'required',
-            'bigliettitotali' =>'required|integer|min:0',
+            'comeraggiungerci' => 'required',
+            'immagine' => 'required|file|mimes:jpeg,png|max:1024',
+            'bigliettitotali' => 'required|numeric|min:1',
             'costo' => 'required|numeric|min:0',
             'sconto' => 'numeric|min:0|max:100',
-            'giornisconto' =>'numeric|min:0'
+            'giornisconto' => 'numeric|min:0'
         ];
     }
 }
