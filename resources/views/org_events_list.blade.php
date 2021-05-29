@@ -15,15 +15,15 @@
                     <h4>{{$event->nome}}</h4>
                 </div>
                 <div class="inner_descr_container">
-                    <div class="purchase_descr_item">
+                        <div class="purchase_descr_item">
                         @if ($event->bigliettitotali !=0)
-                        Biglietti venduti/biglietti totali: {{$event->bigliettivenduti / $event->bigliettitotali}}
+                        Biglietti venduti/biglietti totali: {{$event->bigliettivenduti}}/{{$event->bigliettitotali}}
                         @else
                         Biglietti venduti/biglietti totali: 0
                         @endif
                     </div>
                     <div class="purchase_descr_item">
-                        Percentuale biglietti venduti: {{$event->bigliettivenduti}}
+                        Percentuale biglietti venduti: {{($event->bigliettivenduti / $event->bigliettitotali)*100}}%
                     </div>
                     <div class="purchase_descr_item">
                         Incasso totale: {{$event->incassototale}}
@@ -44,11 +44,10 @@
                     <p id="cross_text">Elimina</p>
                 </div>
                 <div title="Visualizza dettagli evento">
-                    <button id="info_button" class="bigbutton clickable"
-                        onclick="location.href='{{route('event',[$event->id])}}'" type="button">Visualizza
-                        dettagli</button>
+                    <a href="{{route('event',[$event->id])}}"><button id="info_button" class="bigbutton clickable"
+                            type="button">Visualizza
+                            dettagli</button></a>
                 </div>
-
             </div>
         </div>
     </section>

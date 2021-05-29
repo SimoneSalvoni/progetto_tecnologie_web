@@ -140,6 +140,12 @@ return [
         ],
     ],
 
+    'custom' => [
+        'numerobiglietti' => [
+            'max' => "Non ci sono sufficienti biglietti disponibili",
+        ],
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Attributes

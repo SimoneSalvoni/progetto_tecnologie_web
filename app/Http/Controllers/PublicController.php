@@ -7,6 +7,7 @@ use App\Models\EventsList;
 use App\Models\FAQList;
 use Illuminate\Support\Facades\Log;
 use App\Http\Requests\AdvancedSearchRequest;
+use Exception;
 
 class PublicController extends Controller
 {
@@ -43,8 +44,14 @@ class PublicController extends Controller
 
     public function showEvent($eventId)
     {
+        try {
+            $user = auth()->user();
+            $partecipa = $user->hasPart($user->id, $eventId);
+        } catch (Exception $e) {
+            $partecipa = false;
+        }
         $event = $this->eventsList->getEventById($eventId);
-        return view('event')->with('event', $event);
+        return view('event')->with('event', $event)->with('partecipa', $partecipa);
     }
 
     public function showInfo()

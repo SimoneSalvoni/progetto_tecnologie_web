@@ -93,7 +93,12 @@ class EventsList
     public function getOrganizzatori()
     {
         $organizzatori = Event::select('nomeorganizzatore')->distinct()->get();
-        Log::debug($organizzatori);
         return $organizzatori;
+    }
+
+    public function getRemainTickets($eventId)
+    {
+        $event = Event::where('id', '=', $eventId)->first();
+        return $event->bigliettitotali - $event->bigliettivenduti;
     }
 }
