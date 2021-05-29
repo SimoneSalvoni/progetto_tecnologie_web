@@ -67,3 +67,6 @@ Route::post("storeNewEvent", "OrgController@addEvent")->name('addNewEvent')->mid
 
 //Area admin
 Route::post("/areariservata/admin", 'AdminController@searchUser')->name('searchuser')->middleware('can:isAdmin');
+Route::get("deleteUser/{userId}", 'AdminController@deleteUser')->name('deleteuser')->middleware('can:isAdmin');
+Route::get("deleteFaq/{domanda}", 'AdminController@deleteFaq')->name('deletefaq')->middleware('can:isAdmin');
+Route::post('modificaFaq', 'AdminController@ModifyFaq')->name('modifyfaq')->middleware('can:isAdmin');

@@ -37,7 +37,7 @@
                         src="{{asset('css/themes/images/pencil.png')}}" alt="modifica evento">
                 </div>
                 <p id="pencil_text">Modifica</p>
-                <div id="cross_item" title="Elimina evento">
+                <div class="cross_item" title="Elimina evento">
                     <img id="cross" name="cross" class="action_item_clickable"
                         src="{{asset('css/themes/images/cross.png')}}" alt="cancella evento"
                         onclick="if(confirm('Eliminare l\'evento definitivamente?')){location.href = '{{route('delete',[$event->id])}}'}">

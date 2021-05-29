@@ -76,7 +76,7 @@
                 <div id="cross_item" title="Elimina utente" style=" margin: auto 15em;height:50%;justify-content:center">
                     <img id="cross" name="cross" class="action_item_clickable"
                          src="{{asset('css/themes/images/cross.png')}}" alt="cancella utente"
-                         onclick="if (confirm('Eliminare l\'utente definitivamente?')) {location.href = '#';}">
+                         onclick="if (confirm('Eliminare l\'utente definitivamente?')) {location.href = '{{route('deleteuser',[$user->id])}}'; }">
                     <p id="cross_text"><b>ELIMINA</b></p>
                 </div>
             </div>
@@ -84,35 +84,50 @@
         @endif
         <br/>
         <a href='#'><button class='button clickable'>Aggiungi una nuova organizzazione</button></a>
-        <hr size="3" color="black" style="height:0.5px" />
-        <div>
+        <hr size="3" color="black" style="height:2px" />
+        <section>
             <h3>Modifica FAQ</h3>
+            <?php $i=0; ?>
             @foreach($faqs as $faq)
+            {{ Form::open(array('route' => 'modifyfaq', 'class' => 'contact-form', 'id' => 'form'.$i)) }}
             <div class="faq-element" >
-                <div style="display:flex">
-                    <h3 style="width:fit-content">
-                        <b>{{$faq->domanda}}</b>
-                    </h3>
+                <div class="wrap-contact1">
+                    {{ Form::text('domanda', $faq->domanda, ['class' => 'input','id' => 'domanda', 'style'=>'font-weight: bold','disabled'=>'disabled']) }}
+                </div>
+                <div class="wrap-contact1">
+                    {{ Form::text('risposta', $faq->risposta, ['class' => 'input','id' => 'risposta', 'disabled'=>'disabled']) }}
+                </div>
+                <div style="display:inline-flex">
                     <div class="pencil_item" title="Modifica FAQ" style="margin-left:2em;margin-top:-1em">
-                        <img id="pencil" name="pencil" class="action_item_clickable"
+                        <img id="pencil" name="pencil" class="pencil action_item_clickable"
                              src="{{asset('css/themes/images/pencil.png')}}" alt="modifica FAQ"
                              href='#'> <!--LINK A MODIFICA-->
-                        <p id="pencil_text"><b>Modifica</b></p>
+                        <p id="pencil_text"><b>Modifica la FAQ</b></p>
                     </div>
-                    <div id="cross_item" title="Elimina FAQ" style=" margin: -1.2em 0 0 1em;height:50%;justify-content:center">
-                        <img id="cross" name="cross" class="action_item_clickable"
+                    <div class="cross_item" title="Elimina FAQ" style=" margin: -1.2em 0 0 1em;height:50%;justify-content:center">
+                        <img id="cross" name="cross" class="cross action_item_clickable"
                              src="{{asset('css/themes/images/cross.png')}}" alt="elimina FAQ"
                              onclick="if (confirm('Eliminare la FAQ definitivamente?')) {
-                                         location.href = '#';
-                                     }">
+                                         location.href = '{{route('deletefaq', [$faq->domanda])}}';}">
                         <p id="cross_text"><b>ELIMINA</b></p>
                     </div>
                 </div>
-                <p class="risposta">
-                    {{$faq->risposta}}
-                </p>
             </div>
+            <input id="salva" name="salva" hidden type="submit" class="button clickable" value="Salva">
+            <button id="annulla"name='annulla' hidden class="button clickable">Annulla</button>
+            {{ Form::close() }}
+            <hr size="3" color="black" style="height:0.2px" />
+            <?php $i=$i+1; ?>
             @endforeach
-        </div>
+            <div class="plus_item" title="Aggiungi domanda" >
+                <!--style=" margin: -1.2em 0 0 1em;height:50%;justify-content:center"-->
+                <img id="plus" name="cross" class="action_item_clickable"
+                     src="{{asset('css/themes/images/plus.png')}}" alt="aggiungi domanda"
+                     onclick="{
+                                 location.href = '#';
+                                 }">
+                <p id="plus_text"><b>Aggiungi domanda</b></p>
+            </div>
+        </section>
 </section>
 @endsection

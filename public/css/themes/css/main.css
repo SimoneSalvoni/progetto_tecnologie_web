@@ -630,12 +630,12 @@ section.our_client .row {
         0 55%,
         from(rgba(255, 255, 255, 0.1)),
         to(rgba(255, 255, 255, 0))
-    );
+        );
     background-image: -moz-linear-gradient(
         270deg,
         rgba(255, 255, 255, 0.1) 45%,
         rgba(255, 255, 255, 0) 55%
-    );
+        );
 }
 .pricing p {
     margin: 0;
@@ -1112,15 +1112,37 @@ section.our_client .row {
     display: flex;
     flex-direction: column;
 }
+.cross_item {
+    display: flex;
+    flex-direction: column;
+}
 #cross_item {
     display: flex;
     flex-direction: column;
+}
+.plus_item{
+    width:fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    margin-bottom:-1em
 }
 
 #pencil {
     margin-top: 30px;
     width: 20px;
     height: 20px;
+    align-self: center;
+}
+.pencil{
+        margin-top: 30px;
+    width: 20px;
+    height: 20px;
+    align-self: center;
+}
+#plus{
+    width: 30px;
+    height: 30px;
     align-self: center;
 }
 #pencil_text {
@@ -1139,7 +1161,18 @@ section.our_client .row {
     height: 20px;
     align-self: center;
 }
+.cross {
+    margin-top: 30px;
+    margin-bottom: 5px;
+    width: 20px;
+    height: 20px;
+    align-self: center;
+}
 #cross_text {
+    margin-bottom: 20px;
+    align-self: center;
+}
+#plus_text{
     margin-bottom: 20px;
     align-self: center;
 }
