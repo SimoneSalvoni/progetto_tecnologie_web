@@ -48,15 +48,15 @@ class OrgController extends Controller {
         } else {
             $imageName = NULL;
         }
-        $luogo =($request->indirizzo).', '.($request->numciv).', '.($request->città).' '.($request->provincia);
+        $luogo = ($request->indirizzo) . ', ' . ($request->numciv) . ', ' . ($request->città) . ' ' . ($request->provincia);
 
         $product = new Product;
         $product->fill($request->validated());
-        $product->urlluogo = 'http://maps.google.it/maps?f=q&source=s_q&hl=it&geocode=&q='. encodeURIComponent($luogo). "&output=embed";
+        $product->urlluogo = 'http://maps.google.it/maps?f=q&source=s_q&hl=it&geocode=&q=' . encodeURIComponent($luogo) . "&output=embed";
         $product->image = $imageName;
-        $product->bigliettivenduti=0;
-        $product->parteciperò=0;
-        $product->nomeorganizzazione=auth()->user()->organizzazione;
+        $product->bigliettivenduti = 0;
+        $product->parteciperò = 0;
+        $product->nomeorganizzazione = auth()->user()->organizzazione;
         $product->save();
 
         if (!is_null($imageName)) {
@@ -92,13 +92,13 @@ class OrgController extends Controller {
         return redirect()->action('OrgController@EventiOrganizzati', ['result' => $result]);
     }
 
-    public function showEventsListManaged($request = null)
-    {
+    public function showEventsListManaged($request = null) {
         $org = auth()->user();
         $events = $this->eventsList->getEventsManaged($org->organizzazione);
         if ($request == null) {
             return view('list')->with('events', $events);
         }
+    }
 
 }
 

@@ -4,7 +4,6 @@ namespace App\Models;
 
 use App\Models\Resources\Event;
 use App\Models\Resources\User;
-use Illuminate\Support\Facades\Log;
 
 class EventsList
 {

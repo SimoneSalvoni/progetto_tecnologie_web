@@ -1108,7 +1108,7 @@ section.our_client .row {
         brightness(96%) contrast(81%);
 }
 
-#pencil_item {
+.pencil_item {
     display: flex;
     flex-direction: column;
 }
