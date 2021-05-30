@@ -14,8 +14,8 @@ class Faqs extends Migration
     public function up()
     {
         Schema::create('faqs', function (Blueprint $table) {
-            $table->string('domanda')->primary();
-            $table->string('risposta');
+            $table->string('domanda',100)->primary();
+            $table->string('risposta',2000);
         });
     }
 

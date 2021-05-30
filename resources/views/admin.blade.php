@@ -44,7 +44,7 @@
                     </span>
                     @endif
                     <button type=submit method="post" class="btn btn-inverse" style="vertical-align: super"
-                        formaction="{{route('searchuser')}}">Cerca utente</button>
+                            formaction="{{route('searchuser')}}">Cerca utente</button>
                 </form>
             </div>
         </div>
@@ -69,19 +69,18 @@
             <div style="height:inherit">
                 @if($user->livello==3)
                 <div class="pencil_item" title="Modifica dati utente"
-                    style="margin: -0.5em 15em 0 15em; height: 50%;justify-content:center">
+                     style="margin: -0.5em 15em 0 15em; height: 50%;justify-content:center">
                     <img id="pencil" name="pencil" class="action_item_clickable"
-                        src="{{asset('css/themes/images/pencil.png')}}" alt="modifica dati"
-                        onclick="location.href = '{{route('modifyOrg',[$user->id])}}'">
-                    <!--INSERISCI LINK A MODIFICA E CANCELLAZIONE-->
-                    <p id=" pencil_text"><b>Modifica</b></p>
+                         src="{{asset('css/themes/images/pencil.png')}}" alt="modifica dati"
+                         onclick="location.href = '{{route('modifyOrg',[$user->id])}}'">
+                    <p id="pencil_text"><b>Modifica</b></p>
                 </div>
                 @endif
                 <div id="cross_item" title="Elimina utente"
-                    style=" margin: auto 15em;height:50%;justify-content:center">
+                     style=" margin: auto 15em;height:50%;justify-content:center">
                     <img id="cross" name="cross" class="action_item_clickable"
-                        src="{{asset('css/themes/images/cross.png')}}" alt="cancella utente"
-                        onclick="if (confirm('Eliminare l\'utente definitivamente?')) {location.href = '{{route('deleteuser',[$user->id])}}'; }">
+                         src="{{asset('css/themes/images/cross.png')}}" alt="cancella utente"
+                         onclick="if (confirm('Eliminare l\'utente definitivamente?')) {location.href = '{{route('deleteuser',[$user->id])}}'; }">
                     <p id="cross_text"><b>ELIMINA</b></p>
                 </div>
             </div>
@@ -94,46 +93,79 @@
         <hr size="3" color="black" style="height:2px" />
         <section>
             <h3>Modifica FAQ</h3>
-            <?php $i=0; ?>
+            <?php
+            $i = 0;
+            $vecchiadomanda = array();
+            foreach ($faqs as $faq) {
+                $vecchiadomanda[$i] = $faq->domanda;
+                $i++;
+            }
+            $i = 0;
+            ?>
             @foreach($faqs as $faq)
-            {{ Form::open(array('route' => 'modifyfaq', 'class' => 'contact-form', 'id' => 'form'.$i)) }}
-            <div class="faq-element">
+            {{ Form::open(array('route' => array('modifyfaq',$vecchiadomanda[$i]),'method'=>'post', 'class' => 'contact-form')) }}
+            <div class="faq-element" >
                 <div class="wrap-contact1">
-                    {{ Form::text('domanda', $faq->domanda, ['class' => 'input','id' => 'domanda', 'style'=>'font-weight: bold','disabled'=>'disabled']) }}
+                    {{ Form::text('domanda', $faq->domanda, ['class' => 'input','id' => 'domanda', 'style'=>'font-weight: bold;width:50em','disabled'=>'disabled','required' => '']) }}
                 </div>
                 <div class="wrap-contact1">
-                    {{ Form::text('risposta', $faq->risposta, ['class' => 'input','id' => 'risposta', 'disabled'=>'disabled']) }}
+                    {{ Form::textarea('risposta', $faq->risposta, ['class' => 'input','id' => 'risposta', 'disabled'=>'disabled', 'rows'=>'5', 'style'=>'width:58em','required' => '']) }}
                 </div>
                 <div style="display:inline-flex">
                     <div class="pencil_item" title="Modifica FAQ" style="margin-left:2em;margin-top:-1em">
                         <img id="pencil" name="pencil" class="pencil action_item_clickable"
-                            src="{{asset('css/themes/images/pencil.png')}}" alt="modifica FAQ" href='#'>
-                        <!--LINK A MODIFICA-->
+                             src="{{asset('css/themes/images/pencil.png')}}" alt="modifica FAQ">
                         <p id="pencil_text"><b>Modifica la FAQ</b></p>
                     </div>
                     <div class="cross_item" title="Elimina FAQ"
-                        style=" margin: -1.2em 0 0 1em;height:50%;justify-content:center">
+                         style=" margin: -1.2em 0 0 1em;height:50%;justify-content:center">
                         <img id="cross" name="cross" class="cross action_item_clickable"
-                            src="{{asset('css/themes/images/cross.png')}}" alt="elimina FAQ" onclick="if (confirm('Eliminare la FAQ definitivamente?')) {
-                                         location.href = '{{route('deletefaq', [$faq->domanda])}}';}">
+                             src="{{asset('css/themes/images/cross.png')}}" alt="elimina FAQ"
+                             onclick="if (confirm('Eliminare la FAQ definitivamente?')) {
+                                 location.href = '{{route('deletefaq', [$faq->domanda])}}'; }">
                         <p id="cross_text"><b>ELIMINA</b></p>
                     </div>
                 </div>
             </div>
-            <input id="salva" name="salva" hidden type="submit" class="button clickable" value="Salva">
-            <button id="annulla" name='annulla' hidden class="button clickable">Annulla</button>
+            <input id="salva" hidden type="submit" class="button clickable" value="Salva">
+            <input type='reset' name='annulla' hidden class="button clickable" value="Annulla">
             {{ Form::close() }}
             <hr size="3" color="black" style="height:0.2px" />
-            <?php $i=$i+1; ?>
-            @endforeach
-            <div class="plus_item" title="Aggiungi domanda">
-                <!--style=" margin: -1.2em 0 0 1em;height:50%;justify-content:center"-->
-                <img id="plus" name="cross" class="action_item_clickable" src="{{asset('css/themes/images/plus.png')}}"
-                    alt="aggiungi domanda" onclick="{
-                                 location.href = '#';
-                                 }">
-                <p id="plus_text"><b>Aggiungi domanda</b></p>
+            <?php $i = $i + 1; ?>
+            @endforeach   
+            <div>
+                {{ Form::open(array('route' => 'addfaq','method'=>'post', 'class' => 'contact-form', 'id' => 'addform')) }}
+                <div class="plus_item" title="Aggiungi domanda">
+                    <img id="plus" name="cross" class="action_item_clickable" src="{{asset('css/themes/images/plus.png')}}"
+                         alt="aggiungi domanda"}">
+                    <p id="plus_text"><b>Aggiungi domanda</b></p>
+                </div>
+                <div hidden id='nuovadomanda' class="wrap-input">
+                    {{ Form::label('domanda', 'Domanda', ['class' => 'label-input']) }}
+                    {{ Form::text('domanda', '', ['class' => 'input','id' => 'domanda','style'=>'font-weight: bold;width:50em','required' => '']) }}
+                    @if ($errors->first('domanda'))
+                    <ul class="errors">
+                        @foreach ($errors->get('domanda') as $message)
+                        <li>{{ $message }}</li>
+                        @endforeach
+                    </ul>
+                    @endif
+                </div>
+                <div hidden id='nuovarisposta' class="wrap-input">
+                    {{ Form::label('risposta', 'Risposta', ['class' => 'label-input']) }}
+                    {{ Form::textarea('risposta', '', ['class' => 'input','id' => 'risposta', 'style'=>'width:50em', 'rows'=>'5','required' => '']) }}
+                    @if ($errors->first('risposta'))
+                    <ul class="errors">
+                        @foreach ($errors->get('risposta') as $message)
+                        <li>{{ $message }}</li>
+                        @endforeach
+                    </ul>
+                    @endif
+                </div>
+                <input id="salvanuova" hidden type="submit" class="button clickable" value="Aggiungi">
+                <input type='reset' id='annullanuova' hidden class="button clickable" value="Annulla">
             </div>
+            {{ Form::close() }}        
         </section>
 </section>
 @endsection

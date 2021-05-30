@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\FAQList;
 use App\User;
+use App\Models\Resources\Faq;
 use App\Http\Requests\NewOrgRequest;
 use App\Http\Requests\ModifyOrgRequest;
 use App\Models\UsersList;
@@ -11,32 +12,35 @@ use App\Http\Requests\UserSearchRequest;
 use App\Http\Requests\FaqRequest;
 use Illuminate\Support\Facades\Log;
 
-class AdminController extends Controller
-{
+class AdminController extends Controller {
 
     protected $FAQList;
     protected $UsersList;
 
-    public function __construct()
-    {
+    public function __construct() {
         $this->middleware('can:isAdmin');
         $this->FAQList = new FAQList;
         $this->UsersList = new UsersList;
     }
 
-    public function index()
-    {
+    public function index() {
         return view('admin');
     }
 
-    public function AreaRiservata()
-    {
+  
+    public function AreaRiservata() {
         $FAQ = $this->FAQList->getFAQ();
         return view('admin')->with('faqs', $FAQ);
     }
 
-    public function searchUser(UserSearchRequest $request)
-    {
+    /*
+     * Gestisce la ricerca di un utente da parte dell'admin.
+     * A dipendenza della tipologia selezionata si ricerca o il nome utente 
+     * o il nome dell'organizzazione. 
+     * 
+     * @param $request è la richiesta di ricerca che arriva dalla form
+     */
+    public function searchUser(UserSearchRequest $request) {
         $FAQ = $this->FAQList->getFAQ();
         if ($request->usertype == 'client') {
             $user = $this->UsersList->getUserByUsername($request->name);
@@ -46,27 +50,33 @@ class AdminController extends Controller
         return view('admin')->with('user', $user)->with('faqs', $FAQ);
     }
 
-    public function deleteUser($userId)
-    {
+    public function deleteUser($userId) {
         $user = $this->UsersList->getUserById($userId);
         $user->delete();
         return redirect()->route('areariservata.admin');
     }
 
-    public function deleteFaq($domanda)
-    {
+    public function modifyFaq(FaqRequest $request, $vecchiadomanda) {
+        $faq = $this->FAQList->getSingleFaq($vecchiadomanda);
+        $faq->domanda = $request->domanda;
+        $faq->risposta = $request->risposta;
+        $faq->save();
+        return redirect()->route('areariservata.admin');
+    }
+
+    public function addFaq(FaqRequest $request) {
+        $faq = new Faq;
+        $faq->fill($request->validated());
+        $faq->save();
+        return redirect()->route('areariservata.admin');
+    }
+
+    public function deleteFaq($domanda) {
         $faq = $this->FAQList->getSingleFaq($domanda);
         $faq->delete();
         return redirect()->route('areariservata.admin');
     }
 
-    public function modifyFaq(FaqRequest $request)
-    {
-    }
-
-    public function addFaq(FaqRequest $request)
-    {
-    }
     /**
      * Gestisce l'indirizzamento alle form di inserimento o modifica organizzatore.
      * Se viene passato l'id dell'organizzatore rimandera l'utente alla form di modifica
@@ -74,8 +84,7 @@ class AdminController extends Controller
      *
      * @param $orgId Id dell'organizzatore che eventualment si intende modificare
      */
-    public function ManageOrg($orgId = null)
-    {
+    public function ManageOrg($orgId = null) {
         Log::debug($orgId);
         if ($orgId !== null) {
             $org = $this->UsersList->getUserById($orgId);
@@ -90,8 +99,7 @@ class AdminController extends Controller
      *
      * @param $request Richiesta che arriva dalla form di inserimento di un nuovo organizzatore
      */
-    public function InsertOrg(NewOrgRequest $request)
-    {
+    public function InsertOrg(NewOrgRequest $request) {
         $org = new User;
         $org->fill($request->validated());
         $org->livello = 3;
@@ -106,12 +114,15 @@ class AdminController extends Controller
      *
      * @param $request Richiesta che arriva dalla form di modifica di un organizzatore
      */
-    public function ModifyOrg(ModifyOrgRequest $request)
-    {
+    public function ModifyOrg(ModifyOrgRequest $request) {
+        Log::debug($request->email);
+        Log::debug($request->nomeutente);
+        Log::debug($request->organizzazione);
         $org = User::where('id', '=', $request->idOrg);
         $org->fill($request->validated());
         // TODO Fare il check se tutti i campi vengono riempiti correttamente
         $org->save();
         return redirect()->route('areariservata.admin');
     }
+
 }

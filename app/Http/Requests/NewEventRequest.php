@@ -25,7 +25,7 @@ class NewEventRequest extends FormRequest
     {
         return [
             'nome' => 'required|max:50',
-            'descrizione' => 'required|max:300',
+            'descrizione' => 'required|max:2000',
             'data' => 'required|date',
             'regione' => 'required',
             'provincia' => 'required',
@@ -37,7 +37,8 @@ class NewEventRequest extends FormRequest
             'bigliettitotali' => 'required|numeric|min:1',
             'costo' => 'required|numeric|min:0',
             'sconto' => 'numeric|min:0|max:100',
-            'giornisconto' => 'numeric|min:0'
+            'giornisconto' => 'numeric|min:0',
+            'comeraggiungerci' => 'max:1000'
         ];
     }
 }
