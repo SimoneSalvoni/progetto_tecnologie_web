@@ -25,7 +25,7 @@ class FaqRequest extends FormRequest
     {
         return [
             'domanda'=>'required|max:100',
-            'risposta' => 'required|max:500'
+            'risposta' => 'required|max:2000'
         ];
     }
 }

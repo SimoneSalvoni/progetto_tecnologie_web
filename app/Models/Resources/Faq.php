@@ -13,7 +13,7 @@ class Faq extends Model
      * 
      * @var string
      */
-    protected $primarykey = 'domanda';
+    protected $primaryKey = 'domanda';
     
     /**
      * Indica se la primary key è un auto increment o no
