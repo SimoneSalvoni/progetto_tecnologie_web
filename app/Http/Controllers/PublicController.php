@@ -46,7 +46,11 @@ class PublicController extends Controller
     {
         try {
             $user = auth()->user();
-            $partecipa = $user->hasPart($user->id, $eventId);
+            if ($user !== null) {
+                $partecipa = $user->hasPart($user->id, $eventId);
+            } else {
+                $partecipa = false;
+            }
         } catch (Exception $e) {
             $partecipa = false;
         }

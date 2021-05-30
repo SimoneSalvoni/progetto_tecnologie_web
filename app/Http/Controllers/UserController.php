@@ -62,15 +62,16 @@ class UserController extends Controller
         Session::put('importo', $request->costototale);
         return redirect()->route('riepilogo');
     }
-    
-    public function Participate($user, $event) {
+
+    public function Participate($user, $event)
+    {
         $participation = new Participation;
         $participation->userid = $user->id;
         $participation->idevento = $event->id;
         $participation->save();
         return redirect()->route('event')->with('eventId', $event->id);
     }
-    
+/*
     public function deletePart($user, $event)
     {
         if (hasPart($user, $evento)) {
@@ -78,6 +79,7 @@ class UserController extends Controller
         }
         return redirect()->route('event')->with('eventId', $event->id);
     }
+    */
 
     public function showRiepilogo()
     {
@@ -106,7 +108,6 @@ class UserController extends Controller
     {
         $user = auth()->user();
         $this->userModel->fill($request->validated());
-        Log::debug("USER PRIMA DELLA MODIFICA: " . strval($user));
         $user->nome = $this->userModel->nome;
         $user->cognome = $this->userModel->cognome;
         $user->email = $this->userModel->email;
@@ -115,7 +116,6 @@ class UserController extends Controller
             $user->password = Hash::make($this->userModel->password);
         }
         $user->save();
-        Log::debug("USER DOPO LA MODIFICA: " . strval($user));
         return $this->AreaRiservata();
     }
 }

@@ -58,7 +58,7 @@
                     @can('isUser')
                     @if ($partecipa)
                     <input class="btn btn-inverse" type="submit" value="Cancella"
-                    formaction="{{ route('logout') }}"></input>
+                        formaction="{{ route('logout') }}"></input>
                     @else
                     <input class="btn btn-inverse" type="submit" value="Parteciper&ograve"
                         formaction="{{ route('logout') }}"></input>
@@ -69,7 +69,7 @@
 
                     @endcan
                     <p>
-                        Persone che parteciperanno: {{$event->partecipero}}
+                        Persone che parteciperanno: {{$event->parteciperò}}
                     </p>
                 </form>
             </div>
@@ -84,7 +84,7 @@
                     </div>
                     <div>
                         <h5>Come raggiungerci</h5>
-                        <p>{{$event->indicazioni}}</p>
+                        <p>{{$event->comeraggiungerci}}</p>
                     </div>
                 </div>
                 <div>

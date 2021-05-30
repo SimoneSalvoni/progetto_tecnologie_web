@@ -37,11 +37,12 @@ class OrgController extends Controller
      * che specifica il nome dell'organizzazione
      */
 
-    public function showNewEventScreen()
+    public function showNewEventScreen($event = null)
     {
-        //$nomeOrg = $this->_orgModel->getOrg()->pluck('organizzazione');
-        return view('newevent');
-        //->with('organizzazione', $nomeOrg);
+        if ($event == null) {
+            return view('newevent');
+        }
+        return view('newevent')->with('event', $event);
     }
 
     public function addEvent(NewEventRequest $request)
@@ -113,5 +114,15 @@ class OrgController extends Controller
         if ($request == null) {
             return view('list')->with('events', $events);
         }
+    }
+    /**
+     * Prende l'evento da modificare nel database e richiame la funzione per mostrare la form dell'evento
+     *
+     * @param $eventId L'id dell'evento da modificare
+     */
+    public function modifyEvent($eventId)
+    {
+        $event = $this->eventsList->getEventById($eventId);
+        return redirect()->action('OrgController@showNewEventScreen', ['event', $event]);
     }
 }

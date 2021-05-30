@@ -15,7 +15,7 @@
                     <h4>{{$event->nome}}</h4>
                 </div>
                 <div class="inner_descr_container">
-                        <div class="purchase_descr_item">
+                    <div class="purchase_descr_item">
                         @if ($event->bigliettitotali !=0)
                         Biglietti venduti/biglietti totali: {{$event->bigliettivenduti}}/{{$event->bigliettitotali}}
                         @else
@@ -33,7 +33,7 @@
             <div class="action_div">
                 <div id="pencil_item" title="Modifica evento">
                     <img id="pencil" name="pencil" class="action_item_clickable"
-                        onclick="location.href = '{{route('event',[$event->id])}}'"
+                        onclick="location.href = '{{route('modifyEvent',[$event->id])}}'"
                         src="{{asset('css/themes/images/pencil.png')}}" alt="modifica evento">
                 </div>
                 <p id="pencil_text">Modifica</p>
