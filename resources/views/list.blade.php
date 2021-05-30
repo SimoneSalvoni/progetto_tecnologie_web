@@ -75,6 +75,7 @@
                         {{$event->descrizione}}
                     </div>
                     <div class="info-container">
+                        <div>ORGANIZZATORE: {{$event->nomeorganizzatore}} </div>
                         <div>REGIONE: {{$event->regione}} </div>
                         <div>DATA: {{$event->data}}</div>
                         <!--   @include('helpers/prezzoEvento', ['evento' => $event])-->

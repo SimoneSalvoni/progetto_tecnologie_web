@@ -14,8 +14,6 @@
             <div class="wrap-contact1">
                 {{ Form::open(array('route' => 'modificaprofilo', 'class' => 'contact-form')) }}
                 <div class="wrap-input">
-                </div>
-                <div class="wrap-input">
                     {{ Form::label('nome', 'Nome', ['class' => 'label-input']) }}
                     {{ Form::text('nome', $user->nome, ['class' => 'input','id' => 'nome', 'required' => '']) }}
                     @if ($errors->first('nome'))

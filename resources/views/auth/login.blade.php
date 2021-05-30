@@ -7,11 +7,7 @@
         <div class="container-contact">
             <div class="wrap-contact1">
                 {{ Form::open(array('route' => 'login', 'class' => 'contact-form')) }}
-
-
-                <div class="wrap-input">
-                </div>
-                <div class="wrap-input">
+                <div  class="wrap-input">
                     {{ Form::label('nomeutente', 'Nome Utente', ['class' => 'label-input']) }}
                     {{ Form::text('nomeutente', '', ['class' => 'input','id' => 'nomeutente']) }}
                     @if ($errors->first('nomeutente'))

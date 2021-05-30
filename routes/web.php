@@ -72,3 +72,6 @@ Route::get("/areariservata/org/modificaEvento/{eventId}", "OrgController@modifyE
 Route::post("/areariservata/admin", 'AdminController@searchUser')->name('searchuser')->middleware('can:isAdmin');
 Route::post("/areariservata/admin/AggiungiOrganizzatore", "AdminController@InsertOrg")->name('InsertOrg')->middleware('can:isAdmin');
 Route::post("/areariservata/admin/ModificaOrganizzatore", "AdminController@ModifyOrg")->name('ModifyOrg')->middleware('can:isAdmin');
+Route::get("deleteUser/{userId}", 'AdminController@deleteUser')->name('deleteuser')->middleware('can:isAdmin');
+Route::get("deleteFaq/{domanda}", 'AdminController@deleteFaq')->name('deletefaq')->middleware('can:isAdmin');
+Route::post('modificaFaq', 'AdminController@ModifyFaq')->name('modifyfaq')->middleware('can:isAdmin');
