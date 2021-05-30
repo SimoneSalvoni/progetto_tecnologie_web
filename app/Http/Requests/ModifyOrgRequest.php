@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use App\User;
+use Illuminate\Support\Facades\Log;
 
 class ModifyOrgRequest extends FormRequest
 {
@@ -24,7 +25,7 @@ class ModifyOrgRequest extends FormRequest
      */
     public function rules()
     {
-        $org = User::where('id', '=', $this->idOrg);
+        $org = User::where('id', '=', $this->idOrg)->first();
         $validationArray = array();
         if ($org->nomeutente != $this->nomeutente) {
             $validationArray['nomeutente'] = 'required|unique:users';

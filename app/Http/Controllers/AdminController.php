@@ -9,7 +9,7 @@ use App\Http\Requests\ModifyOrgRequest;
 use App\Models\UsersList;
 use App\Http\Requests\UserSearchRequest;
 use App\Http\Requests\FaqRequest;
-
+use Illuminate\Support\Facades\Log;
 
 class AdminController extends Controller
 {
@@ -29,40 +29,59 @@ class AdminController extends Controller
         return view('admin');
     }
 
-    public function AreaRiservata(){
+    public function AreaRiservata()
+    {
         $FAQ = $this->FAQList->getFAQ();
         return view('admin')->with('faqs', $FAQ);
     }
 
-    public function searchUser(UserSearchRequest $request){
+    public function searchUser(UserSearchRequest $request)
+    {
         $FAQ = $this->FAQList->getFAQ();
-        if ($request->usertype == 'client'){
+        if ($request->usertype == 'client') {
             $user = $this->UsersList->getUserByUsername($request->name);
-        }
-        else{
+        } else {
             $user = $this->UsersList->getOrgByOrgname($request->name);
         }
-        return view ('admin')->with('user', $user)->with('faqs', $FAQ);
+        return view('admin')->with('user', $user)->with('faqs', $FAQ);
     }
 
-    public function deleteUser($userId){
+    public function deleteUser($userId)
+    {
         $user = $this->UsersList->getUserById($userId);
         $user->delete();
         return redirect()->route('areariservata.admin');
     }
 
-    public function deleteFaq ($domanda){
+    public function deleteFaq($domanda)
+    {
         $faq = $this->FAQList->getSingleFaq($domanda);
         $faq->delete();
         return redirect()->route('areariservata.admin');
     }
 
-    public function modifyFaq (FaqRequest $request){
-
+    public function modifyFaq(FaqRequest $request)
+    {
     }
 
-    public function addFaq (FaqRequest $request){
-
+    public function addFaq(FaqRequest $request)
+    {
+    }
+    /**
+     * Gestisce l'indirizzamento alle form di inserimento o modifica organizzatore.
+     * Se viene passato l'id dell'organizzatore rimandera l'utente alla form di modifica
+     * altrimenti rimanderà alla form di inserimento.
+     *
+     * @param $orgId Id dell'organizzatore che eventualment si intende modificare
+     */
+    public function ManageOrg($orgId = null)
+    {
+        Log::debug($orgId);
+        if ($orgId !== null) {
+            $org = $this->UsersList->getUserById($orgId);
+            return view('add_and_modify_org')->with('org', $org);
+        }
+        return view('add_and_modify_org');
     }
 
     /**
@@ -75,6 +94,7 @@ class AdminController extends Controller
     {
         $org = new User;
         $org->fill($request->validated());
+        $org->livello = 3;
         // TODO Fare il check se tutti i campi vengono riempiti correttamente
         $org->save();
         return redirect()->route('areariservata.admin');
