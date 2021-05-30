@@ -76,7 +76,7 @@ class AdminController extends Controller
      */
     public function ManageOrg($orgId = null)
     {
-        Log::debug($orgId);
+        Log::debug("DENTRO MANAGE ORG");
         if ($orgId !== null) {
             $org = $this->UsersList->getUserById($orgId);
             return view('add_and_modify_org')->with('org', $org);
@@ -108,7 +108,7 @@ class AdminController extends Controller
      */
     public function ModifyOrg(ModifyOrgRequest $request)
     {
-        $org = User::where('id', '=', $request->idOrg);
+        $org = $this->UsersList->getUserById($request->idOrg);
         $org->fill($request->validated());
         // TODO Fare il check se tutti i campi vengono riempiti correttamente
         $org->save();
