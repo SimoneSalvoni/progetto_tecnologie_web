@@ -27,7 +27,7 @@ class AdminController extends Controller {
         return view('admin');
     }
 
-  
+
     public function AreaRiservata() {
         $FAQ = $this->FAQList->getFAQ();
         return view('admin')->with('faqs', $FAQ);
@@ -35,9 +35,9 @@ class AdminController extends Controller {
 
     /*
      * Gestisce la ricerca di un utente da parte dell'admin.
-     * A dipendenza della tipologia selezionata si ricerca o il nome utente 
-     * o il nome dell'organizzazione. 
-     * 
+     * A dipendenza della tipologia selezionata si ricerca o il nome utente
+     * o il nome dell'organizzazione.
+     *
      * @param $request è la richiesta di ricerca che arriva dalla form
      */
     public function searchUser(UserSearchRequest $request) {
@@ -114,11 +114,9 @@ class AdminController extends Controller {
      *
      * @param $request Richiesta che arriva dalla form di modifica di un organizzatore
      */
-    public function ModifyOrg(ModifyOrgRequest $request) {
-        Log::debug($request->email);
-        Log::debug($request->nomeutente);
-        Log::debug($request->organizzazione);
-        $org = User::where('id', '=', $request->idOrg);
+    public function ModifyOrg(ModifyOrgRequest $request)
+    {
+        $org = $this->UsersList->getUserById($request->idOrg);
         $org->fill($request->validated());
         // TODO Fare il check se tutti i campi vengono riempiti correttamente
         $org->save();

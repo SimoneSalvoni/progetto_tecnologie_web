@@ -8,7 +8,7 @@
         <div class="container-contact">
             <div class="wrap-contact1">
                 @isset($org)
-                {{ Form::open(array('route' => 'ModifyOrg', 'class' => 'contact-form')) }}
+                {{ Form::open(array('route' => 'ModifyOrg', 'id'=>'modifica_org', 'class' => 'contact-form')) }}
                 <div class="wrap-input">
                     {{ Form::label('nomeutente', 'Nome Utente', ['class' => 'label-input']) }}
                     {{ Form::text('nomeutente', $org->nomeutente, ['class' => 'input','id' => 'nomeutente', 'required' => '']) }}
@@ -55,8 +55,9 @@
                     </div>
                 </div>
                 <span class="container-form-btn">
-                 <!--   {{ Form::submit('Conferma Modifiche', ['class' => 'button']) }} -->
-                    <button class="button clickable" formaction="{{route('ModifyOrg')}}">Conferma Modifiche</button>
+                    {{-- {{ Form::submit('Conferma Modifiche', ['class' => 'button']) }} --}}
+                    <button class="button clickable" formaction="{{route('ModifyOrg')}}">Conferma
+                        Modifiche</button>
                 </span>
                 {{ Form::close() }}
                 <span class="container-form-btn">
@@ -70,7 +71,7 @@
 
                 {{-- Form per aggiungere un nuovo organizzatore --}}
                 @if (!isset($org))
-                {{ Form::open(array('route' => 'InsertOrg', 'class' => 'contact-form')) }}
+                {{ Form::open(array('route' => 'InsertOrg', 'id'=>'inserimento_org', 'class' => 'contact-form')) }}
                 <div class="wrap-input">
                     {{ Form::label('nomeutente', 'Nome Utente', ['class' => 'label-input']) }}
                     {{ Form::text('nomeutente', '', ['class' => 'input','id' => 'nomeutente', 'required' => '']) }}
@@ -123,7 +124,7 @@
                     {{ Form::password('password_confirmation', ['class' => 'input','id' => 'password_confirm']) }}
                     @if ($errors->first('password'))
                     <ul class="errors">
-                        @foreach ($errors->get('password') as $message)
+                        @foreach ($errors->get('password_confimation') as $message)
                         <li>{{ $message }}</li>
                         @endforeach
                     </ul>
@@ -131,9 +132,9 @@
                 </div>
 
                 <span class="container-form-btn">
-                    {{ Form::submit('Conferma Inserimento', ['class' => 'button']) }}
-                    {{-- <button class="button clickable" formaction="{{route('InsertOrg')}}">Conferma
-                    Inserimento</button> --}}
+                    {{-- {{ Form::submit('Conferma Inserimento', ['class' => 'button']) }} --}}
+                    <button class="button clickable" formaction="{{route('InsertOrg')}}">Conferma
+                        Inserimento</button>
                 </span>
                 {{ Form::close() }}
                 <span class="container-form-btn">

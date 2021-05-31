@@ -37,7 +37,8 @@ class ModifyOrgRequest extends FormRequest
         } else {
             $validationArray['email'] = 'required';
         }
-        $validationArray['orgnaizzazione'] = 'required';
+        $validationArray['organizzazione'] = 'required';
+        Log::debug($validationArray);
         return $validationArray;
     }
 }

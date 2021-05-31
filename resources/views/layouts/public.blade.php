@@ -12,7 +12,7 @@
     <link href="{{asset('css/themes/css/bootstrappage.css')}}" rel="stylesheet" />
     <link href="{{asset('css/themes/css/flexslider.css')}}" rel="stylesheet" />
     <script src="{{asset('css/themes/js/jquery-3.6.0.min.js')}}"></script>
-    <script src="{{asset('css/bootstrap/js/bootstrap.min.js')}}  "></script>
+    <script src="{{asset('css/bootstrap/js/bootstrap.min.js')}} "></script>
     @yield('scripts')
 </head>
 
