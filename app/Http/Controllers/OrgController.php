@@ -47,12 +47,13 @@ class OrgController extends Controller
 
     public function addEvent(NewEventRequest $request)
     {
+        Log::debug('ZERO LOG');
         function encodeURIComponent($str)
         {
             $revert = array('%21' => '!', '%2A' => '*', '%27' => "'", '%28' => '(', '%29' => ')');
             return strtr(rawurlencode($str), $revert);
         }
-        Log::debug($request->all());
+        Log::debug('PRIMO LOG');
         if ($request->hasFile('immagine')) {
             $image = $request->file('immagine');
             $imageName = $image->getClientOriginalName();
@@ -60,7 +61,7 @@ class OrgController extends Controller
             $imageName = 'concert.jpg';
         }
         $luogo = ($request->indirizzo) . ', ' . ($request->numciv) . ', ' . ($request->città) . ' ' . ($request->provincia);
-
+Log::debug('SECONDO LOG');
         $event = new Event();
         $event->fill($request->validated());
         $event->urlluogo = 'http://maps.google.it/maps?f=q&source=s_q&hl=it&geocode=&q=' . encodeURIComponent($luogo) . "&output=embed";
@@ -68,8 +69,6 @@ class OrgController extends Controller
         $event->bigliettivenduti = 0;
         $event->parteciperò = 0;
         $event->nomeorganizzatore = auth()->user()->organizzazione;
-        $event->città = $request->città;
-        $event->comeraggiungerci = $request->comeraggiungerci;
         $event->save();
 
         if (!is_null($imageName)) {
