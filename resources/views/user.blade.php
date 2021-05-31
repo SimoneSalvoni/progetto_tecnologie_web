@@ -8,12 +8,10 @@
         <h6>Email: {{$user->email}}</h6>
         <h6>Nome: {{$user->nome}} </h6>
         <h6>Cognome: {{$user->cognome}}</h6>
-        <a href="{{route('ModificaProfilo')}}"><button class="button clickable" type="button">Modifcia
-                dati
-                personali</button></a>
+        <a href="{{route('ModificaProfilo')}}"><button class="button clickable" type="button">Modifica dati personali</button></a>
         <hr size="3" color="black" style="height:0.5px" />
         <div>
-            <h3>Eventi in porgramma</h3>
+            <h3>Eventi in programma</h3>
             <ul class="thumbnails">
                 @if (isset($nearEvents))
                 @foreach($nearEvents as $event)

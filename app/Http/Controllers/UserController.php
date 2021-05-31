@@ -45,7 +45,6 @@ class UserController extends Controller
 
     public function showPurchaseScreen($eventId)
     {
-        Log::debug('dentro showPurchaseScreen');
         $event = $this->eventsList->getEventById($eventId);
         return view('buy')->with('event', $event);
     }
