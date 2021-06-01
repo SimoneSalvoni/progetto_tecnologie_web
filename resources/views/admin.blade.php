@@ -70,7 +70,7 @@
                 @if($user->livello==3)
                 <div class="pencil_item" title="Modifica dati utente"
                      style="margin: -0.5em 15em 0 15em; height: 50%;justify-content:center">
-                    <img id="pencil" name="pencil" class="action_item_clickable"
+                    <img id="pencil"  class="action_item_clickable"
                          src="{{asset('css/themes/images/pencil.png')}}" alt="modifica dati"
                          onclick="location.href = '{{route('modifyOrg',[$user->id])}}'">
                     <p id="pencil_text"><b>Modifica</b></p>
@@ -128,7 +128,7 @@
                 </div>
             </div>
             <input id="salva" hidden type="submit" class="button clickable" value="Salva">
-            <input type='reset' name='annulla' hidden class="button clickable" value="Annulla">
+            <input type='reset' id='annulla' hidden class="button clickable" value="Annulla">
             {{ Form::close() }}
             <hr size="3" color="black" style="height:0.2px" />
             <?php $i = $i + 1; ?>

@@ -17,7 +17,7 @@ $(document).ready(function () {
         $(this).closest("form").find('#risposta').prop('disabled', false);
     });
 
-    $("input[name='annulla']").click(function () {
+    $("input[id='annulla']").click(function () {
         $(this).closest("form").find('#pencil').toggle();
         $(this).closest("form").find('#cross').toggle();
         $(this).closest("form").find('#salva').toggle();

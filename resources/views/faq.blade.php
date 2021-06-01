@@ -15,7 +15,7 @@
 <script>
     $(document).ready(function () {
         $('.risposta').hide();
-        $('.domanda').click(function () {
+        $('#domanda').click(function () {
             $(this).next('.risposta').slideToggle();
             $(this).children('span').toggleText('+', '-');
         });
@@ -28,10 +28,10 @@
 <section id="faq">
     @foreach($FAQ as $q)
     <div class="faq-element">
-        <h3>
-            <b id="domanda">{{$q->domanda}}</b><span>+</span>
+        <h3 id="domanda">
+            <span>+</span><b>{{$q->domanda}}</b>
         </h3>
-        <p class="risposta" id="risposta">
+        <p class="risposta">
             {{$q->risposta}}
         </p>
         <hr>
