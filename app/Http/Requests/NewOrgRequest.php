@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Log;
 
 class NewOrgRequest extends FormRequest
 {
@@ -23,6 +24,7 @@ class NewOrgRequest extends FormRequest
      */
     public function rules()
     {
+        Log::debug($this);
         return [
             'nomeutente' => 'required|unique:users',
             'email' => 'required|email|unique:users',

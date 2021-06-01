@@ -8,7 +8,7 @@
         <h4 class=" left title"><span class="text"><strong>Inserimento Evento</strong></h4>
         <div class="container-contact">
             <div class="wrap-contact1">
-                {{ Form::open(array('route' => 'modificaprofilo', 'class' => 'contact-form')) }}
+                {{ Form::open(array('route' => 'addNewEvent', 'class' => 'contact-form', 'files'=>true)) }}
                 <div class="wrap-input">
                     {{ Form::label('nome', 'Nome', ['class' => 'label-input']) }}
                     {{ Form::text('nome', '', ['class' => 'input','id' => 'nome', 'required' => '']) }}
@@ -170,7 +170,7 @@
                 <span class="container-form-btn">
                     <button type="submit" name="conferma" id="conferma" class="button clickable" method="post"
                         formaction="{{route('addNewEvent')}}" enctype="multipart/form-data">Conferma
-                        Inserimento</button>
+                    Inserimento</button>
                 </span>
                 <span class="container-form-btn">
                     <button type="submit" name="annulla" id="annulla" class="button clickable" method="post"

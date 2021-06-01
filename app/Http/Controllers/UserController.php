@@ -65,6 +65,7 @@ class UserController extends Controller
 
     public function Participate($user, $event)
     {
+        $user = auth()->user();
         $participation = new Participation;
         $participation->userid = $user->id;
         $participation->idevento = $event->id;
