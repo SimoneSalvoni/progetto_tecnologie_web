@@ -24,6 +24,7 @@ class EventRequest extends FormRequest
      */
     public function rules()
     {
+        $event = $this->evento;
         return [
             'nome' => 'required|max:50',
             'descrizione' => 'required|max:2000',
@@ -34,8 +35,8 @@ class EventRequest extends FormRequest
             'indirizzo' => 'required',
             'numciv' => 'required',
             'comeraggiungerci' => 'required',
-            //'immagine' => 'required|image|mimes:jpeg,png,jpg,bmp,gif|max:1024',
-            'bigliettitotali' => 'required|numeric|min:1',
+            'immagine' => 'required|image|mimes:jpeg,png,jpg,bmp,gif|max:1024',
+            'bigliettitotali' => 'required|numeric|min:' . strval($event->bigliettivenduti),
             'costo' => 'required|numeric|min:0',
             'sconto' => 'numeric|min:0|max:100',
             'giornisconto' => 'numeric|min:0',

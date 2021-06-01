@@ -9,18 +9,21 @@ use App\Models\EventsList;
 use App\Http\Requests\EventRequest;
 use Illuminate\Support\Facades\Log;
 
-class OrgController extends Controller {
+class OrgController extends Controller
+{
 
     protected $_orgModel;
     protected $eventsList;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->middleware('can:isOrg');
         $this->_orgModel = new Org;
         $this->eventsList = new EventsList;
     }
 
-    public function AreaRiservata() {
+    public function AreaRiservata()
+    {
         $user = auth()->user();
         //  $nearEvents = ;
         //TODO creare la view dello user
@@ -34,65 +37,57 @@ class OrgController extends Controller {
      * che specifica il nome dell'organizzazione
      */
 
-    public function showNewEventScreen() {
+    public function showNewEventScreen()
+    {
         return view('newevent');
     }
 
-    public function addEvent(EventRequest $request) {
+    function encodeURIComponent($str)
+    {
+        $revert = array('%21' => '!', '%2A' => '*', '%27' => "'", '%28' => '(', '%29' => ')');
+        return strtr(rawurlencode($str), $revert);
+    }
 
-        function encodeURIComponent($str) {
-            $revert = array('%21' => '!', '%2A' => '*', '%27' => "'", '%28' => '(', '%29' => ')');
-            return strtr(rawurlencode($str), $revert);
+    public function addEvent(EventRequest $request)
+    {
+        if ($request->hasFile('immagine')) {
+            $image = $request->file('immagine');
+            $imageName = $image->getClientOriginalName();
+        } else {
+            $imageName = 'concert.jpg';
         }
-
-        /*
-          if ($request->hasFile('immagine')) {
-          $image = $request->file('immagine');
-          $imageName = $image->getClientOriginalName();
-          } else {
-          $imageName = 'concert.jpg';
-          }
-         * 
-         */
         $luogo = ($request->indirizzo) . ', ' . ($request->numciv) . ', ' . ($request->città) . ' ' . ($request->provincia);
         $event = new Event();
         $event->fill($request->validated());
-        $event->urlluogo = 'http://maps.google.it/maps?f=q&source=s_q&hl=it&geocode=&q=' . encodeURIComponent($luogo) . "&output=embed";
-        //$event->immagine = $imageName;
+        $event->urlluogo = 'http://maps.google.it/maps?f=q&source=s_q&hl=it&geocode=&q=' . $this->encodeURIComponent($luogo) . "&output=embed";
+        $event->immagine = $imageName;
         $event->immagine = 'capodanno.jpg';
         $event->bigliettivenduti = 0;
         $event->parteciperò = 0;
         $event->nomeorganizzatore = auth()->user()->organizzazione;
         $event->save();
-        /*
-          if (!is_null($imageName)) {
-          $destinationPath = public_path() . '/locandine';
-          $image->move($destinationPath, $imageName);
-          }
-         *  
-         */
+        if (!is_null($imageName)) {
+            $destinationPath = public_path() . '/locandine';
+            $image->move($destinationPath, $imageName);
+        }
         return redirect()->route('areariservata.org');
     }
-    
-    public function storeModifiedEvent(EventRequest $request, $eventId){
+
+    public function storeModifiedEvent(EventRequest $request, $eventId)
+    {
         $event = $this->eventsList->getEventById($eventId);
-        function encodeURIComponent($str) {
-            $revert = array('%21' => '!', '%2A' => '*', '%27' => "'", '%28' => '(', '%29' => ')');
-            return strtr(rawurlencode($str), $revert);
+
+        if ($request->hasFile('immagine')) {
+            $image = $request->file('immagine');
+            $imageName = $image->getClientOriginalName();
+        } else {
+            $imageName = 'concert.jpg';
         }
-        /*
-          if ($request->hasFile('immagine')) {
-          $image = $request->file('immagine');
-          $imageName = $image->getClientOriginalName();
-          } else {
-          $imageName = 'concert.jpg';
-          }
-         * 
-         */
+
         $luogo = ($request->indirizzo) . ', ' . ($request->numciv) . ', ' . ($request->città) . ' ' . ($request->provincia);
         $event->fill($request->validated());
-        $event->urlluogo = 'http://maps.google.it/maps?f=q&source=s_q&hl=it&geocode=&q=' . encodeURIComponent($luogo) . "&output=embed";
-        //$event->immagine = $imageName;
+        $event->urlluogo = 'http://maps.google.it/maps?f=q&source=s_q&hl=it&geocode=&q=' . $this->encodeURIComponent($luogo) . "&output=embed";
+        $event->immagine = $imageName;
         $event->immagine = 'capodanno.jpg';
         $event->save();
         return redirect()->route('areariservata.org');
@@ -104,7 +99,8 @@ class OrgController extends Controller {
      *
      * @param $result Il risultato della cancellazione dell'evento
      */
-    public function EventiOrganizzati($result = null) {
+    public function EventiOrganizzati($result = null)
+    {
         $org = auth()->user();
         $events = $this->_orgModel->getOrgEvents($org->organizzazione);
         if ($result == null) {
@@ -119,12 +115,14 @@ class OrgController extends Controller {
      *
      * @param $event L'evento da eliminare
      */
-    public function EliminaEvento($event) {
+    public function EliminaEvento($event)
+    {
         $result = $this->_orgModel->EliminaEvento($event);
         return redirect()->action('OrgController@EventiOrganizzati', ['result' => $result]);
     }
 
-    public function showEventsListManaged($request = null) {
+    public function showEventsListManaged($request = null)
+    {
         $org = auth()->user();
         $events = $this->eventsList->getEventsManaged($org->organizzazione);
         if ($request == null) {
@@ -137,9 +135,9 @@ class OrgController extends Controller {
      *
      * @param $eventId L'id dell'evento da modificare
      */
-    public function modifyEvent($eventId) {
+    public function modifyEvent($eventId)
+    {
         $event = $this->eventsList->getEventById($eventId);
         return view('newevent')->with('event', $event);
     }
-
 }

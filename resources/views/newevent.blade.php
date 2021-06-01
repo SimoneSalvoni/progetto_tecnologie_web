@@ -8,8 +8,13 @@
         <h4 class=" left title"><span class="text"><strong>Inserimento Evento</strong></h4>
         <div class="container-contact">
             <div class="wrap-contact1">
+                @if(isset($event))
+                {!! Form::open(array('route' => ['storeModifiedEvent',[$event->id]], 'class' => 'contact-form',
+                'files'=>true)) !!}
+                {!! Form::hidden('evento', $evetn, ['id'=> 'evento']) !!}
+                @else
                 {{ Form::open(array('route' => 'addNewEvent', 'class' => 'contact-form', 'files'=>true)) }}
-                @csrf
+                @endif
                 <div class="wrap-input">
                     {{ Form::label('nome', 'Nome', ['class' => 'label-input']) }}
                     @if(isset($event))
@@ -148,19 +153,19 @@
                     </ul>
                     @endif
                 </div>
-                <!--
-                    <div class="wrap-input">
-                        {{ Form::label('immagine', 'Seleziona la locandina', ['class' => 'label-input']) }}
-                        {{ Form::file('immagine', ['class' => 'input','id' => 'locandina', 'required' => '']) }}
-                        @if ($errors->first('immagine'))
-                        <ul class="errors">
-                            @foreach ($errors->get('immagine') as $message)
-                            <li>{{ $message }}</li>
-                            @endforeach
-                        </ul>
-                        @endif
-                    </div>
-                    -->
+
+                <div class="wrap-input">
+                    {{ Form::label('immagine', 'Seleziona la locandina', ['class' => 'label-input']) }}
+                    {{ Form::file('immagine', ['class' => 'input','id' => 'locandina', 'required' => '']) }}
+                    @if ($errors->first('immagine'))
+                    <ul class="errors">
+                        @foreach ($errors->get('immagine') as $message)
+                        <li>{{ $message }}</li>
+                        @endforeach
+                    </ul>
+                    @endif
+                </div>
+
                 <div class="wrap-input">
                     @if(isset($event))
                     {{ Form::label('bigliettitotali', 'Numero biglietti totali', ['class' => 'label-input']) }}
@@ -224,11 +229,13 @@
                 </div>
                 <span class="container-form-btn">
                     @if(isset($event))
-                    <button type="submit" name="modifica" id="modifica" class="button clickable" type="post" ,
-                        formaction="{{route('storeModifiedEvent',[$event->id])}}">Conferma Modifica</button>
+                    {{ Form::submit('Conferma Modifica', ['class' => 'button clickable']) }}
+                    {{-- <button type="submit" name="modifica" id="modifica" class="button clickable" type="post" ,
+                        formaction="{{route('storeModifiedEvent',[$event->id])}}">Conferma Modifica</button> --}}
                     @else
-                    <button type="submit" name="conferma" id="conferma" class="button clickable" type="post" ,
-                        formaction="{{route('addNewEvent')}}">Conferma Inserimento</button>
+                    {!! Form::submit('Conferma Inserimento', ['class' => 'button clickable']) !!}
+                    {{-- <button type="submit" name="conferma" id="conferma" class="button clickable" type="post" ,
+                        formaction="{{route('addNewEvent')}}">Conferma Inserimento</button> --}}
                     @endif
                 </span>
                 <span class="container-form-btn">
