@@ -44,7 +44,6 @@
             </form>
             <div class="form-inline">
                 <form class="form-inline">
-                    <!-- IMPLEMENTA IL SUBMIT -->
                     @guest
                     <input class="btn btn-inverse" type="submit" value="Parteciper&ograve"
                            formaction="{{ route('login') }}"></input>
