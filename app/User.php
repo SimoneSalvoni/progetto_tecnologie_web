@@ -65,10 +65,8 @@ class User extends Authenticatable
     {
         $filters[] = ['nomeutente', 'LIKE', $user];
         $filters[] = ['idevento', 'LIKE', $evento];
-        $participation = Participation::where($filters)->get();
-        Log::debug("DENTRO HAS PART");
-        Log::debug($participation);
-        return isset($participation);
+        $participation = Participation::where($filters)->count();
+        return ($participation!=0);
     }
 
     public function nearEvents($user)
@@ -99,7 +97,6 @@ class User extends Authenticatable
             default:
                 $events = null;
         }
-        Log::debug("Eventi:" . strval($events));
         return $events;
     }
 

@@ -1052,6 +1052,18 @@ section.our_client .row {
     margin: 5px 3px 5px 3px;
 }
 
+.domanda{
+    cursor: pointer;
+}
+
+.hoverabile h3.domanda:hover{
+    color: #fd4004;
+}
+
+.più{
+    float:right;
+}
+
 .risposta {
     font-size: small;
 }

@@ -41,8 +41,8 @@ Route::post('/compraBiglietti', 'UserController@buyTickets')->name('buy')->middl
 Route::get('/RiepilogoAcquisto', 'UserController@showRiepilogo')->name('riepilogo')->middleware('can:isUser');
 
 //partecipazione
-Route::post('/partecipa/{eventId}', 'UserController@Participate')->name('participate')->middleware('can:isUser');
-Route::post('/eliminapar/{eventId}', 'UserController@deletePart')->name('delPart')->middleware('can:isUser');
+Route::get('/partecipa/{eventId}', 'UserController@Participate')->name('participate')->middleware('can:isUser');
+Route::get('/eliminapar/{eventId}', 'UserController@deletePart')->name('delPart')->middleware('can:isUser');
 
 //Areriservata
 

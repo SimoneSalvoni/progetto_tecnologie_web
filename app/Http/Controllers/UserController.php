@@ -6,18 +6,23 @@ use Illuminate\Support\Facades\Log;
 use App\Models\EventsList;
 use App\Models\PurchaseList;
 use App\Models\Resources\Purchase;
+use App\Models\Resources\Participation;
+use App\Models\Resources\Event;
 use App\Http\Requests\PurchaseRequest;
 use App\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use App\Http\Requests\ModifyProfileRequest;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Redirect;
 
 class UserController extends Controller
 {
 
     protected $eventsList;
     protected $purchases;
+    protected $participations;
 
     public function __construct()
     {
@@ -25,6 +30,7 @@ class UserController extends Controller
         $this->eventsList = new EventsList;
         $this->purchases = new PurchaseList;
         $this->userModel = new User();
+        $this->participations = new Participation;
     }
 
     public function index()
@@ -62,24 +68,29 @@ class UserController extends Controller
         return redirect()->route('riepilogo');
     }
 
-    public function Participate($user, $event)
+    public function Participate($eventId)
     {
+
         $user = auth()->user();
         $participation = new Participation;
-        $participation->userid = $user->id;
-        $participation->idevento = $event->id;
+        $participation->nomeutente = $user->nomeutente;
+        $participation->idevento = $eventId;
         $participation->save();
-        return redirect()->route('event')->with('eventId', $event->id);
+        $this->eventsList->getEventById($eventId)->update(['parteciperò' => DB::raw('parteciperò+1')]);
+        return redirect::back();
     }
-/*
-    public function deletePart($user, $event)
+
+    public function deletePart($eventId)
     {
-        if (hasPart($user, $evento)) {
-            return table('Event')->where('id', $user->id)->where('name', $event->id)->delete();
+        $user = auth()->user();
+        
+        if ($user->hasPart($user->nomeutente, $eventId)) {
+             $this->eventsList->getEventById($eventId)->update(['parteciperò' => DB::raw('parteciperò-1')]);
+             $this->participations->where(['nomeutente' => $user->nomeutente,'idevento' => $eventId])->delete();
         }
-        return redirect()->route('event')->with('eventId', $event->id);
+        return redirect()->route('event', [$eventId]);
     }
-    */
+
 
     public function showRiepilogo()
     {
