@@ -95,16 +95,16 @@
             <h3>Modifica FAQ</h3>
             <?php
             $i = 0;
-            $vecchiadomanda = array();
+            $vecchiadomanda=array();
             foreach ($faqs as $faq) {
                 $vecchiadomanda[$i] = $faq->domanda;
                 $i++;
             }
-            $i = 0;
+            $i=0;
             ?>
             @foreach($faqs as $faq)
-            {{ Form::open(array('route' => array('modifyfaq',$vecchiadomanda[$i]),'method'=>'post', 'class' => 'contact-form')) }}
-            <div class="faq-element">
+            {{ Form::open(array('route' => array('modifyfaq',$vecchiadomanda[$i]),'method'=>'post', 'class' => 'contact-form', 'id' => 'form'.$i)) }}
+            <div class="faq-element" >
                 <div class="wrap-contact1">
                     {{ Form::text('domanda', $faq->domanda, ['class' => 'input','id' => 'domanda', 'style'=>'font-weight: bold;width:50em','disabled'=>'disabled','required' => '']) }}
                 </div>
@@ -114,14 +114,15 @@
                 <div style="display:inline-flex">
                     <div class="pencil_item" title="Modifica FAQ" style="margin-left:2em;margin-top:-1em">
                         <img id="pencil" name="pencil" class="pencil action_item_clickable"
-                            src="{{asset('css/themes/images/pencil.png')}}" alt="modifica FAQ">
+                             src="{{asset('css/themes/images/pencil.png')}}" alt="modifica FAQ">
                         <p id="pencil_text"><b>Modifica la FAQ</b></p>
                     </div>
                     <div class="cross_item" title="Elimina FAQ"
                         style=" margin: -1.2em 0 0 1em;height:50%;justify-content:center">
                         <img id="cross" name="cross" class="cross action_item_clickable"
-                            src="{{asset('css/themes/images/cross.png')}}" alt="elimina FAQ" onclick="if (confirm('Eliminare la FAQ definitivamente?')) {
-                                 location.href = '{{route('deletefaq', [$faq->domanda])}}'; }">
+                             src="{{asset('css/themes/images/cross.png')}}" alt="elimina FAQ"
+                             onclick="if (confirm('Eliminare la FAQ definitivamente?')) {
+                                         location.href = '{{route('deletefaq', [$faq->domanda])}}'; }">
                         <p id="cross_text"><b>ELIMINA</b></p>
                     </div>
                 </div>
