@@ -2,27 +2,7 @@
 @section('title', 'Informazioni')
 
 @section('scripts')
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-
-<script>
-    $.fn.extend({
-        toggleText: function (a, b) {
-            return this.text(this.text() === b ? a : b);
-        }
-    });
-</script>
-
-<script>
-    $(document).ready(function () {
-        $('.risposta').hide();
-        $('.domanda').click(function () {
-            $('.risposta').hide();
-            $('.più').toggleText('-', '+');
-            $(this).next('.risposta').slideToggle('fast');
-            $(this).children('.più').toggleText('+', '-');
-        });
-    });
-</script>
+<script src='{{asset('js/faq.js')}}'></script>
 @endsection
 
 @section ('content')
