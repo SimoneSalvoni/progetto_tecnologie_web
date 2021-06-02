@@ -9,6 +9,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Log;
+use App\Models\Resources\Participation;
 
 class User extends Authenticatable
 {
@@ -62,9 +63,11 @@ class User extends Authenticatable
 
     public function hasPart($user, $evento)
     {
-        $filters[] = ['id', 'LIKE', $user->id];
-        $filters[] = ['idevento', 'LIKE', $evento->idevento];
+        $filters[] = ['nomeutente', 'LIKE', $user];
+        $filters[] = ['idevento', 'LIKE', $evento];
         $participation = Participation::where($filters)->get();
+        Log::debug("DENTRO HAS PART");
+        Log::debug($participation);
         return isset($participation);
     }
 

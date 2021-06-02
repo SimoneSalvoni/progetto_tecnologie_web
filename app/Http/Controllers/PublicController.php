@@ -47,7 +47,7 @@ class PublicController extends Controller
         try {
             $user = auth()->user();
             if ($user !== null) {
-                $partecipa = $user->hasPart($user->id, $eventId);
+                $partecipa = $user->hasPart($user->nomeutente, $eventId);
             } else {
                 $partecipa = false;
             }
@@ -55,6 +55,8 @@ class PublicController extends Controller
             $partecipa = false;
         }
         $event = $this->eventsList->getEventById($eventId);
+        Log::debug("PARTECIPA");
+        Log::debug($partecipa);
         return view('event')->with('event', $event)->with('partecipa', $partecipa);
     }
 
