@@ -8,7 +8,8 @@
         <h6>Email: {{$user->email}}</h6>
         <h6>Nome: {{$user->nome}} </h6>
         <h6>Cognome: {{$user->cognome}}</h6>
-        <a href="{{route('ModificaProfilo')}}"><button class="button clickable" type="button">Modifica dati personali</button></a>
+        <a href="{{route('ModificaProfilo')}}"><button class="button clickable" type="button">Modifica dati
+                personali</button></a>
         <hr size="3" color="black" style="height:0.5px" />
         <div>
             <h3>Eventi in programma</h3>
@@ -19,7 +20,7 @@
                     <div class="product-box">
                         <span class="sale_tag"></span>
                         <p><a href="{{route('event', [$event->id])}}"><img
-                                    src="{{asset('locandine/'.$event->immagine)}}" alt="" /></a></p>
+                                    src="{{asset('locandine/'.$event->immagine)}}" id="carousel_imageP" alt="" /></a></p>
                         <a href="{{route('event', [$event->id])}}"
                             class="title">{{$event->nome}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{$event->data}}</a><br />
                     </div>

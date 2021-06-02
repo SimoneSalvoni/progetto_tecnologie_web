@@ -24,7 +24,6 @@ class NewOrgRequest extends FormRequest
      */
     public function rules()
     {
-        Log::debug($this);
         return [
             'nomeutente' => 'required|unique:users',
             'email' => 'required|email|unique:users',

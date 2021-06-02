@@ -11,7 +11,7 @@
                 @if(isset($event))
                 {!! Form::open(array('route' => ['storeModifiedEvent',[$event->id]], 'class' => 'contact-form',
                 'files'=>true)) !!}
-                {!! Form::hidden('evento', $evetn, ['id'=> 'evento']) !!}
+                {!! Form::hidden('evento', $event->id, ['id'=> 'evento']) !!}
                 @else
                 {{ Form::open(array('route' => 'addNewEvent', 'class' => 'contact-form', 'files'=>true)) }}
                 @endif

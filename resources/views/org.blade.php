@@ -19,7 +19,8 @@
                     <div class="product-box">
                         <span class="sale_tag"></span>
                         <p><a href="{{route('event', [$events[$i]->id])}}"><img
-                                    src="{{asset('locandine/'.$events[$i]->immagine)}}" alt="" /></a></p>
+                                    src="{{asset('locandine/'.$events[$i]->immagine)}}" id="carousel_image"
+                                    alt="" /></a></p>
                         <a href="{{route('event', [$events[$i]->id])}}"
                             class="title">{{$events[$i]->nome}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{$events[$i]->data}}</a><br />
                         <a href="{{route('event', [$events[$i]->id])}}" class="title">BIGLIETTI VENDUTI:
