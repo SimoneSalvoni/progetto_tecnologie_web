@@ -15,7 +15,7 @@
 <script>
     $(document).ready(function () {
         $('.risposta').hide();
-        $('#domanda').click(function () {
+        $('.domanda').click(function () {
             $(this).next('.risposta').slideToggle();
             $(this).children('span').toggleText('+', '-');
         });
@@ -27,14 +27,16 @@
 @include('layouts.info')
 <section id="faq">
     @foreach($FAQ as $q)
+    <div class="hoverabile">
     <div class="faq-element">
-        <h3 id="domanda">
-            <span>+</span><b>{{$q->domanda}}</b>
+        <h3 class="domanda">
+            <span style="float:right">+</span><b>{{$q->domanda}}</b>
         </h3>
         <p class="risposta">
             {{$q->risposta}}
         </p>
         <hr>
+    </div>
     </div>
     @endforeach
 

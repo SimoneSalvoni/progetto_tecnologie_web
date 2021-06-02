@@ -1051,6 +1051,13 @@ section.our_client .row {
     padding: 4px 4px 4px 4px;
     margin: 5px 3px 5px 3px;
 }
+.domanda{
+    cursor: pointer;
+}
+
+.hoverabile h3.domanda:hover{
+    color: #fd4004;
+}
 
 .risposta {
     font-size: small;

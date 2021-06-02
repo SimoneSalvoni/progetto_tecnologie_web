@@ -51,13 +51,12 @@
                     @can('isUser')
                     @if ($partecipa)
                     <input class="btn btn-inverse" type="submit" value="Cancella"
-                           formaction="{{ route('delPart') }}"></input>
+                           formaction="{{ route('delPart', ['eventId' => $event->id]) }}"></input>
                     @else
                     <input class="btn btn-inverse" type="submit" value="Parteciper&ograve"
                            formaction="{{ route('participate', ['eventId' => $event->id]) }}"></input>
 
                     @endif
-                    <!--Qua deve creare la partecipazione, forse va fatto da userController (come fatto per le creazioni di altri elementi)-->
                     @endcan
                     <p>
                         Persone che parteciperanno: {{$event->parteciperò}}

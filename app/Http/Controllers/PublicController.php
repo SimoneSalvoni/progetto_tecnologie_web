@@ -55,8 +55,6 @@ class PublicController extends Controller
             $partecipa = false;
         }
         $event = $this->eventsList->getEventById($eventId);
-        Log::debug("PARTECIPA");
-        Log::debug($partecipa);
         return view('event')->with('event', $event)->with('partecipa', $partecipa);
     }
 
