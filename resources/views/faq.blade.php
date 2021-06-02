@@ -16,8 +16,10 @@
     $(document).ready(function () {
         $('.risposta').hide();
         $('.domanda').click(function () {
-            $(this).next('.risposta').slideToggle();
-            $(this).children('span').toggleText('+', '-');
+            $('.risposta').hide();
+            $('.più').toggleText('-', '+');
+            $(this).next('.risposta').slideToggle('fast');
+            $(this).children('.più').toggleText('+', '-');
         });
     });
 </script>
@@ -30,7 +32,7 @@
     <div class="hoverabile">
     <div class="faq-element">
         <h3 class="domanda">
-            <span style="float:right">+</span><b>{{$q->domanda}}</b>
+            <span class="più">+</span><b>{{$q->domanda}}</b>
         </h3>
         <p class="risposta">
             {{$q->risposta}}
