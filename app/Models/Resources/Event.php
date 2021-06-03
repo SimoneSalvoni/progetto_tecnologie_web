@@ -41,8 +41,17 @@ class Event extends Model
     ];
 
 
-    public function getDiscountedPrice(){
-        return ($this->costo) - ($this->costo)*($this->sconto/100);
+    public function setDiscountedPrice(){
+        $eventi = Event::all();
+        foreach($eventi as $evento){
+        $dataEvento = strToTime($evento->data);
+        $differenza=$dataEvento - time();
+        $giorniMancanti=floor($differenza/(60*60*24));
+        $giorniSconto= $evento->giornisconto;
+        $sconto=$evento->sconto;
+        if($giorniMancanti<=$giorniSconto) $evento->costo= ($evento->costo) - ($evento->costo)*$sconto; 
+        
+        }
     }
 
     //forse serve per modificare gli incassi totali con gli acquisti?

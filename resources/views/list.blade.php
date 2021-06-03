@@ -13,38 +13,8 @@
                     }
                 ?>";
     document.getElementById("org").value =
-            "<?php
-                    if (old('org')!=null) {
-                         echo old('org');
-                    } else {
-                         echo isset($_POST['org']) ? $_POST['org'] : '';
-                    }
-                ?>";
-    document.getElementById("month").value =
-            "<?php
-                    if (old('month')!=null) {
-                         echo old('month');
-                    } else {
-                         echo isset($_POST['month']) ? $_POST['month'] : '';
-                    }
-                ?>";
-    document.getElementById("year").value =
-            "<?php
-                    if (old('year')!=null) {
-                         echo old('year');
-                    } else {
-                         echo isset($_POST['year']) ? $_POST['year'] : '';
-                    }
-                ?>";
-    document.getElementById("desc").value =
-            "<?php
-                    if (old('desc')!=null) {
-                         echo old('desc');
-                    } else {
-                         echo isset($_POST['desc']) ? $_POST['desc'] : '';
-                    }
-                ?>";
-    };
+        "<?php echo isset($_POST['org']) ? $_POST['org'] : '' ?>";
+};
 </script>
 @endsection
 
@@ -62,16 +32,9 @@
                 action="{{route('list.search')}}">
                 @csrf
                 <span class="search">
-                    <label for='year' class="control">Anno</label>
-                    <input type="number" name="year" id="year" style='width:4em'>
-                </span>
-                <span class="search">
-                    <label for='month' class="control">Mese</label>
-                    <select name="month" id="month">
-                        @foreach ($months as $month)
-                        <option>{{$month}}</option>
-                        @endforeach
-                    </select>
+                    <label for="date" class="control">Data</label>
+                    <input type="month" name="date" id="date" placeholder="YYYY-MM"
+                        value="<?php echo isset($_POST['date']) ? $_POST['date'] : '' ?>">
                 </span>
                 <span class="search">
                     <label for="reg" class="control">Regione</label>
@@ -130,6 +93,13 @@
                         <p> {{$event->descrizione}} </p>
                     </div>
                     <div class="info-container">
+<<<<<<< HEAD
+                        <div>ORGANIZZATORE: {{$event->nomeorganizzatore}} </div>
+                        <div>REGIONE: {{$event->regione}} </div>
+                        <div>DATA: {{$event->data}}</div>
+ @include('helpers/prezzoEvento', ['evento' => $event])
+                        </div>
+=======
                         <p>ORGANIZZATORE: {{$event->nomeorganizzatore}} </p>
                         <p>REGIONE: {{$event->regione}} </p>
                         <p>DATA: {{$event->data}}</p>
@@ -137,9 +107,13 @@
                         <p>COSTO: <span id="prezzo_daScontare">{{$event->costo}}€</span><span
                                 id="prezzo_scontato">{{$event->costo - $event->costo/100*$event->sconto}}€</span>
                         </p>
+<<<<<<< HEAD
                         @else
                         <p>COSTO: {{$event->costo}}€ </p>
                         @endif
+=======
+>>>>>>> 017e98ec29927ad0425b4bc68023f89bcb7d49ed
+>>>>>>> 7baa5c041b5e4335a8a7487a39894c2fe62cf536
                     </div>
                 </div>
             </div>

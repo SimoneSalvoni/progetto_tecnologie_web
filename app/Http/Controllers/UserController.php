@@ -76,6 +76,7 @@ class UserController extends Controller
         $participation->nomeutente = $user->nomeutente;
         $participation->idevento = $eventId;
         $participation->save();
+
         $this->eventsList->getEventById($eventId)->update(['parteciperò' => DB::raw('parteciperò+1')]);
         return redirect::back();
     }

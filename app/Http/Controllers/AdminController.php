@@ -12,10 +12,6 @@ use App\Http\Requests\UserSearchRequest;
 use App\Http\Requests\FaqRequest;
 use Illuminate\Support\Facades\Log;
 
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
 class AdminController extends Controller {
 
     protected $FAQList;
@@ -31,13 +27,7 @@ class AdminController extends Controller {
         return view('admin');
     }
 
-<<<<<<< Updated upstream
-
     public function AreaRiservata() {
-=======
-    public function AreaRiservata() {
-        Log::debug('dentro area riservata');
->>>>>>> Stashed changes
         $FAQ = $this->FAQList->getFAQ();
         foreach($FAQ as $f){
             Log::debug($f->domanda);
@@ -46,7 +36,6 @@ class AdminController extends Controller {
         return view('admin')->with('faqs', $FAQ);
     }
 
-<<<<<<< Updated upstream
     /*
      * Gestisce la ricerca di un utente da parte dell'admin.
      * A dipendenza della tipologia selezionata si ricerca o il nome utente
@@ -54,8 +43,6 @@ class AdminController extends Controller {
      *
      * @param $request è la richiesta di ricerca che arriva dalla form
      */
-=======
->>>>>>> Stashed changes
     public function searchUser(UserSearchRequest $request) {
         $FAQ = $this->FAQList->getFAQ();
         if ($request->usertype == 'client') {
@@ -72,7 +59,6 @@ class AdminController extends Controller {
         return redirect()->route('areariservata.admin');
     }
 
-<<<<<<< Updated upstream
     public function modifyFaq(FaqRequest $request, $vecchiadomanda)
     {
         $faq = $this->FAQList->getSingleFaq($vecchiadomanda);
@@ -112,27 +98,7 @@ class AdminController extends Controller {
             return view('add_and_modify_org')->with('org', $org);
         }
         return view('add_and_modify_org');
-=======
-    public function deleteFaq($domanda) {
-        $faq = $this->FAQList->getSingleFaq($domanda);
-        $faq->delete();
-        return redirect()->route('areariservata.admin');
-    }
 
-    public function modifyFaq(FaqRequest $request, $vecchiadomanda) {
-        Log::debug($request->vecchiadomanda);
-        Log::debug($request->domanda);
-        Log::debug($request->risposta);
-        $faq = $this->FAQList->getSingleFaq($vecchiadomanda);
-        $faq->domanda = $request->domanda;
-        $faq->risposta = $request->risposta;
-        $faq->save();
-        return redirect()->route('areariservata.admin');
-    }
-
-    public function addFaq(FaqRequest $request) {
-        
->>>>>>> Stashed changes
     }
 
     /**
@@ -156,14 +122,10 @@ class AdminController extends Controller {
      *
      * @param $request Richiesta che arriva dalla form di modifica di un organizzatore
      */
-<<<<<<< Updated upstream
     public function ModifyOrg(ModifyOrgRequest $request)
     {
         $org = $this->UsersList->getUserById($request->idOrg);
-=======
-    public function ModifyOrg(ModifyOrgRequest $request) {
-        $org = User::where('id', '=', $request->idOrg);
->>>>>>> Stashed changes
+
         $org->fill($request->validated());
         // TODO Fare il check se tutti i campi vengono riempiti correttamente
         $org->save();
