@@ -9,7 +9,7 @@
         "<?php echo isset($_POST['reg']) ? $_POST['reg'] : '' ?>";
     document.getElementById("org").value =
         "<?php echo isset($_POST['org']) ? $_POST['org'] : '' ?>";
- };
+};
 </script>
 @endsection
 
@@ -28,7 +28,7 @@
                 @csrf
                 <span class="search">
                     <label for="date" class="control">Data</label>
-                    <input type="month" name="date" id="date"
+                    <input type="month" name="date" id="date" placeholder="YYYY-MM"
                         value="<?php echo isset($_POST['date']) ? $_POST['date'] : '' ?>">
                 </span>
                 <span class="search">
@@ -78,9 +78,7 @@
                         <div>ORGANIZZATORE: {{$event->nomeorganizzatore}} </div>
                         <div>REGIONE: {{$event->regione}} </div>
                         <div>DATA: {{$event->data}}</div>
-                        <!--   @include('helpers/prezzoEvento', ['evento' => $event])-->
-                        <div>COSTO: {{$event->costo}}€
-                            <!-- TODO: Lo sconto è da fare -->
+ @include('helpers/prezzoEvento', ['evento' => $event])
                         </div>
                     </div>
                 </div>

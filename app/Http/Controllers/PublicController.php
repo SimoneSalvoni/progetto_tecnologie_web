@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\EventsList;
+use App\Models\Resources\Event;
 use App\Models\FAQList;
 use Illuminate\Support\Facades\Log;
 use App\Http\Requests\AdvancedSearchRequest;

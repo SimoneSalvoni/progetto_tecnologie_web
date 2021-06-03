@@ -69,7 +69,7 @@ class UserController extends Controller
         $participation->userid = $user->id;
         $participation->idevento = $event->id;
         $participation->save();
-        return redirect()->route('event')->with('eventId', $event->id);
+        return Redirect::back()->withMessage('Partecipazione eseguita!');
     }
 /*
     public function deletePart($user, $event)
