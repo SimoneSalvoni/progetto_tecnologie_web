@@ -11,7 +11,7 @@
                     } else {
                          echo isset($_POST['reg']) ? $_POST['reg'] : '';
                     }
-                ?>";  
+                ?>";
     document.getElementById("org").value =
 
             "<?php
@@ -60,12 +60,12 @@
             </div>
 
             <form method="post" id="search" name="search" enctype="multipart/form-data"
-                  action="{{route('list.search')}}">
+                action="{{route('list.search')}}">
                 @csrf
                 <span class="search">
 
                     <label for='year' class="control">Anno</label>
-                    <input type="number" name="year" id="year" style='width:4em'>  
+                    <input type="number" name="year" id="year" style='width:4em'>
                 </span>
                 <span class="search">
                     <label for='month' class="control">Mese</label>
@@ -129,15 +129,20 @@
                         </h4>
                     </div>
                     <div class="descr_item">
-                        <p>  {{$event->descrizione}} </p>
+                        <p> {{$event->descrizione}} </p>
                     </div>
                     <div class="info-container">
 
                         <p>ORGANIZZATORE: {{$event->nomeorganizzatore}} </p>
                         <p>REGIONE: {{$event->regione}} </p>
-                        <p>DATA: {{$event->data}}</p>                       
+                        <p>DATA: {{$event->data}}</p>
+                        @if ($OnSales[$event->id])
+                        <p>COSTO: <span id="prezzo_daScontare">{{$event->costo}}€</span><span
+                                id="prezzo_scontato">{{$event->costo - $event->costo/100*$event->sconto}}€</span></p>
+                        @else
                         <p>COSTO: {{$event->costo}}€
-                            <!-- TODO: Lo sconto è da fare -->
+                            @endif
+
                         </p>
                     </div>
                 </div>
