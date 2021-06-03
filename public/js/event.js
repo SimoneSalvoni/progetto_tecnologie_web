@@ -8,6 +8,13 @@ function getErrorHtml(elemErrors) {
     return out;
 }
 
+function getProvince(regione){
+    $.ajax({
+        type: 'GET',
+        url: ''
+    })
+}
+
 function doElemValidation(id, actionUrl, formId) {
     var formElems;
 
