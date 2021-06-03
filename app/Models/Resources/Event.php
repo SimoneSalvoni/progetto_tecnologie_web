@@ -22,6 +22,7 @@ class Event extends Model
         'regione',
         'indirizzo',
         'provincia',
+        'città',
         'numciv',
         'data',
         'immagine',
@@ -32,7 +33,8 @@ class Event extends Model
         'bigliettitotali',
         'incassototale',
         'parteciperò',
-        'nomeorganizzatore'
+        'nomeorganizzatore',
+        'comeraggiungerci'
     ];
     protected $guarded = [
         'id'
@@ -58,6 +60,3 @@ class Event extends Model
     }
 
 }
-
-//RICORDA, BISOGNA (PENSO) METTERE LE PROPRIETA' $guarded IN TUTTI
-//UN METODO PER OTTENERE L'ORGAIZZATORE???

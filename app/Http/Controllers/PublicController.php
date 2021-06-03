@@ -21,6 +21,9 @@ class PublicController extends Controller
         $this->FAQList = new FAQList;
     }
 
+    /*
+     * Questo metodo ottiene gli eventi più vicini 
+     */
     public function showHomePage()
     {
         $nearEvents = $this->eventsList->getNearEvents();
@@ -32,15 +35,20 @@ class PublicController extends Controller
         $organizzatori = $this->eventsList->getOrganizzatori();
         $regions = $this->eventsList->getRegionList();
         $events = $this->eventsList->getEvents();
-        return view('list')->with('events', $events)->with('regions', $regions)->with('organizzatori', $organizzatori);
+        $months = $this->eventsList->getMonthList();
+        return view('list')->with('events', $events)->with('regions', $regions)->with('organizzatori', $organizzatori)
+                ->with('months', $months);
     }
 
     public function showEventsListFiltered(AdvancedSearchRequest $request)
     {
         $organizzatori = $this->eventsList->getOrganizzatori();
         $regions = $this->eventsList->getRegionList();
-        $events = $this->eventsList->getEventsFiltered($request->date, $request->reg, $request->org, $request->desc);
-        return view('list')->with('events', $events)->with('regions', $regions)->with('organizzatori', $organizzatori);
+        $months = $this->eventsList->getMonthList();
+        $events = $this->eventsList->getEventsFiltered($request->year, $request->month, $request->reg, 
+                $request->org, $request->desc);
+        return view('list')->with('events', $events)->with('regions', $regions)->with('organizzatori', $organizzatori)
+                ->with('months', $months);
     }
 
     public function showEvent($eventId)
@@ -48,7 +56,7 @@ class PublicController extends Controller
         try {
             $user = auth()->user();
             if ($user !== null) {
-                $partecipa = $user->hasPart($user->id, $eventId);
+                $partecipa = $user->hasPart($user->nomeutente, $eventId);
             } else {
                 $partecipa = false;
             }

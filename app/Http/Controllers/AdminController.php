@@ -27,9 +27,12 @@ class AdminController extends Controller {
         return view('admin');
     }
 
-
     public function AreaRiservata() {
         $FAQ = $this->FAQList->getFAQ();
+        foreach($FAQ as $f){
+            Log::debug($f->domanda);
+            Log::debug($f->risposta);
+        }
         return view('admin')->with('faqs', $FAQ);
     }
 
@@ -56,7 +59,8 @@ class AdminController extends Controller {
         return redirect()->route('areariservata.admin');
     }
 
-    public function modifyFaq(FaqRequest $request, $vecchiadomanda) {
+    public function modifyFaq(FaqRequest $request, $vecchiadomanda)
+    {
         $faq = $this->FAQList->getSingleFaq($vecchiadomanda);
         $faq->domanda = $request->domanda;
         $faq->risposta = $request->risposta;
@@ -64,18 +68,20 @@ class AdminController extends Controller {
         return redirect()->route('areariservata.admin');
     }
 
-    public function addFaq(FaqRequest $request) {
+    public function addFaq(FaqRequest $request)
+    {
         $faq = new Faq;
         $faq->fill($request->validated());
         $faq->save();
         return redirect()->route('areariservata.admin');
     }
-
+    
     public function deleteFaq($domanda) {
         $faq = $this->FAQList->getSingleFaq($domanda);
         $faq->delete();
         return redirect()->route('areariservata.admin');
     }
+
 
     /**
      * Gestisce l'indirizzamento alle form di inserimento o modifica organizzatore.
@@ -84,13 +90,15 @@ class AdminController extends Controller {
      *
      * @param $orgId Id dell'organizzatore che eventualment si intende modificare
      */
-    public function ManageOrg($orgId = null) {
+    public function ManageOrg($orgId = null)
+    {
         Log::debug($orgId);
         if ($orgId !== null) {
             $org = $this->UsersList->getUserById($orgId);
             return view('add_and_modify_org')->with('org', $org);
         }
         return view('add_and_modify_org');
+
     }
 
     /**
@@ -117,6 +125,7 @@ class AdminController extends Controller {
     public function ModifyOrg(ModifyOrgRequest $request)
     {
         $org = $this->UsersList->getUserById($request->idOrg);
+
         $org->fill($request->validated());
         // TODO Fare il check se tutti i campi vengono riempiti correttamente
         $org->save();

@@ -87,7 +87,7 @@
                     @endif
                 </div>
                 <span class="container-form-btn">
-                    {{ Form::submit('Conferma Modifiche', ['class' => 'button']) }}
+                    {{ Form::submit('Conferma Modifiche', ['class' => 'button clickable']) }}
                 </span>
                 {{ Form::close() }}
                 <span class="container-form-btn">

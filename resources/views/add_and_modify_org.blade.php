@@ -55,9 +55,9 @@
                     </div>
                 </div>
                 <span class="container-form-btn">
-                    {{-- {{ Form::submit('Conferma Modifiche', ['class' => 'button']) }} --}}
-                    <button class="button clickable" formaction="{{route('ModifyOrg')}}">Conferma
-                        Modifiche</button>
+                    {{ Form::submit('Conferma Modifiche', ['class' => 'button clickable']) }}
+                    {{-- <button class="button clickable" formaction="{{route('ModifyOrg')}}">Conferma
+                        Modifiche</button> --}}
                 </span>
                 {{ Form::close() }}
                 <span class="container-form-btn">
@@ -132,9 +132,9 @@
                 </div>
 
                 <span class="container-form-btn">
-                    {{-- {{ Form::submit('Conferma Inserimento', ['class' => 'button']) }} --}}
-                    <button class="button clickable" formaction="{{route('InsertOrg')}}">Conferma
-                        Inserimento</button>
+                    {{ Form::submit('Conferma Inserimento', ['class' => 'button clickable']) }}
+                    {{-- <button class="button clickable" formaction="{{route('InsertOrg')}}">Conferma
+                        Inserimento</button> --}}
                 </span>
                 {{ Form::close() }}
                 <span class="container-form-btn">

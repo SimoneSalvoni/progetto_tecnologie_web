@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class NewEventRequest extends FormRequest
+class EventRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,6 +23,7 @@ class NewEventRequest extends FormRequest
      */
     public function rules()
     {
+        $event = $this->evento;
         return [
             'nome' => 'required|max:50',
             'descrizione' => 'required|max:2000',
@@ -33,8 +34,8 @@ class NewEventRequest extends FormRequest
             'indirizzo' => 'required',
             'numciv' => 'required',
             'comeraggiungerci' => 'required',
-            'immagine' => 'required|file|mimes:jpeg,png|max:1024',
-            'bigliettitotali' => 'required|numeric|min:1',
+            'immagine' => 'required|image|mimes:jpeg,png,jpg,bmp,gif|max:1024',
+            'bigliettitotali' => 'required|numeric|min:' . strval($event->bigliettivenduti),
             'costo' => 'required|numeric|min:0',
             'sconto' => 'numeric|min:0|max:100',
             'giornisconto' => 'numeric|min:0',
