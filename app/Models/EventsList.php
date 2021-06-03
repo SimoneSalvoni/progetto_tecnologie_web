@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Models\Resources\Event;
-use App\User;
 use Carbon\Carbon;
 
 class EventsList {
@@ -22,7 +21,7 @@ class EventsList {
     public function getEventsFiltered($anno = null, $mese = null, $regione = null, $organizzazione = null, $descrizione = null) {
         $data = null;
         if ((isset($anno)) && (isset($mese))) {
-            $data=$anno.'-'.$this->chooseMonthNumber($mese);
+            $data = $anno . '-' . $this->chooseMonthNumber($mese);
         }
         $filters = array("data" => $data, "regione" => $regione, "organizzazione" => $organizzazione, "descrizione" => $descrizione);
 
@@ -124,6 +123,16 @@ class EventsList {
             case "Novembre" : return '11';
             case "Dicembre" : return '12';
         }
+    }
+
+    public function checkOnSale($event) {
+        $currentDate = Carbon::now();
+        $eventDate = Carbon::parse($event->data);
+        $diff = $eventDate->diffInDays($currentDate);
+        if ($diff <= $event->giornisconto) {
+            return true;
+        }
+        return false;
     }
 
 }

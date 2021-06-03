@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
 use App\Models\Resources\Event;
 use App\Models\Org;
 use App\Models\EventsList;
@@ -22,13 +21,14 @@ class OrgController extends Controller
         $this->eventsList = new EventsList;
     }
 
+    /*
+     * Questa funzione ottiene l'utente oganizzatore e gli eventi da esso organizzati,
+     * per poi ritornare la vista dell'area riservata dell'utente
+     */
     public function AreaRiservata()
     {
         $user = auth()->user();
-        //  $nearEvents = ;
-        //TODO creare la view dello user
         $events = $this->eventsList->getEventsManaged($user->organizzazione);
-
         return view('org')->with('user', $user)->with('events', $events);
     }
 
@@ -42,26 +42,37 @@ class OrgController extends Controller
         return view('newevent');
     }
 
+    /*
+     * Questa funzione modifica la stringa che contiene i dati del luogo dell'evento
+     * per poter inserire nella mappa nella pagina dell'evento
+     * 
+     * @param str è la stringa da modificare
+     */
     function encodeURIComponent($str)
     {
         $revert = array('%21' => '!', '%2A' => '*', '%27' => "'", '%28' => '(', '%29' => ')');
         return strtr(rawurlencode($str), $revert);
     }
 
+    /*
+     * Questa funzione richiede l'inserimento nel db dei dati di un nuovo evento, dopo aver elaborato quelli sulla locazione e dopo 
+     * aver gestito l'immagine caricata dall'utente organizzatore
+     * 
+     * @param $request è il risultato della submit della form di aggiunta evento
+     */
     public function addEvent(EventRequest $request)
     {
         if ($request->hasFile('immagine')) {
             $image = $request->file('immagine');
             $imageName = $image->getClientOriginalName();
         } else {
-            $imageName = 'concert.jpg';
+            $imageName = 'default.png';
         }
         $luogo = ($request->indirizzo) . ', ' . ($request->numciv) . ', ' . ($request->città) . ' ' . ($request->provincia);
         $event = new Event();
         $event->fill($request->validated());
         $event->urlluogo = 'http://maps.google.it/maps?f=q&source=s_q&hl=it&geocode=&q=' . $this->encodeURIComponent($luogo) . "&output=embed";
         $event->immagine = $imageName;
-        $event->immagine = 'capodanno.jpg';
         $event->bigliettivenduti = 0;
         $event->parteciperò = 0;
         $event->nomeorganizzatore = auth()->user()->organizzazione;
@@ -73,6 +84,13 @@ class OrgController extends Controller
         return redirect()->route('areariservata.org');
     }
 
+    /*
+     * Questa funzione richiede la modifica dei dati di un evento all'interno del DB. La gestione del luogo e della immagine
+     * è analoga all'aggiunta dell'evento
+     * 
+     * @param $request è il risultato della submit della form di modifica
+     * @param $eventId è l'id dell'evento da modificare, da passare in quanto non presente in $request
+     */
     public function storeModifiedEvent(EventRequest $request, $eventId)
     {
         $event = $this->eventsList->getEventById($eventId);
@@ -88,7 +106,6 @@ class OrgController extends Controller
         $event->fill($request->validated());
         $event->urlluogo = 'http://maps.google.it/maps?f=q&source=s_q&hl=it&geocode=&q=' . $this->encodeURIComponent($luogo) . "&output=embed";
         $event->immagine = $imageName;
-        $event->immagine = 'capodanno.jpg';
         $event->save();
         return redirect()->route('areariservata.org');
     }

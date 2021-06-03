@@ -20,7 +20,7 @@
                     <div class="product-box">
                         <span class="sale_tag"></span>
                         <p><a href="{{route('event', [$event->id])}}"><img
-                                    src="{{asset('locandine/'.$event->immagine)}}" id="carousel_imageP" alt="" /></a></p>
+                                    src="{{asset('locandine/'.$event->immagine)}}" id="carousel_image" alt="" /></a></p>
                         <a href="{{route('event', [$event->id])}}"
                             class="title">{{$event->nome}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{$event->data}}</a><br />
                     </div>

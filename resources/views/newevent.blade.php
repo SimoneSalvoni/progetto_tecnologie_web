@@ -1,6 +1,7 @@
 @extends('layouts.public')
 
 @section('title', 'Nuovo Evento')
+@section('scripts')
 <script src="{{ asset('js/event.js') }}" ></script>
 @if (isset($event))
 @else
@@ -22,6 +23,8 @@ $(function () {
 });
 </script>
 @endif
+@endsection
+
 @section('content')
 <div class="container">
     <div class="center">

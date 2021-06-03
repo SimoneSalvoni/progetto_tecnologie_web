@@ -20,8 +20,9 @@
             <h5>Data: {{$event->data}}</h5>
             <h5>Luogo: {{$event->regione.", ".$event->provincia.", ".$event->indirizzo." ".$event->numciv}}</h5>
             @if ($saldo)
-            <h5>Prezzo scontato: <span id="prezzo_daScontare">{{$event->costo}}€</span><span
-                    id="prezzo_scontato">{{$event->costo - $event->costo/100*$event->sconto}}€</span>
+            <h5>Prezzo scontato: 
+                <span id="prezzo_daScontare">{{$event->costo}}€</span>
+                <span id="prezzo_scontato">{{$event->costo - $event->costo/100*$event->sconto}}€</span>
             </h5>
             @else
             <h5>Prezzo: {{$event->costo}}€</h5>
@@ -38,10 +39,10 @@
                 @can('isUser')
                 @if (($event->bigliettitotali-$event->bigliettivenduti)>0)
                 <input class="bigbutton clickable" id="buy" type="submit" value="ACQUISTA"
-                    formaction='{{ route('purchase', ['eventId' => $event->id])}}'>
+                       formaction='{{ route('purchase', ['eventId' => $event->id])}}'>
                 @else
                 <input class="bigbutton clickable" style="display:inline" id="buy" type="submit" value="ACQUISTA"
-                    formaction=''>
+                       formaction=''>
                 <h5 style="display:inline;color: red">&nbspBiglietti esauriti!</h5>
                 @endif
                 @endcan
@@ -51,7 +52,7 @@
                 <form class="form-inline">
                     @guest
                     <input class="btn btn-inverse" type="submit" value="Parteciper&ograve"
-                        formaction="{{ route('login') }}"></input>
+                           formaction="{{ route('login') }}"></input>
                     @endguest
                     @can('isUser')
                     @if ($partecipa)
@@ -59,7 +60,7 @@
                            formaction="{{ route('delPart', ['eventId' => $event->id]) }}"></input>
                     @else
                     <input class="btn btn-inverse" type="submit" value="Parteciper&ograve"
-                        formaction="{{ route('participate', ['eventId' => $event->id]) }}"></input>
+                           formaction="{{ route('participate', ['eventId' => $event->id]) }}"></input>
 
                     @endif
                     @endcan
@@ -74,14 +75,14 @@
         <div class="action_div">
             <div class="pencil_item" title="Modifica evento">
                 <img id="pencil" name="pencil" class="action_item_clickable"
-                    onclick="location.href = '{{route('modifyEvent',[$event->id])}}'"
-                    src="{{asset('css/themes/images/pencil.png')}}" alt="modifica evento">
+                     onclick="location.href = '{{route('modifyEvent',[$event->id])}}'"
+                     src="{{asset('css/themes/images/pencil.png')}}" alt="modifica evento">
             </div>
             <p id="pencil_text">Modifica</p>
             <div class="cross_item" title="Elimina evento">
                 <img id="cross" name="cross" class="action_item_clickable"
-                    src="{{asset('css/themes/images/cross.png')}}" alt="cancella evento"
-                    onclick="if (confirm('Eliminare l\'evento definitivamente?')){location.href = '{{route('delete',[$event->id])}}'}">
+                     src="{{asset('css/themes/images/cross.png')}}" alt="cancella evento"
+                     onclick="if (confirm('Eliminare l\'evento definitivamente?')){location.href = '{{route('delete',[$event->id])}}'}">
                 <p id="cross_text">Elimina</p>
             </div>
         </div>
@@ -102,7 +103,7 @@
                 </div>
                 <div>
                     <iframe width="400" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
-                        src="{{$event->urlluogo}}"></iframe><small><a href="{{$event->urlluogo}}"""></a></small>
+                            src="{{$event->urlluogo}}"></iframe><small><a href="{{$event->urlluogo}}"""></a></small>
                 </div>
             </div>
         </div>

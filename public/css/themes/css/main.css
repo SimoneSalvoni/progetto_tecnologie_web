@@ -1220,5 +1220,10 @@ section.our_client .row {
     text-decoration: line-through;
 }
 #prezzo_scontato {
-    margin-left: 10px;
+    margin-left: 5px;
+    font-size: large;
+}
+.product_image{
+    height:16em;
+    width:11em
 }

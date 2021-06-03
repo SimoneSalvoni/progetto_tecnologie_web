@@ -7,15 +7,12 @@ use App\Models\EventsList;
 use App\Models\PurchaseList;
 use App\Models\Resources\Purchase;
 use App\Models\Resources\Participation;
-use App\Models\Resources\Event;
 use App\Http\Requests\PurchaseRequest;
 use App\User;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use App\Http\Requests\ModifyProfileRequest;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Redirect;
 
 class UserController extends Controller
 {
@@ -39,6 +36,10 @@ class UserController extends Controller
         return view('home')->with('nearEvents', $nearEvents);
     }
 
+    /*
+     * Questa funzione ottiene gli eventi più vicini di cui l'utente attuale ha acquistato i biglietti,
+     * se presenti
+     */
     public function AreaRiservata()
     {
         $user = auth()->user();
@@ -49,12 +50,24 @@ class UserController extends Controller
         return view('user')->with('user', $user);
     }
 
+    /*
+     * Questa funzione ottiene i dati dell'evento da comprare e controlla se è in sconto
+     * 
+     * @param $eventId è l'id dell'evento da ottenere
+     */
     public function showPurchaseScreen($eventId)
     {
         $event = $this->eventsList->getEventById($eventId);
-        return view('buy')->with('event', $event);
+        $isOnSale = $this->eventsList->checkOnSale($event);
+        return view('buy')->with('event', $event)->with('saldo', $isOnSale);
     }
-
+    
+    /*
+     * Questa funzione compie l'acquisto dei biglietti andando a richiedere la modifica dei dati nel DB.
+     * Succesivamente redirige alla pagina di ripeilogo inserendo nella sessione i dati necessari
+     * 
+     * @param $request è il risultato della submit della form d'acquisto
+     */
     public function buyTickets(PurchaseRequest $request)
     {
         $acquisto = new Purchase;
@@ -68,9 +81,14 @@ class UserController extends Controller
         return redirect()->route('riepilogo');
     }
 
+    /*
+     * Questa funzione richiede l'aggiornamento del DB di fronte alla richiesta dell'utente di voler partecipare
+     * ad un certo evento. Alla fine redirige alla stessa pagina dell'evento
+     * 
+     * @param $eventId è l'id dell'evento a cui l'utente vuole partecipare
+     */
     public function Participate($eventId)
     {
-
         $user = auth()->user();
         $participation = new Participation;
         $participation->nomeutente = $user->nomeutente;
@@ -78,9 +96,15 @@ class UserController extends Controller
         $participation->save();
 
         $this->eventsList->getEventById($eventId)->update(['parteciperò' => DB::raw('parteciperò+1')]);
-        return redirect::back();
+        return redirect()->route('event', [$eventId]);
     }
 
+    /*
+     * Questa funzione cancella la partecipazione ad un evento da parte di un utente. Richiede la 
+     * modifica del DB e poi redirige alla stessa pagina dell'evento.
+     * 
+     * @param $eventId è l'id dell'evento a cui l'utente vuole partecipare
+     */
     public function deletePart($eventId)
     {
         $user = auth()->user();
@@ -92,7 +116,10 @@ class UserController extends Controller
         return redirect()->route('event', [$eventId]);
     }
 
-
+    /*
+     * Questa funzione ottiene i dati necessari che sono stati posti nella sessione dal metodo buyTickets
+     * e poi ritorna la vista di riepilogo acquisto
+     */
     public function showRiepilogo()
     {
         $event = Session::get('evento');
@@ -101,6 +128,9 @@ class UserController extends Controller
         return view('riepilogo')->with('event', $event)->with('numerobiglietti', $numBiglietti)->with('importo', $importo);
     }
 
+    /*
+     * Questa funzione ottiene i dati necessari per visualizzare la cronologia degli acquisti di un utente
+     */
     public function CronologiaAcquisti()
     {
         $user = auth()->user();
@@ -109,12 +139,21 @@ class UserController extends Controller
             ->with('images', $lista_acquisti["images"]);
     }
 
+    /*
+     * Questa funzione ottiene un'istanza dell'utente corrente, necessaria per mostrare la pagina di modifica del profilo,
+     * la cui vista viene restituita
+     */
     public function showModifyProfile()
     {
         $user = auth()->user();
         return view('modify_profile')->with('user', $user);
     }
 
+    /*
+     * Questa funzione esegue la modifica del profilo di un utente, richiedendo la modifica dei dati salvati nel DB.
+     * 
+     * @param $request è il risultato del submit della form di modifica
+     */
     public function ModifyProfile(ModifyProfileRequest $request)
     {
         $user = auth()->user();

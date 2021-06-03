@@ -15,8 +15,12 @@
         <h2 style="font-size:medium">Locazione: {{$event->regione}}, {{$event->provincia}},
             {{$event->indirizzo}} {{$event->numciv}}</h2>
         <h2 style="font-size:medium;display: inline">Costo: </h2>
+        @if ($saldo)
+        <h2 style="font-size:medium;display: inline" id="costo">{{$event->costo - $event->costo/100*$event->sconto}}</h2>
+        @else
         <h2 style="font-size:medium;display: inline" id="costo">{{$event->costo}}</h2>
-        <h2 style="font-size:medium;display: inline" id="costo">€</h2>
+        @endif
+        <h2 style="font-size:medium;display: inline">€</h2>
     </div>
     <h3><b>Seleziona il metodo di pagamento:</b></h3>
     <div class="container">
@@ -54,9 +58,9 @@
                 </ul>
             </div>
             <br />
-                <h4 style="display:inline">Costo complessivo: &nbsp</h4>
-                <h4 style="display:inline" id="tot">{{$event->costo}}</h4>
-                <h4 style="display:inline"> € </h4>
+            <h4 style="display:inline">Costo complessivo: &nbsp</h4>
+            <h4 style="display:inline" id="tot">{{$event->costo}}</h4>
+            <h4 style="display:inline"> € </h4>
             <input type="hidden" name="costototale" id="costototale" value="{{$event->costo}}">
             <input type='hidden' name='nomeutente' value='{{auth()->user()->nomeutente}}'>
             <input type='hidden' name='idevento' value='{{$event->id}}'>
