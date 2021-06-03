@@ -3,10 +3,11 @@
 @section('content')
 @isset ($purchases)
 <h3><span>Lista degli acquisti</span></h3>
-@for($i = 0; $i<count($purchases); $i++) <section class="main-content">
+@for($i = 0; $i<(count($purchases)); $i++)
+<section class="main-content">
     <section class="single_product">
         <div class="product_container {{--clickable--}}"
-            {{--; onclick="location.href='{{route('event',[$event->id])}}'--}}">
+             {{--; onclick="location.href ='{{route('event',[$event->id])}}'--}}">
             <div class="image_item">
                 <img src="{{ asset('locandine/'.$images[$i])}}" class="product_image" alt="">
             </div>
@@ -28,14 +29,14 @@
             </div>
         </div>
     </section>
-    </section>
-    @endfor
+</section>
+@endfor
 
-    @include('pagination.paginator', ['paginator' => $purchases])
+@include('pagination.paginator', ['paginator' => $purchases])
 
-    @if (count($purchases) == 0)
-    <h4 class="center">La cronologia degli acquisti è ancora vuota</h4>
-    @endif
+@if (count($purchases) == 0)
+<h4 class="center">La cronologia degli acquisti è ancora vuota</h4>
+@endif
 
-    @endisset
-    @endsection
+@endisset
+@endsection

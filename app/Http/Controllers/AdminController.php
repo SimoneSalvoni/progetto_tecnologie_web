@@ -12,31 +12,41 @@ use App\Http\Requests\UserSearchRequest;
 use App\Http\Requests\FaqRequest;
 use Illuminate\Support\Facades\Log;
 
-class AdminController extends Controller
-{
+<<<<<<< Updated upstream
+
+=======
+>>>>>>> Stashed changes
+class AdminController extends Controller {
 
     protected $FAQList;
     protected $UsersList;
 
-    public function __construct()
-    {
+    public function __construct() {
         $this->middleware('can:isAdmin');
         $this->FAQList = new FAQList;
         $this->UsersList = new UsersList;
     }
 
-    public function index()
-    {
+    public function index() {
         return view('admin');
     }
 
+<<<<<<< Updated upstream
 
-    public function AreaRiservata()
-    {
+    public function AreaRiservata() {
+=======
+    public function AreaRiservata() {
+        Log::debug('dentro area riservata');
+>>>>>>> Stashed changes
         $FAQ = $this->FAQList->getFAQ();
+        foreach($FAQ as $f){
+            Log::debug($f->domanda);
+            Log::debug($f->risposta);
+        }
         return view('admin')->with('faqs', $FAQ);
     }
 
+<<<<<<< Updated upstream
     /*
      * Gestisce la ricerca di un utente da parte dell'admin.
      * A dipendenza della tipologia selezionata si ricerca o il nome utente
@@ -44,8 +54,9 @@ class AdminController extends Controller
      *
      * @param $request è la richiesta di ricerca che arriva dalla form
      */
-    public function searchUser(UserSearchRequest $request)
-    {
+=======
+>>>>>>> Stashed changes
+    public function searchUser(UserSearchRequest $request) {
         $FAQ = $this->FAQList->getFAQ();
         if ($request->usertype == 'client') {
             $user = $this->UsersList->getUserByUsername($request->name);
@@ -55,13 +66,13 @@ class AdminController extends Controller
         return view('admin')->with('user', $user)->with('faqs', $FAQ);
     }
 
-    public function deleteUser($userId)
-    {
+    public function deleteUser($userId) {
         $user = $this->UsersList->getUserById($userId);
         $user->delete();
         return redirect()->route('areariservata.admin');
     }
 
+<<<<<<< Updated upstream
     public function modifyFaq(FaqRequest $request, $vecchiadomanda)
     {
         $faq = $this->FAQList->getSingleFaq($vecchiadomanda);
@@ -78,13 +89,13 @@ class AdminController extends Controller
         $faq->save();
         return redirect()->route('areariservata.admin');
     }
-
-    public function deleteFaq($domanda)
-    {
+    
+    public function deleteFaq($domanda) {
         $faq = $this->FAQList->getSingleFaq($domanda);
         $faq->delete();
         return redirect()->route('areariservata.admin');
     }
+
 
     /**
      * Gestisce l'indirizzamento alle form di inserimento o modifica organizzatore.
@@ -101,6 +112,27 @@ class AdminController extends Controller
             return view('add_and_modify_org')->with('org', $org);
         }
         return view('add_and_modify_org');
+=======
+    public function deleteFaq($domanda) {
+        $faq = $this->FAQList->getSingleFaq($domanda);
+        $faq->delete();
+        return redirect()->route('areariservata.admin');
+    }
+
+    public function modifyFaq(FaqRequest $request, $vecchiadomanda) {
+        Log::debug($request->vecchiadomanda);
+        Log::debug($request->domanda);
+        Log::debug($request->risposta);
+        $faq = $this->FAQList->getSingleFaq($vecchiadomanda);
+        $faq->domanda = $request->domanda;
+        $faq->risposta = $request->risposta;
+        $faq->save();
+        return redirect()->route('areariservata.admin');
+    }
+
+    public function addFaq(FaqRequest $request) {
+        
+>>>>>>> Stashed changes
     }
 
     /**
@@ -109,8 +141,7 @@ class AdminController extends Controller
      *
      * @param $request Richiesta che arriva dalla form di inserimento di un nuovo organizzatore
      */
-    public function InsertOrg(NewOrgRequest $request)
-    {
+    public function InsertOrg(NewOrgRequest $request) {
         $org = new User;
         $org->fill($request->validated());
         $org->livello = 3;
@@ -125,12 +156,18 @@ class AdminController extends Controller
      *
      * @param $request Richiesta che arriva dalla form di modifica di un organizzatore
      */
+<<<<<<< Updated upstream
     public function ModifyOrg(ModifyOrgRequest $request)
     {
         $org = $this->UsersList->getUserById($request->idOrg);
+=======
+    public function ModifyOrg(ModifyOrgRequest $request) {
+        $org = User::where('id', '=', $request->idOrg);
+>>>>>>> Stashed changes
         $org->fill($request->validated());
         // TODO Fare il check se tutti i campi vengono riempiti correttamente
         $org->save();
         return redirect()->route('areariservata.admin');
     }
+
 }

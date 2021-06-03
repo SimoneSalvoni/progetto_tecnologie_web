@@ -103,8 +103,7 @@ class UserController extends Controller
     public function CronologiaAcquisti()
     {
         $user = auth()->user();
-        //Ricordarsi di fare la paginazione
-        $lista_acquisti = $this->purchases->getPurchases($user->id);
+        $lista_acquisti = $this->purchases->getPurchases($user->nomeutente);
         return view('purchase_list')->with('purchases', $lista_acquisti["purchases"])
             ->with('images', $lista_acquisti["images"]);
     }

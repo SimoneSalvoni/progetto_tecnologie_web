@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Resources\Purchase;
 use App\Models\EventsList;
 use Exception;
+use Illuminate\Support\Facades\Log;
 
 class PurchaseList
 {
@@ -13,10 +14,6 @@ class PurchaseList
     public function __construct()
     {
         $this->eventsList = new EventsList;
-    }
-    public function getEventsBought($username)
-    {
-        // $events =
     }
 
     private function getImgs($eventId)
@@ -28,11 +25,12 @@ class PurchaseList
      * Ritorna la lista degli acquisti paginata di un utente
      * Per adesso funziona solo se ad ogni acquisto è associato un evento con una immagine
      */
-    public function getPurchases($userId)
+    public function getPurchases($username)
     {
         $images = array();
         $purchasesList = array();
-        $purchases = Purchase::where('id',$userId)->orderBy('data')->paginate(8);
+        $purchases = Purchase::where('nomeutente',$username)->orderBy('data')->paginate(8);
+        Log::debug($purchases);
         foreach ($purchases as $purchase) {
             array_push($images, $this->getImgs($purchase->idevento));
         }
