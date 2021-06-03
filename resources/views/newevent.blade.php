@@ -84,109 +84,130 @@
                     @endif
                 </div>
                 <!-- REGIONE E PROVINCIA DOVREBBERO ESSERE MENU A TENDINA -->
+                {{--
                 <div class="wrap-input">
                     {{ Form::label('regione', 'Regione', ['class' => 'label-input']) }}
-                    @if(isset($event))
-                    {{ Form::text('regione', $event->regione, ['class' => 'input','id' => 'regione', 'required' => '']) }}
-                    @else
-                    {{ Form::text('regione', '', ['class' => 'input','id' => 'regione', 'required' => '']) }}
-                    @endif
-                </div>
-                <div class="wrap-input">
-                    {{ Form::label('provincia', 'Provincia', ['class' => 'label-input']) }}
-                    @if(isset($event))
-                    {{ Form::text('provincia', $event->provincia, ['class' => 'input','id' => 'provincia', 'required' => '']) }}
-                    @else
-                    {{ Form::text('provincia', '', ['class' => 'input','id' => 'provincia', 'required' => '']) }}
-                    @endif
-                </div>
-                <div class="wrap-input">
-                    {{ Form::label('città', 'Città', ['class' => 'label-input']) }}
-                    @if(isset($event))
-                    {{ Form::text('città', $event->città, ['class' => 'input','id' => 'città', 'required' => '']) }}
-                    @else
-                    {{ Form::text('città', '', ['class' => 'input','id' => 'città', 'required' => '']) }}
-                    @endif
-                </div>
-                <div class="wrap-input">
-                    {{ Form::label('indirizzo', 'Indirizzo', ['class' => 'label-input']) }}
-                    @if(isset($event))
-                    {{ Form::text('indirizzo', $event->indirizzo, ['class' => 'input','id' => 'indirizzo', 'required' => '']) }}
-                    @else
-                    {{ Form::text('indirizzo', '', ['class' => 'input','id' => 'indirizzo', 'required' => '']) }}
-                    @endif
-                </div>
-                <div class="wrap-input">
-                    {{ Form::label('numciv', 'Numero civico', ['class' => 'label-input']) }}
-                    @if(isset($event))
-                    {{ Form::text('numciv', $event->numciv, ['class' => 'input','id' => 'numciv', 'required' => '']) }}
-                    @else
-                    {{ Form::text('numciv', '', ['class' => 'input','id' => 'numciv', 'required' => '']) }}
-                    @endif
-                </div>
-                <div class="wrap-input">
-                    {{ Form::label('comeraggiungerci', 'Indicazioni su come raggiungere il luogo', ['class' => 'label-input']) }}
-                    @if(isset($event))
-                    {{ Form::textarea('comeraggiungerci',$event->comeraggiungerci, ['class' => 'input','id' => 'comeraggiungerci', 'required'=>'', 'rows'=>'5','style'=>'width:50em']) }}
-                    @else
-                    {{ Form::textarea('comeraggiungerci','', ['class' => 'input','id' => 'comeraggiungerci','required'=>'', 'rows'=>'5','style'=>'width:50em']) }}
-                    @endif
-                </div>
-
-                <div class="wrap-input">
-                    {{ Form::label('immagine', 'Seleziona la locandina', ['class' => 'label-input']) }}
-                    {{ Form::file('immagine', ['class' => 'input','id' => 'immagine', 'required' => '']) }}
-                </div>
-
-                <div class="wrap-input">
-                    @if(isset($event))
-                    {{ Form::label('bigliettitotali', 'Numero biglietti totali', ['class' => 'label-input']) }}
-                    {{ Form::number('bigliettitotali',$event->bigliettitotali, ['class' => 'input','id' => 'bigliettitotali', 'required' => '', 'min' => '0']) }}
-                    @else
-                    {{ Form::label('bigliettitotali', 'Numero di biglietti', ['class' => 'label-input']) }}
-                    {{ Form::number('bigliettitotali', '', ['class' => 'input','id' => 'bigliettitotali', 'required' => '', 'min' => '0']) }}
-                    @endif
-                </div>
-                <div class="wrap-input">
-                    {{ Form::label('costo', 'Costo', ['class' => 'label-input']) }}
-                    @if(isset($event))
-                    {{ Form::number('costo',  $event->costo, ['class' => 'input','id' => 'costo', 'required' => '', 'min' => '0']) }}
-                    @else
-                    {{ Form::number('costo','', ['class' => 'input','id' => 'costo', 'required' => '', 'min' => '0']) }}
-                    @endif
-                </div>
-                <div class="wrap-input">
-                    {{ Form::label('sconto', 'Sconto (%)', ['class' => 'label-input']) }}
-                    @if(isset($event))
-                    {{ Form::number('sconto', $event->sconto, ['class' => 'input','id' => 'sconto', 'required' => '', 'min' => '0', 'max' => '100']) }}
-                    @else
-                    {{ Form::number('sconto', '', ['class' => 'input','id' => 'sconto', 'required' => '', 'min' => '0', 'max' => '100']) }}
-                    @endif
-                </div>
-                <div class="wrap-input">
-                    {{ Form::label('giornisconto', 'Giorni di sconto', ['class' => 'label-input']) }}
-                    @if(isset($event))
-                    {{ Form::number('giornisconto', $event->giornisconto, ['class' => 'input','id' => 'giornisconto', 'required' => '', 'min' => '0']) }}
-                    @else
-                    {{ Form::number('giornisconto', '', ['class' => 'input','id' => 'giornisconto', 'required' => '', 'min' => '0']) }}
-                    @endif
-                </div>
-                <span class="container-form-btn">
-                    @if(isset($event))
-                    {{ Form::submit('Conferma Modifica', ['class' => 'button clickable']) }}
-                    @else
-                    {!! Form::submit('Conferma Inserimento', ['class' => 'button clickable']) !!}
-                    @endif
-                </span>
-                <span class="container-form-btn">
-                    <button type="submit" name="annulla" id="annulla" class="button clickable" method="post"
-                        formaction="{{route('areariservata.org')}}">Annulla Inserimento</button>
-                </span>
-
-                {{ Form::close() }}
-
+                @if(isset($event))
+                {{ Form::text('regione', $event->regione, ['class' => 'input','id' => 'regione', 'required' => '']) }}
+                @else
+                {{ Form::text('regione', '', ['class' => 'input','id' => 'regione', 'required' => '']) }}
+                @endif
             </div>
+            --}}
+            <div class="wrap-input">
+                {{ Form::label('regione', 'Regione', ['class' => 'label-input']) }}
+                @if(isset($event))
+                {{ Form::select('regione', $regions, $event->regione, ['class' => 'input','id' => 'regione', 'required' => '']) }}
+                @else
+                {{ Form::select('regione', '',null , ['class' => 'input','id' => 'regione', 'required' => '']) }}
+                @endif
+            </div>
+            {{--
+            <div class="wrap-input">
+                {{ Form::label('provincia', 'Provincia', ['class' => 'label-input']) }}
+            @if(isset($event))
+            {{ Form::text('provincia', $event->provincia, ['class' => 'input','id' => 'provincia', 'required' => '']) }}
+            @else
+            {{ Form::text('provincia', '',['class' => 'input','id' => 'provincia', 'required' => '']) }}
+            @endif
         </div>
+
+        --}}
+        <div class="wrap-input">
+            {{ Form::label('provincia', 'Provincia', ['class' => 'label-input']) }}
+            @if(isset($event))
+            {{ Form::select('provincia', $province, $event->provincia, ['class' => 'input','id' => 'provincia', 'required' => '']) }}
+            @else
+            {{ Form::select('provincia', '', null, ['class' => 'input','id' => 'provincia', 'required' => '']) }}
+            @endif
+        </div>
+        <div class="wrap-input">
+            {{ Form::label('città', 'Città', ['class' => 'label-input']) }}
+            @if(isset($event))
+            {{ Form::text('città', $event->città, ['class' => 'input','id' => 'città', 'required' => '']) }}
+            @else
+            {{ Form::text('città', '', ['class' => 'input','id' => 'città', 'required' => '']) }}
+            @endif
+        </div>
+        <div class="wrap-input">
+            {{ Form::label('indirizzo', 'Indirizzo', ['class' => 'label-input']) }}
+            @if(isset($event))
+            {{ Form::text('indirizzo', $event->indirizzo, ['class' => 'input','id' => 'indirizzo', 'required' => '']) }}
+            @else
+            {{ Form::text('indirizzo', '', ['class' => 'input','id' => 'indirizzo', 'required' => '']) }}
+            @endif
+        </div>
+        <div class="wrap-input">
+            {{ Form::label('numciv', 'Numero civico', ['class' => 'label-input']) }}
+            @if(isset($event))
+            {{ Form::text('numciv', $event->numciv, ['class' => 'input','id' => 'numciv', 'required' => '']) }}
+            @else
+            {{ Form::text('numciv', '', ['class' => 'input','id' => 'numciv', 'required' => '']) }}
+            @endif
+        </div>
+        <div class="wrap-input">
+            {{ Form::label('comeraggiungerci', 'Indicazioni su come raggiungere il luogo', ['class' => 'label-input']) }}
+            @if(isset($event))
+            {{ Form::textarea('comeraggiungerci',$event->comeraggiungerci, ['class' => 'input','id' => 'comeraggiungerci', 'required'=>'', 'rows'=>'5','style'=>'width:50em']) }}
+            @else
+            {{ Form::textarea('comeraggiungerci','', ['class' => 'input','id' => 'comeraggiungerci','required'=>'', 'rows'=>'5','style'=>'width:50em']) }}
+            @endif
+        </div>
+
+        <div class="wrap-input">
+            {{ Form::label('immagine', 'Seleziona la locandina', ['class' => 'label-input']) }}
+            {{ Form::file('immagine', ['class' => 'input','id' => 'immagine', 'required' => '']) }}
+        </div>
+
+        <div class="wrap-input">
+            @if(isset($event))
+            {{ Form::label('bigliettitotali', 'Numero biglietti totali', ['class' => 'label-input']) }}
+            {{ Form::number('bigliettitotali',$event->bigliettitotali, ['class' => 'input','id' => 'bigliettitotali', 'required' => '', 'min' => '0']) }}
+            @else
+            {{ Form::label('bigliettitotali', 'Numero di biglietti', ['class' => 'label-input']) }}
+            {{ Form::number('bigliettitotali', '', ['class' => 'input','id' => 'bigliettitotali', 'required' => '', 'min' => '0']) }}
+            @endif
+        </div>
+        <div class="wrap-input">
+            {{ Form::label('costo', 'Costo', ['class' => 'label-input']) }}
+            @if(isset($event))
+            {{ Form::number('costo',  $event->costo, ['class' => 'input','id' => 'costo', 'required' => '', 'min' => '0']) }}
+            @else
+            {{ Form::number('costo','', ['class' => 'input','id' => 'costo', 'required' => '', 'min' => '0']) }}
+            @endif
+        </div>
+        <div class="wrap-input">
+            {{ Form::label('sconto', 'Sconto (%)', ['class' => 'label-input']) }}
+            @if(isset($event))
+            {{ Form::number('sconto', $event->sconto, ['class' => 'input','id' => 'sconto', 'required' => '', 'min' => '0', 'max' => '100']) }}
+            @else
+            {{ Form::number('sconto', '', ['class' => 'input','id' => 'sconto', 'required' => '', 'min' => '0', 'max' => '100']) }}
+            @endif
+        </div>
+        <div class="wrap-input">
+            {{ Form::label('giornisconto', 'Giorni di sconto', ['class' => 'label-input']) }}
+            @if(isset($event))
+            {{ Form::number('giornisconto', $event->giornisconto, ['class' => 'input','id' => 'giornisconto', 'required' => '', 'min' => '0']) }}
+            @else
+            {{ Form::number('giornisconto', '', ['class' => 'input','id' => 'giornisconto', 'required' => '', 'min' => '0']) }}
+            @endif
+        </div>
+        <span class="container-form-btn">
+            @if(isset($event))
+            {{ Form::submit('Conferma Modifica', ['class' => 'button clickable']) }}
+            @else
+            {!! Form::submit('Conferma Inserimento', ['class' => 'button clickable']) !!}
+            @endif
+        </span>
+        <span class="container-form-btn">
+            <button type="submit" name="annulla" id="annulla" class="button clickable" method="post"
+                formaction="{{route('areariservata.org')}}">Annulla Inserimento</button>
+        </span>
+
+        {{ Form::close() }}
+
     </div>
+</div>
+</div>
 </div>
 @endsection
