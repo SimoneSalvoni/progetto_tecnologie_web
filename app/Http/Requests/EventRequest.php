@@ -3,6 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Contracts\Validation\Validator;
+use Symfony\Component\HttpFoundation\Response;
 
 class EventRequest extends FormRequest
 {
@@ -32,18 +35,21 @@ class EventRequest extends FormRequest
             'nome' => 'required|max:50',
             'descrizione' => 'required|max:2000',
             'data' => 'required|date',
-            'regione' => 'required',
-            'provincia' => 'required',
-            'città' => 'required',
-            'indirizzo' => 'required',
-            'numciv' => 'required',
-            'comeraggiungerci' => 'required',
+            'regione' => 'string|required',
+            'provincia' => 'string|required',
+            'città' => 'string|required',
+            'indirizzo' => 'string|required',
+            'numciv' => 'numeric|required',
+            'comeraggiungerci' => 'string|required|max:1000',
             'immagine' => 'required|image|mimes:jpeg,png,jpg,bmp,gif|max:1024',
             'bigliettitotali' => 'required|numeric|min:' . strval($BigliettitotaliMin),
             'costo' => 'required|numeric|min:0',
             'sconto' => 'numeric|min:0|max:100',
             'giornisconto' => 'numeric|min:0',
-            'comeraggiungerci' => 'max:1000'
         ];
+    }
+    protected function failedValidation(Validator $validator)
+    {
+        throw new HttpResponseException(response($validator->errors(), Response::HTTP_UNPROCESSABLE_ENTITY));
     }
 }
