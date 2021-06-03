@@ -630,12 +630,12 @@ section.our_client .row {
         0 55%,
         from(rgba(255, 255, 255, 0.1)),
         to(rgba(255, 255, 255, 0))
-        );
+    );
     background-image: -moz-linear-gradient(
         270deg,
         rgba(255, 255, 255, 0.1) 45%,
         rgba(255, 255, 255, 0) 55%
-        );
+    );
 }
 .pricing p {
     margin: 0;
@@ -1132,12 +1132,12 @@ section.our_client .row {
     display: flex;
     flex-direction: column;
 }
-.plus_item{
-    width:fit-content;
+.plus_item {
+    width: fit-content;
     display: flex;
     flex-direction: column;
-    justify-content:center;
-    margin-bottom:-1em
+    justify-content: center;
+    margin-bottom: -1em;
 }
 
 #pencil {
@@ -1146,13 +1146,13 @@ section.our_client .row {
     height: 20px;
     align-self: center;
 }
-.pencil{
+.pencil {
     margin-top: 30px;
     width: 20px;
     height: 20px;
     align-self: center;
 }
-#plus{
+#plus {
     width: 30px;
     height: 30px;
     align-self: center;
@@ -1184,7 +1184,7 @@ section.our_client .row {
     margin-bottom: 20px;
     align-self: center;
 }
-#plus_text{
+#plus_text {
     margin-bottom: 20px;
     align-self: center;
 }
@@ -1210,4 +1210,15 @@ section.our_client .row {
 
 #registrati {
     color: #df403d;
+}
+#carousel_image {
+    height: 300px;
+    width: 100%;
+}
+#prezzo_daScontare {
+    color: rgb(138, 138, 138);
+    text-decoration: line-through;
+}
+#prezzo_scontato {
+    margin-left: 10px;
 }

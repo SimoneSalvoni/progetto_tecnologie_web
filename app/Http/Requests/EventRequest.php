@@ -24,6 +24,10 @@ class EventRequest extends FormRequest
     public function rules()
     {
         $event = $this->evento;
+        if (isset($event)) {
+            $BigliettitotaliMin = $event->bigliettivenduti;
+        }
+        $BigliettitotaliMin = 1;
         return [
             'nome' => 'required|max:50',
             'descrizione' => 'required|max:2000',
@@ -35,7 +39,7 @@ class EventRequest extends FormRequest
             'numciv' => 'required',
             'comeraggiungerci' => 'required',
             'immagine' => 'required|image|mimes:jpeg,png,jpg,bmp,gif|max:1024',
-            'bigliettitotali' => 'required|numeric|min:' . strval($event->bigliettivenduti),
+            'bigliettitotali' => 'required|numeric|min:' . strval($BigliettitotaliMin),
             'costo' => 'required|numeric|min:0',
             'sconto' => 'numeric|min:0|max:100',
             'giornisconto' => 'numeric|min:0',

@@ -8,6 +8,7 @@ use App\Models\Resources\Event;
 use App\Models\FAQList;
 use Illuminate\Support\Facades\Log;
 use App\Http\Requests\AdvancedSearchRequest;
+use Carbon\Carbon;
 use Exception;
 
 class PublicController extends Controller
@@ -51,6 +52,19 @@ class PublicController extends Controller
                 ->with('months', $months);
     }
 
+    private function checkOnSale($event)
+    {
+        $currentDate = Carbon::now();
+        $eventDate = Carbon::parse($event->data);
+        Log::debug($event);
+        $diff = $eventDate->diffInDays($currentDate);
+        Log::debug($diff);
+        if ($diff <= $event->giornisconto) {
+            return true;
+        }
+        return false;
+    }
+
     public function showEvent($eventId)
     {
         try {
@@ -63,8 +77,12 @@ class PublicController extends Controller
         } catch (Exception $e) {
             $partecipa = false;
         }
+        //Trovo se l'evento è in sconto oppure no
         $event = $this->eventsList->getEventById($eventId);
-        return view('event')->with('event', $event)->with('partecipa', $partecipa);
+        $isOnSale = $this->checkOnSale($event);
+        Log::debug("IS ON SALE");
+        Log::debug($isOnSale == false);
+        return view('event')->with('event', $event)->with('partecipa', $partecipa)->with('saldo', $isOnSale);
     }
 
     public function showInfo()
