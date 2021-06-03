@@ -1,7 +1,27 @@
 @extends('layouts.public')
 
 @section('title', 'Nuovo Evento')
-
+<script src="{{ asset('js/event.js') }}" ></script>
+@if (isset($event))
+@else
+<script>
+$(function () {
+    var actionUrl = "{{ route('addNewEvent') }}";
+    var formId = 'addEvent';
+    $(":input").on('blur', function (event) {
+        var formElementId = $(this).attr('id');
+        doElemValidation(formElementId, actionUrl, formId);
+    });
+    //Questa parte è l'handler del bottone di submit
+    $("#addproduct").on('submit', function (event) {
+        //Per prima cosa si annulla l'operazione di submit di default con il comando event.preventDefault()
+        event.preventDefault();
+        //doFormValidatio gestisce l'operazione di validazione della form e effettua in caso il submit
+        doFormValidation(actionUrl, formId);
+    });
+});
+</script>
+@endif
 @section('content')
 <div class="container">
     <div class="center">
@@ -13,7 +33,7 @@
                 'files'=>true)) !!}
                 {!! Form::hidden('evento', $event->id, ['id'=> 'evento']) !!}
                 @else
-                {{ Form::open(array('route' => 'addNewEvent', 'class' => 'contact-form', 'files'=>true)) }}
+                {{ Form::open(array('route' => 'addNewEvent', 'class' => 'contact-form', 'files'=>true, 'id'=>'addEvent')) }}
                 @endif
                 <div class="wrap-input">
                     {{ Form::label('nome', 'Nome', ['class' => 'label-input']) }}

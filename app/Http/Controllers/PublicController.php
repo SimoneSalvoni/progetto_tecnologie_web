@@ -22,7 +22,7 @@ class PublicController extends Controller
     }
 
     /*
-     * Questo metodo ottiene gli eventi più vicini 
+     * Questo metodo ottiene gli eventi più vicini
      */
     public function showHomePage()
     {
@@ -35,9 +35,13 @@ class PublicController extends Controller
         $organizzatori = $this->eventsList->getOrganizzatori();
         $regions = $this->eventsList->getRegionList();
         $events = $this->eventsList->getEvents();
+        $EventsOnSales = array();
+        foreach ($events as $event){
+           $EventsOnSales[$event->id] = $this->checkOnSale($event);
+        }
         $months = $this->eventsList->getMonthList();
         return view('list')->with('events', $events)->with('regions', $regions)->with('organizzatori', $organizzatori)
-                ->with('months', $months);
+                ->with('months', $months)->with('OnSales', $EventsOnSales);
     }
 
     public function showEventsListFiltered(AdvancedSearchRequest $request)
@@ -45,19 +49,21 @@ class PublicController extends Controller
         $organizzatori = $this->eventsList->getOrganizzatori();
         $regions = $this->eventsList->getRegionList();
         $months = $this->eventsList->getMonthList();
-        $events = $this->eventsList->getEventsFiltered($request->year, $request->month, $request->reg, 
+        $events = $this->eventsList->getEventsFiltered($request->year, $request->month, $request->reg,
                 $request->org, $request->desc);
+        $EventsOnSales = array();
+        foreach ($events as $event){
+           $EventsOnSales[$event->id] = $this->checkOnSale($event);
+        }
         return view('list')->with('events', $events)->with('regions', $regions)->with('organizzatori', $organizzatori)
-                ->with('months', $months);
+                ->with('months', $months)->with('OnSales', $EventsOnSales);
     }
 
     private function checkOnSale($event)
     {
         $currentDate = Carbon::now();
         $eventDate = Carbon::parse($event->data);
-        Log::debug($event);
         $diff = $eventDate->diffInDays($currentDate);
-        Log::debug($diff);
         if ($diff <= $event->giornisconto) {
             return true;
         }
