@@ -13,10 +13,7 @@
                     }
                 ?>";  
     document.getElementById("org").value =
-<<<<<<< HEAD
-        "<?php echo isset($_POST['org']) ? $_POST['org'] : '' ?>";
-};
-=======
+
             "<?php
                     if (old('org')!=null) {
                          echo old('org');
@@ -49,7 +46,6 @@
                     }
                 ?>";
     };
->>>>>>> 017e98ec29927ad0425b4bc68023f89bcb7d49ed
 </script>
 @endsection
 
@@ -67,11 +63,7 @@
                   action="{{route('list.search')}}">
                 @csrf
                 <span class="search">
-<<<<<<< HEAD
-                    <label for="date" class="control">Data</label>
-                    <input type="month" name="date" id="date" placeholder="YYYY-MM"
-                        value="<?php echo isset($_POST['date']) ? $_POST['date'] : '' ?>">
-=======
+
                     <label for='year' class="control">Anno</label>
                     <input type="number" name="year" id="year" style='width:4em'>  
                 </span>
@@ -82,7 +74,6 @@
                         <option>{{$month}}</option>
                         @endforeach
                     </select>
->>>>>>> 017e98ec29927ad0425b4bc68023f89bcb7d49ed
                 </span>
                 <span class="search">
                     <label for="reg" class="control">Regione</label>
@@ -141,20 +132,13 @@
                         <p>  {{$event->descrizione}} </p>
                     </div>
                     <div class="info-container">
-<<<<<<< HEAD
-                        <div>ORGANIZZATORE: {{$event->nomeorganizzatore}} </div>
-                        <div>REGIONE: {{$event->regione}} </div>
-                        <div>DATA: {{$event->data}}</div>
- @include('helpers/prezzoEvento', ['evento' => $event])
-                        </div>
-=======
+
                         <p>ORGANIZZATORE: {{$event->nomeorganizzatore}} </p>
                         <p>REGIONE: {{$event->regione}} </p>
                         <p>DATA: {{$event->data}}</p>                       
                         <p>COSTO: {{$event->costo}}€
                             <!-- TODO: Lo sconto è da fare -->
                         </p>
->>>>>>> 017e98ec29927ad0425b4bc68023f89bcb7d49ed
                     </div>
                 </div>
             </div>
