@@ -29,18 +29,19 @@ class EventRequest extends FormRequest
         $event = $this->evento;
         if (isset($event)) {
             $BigliettitotaliMin = $event->bigliettivenduti;
+        } else {
+            $BigliettitotaliMin = 1;
         }
-        $BigliettitotaliMin = 1;
         return [
             'nome' => 'required|max:50',
             'descrizione' => 'required|max:2000',
             'data' => 'required|date',
-            'regione' => 'string|required',
-            'provincia' => 'string|required',
-            'città' => 'string|required',
-            'indirizzo' => 'string|required',
-            'numciv' => 'numeric|required',
-            'comeraggiungerci' => 'string|required|max:1000',
+            'regione' => 'required|string',
+            'provincia' => 'required|string',
+            'città' => 'required|string',
+            'indirizzo' => 'required|string',
+            'numciv' => 'required|numeric',
+            'comeraggiungerci' => 'required|string|max:1000',
             'immagine' => 'required|image|mimes:jpeg,png,jpg,bmp,gif|max:1024',
             'bigliettitotali' => 'required|numeric|min:' . strval($BigliettitotaliMin),
             'costo' => 'required|numeric|min:0',
