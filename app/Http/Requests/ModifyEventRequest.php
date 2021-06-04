@@ -32,8 +32,9 @@ class ModifyEventRequest extends FormRequest
         $event = $eventList->getEventById($this->eventId);
         if (isset($event)) {
             $BigliettitotaliMin = $event->bigliettivenduti;
+        } else {
+            $BigliettitotaliMin = 1;
         }
-        $BigliettitotaliMin = 1;
         return [
             'nome' => 'required|max:50',
             'descrizione' => 'required|max:2000',

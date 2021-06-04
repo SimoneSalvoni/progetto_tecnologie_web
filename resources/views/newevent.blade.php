@@ -176,7 +176,6 @@ doFormValidation(validationUrl, formId);
                     {{ Form::file('immagine', ['class' => 'input','id' => 'immagine', 'required' => '']) }}
                     @endif
                 </div>
-
                 <div class="wrap-input">
                     @if(isset($event))
                     {{ Form::label('bigliettitotali', 'Numero biglietti totali', ['class' => 'label-input']) }}
