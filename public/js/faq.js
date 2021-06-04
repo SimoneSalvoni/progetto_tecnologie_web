@@ -7,10 +7,18 @@ $.fn.extend({
 $(document).ready(function () {
     $('.risposta').hide();
     $('.domanda').click(function () {
-        $('.risposta').hide();
-        $('.più').toggleText('-', '+');
-        $(this).next('.risposta').slideToggle('fast');
-        $(this).children('.più').toggleText('+', '-');
+        $('.risposta').hide(200);
+        if(!$(this).closest('.domanda').hasClass("open")){
+            $('.domanda').removeClass("open");
+            $('.più').toggleText('-', '+');
+            $(this).next('.risposta').slideToggle('fast');
+            $(this).children('.più').toggleText('+', '-');
+            $(this).closest('.domanda').addClass("open");
+        }
+        else{
+            $('.domanda').removeClass("open");
+            $('.più').toggleText('-', '+');
+        }
     });
 });
 
