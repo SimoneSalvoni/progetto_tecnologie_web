@@ -25,12 +25,12 @@ class EventSeeder extends Seeder
         $date = array('2021-07-22', '2021-07-23', '2021-07-24', '2021-06-30', '2021-07-30', '2021-07-25', '2021-07-20', '2021-07-20', '2021-08-27', '2021-07-2');
         $nome = array('Ligabue in concerto', 'Vasco in concerto', 'Albano in concerto', 'Elisa in concerto', 'Fabri Fibra in concerto', 'Andrea Bocelli in concerto', 'Evento musicale estate 2021', 'Loredana Bertè in concerto', 'Neffa Speciale Live', 'Concerto in teatro');
         $descrizione = array('Ritorna Ligabue in concerto', 'Ritorna Vasco Rossi in concerto', 'Ritorna Albano in concerto', 'Ritorna Elisa in concerto', 'Ritorna Fabri Fibra in concerto', 'Ritorna Andrea Bocelli in concerto', 'Evento speciale con la partecipazione di molti artisti', 'Ritorna Loredana Berte in concerto', 'Non perderti Neffa in live', 'Evento speciale al teatro delle Muse con la partecipazione di molti artisti locali');
-        $organizzatori = array('Acme', 'Acme', 'Acme', 'Acme', 'Acme', 'SConcert', 'SConcert', 'SConcert', 'SConcert', 'Sup');
+        $organizzatori = array('Acme', 'Acme', 'Acme', 'Acme', 'Acme', 'Sconcert', 'Sconcert', 'Sconcert', 'Sconcert', 'Sup');
         for ($i = 0; $i < 10; $i++) {
             DB::table('events')->insert([
                 'nome' => $nome[$i],
                 'descrizione' => $descrizione[$i],
-                'urlluogo' => 'http://maps.google.it/maps?f=q&source=s_q&hl=it&geocode=&q=Via+SanBiagio,+5,+' + $cities[$i] + '+' + $regions[$i] + '&output=embed',
+                'urlluogo' => 'http://maps.google.it/maps?f=q&source=s_q&hl=it&geocode=&q=Via+' . strval($vie[$i]) . ',+2,+' . strval($cities[$i]) . '+' . strval($regions[$i]) . '&output=embed',
                 'regione' => $regions[$i],
                 'provincia' => $province[$i],
                 'città' => $cities[$i],

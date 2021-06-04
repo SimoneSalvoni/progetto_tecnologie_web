@@ -15,18 +15,18 @@ class PurchaseSeeder extends Seeder
     public function run()
     {
         DB::table('purchases')->insert([
-            'nomeutente' => 'User1',
+            'nomeutente' => 'clieclie',
             'idevento' => 1,
-            'nomeevento' => 'Evento di prova 0',
+            'nomeevento' => 'Ligabue in concerto',
             'numerobiglietti' => 3,
             'costototale' => 23,
             'data' => '2021-07-15'
         ]);
 
         DB::table('purchases')->insert([
-            'nomeutente' => 'User1',
+            'nomeutente' => 'clieclie',
             'idevento' => 2,
-            'nomeevento' => 'Evento di prova 1',
+            'nomeevento' => 'Vasco in concerto',
             'numerobiglietti' => 3,
             'costototale' => 23,
             'data' => '2021-07-15'
