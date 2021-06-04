@@ -94,6 +94,7 @@ class User extends Authenticatable
                     ->orWhere('id', '=', $purchases[2]->idevento)
                     ->orWhere('id', '=', $purchases[3]->idevento)->take(4)->get();
                 break;
+            
             default:
                 $events = null;
         }

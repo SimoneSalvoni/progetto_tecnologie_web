@@ -4,8 +4,8 @@
         <b> Chi siamo </b>
     </h3>
     <p class="info-paragraph">
-        R3S è una realtà nata all'inizio del 2021 con l'obbiettivo di promuovere l'organizzazione di eventi dedicati ai giovani.
-        Dopo aver riscosso un gran successo in ambito locale, ora ospita eventi da tutta Italia e conta diversi collaboratori sparsi lungo la penisola.
+        R3S è una realtà nata all'inizio del 2021 con l'obbiettivo di promuovere l'organizzazione di concerti.
+        Dopo aver riscosso un gran successo in ambito locale, ora ospita concerti da tutta Italia e conta diversi collaboratori sparsi lungo la penisola.
         Tra le sue varie qualità vi è sicuramente l'immediatezza con cui organizzazioni e clienti riescono ad interfacciarsi, come anche la chiarezza in tutte le informazioni fornite.
         R3S è sempre in costante evoluzione, causata anche dalla crescita rapida e repentina dell'azienda.
     </p>
