@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Log;
 use App\Models\EventsList;
 use App\Models\PurchaseList;
 use App\Models\Resources\Purchase;
@@ -11,7 +10,6 @@ use App\Models\Resources\Event;
 use App\Http\Requests\PurchaseRequest;
 use App\User;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use App\Http\Requests\ModifyProfileRequest;
 use Illuminate\Support\Facades\Hash;
@@ -76,8 +74,8 @@ class UserController extends Controller
         $participation->nomeutente = $user->nomeutente;
         $participation->idevento = $eventId;
         $participation->save();
-
-        $this->eventsList->getEventById($eventId)->update(['parteciperò' => DB::raw('parteciperò+1')]);
+        $numpart = $this->participations->where('idevento' , $eventId)->count();
+        $this->eventsList->getEventById($eventId)->update(['parteciperò' => $numpart]);
         return redirect::back();
     }
 
@@ -86,8 +84,9 @@ class UserController extends Controller
         $user = auth()->user();
         
         if ($user->hasPart($user->nomeutente, $eventId)) {
-             $this->eventsList->getEventById($eventId)->update(['parteciperò' => DB::raw('parteciperò-1')]);
              $this->participations->where(['nomeutente' => $user->nomeutente,'idevento' => $eventId])->delete();
+             $numpart = $this->participations->where('idevento' , $eventId)->count();
+             $this->eventsList->getEventById($eventId)->update(['parteciperò' => $numpart]);
         }
         return redirect()->route('event', [$eventId]);
     }
