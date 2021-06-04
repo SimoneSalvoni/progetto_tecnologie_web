@@ -66,7 +66,7 @@ Route::get("/areariservata/org/nuovoEvento", "OrgController@showNewEventScreen")
 Route::post("/storeNewEvent", "OrgController@addEvent")->name('addNewEvent')->middleware('can:isOrg');
 Route::get("/areariservata/org/modificaEvento/{eventId}", "OrgController@modifyEvent")->name('modifyEvent')->middleware('can:isOrg');
 Route::post("/storeModifiedEvent/{eventId}", "OrgController@storeModifiedEvent")->name('storeModifiedEvent')->middleware('can:isOrg');
-
+Route::get('/province/{regione}', 'OrgController@getProvince')->name('province')->middleware('can:isOrg');
 
 //Area admin
 Route::post("/areariservata/admin", 'AdminController@searchUser')->name('searchuser')->middleware('can:isAdmin');

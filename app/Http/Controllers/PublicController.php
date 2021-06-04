@@ -102,4 +102,5 @@ class PublicController extends Controller
         $FAQ = $this->FAQList->getFAQ();
         return view('faq')->with('FAQ', $FAQ);
     }
+    
 }

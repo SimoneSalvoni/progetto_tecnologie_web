@@ -941,7 +941,10 @@ section.our_client .row {
     margin-right: 1em;
     flex-shrink: 0;
 }
-
+.product_image {
+    height: 16em;
+    width: 11em;
+}
 .descr_container {
     padding-left: 0;
     display: flex;
@@ -978,6 +981,7 @@ section.our_client .row {
     flex-wrap: wrap;
     height: fit-content;
     margin-left: 2em;
+
 }
 
 @media (max-width: 180px) {
@@ -1052,16 +1056,16 @@ section.our_client .row {
     margin: 5px 3px 5px 3px;
 }
 
-.domanda{
+.domanda {
     cursor: pointer;
 }
 
-.hoverabile h3.domanda:hover{
+.hoverabile h3.domanda:hover {
     color: #fd4004;
 }
 
-.più{
-    float:right;
+.più {
+    float: right;
 }
 
 .risposta {
