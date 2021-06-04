@@ -18,6 +18,7 @@ class Events extends Migration
             $table->increments('id');
             $table->string('nome')->index();
             $table->string('descrizione',2000);
+            $table->string('programma', 1000);
             $table->longText('urlluogo');
             $table->string('regione');
             $table->string('provincia');

@@ -84,16 +84,15 @@
                     @endif
                 </div>
                 <!-- REGIONE E PROVINCIA DOVREBBERO ESSERE MENU A TENDINA -->
-                {{--
                 <div class="wrap-input">
                     {{ Form::label('regione', 'Regione', ['class' => 'label-input']) }}
-                @if(isset($event))
-                {{ Form::text('regione', $event->regione, ['class' => 'input','id' => 'regione', 'required' => '']) }}
-                @else
-                {{ Form::text('regione', '', ['class' => 'input','id' => 'regione', 'required' => '']) }}
-                @endif
-            </div>
-            --}}
+                    @if(isset($event))
+                    {{ Form::text('regione', $event->regione, ['class' => 'input','id' => 'regione', 'required' => '']) }}
+                    @else
+                    {{ Form::text('regione', '', ['class' => 'input','id' => 'regione', 'required' => '']) }}
+                    @endif
+                </div>
+                {{--
             <div class="wrap-input">
                 {{ Form::label('regione', 'Regione', ['class' => 'label-input']) }}
                 @if(isset($event))
@@ -102,17 +101,16 @@
                 {{ Form::select('regione', '',null , ['class' => 'input','id' => 'regione', 'required' => '']) }}
                 @endif
             </div>
-            {{--
+            --}}
             <div class="wrap-input">
                 {{ Form::label('provincia', 'Provincia', ['class' => 'label-input']) }}
-            @if(isset($event))
-            {{ Form::text('provincia', $event->provincia, ['class' => 'input','id' => 'provincia', 'required' => '']) }}
-            @else
-            {{ Form::text('provincia', '',['class' => 'input','id' => 'provincia', 'required' => '']) }}
-            @endif
-        </div>
-
-        --}}
+                @if(isset($event))
+                {{ Form::text('provincia', $event->provincia, ['class' => 'input','id' => 'provincia', 'required' => '']) }}
+                @else
+                {{ Form::text('provincia', '',['class' => 'input','id' => 'provincia', 'required' => '']) }}
+                @endif
+            </div>
+            {{--
         <div class="wrap-input">
             {{ Form::label('provincia', 'Provincia', ['class' => 'label-input']) }}
             @if(isset($event))
@@ -121,6 +119,7 @@
             {{ Form::select('provincia', '', null, ['class' => 'input','id' => 'provincia', 'required' => '']) }}
             @endif
         </div>
+        --}}
         <div class="wrap-input">
             {{ Form::label('città', 'Città', ['class' => 'label-input']) }}
             @if(isset($event))
