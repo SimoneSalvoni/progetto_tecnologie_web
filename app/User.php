@@ -71,27 +71,25 @@ class User extends Authenticatable
     public function nearEvents($user)
     {
         $currentDate = Carbon::now()->toDateString();
-        $filters[] = ['data', '>=', $currentDate];
-        $filters[] = ['nomeutente', 'LIKE', $user];
-        $purchases = Purchase::where($filters)->orderBy('data')->select('idevento')->distinct()->take(2)->get();
+        $purchases = Purchase::where('nomeutente', 'LIKE', $user)->orderBy('data')->select('idevento')->distinct()->take(4)->get();
         switch (count($purchases)) {
             case 1:
-                $events = Event::where('id', '=', $purchases[0]->idevento)->get();
+                $events = Event::where( 'data', '>=', $currentDate)->where('id', '=', $purchases[0]->idevento)->orderBy('data')->get();
                 break;
             case 2:
-                $events = Event::where('id', '=', $purchases[0]->idevento)
-                    ->orWhere('id', '=', $purchases[1]->idevento)->get();
+                $events = Event::where(  'data', '>=', $currentDate)->where('id', '=', $purchases[0]->idevento)
+                    ->orWhere('id', '=', $purchases[1]->idevento)->orderBy('data')->get();
                 break;
             case 3:
-                $events = Event::where('id', '=', $purchases[0]->idevento)
+                $events = Event::where(  'data', '>=', $currentDate)->where('id', '=', $purchases[0]->idevento)
                     ->orWhere('id', '=', $purchases[1]->idevento)
-                    ->orWhere('id', '=', $purchases[2]->idevento)->get();
+                    ->orWhere('id', '=', $purchases[2]->idevento)->orderBy('data')->get();
                 break;
             case 4:
-                $events = Event::where('id', '=', $purchases[0]->idevento)
+                $events = Event::where(  'data', '>=', $currentDate)->where('id', '=', $purchases[0]->idevento)
                     ->orWhere('id', '=', $purchases[1]->idevento)
                     ->orWhere('id', '=', $purchases[2]->idevento)
-                    ->orWhere('id', '=', $purchases[3]->idevento)->take(4)->get();
+                    ->orWhere('id', '=', $purchases[3]->idevento)->orderBy('data')->take(4)->get();
                 break;
             
             default:
