@@ -9,7 +9,7 @@
                 <h5>
                     {{$event->nome}}
                 </h5>
-                <div style="float:left; height:inherit">
+                <div class="riepilogo1">
                     <h5>
                         {{$event->data}}
                     </h5>
@@ -20,7 +20,7 @@
                         {{$event->indirizzo}} {{$event->numciv}}
                     </h5>
                 </div>
-                <div style="display:inline-block;margin-left:25em;margin-top:1.5em">
+                <div class="riepilogo2">
                     <h5>Numero di biglietti: {{$numerobiglietti}}</h5>
                     <h5>Importo complessivo: {{$importo}}€</h5>
                 </div>
