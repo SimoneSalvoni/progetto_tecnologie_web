@@ -30,7 +30,6 @@ class PurchaseList
         $images = array();
         $purchasesList = array();
         $purchases = Purchase::where('nomeutente',$username)->orderBy('data')->paginate(8);
-        Log::debug($purchases);
         foreach ($purchases as $purchase) {
             array_push($images, $this->getImgs($purchase->idevento));
         }

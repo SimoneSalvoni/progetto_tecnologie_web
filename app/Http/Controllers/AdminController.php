@@ -145,7 +145,6 @@ class AdminController extends Controller {
         $org = new User;
         $org->fill($request->validated());
         $org->livello = 3;
-        // TODO Fare il check se tutti i campi vengono riempiti correttamente
         $org->save();
         return redirect()->route('areariservata.admin');
     }
@@ -160,7 +159,6 @@ class AdminController extends Controller {
     {
         $org = $this->UsersList->getUserById($request->idOrg);
         $org->fill($request->validated());
-        // TODO Fare il check se tutti i campi vengono riempiti correttamente
         $org->save();
         return redirect()->route('areariservata.admin');
     }

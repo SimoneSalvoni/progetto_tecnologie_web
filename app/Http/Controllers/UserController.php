@@ -7,6 +7,7 @@ use App\Models\PurchaseList;
 use App\Models\Resources\Purchase;
 use App\Models\Resources\Participation;
 use App\Http\Requests\PurchaseRequest;
+use Illuminate\Support\Facades\Session;
 use App\User;
 
 class UserController extends Controller

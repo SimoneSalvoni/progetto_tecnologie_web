@@ -8,16 +8,13 @@
 $(function () {
 var validationUrl = "{{ route('storeModifiedEvent',[$event->id] ) }}";
 var formId = 'modifyEvent';
-//Quando un campo di input per il focus fa quello sotto
+
 $(":input").on('blur', function () {
 var formElementId = $(this).attr('id');
 doElemValidation(formElementId, validationUrl, formId);
 });
-//Questa parte è l'handler del bottone di submit
 $("#modifyEvent").on('submit', function (event) {
-//Per prima cosa si annulla l'operazione di submit di default con il comando event.preventDefault()
 event.preventDefault();
-//doFormValidatio gestisce l'operazione di validazione della form e effettua in caso il submit
 doFormValidation(validationUrl, formId);
 });
 });</script>
@@ -30,52 +27,52 @@ doFormValidation(validationUrl, formId);
     $('#regione').append(new Option("{!!$region!!}", "{!!$region!!}"));
     }
     @endforeach
-            var regione = $('#regione option:selected').text();
+    
+    var regione = $('#regione option:selected').text();
     var provUrl = "{{route('province', '')}}" + "/" + regione;
     $('#provincia').find('option').remove();
     $('#provincia').append('<option selected value="{!!$event->provincia!!}">{!!$event->provincia!!}</option>');
     getProvince(provUrl);
+    
     $('#regione').change(function () {
-    var regione = $('#regione option:selected').text();
-    var provUrl = "{{route('province', '')}}" + "/" + regione;
-    $('#provincia').find('option').remove();
-    $('#provincia').append('<option selected disabled>Scegli la provincia</option>');
-    getProvince(provUrl);
+        var regione = $('#regione option:selected').text();
+        var provUrl = "{{route('province', '')}}" + "/" + regione;
+        $('#provincia').find('option').remove();
+        $('#provincia').append('<option selected disabled>Scegli la provincia</option>');
+        getProvince(provUrl);
     });
-    });</script>
+    });
+</script>
 @else
 <script>
     $(function () {
     var validationUrl = "{{ route('addNewEvent') }}";
     var formId = 'addEvent';
-    //Quando un campo di input per il focus fa quello sotto
+    
     $(":input").on('blur', function () {
-    var formElementId = $(this).attr('id');
-    doElemValidation(formElementId, validationUrl, formId);
+        var formElementId = $(this).attr('id');
+        doElemValidation(formElementId, validationUrl, formId);
     });
-    //Questa parte è l'handler del bottone di submit
     $("#addEvent").on('submit', function (event) {
-    //Per prima cosa si annulla l'operazione di submit di default con il comando event.preventDefault()
-    event.preventDefault();
-    //doFormValidatio gestisce l'operazione di validazione della form e effettua in caso il submit
-    doFormValidation(validationUrl, formId);
+        event.preventDefault();
+        doFormValidation(validationUrl, formId);
     });
-    });</script>
+    });
+</script>
 <script>
     $(function () {
-    $('#regione').append('<option selected disabled>Scegli la regione</option>');
-    @foreach($regions as $region)
-            $('#regione').append(new Option("{!!$region!!}", "{!!$region!!}"));
-    @endforeach
-            $('#regione').change(function () {
-    var regione = $('#regione option:selected').text();
-    var provUrl = "{{route('province', '')}}" + "/" + regione;
-    $('#provincia').find('option').remove();
-    $('#provincia').append('<option selected disabled>Scegli la provincia</option>');
-    getProvince(provUrl);
+        $('#regione').append('<option selected disabled>Scegli la regione</option>');
+        @foreach($regions as $region)
+        $('#regione').append(new Option("{!!$region!!}", "{!!$region!!}"));
+        @endforeach
+        $('#regione').change(function () {
+        var regione = $('#regione option:selected').text();
+        var provUrl = "{{route('province', '')}}" + "/" + regione;
+        $('#provincia').find('option').remove();
+        $('#provincia').append('<option selected disabled>Scegli la provincia</option>');
+        getProvince(provUrl);
     });
-    }
-    );
+    });
 </script>
 @endif
 @endsection

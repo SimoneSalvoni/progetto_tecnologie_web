@@ -1,13 +1,10 @@
 @extends('layouts.public')
 @section('title', 'Modifica Profilo')
-@section('scripts')
-<script type="text/javascript" src='{{asset('js/ModifyProfile.js')}}'></script>
-@endsection
+
 @section('content')
 @isset($user)
 
 <div class="container">
-
     <div class="center">
         <h4 class=" left title"><span class="text"><strong>Modifica Profilo</strong></h4>
         <div class="container-contact">
