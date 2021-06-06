@@ -1,4 +1,8 @@
 $(document).ready(function () {
+    
+    $('#tot').html($('#costo').html());
+    $('#costototale').val(+$('#costo').html());
+    
     $('#numBiglietti').keydown(function (e) {
         if (e.keyCode === 13) {
             e.preventDefault();

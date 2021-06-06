@@ -1,5 +1,6 @@
 function getErrorHtml(elemErrors) {
-    if (typeof elemErrors === "undefined" || elemErrors.length < 1) return;
+    if (typeof elemErrors === "undefined" || elemErrors.length < 1)
+        return;
     var out = '<ul class="errors">';
     for (var i = 0; i < elemErrors.length; i++) {
         out += "<li>" + elemErrors[i] + "</li>";
@@ -8,14 +9,7 @@ function getErrorHtml(elemErrors) {
     return out;
 }
 
-function getProvince(regione){
-    $.ajax({
-        type: 'GET',
-        url: ''
-    })
-}
-
-function doElemValidation(id, actionUrl, formId) {
+function doElemValidation(id, validationUrl, formId) {
     var formElems;
 
     function addFormToken() {
@@ -28,7 +22,7 @@ function doElemValidation(id, actionUrl, formId) {
     function sendAjaxReq() {
         $.ajax({
             type: "POST",
-            url: actionUrl,
+            url: validationUrl,
             data: formElems,
             dataType: "json",
             //error in una richiesta ajax è il campo che indica la funzione di call back da attivare quando dal server arriva
@@ -40,9 +34,9 @@ function doElemValidation(id, actionUrl, formId) {
                     //prendere solo gli errori che arrivano dal server relativi ai campi che stiamo analizzando e tralasciare gli altri
                     //La prima riga sotto ha lo scopo di togliere eventuali messaggi d'errore dall'elemento che abbiamo appena validato
                     $("#" + id)
-                        .parent()
-                        .find(".errors")
-                        .html(" ");
+                            .parent()
+                            .find(".errors")
+                            .html(" ");
                     $("#" + id).after(getErrorHtml(errMsgs[id]));
                 }
             },
@@ -50,7 +44,7 @@ function doElemValidation(id, actionUrl, formId) {
             contentType: false,
             //Con questo parametro indichiamo che ajax non deve formattare in modo diverso dal nostro la struttura del messaggio
             //L'imput è formattato con formData
-            processData: false,
+            processData: false
         });
     }
 
@@ -76,30 +70,62 @@ function doElemValidation(id, actionUrl, formId) {
     sendAjaxReq();
 }
 
-function doFormValidation(actionUrl, formId) {
+function doFormValidation(validationUrl, formId) {
+    console.log('entratonel metodo');
     var form = new FormData(document.getElementById(formId));
     $.ajax({
         type: "POST",
-        url: actionUrl,
+        url: validationUrl,
         data: form,
         dataType: "json",
         error: function (data) {
+            console.log('entrato in err');
             if (data.status === 422) {
                 var errMsgs = JSON.parse(data.responseText);
                 $.each(errMsgs, function (id) {
                     $("#" + id)
-                        .parent()
-                        .find(".errors")
-                        .html(" ");
+                            .parent()
+                            .find(".errors")
+                            .html(" ");
                     $("#" + id).after(getErrorHtml(errMsgs[id]));
                 });
             }
         },
         //success indica cosa fare nel caso la validazione lato server dia un esito positivo
         success: function (data) {
+            console.log('entrato');
             window.location.replace(data.redirect); // serve per dire al browser di ricaricare un'altra pagina
         },
         contentType: false,
-        processData: false,
+        processData: false
+    });
+}
+
+function getProvince(provUrl) {
+    var province;
+    $.ajax({
+        type: 'GET',
+        url: provUrl,
+        data: province,
+        dataType: 'json',
+        error: function (data) {
+            if (data.status === 422) {
+                var errMsgs = JSON.parse(data.responseText);
+                $.each(errMsgs, function (id) {
+                    $("#" + id)
+                            .parent()
+                            .find(".errors")
+                            .html(" ");
+                    $("#" + id).after(getErrorHtml(errMsgs[id]));
+                });
+            }
+        },
+        success: function (data) {
+            data.forEach(function (elem) {
+                $('#provincia').append(new Option(elem, elem));
+            });
+        },
+        contentType: false,
+        processData: false
     });
 }

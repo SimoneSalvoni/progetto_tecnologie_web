@@ -7,8 +7,10 @@ use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Log;
+use App\Models\EventsList;
 
-class EventRequest extends FormRequest
+class ModifyEventRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,7 +29,8 @@ class EventRequest extends FormRequest
      */
     public function rules()
     {
-        $event = $this->evento;
+        $eventList = new EventsList;
+        $event = $eventList->getEventById($this->eventId);
         if (isset($event)) {
             $BigliettitotaliMin = $event->bigliettivenduti;
         } else {
@@ -38,17 +41,17 @@ class EventRequest extends FormRequest
             'nome' => 'required|max:50',
             'descrizione' => 'required|max:2000',
             'data' => 'required|date',
-            'regione' => 'required|string',
-            'provincia' => 'required|string',
-            'città' => 'required|string',
-            'indirizzo' => 'required|string',
-            'numciv' => 'required|numeric',
-            'comeraggiungerci' => 'required|string|max:1000',
-            'immagine' => 'required|image|mimes:jpeg,png,jpg,bmp,gif|max:1024',
+            'regione' => 'required',
+            'provincia' => 'required',
+            'città' => 'string|required',
+            'indirizzo' => 'string|required',
+            'numciv' => 'numeric|required',
+            'comeraggiungerci' => 'nullable|string|max:1000',
+            'immagine' => 'nullable|image|mimes:jpeg,png,jpg,bmp,gif|max:1024',
             'bigliettitotali' => 'required|numeric|min:' . strval($BigliettitotaliMin),
             'costo' => 'required|numeric|min:0',
-            'sconto' => 'numeric|min:0|max:100',
-            'giornisconto' => 'numeric|min:0',
+            'sconto' => 'nullable|numeric|min:0|max:100',
+            'giornisconto' => 'nullable|numeric|min:0',
         ];
     }
     protected function failedValidation(Validator $validator)

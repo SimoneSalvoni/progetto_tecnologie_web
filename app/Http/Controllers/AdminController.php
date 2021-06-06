@@ -8,31 +8,35 @@ use App\Models\Resources\Faq;
 use App\Http\Requests\NewOrgRequest;
 use App\Http\Requests\ModifyOrgRequest;
 use App\Models\UsersList;
+use App\Models\EventsList;
 use App\Http\Requests\UserSearchRequest;
 use App\Http\Requests\FaqRequest;
 use Illuminate\Support\Facades\Log;
+
 
 class AdminController extends Controller {
 
     protected $FAQList;
     protected $UsersList;
+    protected $EverntsList;
 
     public function __construct() {
         $this->middleware('can:isAdmin');
         $this->FAQList = new FAQList;
         $this->UsersList = new UsersList;
+        $this->EventsList = new EventsList;
     }
 
     public function index() {
         return view('admin');
     }
 
+    /*
+     * Questa funzione ottiene le faq da mostrare nell'area riserva dell'admin, per poi restituire
+     * la relativa vista
+     */
     public function AreaRiservata() {
         $FAQ = $this->FAQList->getFAQ();
-        foreach($FAQ as $f){
-            Log::debug($f->domanda);
-            Log::debug($f->risposta);
-        }
         return view('admin')->with('faqs', $FAQ);
     }
 
@@ -47,18 +51,38 @@ class AdminController extends Controller {
         $FAQ = $this->FAQList->getFAQ();
         if ($request->usertype == 'client') {
             $user = $this->UsersList->getUserByUsername($request->name);
+            return view('admin')->with('user', $user)->with('faqs', $FAQ);
         } else {
             $user = $this->UsersList->getOrgByOrgname($request->name);
+            $events=$this->EventsList->getEventsManaged($request->name);
+            $biglietti=0;
+            $incasso=0;
+            foreach($events as $event){
+                $biglietti+=$event->bigliettivenduti;
+                $incasso+=$event->incassototale;
+            }
+            return view('admin')->with('user', $user)->with('faqs', $FAQ)->with('biglietti', $biglietti)->with('incasso', $incasso);
         }
-        return view('admin')->with('user', $user)->with('faqs', $FAQ);
     }
 
+    /*
+     * Questa funzione richiede la cancellazione di un utente dal DB. Redirige poi all'area riservata dell'admin
+     * 
+     * @param $userId è l'id dell'utente da cancellare
+     */
     public function deleteUser($userId) {
         $user = $this->UsersList->getUserById($userId);
         $user->delete();
         return redirect()->route('areariservata.admin');
     }
 
+    /*
+     * Questa funzione richiede la modifica di una FAQ dal DB. Ridirige poi all'area riservata dell'admin
+     * 
+     * @param $request è il risultato del submit di modifica di una FAQ
+     * @param $vecchiadomanda è la domanda originale della FAQ che si vuole modificata, necessaria come riferimento alla 
+     *        faq da modificare
+     */
     public function modifyFaq(FaqRequest $request, $vecchiadomanda)
     {
         $faq = $this->FAQList->getSingleFaq($vecchiadomanda);
@@ -68,6 +92,11 @@ class AdminController extends Controller {
         return redirect()->route('areariservata.admin');
     }
 
+    /*
+     * Questa funzione richiede l'aggiunta di una FAQ nel DB. Poi redirige all'area riservaa dell'admin
+     * 
+     * @param $request è il risultato del submit di modifica di una FAQ
+     */
     public function addFaq(FaqRequest $request)
     {
         $faq = new Faq;
@@ -76,6 +105,11 @@ class AdminController extends Controller {
         return redirect()->route('areariservata.admin');
     }
     
+    /*
+     * Questa funzione richiede la cancellazione di una FAQ dal DB. Poi redirige all'area riservaa dell'admin
+     * 
+     * @param $domanda è la domanda della FAQ da cancellare
+     */
     public function deleteFaq($domanda) {
         $faq = $this->FAQList->getSingleFaq($domanda);
         $faq->delete();
@@ -98,8 +132,8 @@ class AdminController extends Controller {
             return view('add_and_modify_org')->with('org', $org);
         }
         return view('add_and_modify_org');
-
     }
+    
 
     /**
      * Prende dalla richiesta i dati necessati e li inserisce all'interno di un modello di organizzatore
@@ -125,7 +159,6 @@ class AdminController extends Controller {
     public function ModifyOrg(ModifyOrgRequest $request)
     {
         $org = $this->UsersList->getUserById($request->idOrg);
-
         $org->fill($request->validated());
         // TODO Fare il check se tutti i campi vengono riempiti correttamente
         $org->save();

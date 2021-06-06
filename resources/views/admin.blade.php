@@ -14,8 +14,7 @@
         <div class="outer_search">
             <div>
                 {!! Form::open(array('route' => 'searchuser')) !!}
-                @csrf
-                <label for="usertype" class="control" style="margin-bottom:-1.55em"> Selezione la tipologia di
+                <label for="usertype" style="margin-bottom:-1.55em"> Selezione la tipologia di
                     utente</label>
                 <select id="usertype" name="usertype">
                     <option id='c' value="client">Cliente</option>
@@ -44,8 +43,6 @@
                 </span>
                 @endif
                 {!! Form::submit('Cerca utente', ['class' => 'btn btn-inverse', 'style' => 'vertical-align: super']) !!}
-                {{-- <button type=submit method="post" class="btn btn-inverse" style="vertical-align: super"
-                            formaction="{{route('searchuser')}}">Cerca utente</button> --}}
                 {!! Form::close() !!}
             </div>
         </div>
@@ -53,31 +50,31 @@
     @if(isset($user))
     @if($user->livello==2)
     <div class="single_product" style="height:120px">
-        <div style="width:fit-content;float:left">
+        <div class="user_info">
             <p><b>Nome utente: {{$user->nomeutente}}</b></p>
             <p><b>Email: {{$user->email}}</b></p>
             <p><b>Nome: {{$user->nome}}</b> </p>
             <p><b>Cognome: {{$user->cognome}}</b></p>
         </div>
         @else
-        <div class="single_product" style="height:90px">
-            <div style="width:fit-content;float:left">
+        <div class="single_product" style="height:150px">
+            <div class="user_info">
                 <p><b>Nome utente: {{$user->nomeutente}}</b></p>
                 <p><b>Nome organizzazione: {{$user->organizzazione}}</b></p>
                 <p><b>Email: {{$user->email}}</b></p>
+                <p><b>Numero di biglietti venduti: {{$biglietti}} </b></p>
+                <p><b>Incasso totale: {{$incasso}} €</b></p>
             </div>
             @endif
             <div style="height:inherit">
                 @if($user->livello==3)
-                <div class="pencil_item" title="Modifica dati utente"
-                    style="margin: -0.5em 15em 0 15em; height: 50%;justify-content:center">
+                <div class="pencil_item user" title="Modifica dati utente" >
                     <img id="pencil" class="action_item_clickable" src="{{asset('css/themes/images/pencil.png')}}"
                         alt="modifica dati" onclick="location.href = '{{route('modifyOrg',[$user->id])}}'">
                     <p id="pencil_text"><b>Modifica</b></p>
                 </div>
                 @endif
-                <div id="cross_item" title="Elimina utente"
-                    style=" margin: auto 15em;height:50%;justify-content:center">
+                <div class="cross_item user" title="Elimina utente">
                     <img id="cross" name="cross" class="action_item_clickable"
                         src="{{asset('css/themes/images/cross.png')}}" alt="cancella utente"
                         onclick="if (confirm('Eliminare l\'utente definitivamente?')) {location.href = '{{route('deleteuser',[$user->id])}}'; }">
@@ -112,13 +109,12 @@
                     {{ Form::textarea('risposta', $faq->risposta, ['class' => 'input','id' => 'risposta', 'disabled'=>'disabled', 'rows'=>'5', 'style'=>'width:58em','required' => '']) }}
                 </div>
                 <div style="display:inline-flex">
-                    <div class="pencil_item" title="Modifica FAQ" style="margin-left:2em;margin-top:-1em">
+                    <div class="pencil_item faq" title="Modifica FAQ">
                         <img id="pencil" name="pencil" class="pencil action_item_clickable"
                              src="{{asset('css/themes/images/pencil.png')}}" alt="modifica FAQ">
                         <p id="pencil_text"><b>Modifica la FAQ</b></p>
                     </div>
-                    <div class="cross_item" title="Elimina FAQ"
-                        style=" margin: -1.2em 0 0 1em;height:50%;justify-content:center">
+                    <div class="cross_item faq" title="Elimina FAQ">
                         <img id="cross" name="cross" class="cross action_item_clickable"
                              src="{{asset('css/themes/images/cross.png')}}" alt="elimina FAQ"
                              onclick="if (confirm('Eliminare la FAQ definitivamente?')) {

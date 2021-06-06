@@ -2,67 +2,75 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
 use App\Models\Resources\Event;
 use App\Models\Org;
 use App\Models\EventsList;
-use App\Http\Requests\EventRequest;
+use App\Http\Requests\AddEventRequest;
+use App\Http\Requests\ModifyEventRequest;
 use Illuminate\Support\Facades\Log;
 
-class OrgController extends Controller
-{
+class OrgController extends Controller {
 
     protected $_orgModel;
     protected $eventsList;
 
-    public function __construct()
-    {
+    public function __construct() {
         $this->middleware('can:isOrg');
         $this->_orgModel = new Org;
         $this->eventsList = new EventsList;
     }
 
-    public function AreaRiservata()
-    {
-        $user = auth()->user();
-        //  $nearEvents = ;
-        //TODO creare la view dello user
-        $events = $this->eventsList->getEventsManaged($user->organizzazione);
+    /*
+     * Questa funzione ottiene l'utente oganizzatore e gli eventi da esso organizzati,
+     * per poi ritornare la vista dell'area riservata dell'utente
+     */
 
+    public function AreaRiservata() {
+        $user = auth()->user();
+        $events = $this->eventsList->getEventsManaged($user->organizzazione);
         return view('org')->with('user', $user)->with('events', $events);
     }
 
     /*
-     * Qui mettiamo di default l'attributo dell'evento
-     * che specifica il nome dell'organizzazione
+     * Questa funzione restituisce la vista per la creazione di un nuovo evento
      */
 
-    public function showNewEventScreen()
-    {
-        return view('newevent');
+    public function showNewEventScreen() {
+        $regions = $this->eventsList->getRegionList();
+        return view('newevent')->with('regions', $regions);
     }
 
-    function encodeURIComponent($str)
-    {
+    /*
+     * Questa funzione modifica la stringa che contiene i dati del luogo dell'evento
+     * per poter inserire nella mappa nella pagina dell'evento
+     *
+     * @param str è la stringa da modificare
+     */
+
+    function encodeURIComponent($str) {
         $revert = array('%21' => '!', '%2A' => '*', '%27' => "'", '%28' => '(', '%29' => ')');
         return strtr(rawurlencode($str), $revert);
     }
 
-    public function addEvent(EventRequest $request)
-    {
-        Log::debug("NEL CONTROLLER");
+    /*
+     * Questa funzione richiede l'inserimento nel db dei dati di un nuovo evento, dopo aver elaborato quelli sulla locazione e dopo
+     * aver gestito l'immagine caricata dall'utente organizzatore
+     *
+     * @param $request è il risultato della submit della form di aggiunta evento
+     */
+
+    public function addEvent(AddEventRequest $request) {
         if ($request->hasFile('immagine')) {
             $image = $request->file('immagine');
             $imageName = $image->getClientOriginalName();
         } else {
-            $imageName = 'concert.jpg';
+            $imageName = 'default.png';
         }
         $luogo = ($request->indirizzo) . ', ' . ($request->numciv) . ', ' . ($request->città) . ' ' . ($request->provincia);
         $event = new Event();
         $event->fill($request->validated());
         $event->urlluogo = 'http://maps.google.it/maps?f=q&source=s_q&hl=it&geocode=&q=' . $this->encodeURIComponent($luogo) . "&output=embed";
         $event->immagine = $imageName;
-        $event->immagine = 'capodanno.jpg';
         $event->bigliettivenduti = 0;
         $event->parteciperò = 0;
         $event->nomeorganizzatore = auth()->user()->organizzazione;
@@ -71,27 +79,33 @@ class OrgController extends Controller
             $destinationPath = public_path() . '/locandine';
             $image->move($destinationPath, $imageName);
         }
-        return redirect()->route('areariservata.org');
+        return response()->json(['redirect' => route('areariservata.org')]);
     }
 
-    public function storeModifiedEvent(EventRequest $request, $eventId)
-    {
-        $event = $this->eventsList->getEventById($eventId);
+    /*
+     * Questa funzione richiede la modifica dei dati di un evento all'interno del DB. La gestione del luogo e della immagine
+     * è analoga all'aggiunta dell'evento
+     *
+     * @param $request è il risultato della submit della form di modifica
+     * @param $eventId è l'id dell'evento da modificare, da passare in quanto non presente in $request
+     */
 
-        if ($request->hasFile('immagine')) {
+    public function storeModifiedEvent(ModifyEventRequest $request, $eventId) {
+        $event = $this->eventsList->getEventById($eventId);
+        if (($request->hasFile('immagine')) && ($request->file('immagine')->getClientOriginalName() != $event->immagine)) {
             $image = $request->file('immagine');
             $imageName = $image->getClientOriginalName();
-        } else {
-            $imageName = 'concert.jpg';
+            if (!is_null($imageName)) {
+                $destinationPath = public_path() . '/locandine';
+                $image->move($destinationPath, $imageName);
+            }
+            $event->immagine = $imageName;
         }
-
         $luogo = ($request->indirizzo) . ', ' . ($request->numciv) . ', ' . ($request->città) . ' ' . ($request->provincia);
         $event->fill($request->validated());
         $event->urlluogo = 'http://maps.google.it/maps?f=q&source=s_q&hl=it&geocode=&q=' . $this->encodeURIComponent($luogo) . "&output=embed";
-        $event->immagine = $imageName;
-        $event->immagine = 'capodanno.jpg';
         $event->save();
-        return redirect()->route('areariservata.org');
+        return response()->json(['redirect' => route('areariservata.org')]);
     }
 
     /**
@@ -100,8 +114,7 @@ class OrgController extends Controller
      *
      * @param $result Il risultato della cancellazione dell'evento
      */
-    public function EventiOrganizzati($result = null)
-    {
+    public function EventiOrganizzati($result = null) {
         $org = auth()->user();
         $events = $this->_orgModel->getOrgEvents($org->organizzazione);
         if ($result == null) {
@@ -116,14 +129,12 @@ class OrgController extends Controller
      *
      * @param $event L'evento da eliminare
      */
-    public function EliminaEvento($event)
-    {
+    public function EliminaEvento($event) {
         $result = $this->_orgModel->EliminaEvento($event);
         return redirect()->action('OrgController@EventiOrganizzati', ['result' => $result]);
     }
 
-    public function showEventsListManaged($request = null)
-    {
+    public function showEventsListManaged($request = null) {
         $org = auth()->user();
         $events = $this->eventsList->getEventsManaged($org->organizzazione);
         if ($request == null) {
@@ -136,9 +147,21 @@ class OrgController extends Controller
      *
      * @param $eventId L'id dell'evento da modificare
      */
-    public function modifyEvent($eventId)
-    {
+    public function modifyEvent($eventId) {
         $event = $this->eventsList->getEventById($eventId);
-        return view('newevent')->with('event', $event);
+        $regions = $this->eventsList->getRegionList();
+        return view('newevent')->with('event', $event)->with('regions', $regions);
     }
+
+    public function getProvince($regione) {
+        $prov = $this->eventsList->getProv($regione);
+        $response = [];
+        $i = 0;
+        foreach ($prov as $p) {
+            $response[$i] = $p;
+            $i++;
+        }
+        return response()->json($response);
+    }
+
 }

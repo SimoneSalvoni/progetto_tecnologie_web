@@ -630,12 +630,12 @@ section.our_client .row {
         0 55%,
         from(rgba(255, 255, 255, 0.1)),
         to(rgba(255, 255, 255, 0))
-    );
+        );
     background-image: -moz-linear-gradient(
         270deg,
         rgba(255, 255, 255, 0.1) 45%,
         rgba(255, 255, 255, 0) 55%
-    );
+        );
 }
 .pricing p {
     margin: 0;
@@ -1024,7 +1024,7 @@ section.our_client .row {
     display: flex;
     flex-direction: column;
     width: 50%;
-    float: righty;
+    float: right;
     margin-right: 50px;
 }
 
@@ -1128,10 +1128,38 @@ section.our_client .row {
     display: flex;
     flex-direction: column;
 }
+.pencil_item.user{
+    display: flex;
+    flex-direction: column;
+    margin: -0.5em 15em 0 15em; 
+    height: 50%;
+    justify-content:center
+}
+.pencil_item.faq{
+    display: flex;
+    flex-direction: column;
+    margin-left:2em;
+    margin-top:-1em
+}
 .cross_item {
     display: flex;
     flex-direction: column;
 }
+.cross_item.user{
+    display: flex;
+    flex-direction: column;
+    margin: auto 15em;
+    height:50%;
+    justify-content:center
+}
+.cross_item.faq{
+    display: flex;
+    flex-direction: column;
+    margin: -1.2em 0 0 1em;
+    height:50%;
+    justify-content:center
+}
+
 #cross_item {
     display: flex;
     flex-direction: column;
@@ -1224,7 +1252,36 @@ section.our_client .row {
     text-decoration: line-through;
 }
 #prezzo_scontato {
-    margin-left: 10px;
+    margin-left: 5px;
+    font-size: large;
+}
+.product_image{
+    height:16em;
+    width:11em
+}
+.user_info{
+    width:fit-content;
+    float:left
+}
+.sconto_text{
+    color:red;
+    font-style:italic
+}
+
+.parteciperò_container{
+    display:flex;
+    align-items:flex-end
+}
+
+.riepilogo1{
+    float:left; 
+    height:inherit
+}
+
+.riepilogo2{   
+    display:inline-block;
+    margin-left:25em;
+    margin-top:1.5em
 }
 #toColor{
     color: #df403d;

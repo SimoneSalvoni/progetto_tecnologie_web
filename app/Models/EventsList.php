@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Models\Resources\Event;
-use App\User;
 use Carbon\Carbon;
 
 class EventsList {
@@ -22,7 +21,7 @@ class EventsList {
     public function getEventsFiltered($anno = null, $mese = null, $regione = null, $organizzazione = null, $descrizione = null) {
         $data = null;
         if ((isset($anno)) && (isset($mese))) {
-            $data=$anno.'-'.$this->chooseMonthNumber($mese);
+            $data = $anno . '-' . $this->chooseMonthNumber($mese);
         }
         $filters = array("data" => $data, "regione" => $regione, "organizzazione" => $organizzazione, "descrizione" => $descrizione);
 
@@ -126,4 +125,38 @@ class EventsList {
         }
     }
 
+    public function checkOnSale($event) {
+        $currentDate = Carbon::now();
+        $eventDate = Carbon::parse($event->data);
+        $diff = $eventDate->diffInDays($currentDate);
+        if ($diff <= $event->giornisconto) {
+            return true;
+        }
+        return false;
+    }
+    
+    public function getProv($region){
+        switch($region){
+            case 'Abruzzo': return ['CH', 'AQ', 'PE', 'TE'];
+            case 'Basilicata': return ['MT', 'PZ'];
+            case 'Calabria': return ['CZ', 'CS', 'KR', 'RC', 'VV'];
+            case 'Campania': return ['AV', 'BN', 'CE', 'NA', 'SA'];
+            case 'Emilia-Romagna': return ['BO', 'FE', 'FC', 'MO', 'PR', 'PC', 'RA', 'RE', 'RN'];
+            case 'Friuli-Venezia Giulia': return ['GO', 'PN', 'TS', 'UD'];
+            case 'Lazio': return ['FR', 'LT', 'RI', 'RM', 'VT'];
+            case 'Liguria': return ['GE', 'IM', 'SP', 'SV'];
+            case 'Lombardia': return ['BG', 'BS', 'CO', 'CR', 'LC', 'LO', 'MN', 'MI', 'MB', 'PV', 'SO', 'VA'];
+            case 'Marche': return ['AN', 'AP', 'FM', 'MC', 'PU'];
+            case 'Molise': return ['CB', 'IS'];
+            case 'Piemonte': return ['AL', 'AT', 'BI', 'CN', 'NO', 'TO', 'VB', 'VC'];
+            case 'Puglia': return ['BA', 'BT', 'BR', 'FG', 'LE', 'TA'];
+            case 'Sardegna': return ['CA', 'NU', 'OR', 'SS', 'SU'];
+            case 'Sicilia': return ['AG', 'CL', 'CT', 'EN', 'ME', 'PA', 'RG', 'SR', 'TP'];
+            case 'Trentino-Alto Adige': return['BZ', 'TN'];
+            case 'Toscana': return ['FI', 'GR', 'LI', 'LU', 'MS', 'PI', 'PT', 'PO', 'SI'];
+            case 'Umbria': return ['PG', 'TR'];
+            case "Valle d'Aosta": return ['AO'];
+            case 'Veneto': return ['BL', 'PD', 'RO', 'TV', 'VE', 'VR', 'VI'];
+        }
+    }
 }
