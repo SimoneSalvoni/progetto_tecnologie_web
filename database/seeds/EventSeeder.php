@@ -40,7 +40,7 @@ class EventSeeder extends Seeder
                 'numciv' => '2',
                 'città' => $cities[$i],
                 'data' => $date[$i],
-                'immagine' => 'concert.jpg',
+                'immagine' => 'default.png',
                 'costo' => $costo[$i],
                 'sconto' => $sconto[$i],
                 'giornisconto' => $giornisconto[$i],

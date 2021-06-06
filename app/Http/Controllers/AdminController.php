@@ -11,7 +11,6 @@ use App\Models\UsersList;
 use App\Models\EventsList;
 use App\Http\Requests\UserSearchRequest;
 use App\Http\Requests\FaqRequest;
-use Illuminate\Support\Facades\Log;
 
 
 class AdminController extends Controller {
@@ -67,7 +66,7 @@ class AdminController extends Controller {
 
     /*
      * Questa funzione richiede la cancellazione di un utente dal DB. Redirige poi all'area riservata dell'admin
-     * 
+     *
      * @param $userId è l'id dell'utente da cancellare
      */
     public function deleteUser($userId) {
@@ -78,9 +77,9 @@ class AdminController extends Controller {
 
     /*
      * Questa funzione richiede la modifica di una FAQ dal DB. Ridirige poi all'area riservata dell'admin
-     * 
+     *
      * @param $request è il risultato del submit di modifica di una FAQ
-     * @param $vecchiadomanda è la domanda originale della FAQ che si vuole modificata, necessaria come riferimento alla 
+     * @param $vecchiadomanda è la domanda originale della FAQ che si vuole modificata, necessaria come riferimento alla
      *        faq da modificare
      */
     public function modifyFaq(FaqRequest $request, $vecchiadomanda)
@@ -94,7 +93,7 @@ class AdminController extends Controller {
 
     /*
      * Questa funzione richiede l'aggiunta di una FAQ nel DB. Poi redirige all'area riservaa dell'admin
-     * 
+     *
      * @param $request è il risultato del submit di modifica di una FAQ
      */
     public function addFaq(FaqRequest $request)
@@ -104,10 +103,10 @@ class AdminController extends Controller {
         $faq->save();
         return redirect()->route('areariservata.admin');
     }
-    
+
     /*
      * Questa funzione richiede la cancellazione di una FAQ dal DB. Poi redirige all'area riservaa dell'admin
-     * 
+     *
      * @param $domanda è la domanda della FAQ da cancellare
      */
     public function deleteFaq($domanda) {
@@ -126,14 +125,13 @@ class AdminController extends Controller {
      */
     public function ManageOrg($orgId = null)
     {
-        Log::debug($orgId);
         if ($orgId !== null) {
             $org = $this->UsersList->getUserById($orgId);
             return view('add_and_modify_org')->with('org', $org);
         }
         return view('add_and_modify_org');
     }
-    
+
 
     /**
      * Prende dalla richiesta i dati necessati e li inserisce all'interno di un modello di organizzatore

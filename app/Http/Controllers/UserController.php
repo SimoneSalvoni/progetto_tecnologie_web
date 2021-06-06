@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\EventsList;
 use App\Models\PurchaseList;
+use App\Models\Participations;
 use App\Models\Resources\Purchase;
 use App\Models\Resources\Participation;
 use App\Http\Requests\PurchaseRequest;
@@ -23,7 +24,7 @@ class UserController extends Controller
         $this->eventsList = new EventsList;
         $this->purchases = new PurchaseList;
         $this->userModel = new User();
-        $this->participations = new Participation;
+        $this->participations = new Participations;
     }
 
     public function index()
@@ -48,7 +49,7 @@ class UserController extends Controller
 
     /*
      * Questa funzione ottiene i dati dell'evento da comprare e controlla se è in sconto
-     * 
+     *
      * @param $eventId è l'id dell'evento da ottenere
      */
     public function showPurchaseScreen($eventId)
@@ -57,11 +58,11 @@ class UserController extends Controller
         $isOnSale = $this->eventsList->checkOnSale($event);
         return view('buy')->with('event', $event)->with('saldo', $isOnSale);
     }
-    
+
     /*
      * Questa funzione compie l'acquisto dei biglietti andando a richiedere la modifica dei dati nel DB.
      * Succesivamente redirige alla pagina di ripeilogo inserendo nella sessione i dati necessari
-     * 
+     *
      * @param $request è il risultato della submit della form d'acquisto
      */
     public function buyTickets(PurchaseRequest $request)
@@ -80,7 +81,7 @@ class UserController extends Controller
     /*
      * Questa funzione richiede l'aggiornamento del DB di fronte alla richiesta dell'utente di voler partecipare
      * ad un certo evento. Alla fine redirige alla stessa pagina dell'evento
-     * 
+     *
      * @param $eventId è l'id dell'evento a cui l'utente vuole partecipare
      */
     public function Participate($eventId)
@@ -90,24 +91,24 @@ class UserController extends Controller
         $participation->nomeutente = $user->nomeutente;
         $participation->idevento = $eventId;
         $participation->save();
-        $numpart = $this->participations->where('idevento' , $eventId)->count();
+        $numpart = $this->participations->countParticipations($eventId);
         $this->eventsList->getEventById($eventId)->update(['parteciperò' => $numpart]);
         return redirect()->route('event', [$eventId]);
     }
 
     /*
-     * Questa funzione cancella la partecipazione ad un evento da parte di un utente. Richiede la 
+     * Questa funzione cancella la partecipazione ad un evento da parte di un utente. Richiede la
      * modifica del DB e poi redirige alla stessa pagina dell'evento.
-     * 
+     *
      * @param $eventId è l'id dell'evento a cui l'utente vuole partecipare
      */
     public function deletePart($eventId)
     {
         $user = auth()->user();
-        
+
         if ($user->hasPart($user->nomeutente, $eventId)) {
-             $this->participations->where(['nomeutente' => $user->nomeutente,'idevento' => $eventId])->delete();
-             $numpart = $this->participations->where('idevento' , $eventId)->count();
+             $this->participations->getParticipation($user->nomeutente, $eventId)->delete();
+             $numpart = $this->participations->countParticipations($eventId);
              $this->eventsList->getEventById($eventId)->update(['parteciperò' => $numpart]);
         }
         return redirect()->route('event', [$eventId]);
@@ -148,7 +149,7 @@ class UserController extends Controller
 
     /*
      * Questa funzione esegue la modifica del profilo di un utente, richiedendo la modifica dei dati salvati nel DB.
-     * 
+     *
      * @param $request è il risultato del submit della form di modifica
      */
     public function ModifyProfile(ModifyProfileRequest $request)
