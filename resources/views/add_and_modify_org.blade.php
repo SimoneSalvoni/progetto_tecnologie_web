@@ -1,6 +1,6 @@
 @extends('layouts.public')
 @section('title', 'Gestione Organizzatori')
-{{--- Aggiungere script per il futuro---}}
+
 @section('content')
 <div class="container">
     <div class="center">
@@ -56,8 +56,6 @@
                 </div>
                 <span class="container-form-btn">
                     {{ Form::submit('Conferma Modifiche', ['class' => 'button clickable']) }}
-                    {{-- <button class="button clickable" formaction="{{route('ModifyOrg')}}">Conferma
-                        Modifiche</button> --}}
                 </span>
                 {{ Form::close() }}
                 <span class="container-form-btn">
@@ -65,11 +63,6 @@
                 </span>
                 @endisset
 
-
-
-
-
-                {{-- Form per aggiungere un nuovo organizzatore --}}
                 @if (!isset($org))
                 {{ Form::open(array('route' => 'InsertOrg', 'id'=>'inserimento_org', 'class' => 'contact-form')) }}
                 <div class="wrap-input">
@@ -133,8 +126,6 @@
 
                 <span class="container-form-btn">
                     {{ Form::submit('Conferma Inserimento', ['class' => 'button clickable']) }}
-                    {{-- <button class="button clickable" formaction="{{route('InsertOrg')}}">Conferma
-                        Inserimento</button> --}}
                 </span>
                 {{ Form::close() }}
                 <span class="container-form-btn">

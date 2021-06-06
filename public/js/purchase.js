@@ -1,7 +1,7 @@
 $(document).ready(function () {
     
-    $('#tot').html($('#costo').html());
-    $('#costototale').val(+$('#costo').html());
+    $('#tot').html(($('#costo').html())*($('#numBiglietti').val()));
+    $('#costototale').val(+($('#costo').html())*($('#numBiglietti').val()));
     
     $('#numBiglietti').keydown(function (e) {
         if (e.keyCode === 13) {
@@ -35,6 +35,21 @@ $(document).ready(function () {
         $("#img1").css('border', '');
         $("#img2").css('border', '');
         $('#pay3').prop('checked', true);
+    });
+    $('#pay1').click(function(){
+        $('#img1').css('border', 'solid 4px orange');
+        $("#img2").css('border', '');
+        $("#img3").css('border', '');
+    });
+    $('#pay2').click(function(){
+        $('#img2').css('border', 'solid 4px orange');
+        $("#img1").css('border', '');
+        $("#img3").css('border', '');
+    });
+    $('#pay3').click(function(){
+        $('#img3').css('border', 'solid 4px orange');
+        $("#img1").css('border', '');
+        $("#img2").css('border', '');
     });
 });
 

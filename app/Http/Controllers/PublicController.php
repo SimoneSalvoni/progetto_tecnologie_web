@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\EventsList;
 use App\Models\FAQList;
-use Illuminate\Support\Facades\Log;
 use App\Http\Requests\AdvancedSearchRequest;
 use Exception;
 

@@ -12,7 +12,7 @@
     <div name="dati-evento">
         <h1 style="font-size:x-large">Dati evento</h1>
         <h2 style="font-size:medium">Data: {{$event->data}}</h2>
-        <h2 style="font-size:medium">Locazione: {{$event->regione}}, {{$event->provincia}},
+        <h2 style="font-size:medium">Location: {{$event->regione}}, {{$event->provincia}},
             {{$event->indirizzo}} {{$event->numciv}}</h2>
         <h2 style="font-size:medium;display: inline">Costo: </h2>
         @if ($saldo)

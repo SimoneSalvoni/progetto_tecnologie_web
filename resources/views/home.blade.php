@@ -19,7 +19,7 @@
                 <div class="carousel-inner">
                     <div class="active item">
                         <ul class="thumbnails">
-                            @for ($i=0;$i<4;$i++) @if (@isset($nearEvents[$i])) <li class="span3">
+                            @for ($i=0;$i<4;$i++) @if (isset($nearEvents[$i])) <li class="span3">
                                 <div class="product-box ">
                                     <span class="sale_tag"></span>
                                     <p><a href="{{route('event',[$nearEvents[$i]->id])}}"><img
@@ -34,7 +34,7 @@
                     </div>
                     <div class="item">
                         <ul class="thumbnails">
-                            @for ($i=4;$i<8;$i++) @if (@isset($nearEvents[$i])) <li class="span3">
+                            @for ($i=4;$i<8;$i++) @if (isset($nearEvents[$i])) <li class="span3">
                                 <div class="product-box">
                                     <p><a href="{{route('event',[$nearEvents[$i]->id])}}"><img
                                                 src="{{ asset('locandine/'.$nearEvents[$i]->immagine)}}" id="carousel_image"

@@ -6,8 +6,7 @@
 @for($i = 0; $i<(count($purchases)); $i++)
 <section class="main-content">
     <section class="single_product">
-        <div class="product_container {{--clickable--}}"
-             {{--; onclick="location.href ='{{route('event',[$event->id])}}'--}}">
+        <div class="product_container">
             <div class="image_item">
                 <img src="{{ asset('locandine/'.$images[$i])}}" class="product_image" alt="">
             </div>
