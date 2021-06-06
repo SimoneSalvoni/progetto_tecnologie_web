@@ -13,7 +13,7 @@
     <section>
         <div class="outer_search">
             <div>
-                {!! Form::open(array('route' => 'searchuser')) !!}
+                {{ Form::open(array('route' => 'searchuser')) }}
                 <label for="usertype" style="margin-bottom:-1.55em"> Selezione la tipologia di
                     utente</label>
                 <select id="usertype" name="usertype">
@@ -29,7 +29,7 @@
                     @if(isset($user)&&($user->livello==2))
                     <input type="text" name="name" id="name" value="{{$user->nomeutente}}" />
                     @elseif(isset($user)&&($user->livello==3))
-                    <input type="text" name="name" id="name" value="{{$user->nomeutente}}" />
+                    <input type="text" name="name" id="name" value="{{$user->organizzazione}}" />
                     @else
                     <input type="text" name="name" id="name" />
                     @endif
@@ -68,7 +68,7 @@
             @endif
             <div style="height:inherit">
                 @if($user->livello==3)
-                <div class="pencil_item user" title="Modifica dati utente" >
+                <div class="pencil_item user" title="Modifica dati utente">
                     <img id="pencil" class="action_item_clickable" src="{{asset('css/themes/images/pencil.png')}}"
                         alt="modifica dati" onclick="location.href = '{{route('modifyOrg',[$user->id])}}'">
                     <p id="pencil_text"><b>Modifica</b></p>
@@ -101,7 +101,7 @@
             ?>
             @foreach($faqs as $faq)
             {{ Form::open(array('route' => array('modifyfaq',$vecchiadomanda[$i]),'method'=>'post', 'class' => 'contact-form', 'id' => 'form'.$i)) }}
-            <div class="faq-element" >
+            <div class="faq-element">
                 <div class="wrap-contact1">
                     {{ Form::text('domanda', $faq->domanda, ['class' => 'input','id' => 'domanda', 'style'=>'font-weight: bold;width:50em','disabled'=>'disabled','required' => '']) }}
                 </div>
@@ -111,13 +111,12 @@
                 <div style="display:inline-flex">
                     <div class="pencil_item faq" title="Modifica FAQ">
                         <img id="pencil" name="pencil" class="pencil action_item_clickable"
-                             src="{{asset('css/themes/images/pencil.png')}}" alt="modifica FAQ">
+                            src="{{asset('css/themes/images/pencil.png')}}" alt="modifica FAQ">
                         <p id="pencil_text"><b>Modifica la FAQ</b></p>
                     </div>
                     <div class="cross_item faq" title="Elimina FAQ">
                         <img id="cross" name="cross" class="cross action_item_clickable"
-                             src="{{asset('css/themes/images/cross.png')}}" alt="elimina FAQ"
-                             onclick="if (confirm('Eliminare la FAQ definitivamente?')) {
+                            src="{{asset('css/themes/images/cross.png')}}" alt="elimina FAQ" onclick="if (confirm('Eliminare la FAQ definitivamente?')) {
                                          location.href = '{{route('deletefaq', [$faq->domanda])}}'; }">
                         <p id="cross_text"><b>ELIMINA</b></p>
                     </div>
