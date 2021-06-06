@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\Response;
 
 class EventRequest extends FormRequest
@@ -32,6 +33,7 @@ class EventRequest extends FormRequest
         } else {
             $BigliettitotaliMin = 1;
         }
+        Log::debug("IN REQUEST");
         return [
             'nome' => 'required|max:50',
             'descrizione' => 'required|max:2000',

@@ -198,12 +198,13 @@
             {!! Form::submit('Conferma Inserimento', ['class' => 'button clickable']) !!}
             @endif
         </span>
+        {{ Form::close() }}
+
         <span class="container-form-btn">
-            <button type="submit" name="annulla" id="annulla" class="button clickable" method="post"
+            <button type='button' name="annulla" id="annulla" class="button clickable" method="post"
                 formaction="{{route('areariservata.org')}}">Annulla Inserimento</button>
         </span>
 
-        {{ Form::close() }}
 
     </div>
 </div>

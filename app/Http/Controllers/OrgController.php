@@ -50,6 +50,7 @@ class OrgController extends Controller
 
     public function addEvent(EventRequest $request)
     {
+        Log::debug("NEL CONTROLLER");
         if ($request->hasFile('immagine')) {
             $image = $request->file('immagine');
             $imageName = $image->getClientOriginalName();
