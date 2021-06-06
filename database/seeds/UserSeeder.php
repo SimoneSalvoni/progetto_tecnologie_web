@@ -27,17 +27,6 @@ class UserSeeder extends Seeder
         ]);
 
         DB::table('users')->insert([
-            'nomeutente' => 'Org2',
-            'email' => 'org2@studenti.univpm.it',
-            'password' => Hash::make('passworddiprova'),
-            'organizzazione' => 'Sconcert',
-            'livello' => 3,
-            'created_at' => date("Y-m-d H:i:s"),
-            'updated_at' => date("Y-m-d H:i:s")
-
-        ]);
-
-        DB::table('users')->insert([
             'nomeutente' => 'clieclie',
             'email' => 'clieclie@studenti.univpm.it',
             'password' => Hash::make('lBeppPJ4'),
@@ -47,16 +36,6 @@ class UserSeeder extends Seeder
             'created_at' => date("Y-m-d H:i:s"),
             'updated_at' => date("Y-m-d H:i:s")
 
-        ]);
-
-        DB::table('users')->insert([
-            'nomeutente' => 'Org3',
-            'email' => 'org3@studenti.univpm.it',
-            'password' => Hash::make('passworddiprova'),
-            'organizzazione' => 'Sup',
-            'livello' => 3,
-            'created_at' => date("Y-m-d H:i:s"),
-            'updated_at' => date("Y-m-d H:i:s")
         ]);
 
         DB::table('users')->insert([
