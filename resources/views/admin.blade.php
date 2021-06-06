@@ -57,11 +57,13 @@
             <p><b>Cognome: {{$user->cognome}}</b></p>
         </div>
         @else
-        <div class="single_product" style="height:90px">
+        <div class="single_product" style="height:150px">
             <div class="user_info">
                 <p><b>Nome utente: {{$user->nomeutente}}</b></p>
                 <p><b>Nome organizzazione: {{$user->organizzazione}}</b></p>
                 <p><b>Email: {{$user->email}}</b></p>
+                <p><b>Numero di biglietti venduti: {{$biglietti}} </b></p>
+                <p><b>Incasso totale: {{$incasso}} €</b></p>
             </div>
             @endif
             <div style="height:inherit">

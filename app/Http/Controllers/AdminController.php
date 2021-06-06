@@ -8,6 +8,7 @@ use App\Models\Resources\Faq;
 use App\Http\Requests\NewOrgRequest;
 use App\Http\Requests\ModifyOrgRequest;
 use App\Models\UsersList;
+use App\Models\EventsList;
 use App\Http\Requests\UserSearchRequest;
 use App\Http\Requests\FaqRequest;
 use Illuminate\Support\Facades\Log;
@@ -17,11 +18,13 @@ class AdminController extends Controller {
 
     protected $FAQList;
     protected $UsersList;
+    protected $EverntsList;
 
     public function __construct() {
         $this->middleware('can:isAdmin');
         $this->FAQList = new FAQList;
         $this->UsersList = new UsersList;
+        $this->EventsList = new EventsList;
     }
 
     public function index() {
@@ -48,10 +51,18 @@ class AdminController extends Controller {
         $FAQ = $this->FAQList->getFAQ();
         if ($request->usertype == 'client') {
             $user = $this->UsersList->getUserByUsername($request->name);
+            return view('admin')->with('user', $user)->with('faqs', $FAQ);
         } else {
             $user = $this->UsersList->getOrgByOrgname($request->name);
+            $events=$this->EventsList->getEventsManaged($request->name);
+            $biglietti=0;
+            $incasso=0;
+            foreach($events as $event){
+                $biglietti+=$event->bigliettivenduti;
+                $incasso+=$event->incassototale;
+            }
+            return view('admin')->with('user', $user)->with('faqs', $FAQ)->with('biglietti', $biglietti)->with('incasso', $incasso);
         }
-        return view('admin')->with('user', $user)->with('faqs', $FAQ);
     }
 
     /*

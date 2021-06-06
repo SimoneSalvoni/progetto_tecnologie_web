@@ -3,6 +3,13 @@
 
 @section ('scripts')
 <script src='{{asset('js/block_purchase.js')}}'></script>
+@can('isOrg')
+<script>
+    $(function(){
+        $('.single_event').css('float','left');
+    });
+</script>
+@endcan
 @endsection
 
 @section ('content')
@@ -48,6 +55,7 @@
                 </form>
             </div>
             <div class="parteciperò_container">
+                @guest
                 <div>
                     <p>
                         Dì alle persone che perteciperai!
@@ -56,24 +64,33 @@
                         Persone che parteciperanno: {{$event->parteciperò}}
                     </p>
                 </div>
-                <form class="form-inline" style="margin-left:2em">
-                    @guest
+                <form class="form-inline" style="margin-left:2em">                 
                     <input class="btn btn-inverse" type="submit" value="Parteciper&ograve"
                            formaction="{{ route('login') }}"></input>
-                    @endguest
-                    @can('isUser')
+                </form>
+                @endguest
+                @can('isUser')
+                <div>
+                    <p>
+                        Dì alle persone che perteciperai!
+                    </p>
+                    <p>
+                        Persone che parteciperanno: {{$event->parteciperò}}
+                    </p>
+                </div>
+                <form class="form-inline" style="margin-left:2em">                 
                     @if ($partecipa)
                     <input class="btn btn-inverse" type="submit" value="Cancella"
                            formaction="{{ route('delPart', ['eventId' => $event->id]) }}"></input>
                     @else
                     <input class="btn btn-inverse" type="submit" value="Parteciper&ograve"
                            formaction="{{ route('participate', ['eventId' => $event->id]) }}"></input>
-
                     @endif
-                    @endcan
-
+                </form>
+                @endcan
                 </form>
             </div>
+
         </div>
         @can('isOrg')
         @if(($event->nomeorganizzatore)==(auth()->user()->organizzazione))
