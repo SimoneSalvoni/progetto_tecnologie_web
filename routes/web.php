@@ -11,7 +11,6 @@
 |
 */
 
-use Illuminate\Support\Facades\Log;
 
 Route::get('/', 'PublicController@showHomePage')->name('home');
 Route::get('/listaEventi', 'PublicController@showEventsList')->name('list');

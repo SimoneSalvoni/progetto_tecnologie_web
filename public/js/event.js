@@ -70,7 +70,7 @@ function doElemValidation(id, validationUrl, formId) {
 }
 
 function doFormValidation(validationUrl, formId) {
-    console.log("entratonel metodo");
+    console.log("entrato nel metodo");
     var form = new FormData(document.getElementById(formId));
     $.ajax({
         type: "POST",
@@ -79,6 +79,7 @@ function doFormValidation(validationUrl, formId) {
         dataType: "json",
         error: function (data) {
             console.log("entrato in err");
+            console.log(data);
             if (data.status === 422) {
                 var errMsgs = JSON.parse(data.responseText);
                 $.each(errMsgs, function (id) {
@@ -96,7 +97,7 @@ function doFormValidation(validationUrl, formId) {
             window.location.replace(data.redirect); // serve per dire al browser di ricaricare un'altra pagina
         },
         contentType: false,
-        processData: false,
+        processData: false
     });
 }
 
@@ -125,6 +126,6 @@ function getProvince(provUrl) {
             });
         },
         contentType: false,
-        processData: false,
+        processData: false
     });
 }

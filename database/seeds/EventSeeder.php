@@ -3,7 +3,6 @@
 //namespace Database\Seeders;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Str;
 
 class EventSeeder extends Seeder
 {
@@ -28,7 +27,7 @@ class EventSeeder extends Seeder
         $organizzatori = array('Acme', 'Acme', 'Acme', 'Acme', 'Acme', 'Sconcert', 'Sconcert', 'Sconcert', 'Sconcert', 'Sup');
         $bigliettivenduti = array(3, 2, 0, 6, 0, 0, 6, 5, 1, 10);
         $incassototale = array(22.50, 15.00, 0, 45.00, 0, 0, 36.00, 50.00, 8.50, 45.00);
-        $immagini = array('Ligabue.jpg', 'Vasco.png', 'Albano.jpeg', 'Elisa.jpg', 'Fibra.png', 'Boccelli.jpg', 'Estate2021.png', 'Berte.jpeg', 'Neffa.jpg', 'Muse.png');
+        $immagini = array('Ligabue.jpg', 'Vasco.png', 'Albano.jpeg', 'Elisa.jpg', 'Fibra.png', 'Bocelli.jpg', 'Estate2021.png', 'Berte.jpeg', 'Neffa.jpg', 'Muse.png');
         $biglietti= array(50, 100, 75, 200, 150, 300, 75, 100, 125, 50);
         $programmi = array('[22:00-23:30] 8 pezzi magnifici di Ligabue', '[21:30-23:00] 7 singoli intramontabili di Vasco', '[21:00-22:00] 6 classici di Al Bano', '[22:00-23:00] 5 nuove canzoni di Elisa', '[21:30-22:30] 4 pezzi classici di Fibra, con una sorpresa sul finale', '[22:00-23:00] 4 classici della canzone italiana cantati dal maestro Bocelli', '[20:00-21:30] 5 band emergenti si intervalleranno per un totale di 10 pezzi', '[21:00-22:30] 6 eterne composizioni di Loredana Bertè', '[21:00-22:00] Un tuffo nel passato con 7 classici di Neffa', '[22:00-24:00] 8 diverse performance di artisti differenti');
         for ($i = 0; $i < 10; $i++) {

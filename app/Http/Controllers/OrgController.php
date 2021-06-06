@@ -10,14 +10,12 @@ use App\Http\Requests\ModifyEventRequest;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Log;
 
-class OrgController extends Controller
-{
+class OrgController extends Controller {
 
     protected $_orgModel;
     protected $eventsList;
 
-    public function __construct()
-    {
+    public function __construct() {
         $this->middleware('can:isOrg');
         $this->_orgModel = new Org;
         $this->eventsList = new EventsList;
@@ -28,8 +26,7 @@ class OrgController extends Controller
      * per poi ritornare la vista dell'area riservata dell'utente
      */
 
-    public function AreaRiservata()
-    {
+    public function AreaRiservata() {
         $user = auth()->user();
         $events = $this->_orgModel->getNearOrgEvents($user->organizzazione);
         return view('org')->with('user', $user)->with('events', $events);
@@ -39,8 +36,7 @@ class OrgController extends Controller
      * Questa funzione restituisce la vista per la creazione di un nuovo evento
      */
 
-    public function showNewEventScreen()
-    {
+    public function showNewEventScreen() {
         $regions = $this->eventsList->getRegionList();
         return view('newevent')->with('regions', $regions);
     }
@@ -52,8 +48,7 @@ class OrgController extends Controller
      * @param str è la stringa da modificare
      */
 
-    function encodeURIComponent($str)
-    {
+    function encodeURIComponent($str) {
         $revert = array('%21' => '!', '%2A' => '*', '%27' => "'", '%28' => '(', '%29' => ')');
         return strtr(rawurlencode($str), $revert);
     }
@@ -65,8 +60,7 @@ class OrgController extends Controller
      * @param $request è il risultato della submit della form di aggiunta evento
      */
 
-    public function addEvent(AddEventRequest $request)
-    {
+    public function addEvent(AddEventRequest $request) {
         if ($request->hasFile('immagine')) {
             $image = $request->file('immagine');
             $imageName = $image->getClientOriginalName();
@@ -97,12 +91,11 @@ class OrgController extends Controller
      * @param $eventId è l'id dell'evento da modificare, da passare in quanto non presente in $request
      */
 
-    public function storeModifiedEvent(ModifyEventRequest $request, $eventId)
-    {
+    public function storeModifiedEvent(ModifyEventRequest $request, $eventId) {
         $event = $this->eventsList->getEventById($eventId);
-        if (($request->hasFile('immagine')) && ($request->file('immagine')->getClientOriginalName() != $event->immagine)) {
-            $image = $request->file('immagine');
-            $imageName = $image->getClientOriginalName();
+        if (($request->hasFile('imm')) && ($request->file('imm')->getClientOriginalName() != $event->immagine)) {
+            $imageName = $request->file('imm')->getClientOriginalName();
+            $image = $request->file('imm');
             if (!is_null($imageName)) {
                 $destinationPath = public_path() . '/locandine';
                 $image->move($destinationPath, $imageName);
@@ -122,8 +115,7 @@ class OrgController extends Controller
      *
      * @param $result Il risultato della cancellazione dell'evento
      */
-    public function EventiOrganizzati($result = null)
-    {
+    public function EventiOrganizzati($result = null) {
         $org = auth()->user();
         $events = $this->_orgModel->getOrgEvents($org->organizzazione);
         if ($result == null) {
@@ -138,8 +130,7 @@ class OrgController extends Controller
      *
      * @param $event L'evento da eliminare
      */
-    public function EliminaEvento($eventId)
-    {
+    public function EliminaEvento($eventId) {
         $event = $this->eventsList->getEventById($eventId);
         if (isset($event)) {
             $imageName = $event->immagine;
@@ -153,8 +144,7 @@ class OrgController extends Controller
         return redirect()->action('OrgController@EventiOrganizzati', ['result' => $result]);
     }
 
-    public function showEventsListManaged($request = null)
-    {
+    public function showEventsListManaged($request = null) {
         $org = auth()->user();
         $events = $this->eventsList->getEventsManaged($org->organizzazione);
         if ($request == null) {
@@ -167,15 +157,13 @@ class OrgController extends Controller
      *
      * @param $eventId L'id dell'evento da modificare
      */
-    public function modifyEvent($eventId)
-    {
+    public function modifyEvent($eventId) {
         $event = $this->eventsList->getEventById($eventId);
         $regions = $this->eventsList->getRegionList();
         return view('newevent')->with('event', $event)->with('regions', $regions);
     }
 
-    public function getProvince($regione)
-    {
+    public function getProvince($regione) {
         $prov = $this->eventsList->getProv($regione);
         $response = [];
         $i = 0;
@@ -185,4 +173,5 @@ class OrgController extends Controller
         }
         return response()->json($response);
     }
+
 }

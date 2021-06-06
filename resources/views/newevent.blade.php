@@ -179,8 +179,8 @@ doFormValidation(validationUrl, formId);
                 <div class="wrap-input">
                     {{ Form::label('immagine', 'Seleziona la locandina', ['class' => 'label-input']) }}
                     @if(isset($event))
-                    {{ Form::file('immagine', ['class' => 'input','id' => 'immagine']) }}
-                    @else
+                    {{ Form::file('imm', ['class' => 'input','id' => 'immagine']) }}
+                    @else                    
                     {{ Form::file('immagine', ['class' => 'input','id' => 'immagine', 'required' => '']) }}
                     @endif
                 </div>

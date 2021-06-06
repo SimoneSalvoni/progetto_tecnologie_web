@@ -2,7 +2,6 @@
 
 namespace App\Models\Resources;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Event extends Model
@@ -39,8 +38,7 @@ class Event extends Model
     protected $guarded = [
         'id'
     ];
-
-    /*
+/*
     public function setDiscountedPrice(){
         $eventi = Event::all();
         foreach($eventi as $evento){
@@ -49,8 +47,7 @@ class Event extends Model
         $giorniMancanti=floor($differenza/(60*60*24));
         $giorniSconto= $evento->giornisconto;
         $sconto=$evento->sconto;
-        if($giorniMancanti<=$giorniSconto) $evento->costo= ($evento->costo) - ($evento->costo)*$sconto;
-
+        if($giorniMancanti<=$giorniSconto) {$evento->costo= ($evento->costo) - ($evento->costo)*$sconto; }
         }
     }
 

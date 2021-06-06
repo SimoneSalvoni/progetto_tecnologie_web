@@ -45,7 +45,7 @@ class ModifyEventRequest extends FormRequest
             'numciv' => 'numeric|required',
             'comeraggiungerci' => 'nullable|string|max:1000',
             'programma' => 'nullable|string|max:1000',
-            'immagine' => 'nullable|image|mimes:jpeg,png,jpg,bmp,gif|max:1024',
+            'imm' => 'nullable|image|mimes:jpeg,png,jpg,bmp,gif|max:1024',
             'bigliettitotali' => 'required|numeric|min:' . strval($BigliettitotaliMin),
             'costo' => 'required|numeric|min:0',
             'sconto' => 'nullable|numeric|min:0|max:100',
