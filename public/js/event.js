@@ -1,7 +1,6 @@
 function getErrorHtml(elemErrors) {
-    if (typeof elemErrors === "undefined" || elemErrors.length < 1)
-        return;
-    var out = '<ul class="errors">';
+    if (typeof elemErrors === "undefined" || elemErrors.length < 1) return;
+    var out = '<ul class="errors" type="none">';
     for (var i = 0; i < elemErrors.length; i++) {
         out += "<li>" + elemErrors[i] + "</li>";
     }
@@ -34,9 +33,9 @@ function doElemValidation(id, validationUrl, formId) {
                     //prendere solo gli errori che arrivano dal server relativi ai campi che stiamo analizzando e tralasciare gli altri
                     //La prima riga sotto ha lo scopo di togliere eventuali messaggi d'errore dall'elemento che abbiamo appena validato
                     $("#" + id)
-                            .parent()
-                            .find(".errors")
-                            .html(" ");
+                        .parent()
+                        .find(".errors")
+                        .html(" ");
                     $("#" + id).after(getErrorHtml(errMsgs[id]));
                 }
             },
@@ -44,7 +43,7 @@ function doElemValidation(id, validationUrl, formId) {
             contentType: false,
             //Con questo parametro indichiamo che ajax non deve formattare in modo diverso dal nostro la struttura del messaggio
             //L'imput è formattato con formData
-            processData: false
+            processData: false,
         });
     }
 
@@ -71,7 +70,7 @@ function doElemValidation(id, validationUrl, formId) {
 }
 
 function doFormValidation(validationUrl, formId) {
-    console.log('entratonel metodo');
+    console.log("entratonel metodo");
     var form = new FormData(document.getElementById(formId));
     $.ajax({
         type: "POST",
@@ -79,53 +78,53 @@ function doFormValidation(validationUrl, formId) {
         data: form,
         dataType: "json",
         error: function (data) {
-            console.log('entrato in err');
+            console.log("entrato in err");
             if (data.status === 422) {
                 var errMsgs = JSON.parse(data.responseText);
                 $.each(errMsgs, function (id) {
                     $("#" + id)
-                            .parent()
-                            .find(".errors")
-                            .html(" ");
+                        .parent()
+                        .find(".errors")
+                        .html(" ");
                     $("#" + id).after(getErrorHtml(errMsgs[id]));
                 });
             }
         },
         //success indica cosa fare nel caso la validazione lato server dia un esito positivo
         success: function (data) {
-            console.log('entrato');
+            console.log("entrato");
             window.location.replace(data.redirect); // serve per dire al browser di ricaricare un'altra pagina
         },
         contentType: false,
-        processData: false
+        processData: false,
     });
 }
 
 function getProvince(provUrl) {
     var province;
     $.ajax({
-        type: 'GET',
+        type: "GET",
         url: provUrl,
         data: province,
-        dataType: 'json',
+        dataType: "json",
         error: function (data) {
             if (data.status === 422) {
                 var errMsgs = JSON.parse(data.responseText);
                 $.each(errMsgs, function (id) {
                     $("#" + id)
-                            .parent()
-                            .find(".errors")
-                            .html(" ");
+                        .parent()
+                        .find(".errors")
+                        .html(" ");
                     $("#" + id).after(getErrorHtml(errMsgs[id]));
                 });
             }
         },
         success: function (data) {
             data.forEach(function (elem) {
-                $('#provincia').append(new Option(elem, elem));
+                $("#provincia").append(new Option(elem, elem));
             });
         },
         contentType: false,
-        processData: false
+        processData: false,
     });
 }

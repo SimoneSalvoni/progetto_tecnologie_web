@@ -5,9 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Contracts\Validation\Validator;
-use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\Response;
-use Illuminate\Support\Facades\Log;
 use App\Models\EventsList;
 
 class ModifyEventRequest extends FormRequest
@@ -36,7 +34,6 @@ class ModifyEventRequest extends FormRequest
         } else {
             $BigliettitotaliMin = 1;
         }
-        Log::debug("IN REQUEST");
         return [
             'nome' => 'required|max:50',
             'descrizione' => 'required|max:2000',
@@ -47,6 +44,7 @@ class ModifyEventRequest extends FormRequest
             'indirizzo' => 'string|required',
             'numciv' => 'numeric|required',
             'comeraggiungerci' => 'nullable|string|max:1000',
+            'programma' => 'nullable|string|max:1000',
             'immagine' => 'nullable|image|mimes:jpeg,png,jpg,bmp,gif|max:1024',
             'bigliettitotali' => 'required|numeric|min:' . strval($BigliettitotaliMin),
             'costo' => 'required|numeric|min:0',

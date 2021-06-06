@@ -5,7 +5,7 @@
 <script src="{{ asset('js/event.js') }}"></script>
 @if (isset($event))
 <script>
-$(function () {
+    $(function () {
 var validationUrl = "{{ route('storeModifiedEvent',[$event->id] ) }}";
 var formId = 'modifyEvent';
 //Quando un campo di input per il focus fa quello sotto
@@ -20,7 +20,8 @@ event.preventDefault();
 //doFormValidatio gestisce l'operazione di validazione della form e effettua in caso il submit
 doFormValidation(validationUrl, formId);
 });
-});</script>
+});
+</script>
 <script>
     $(function () {
     @foreach($regions as $region)
@@ -42,7 +43,8 @@ doFormValidation(validationUrl, formId);
     $('#provincia').append('<option selected disabled>Scegli la provincia</option>');
     getProvince(provUrl);
     });
-    });</script>
+    });
+</script>
 @else
 <script>
     $(function () {
@@ -60,7 +62,8 @@ doFormValidation(validationUrl, formId);
     //doFormValidatio gestisce l'operazione di validazione della form e effettua in caso il submit
     doFormValidation(validationUrl, formId);
     });
-    });</script>
+    });
+</script>
 <script>
     $(function () {
     $('#regione').append('<option selected disabled>Scegli la regione</option>');
@@ -162,10 +165,20 @@ doFormValidation(validationUrl, formId);
                 <div class="wrap-input">
                     {{ Form::label('comeraggiungerci', 'Indicazioni su come raggiungere il luogo', ['class' => 'label-input']) }}
                     @if(isset($event))
-                    {{ Form::textarea('comeraggiungerci',$event->comeraggiungerci, ['class' => 'input','id' => 'comeraggiungerci', 'required'=>'', 'rows'=>'5','style'=>'width:50em']) }}
+                    {{ Form::textarea('comeraggiungerci',$event->comeraggiungerci, ['class' => 'input','id' => 'comeraggiungerci', 'rows'=>'5','style'=>'width:50em']) }}
                     @else
-                    {{ Form::textarea('comeraggiungerci','', ['class' => 'input','id' => 'comeraggiungerci','required'=>'', 'rows'=>'5','style'=>'width:50em']) }}
+                    {{ Form::textarea('comeraggiungerci','', ['class' => 'input','id' => 'comeraggiungerci', 'rows'=>'5','style'=>'width:50em']) }}
                     @endif
+                </div>
+
+                <div class="wrap-input">
+                    {{ Form::label('programma', 'Programma dell\'evento', ['class' => 'label-input']) }}
+                    @if(isset($event))
+                    {{ Form::textarea('programma',$event->programma, ['class' => 'input','id' => 'programma', 'rows'=>'5','style'=>'width:50em']) }}
+                    @else
+                    {{ Form::textarea('programma','', ['class' => 'input','id' => 'programma', 'rows'=>'5','style'=>'width:50em']) }}
+                    @endif
+
                 </div>
 
                 <div class="wrap-input">
@@ -220,15 +233,6 @@ doFormValidation(validationUrl, formId);
                 {{ Form::close() }}
             </div>
         </div>
-        <span class="container-form-btn">
-            @if(isset($event))
-            {{ Form::submit('Conferma Modifica', ['class' => 'button clickable']) }}
-            @else
-            {!! Form::submit('Conferma Inserimento', ['class' => 'button clickable']) !!}
-            @endif
-        </span>
-        {{ Form::close() }}
-
         <span class="container-form-btn">
             <button type='button' name="annulla" id="annulla" class="button clickable" method="post"
                 formaction="{{route('areariservata.org')}}">Annulla Inserimento</button>

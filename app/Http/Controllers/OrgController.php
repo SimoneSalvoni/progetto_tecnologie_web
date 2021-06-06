@@ -7,7 +7,6 @@ use App\Models\Org;
 use App\Models\EventsList;
 use App\Http\Requests\AddEventRequest;
 use App\Http\Requests\ModifyEventRequest;
-use Illuminate\Support\Facades\Log;
 
 class OrgController extends Controller {
 

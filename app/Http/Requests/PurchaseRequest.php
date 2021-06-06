@@ -4,7 +4,6 @@ namespace App\Http\Requests;
 
 use App\Models\EventsList;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Log;
 
 class PurchaseRequest extends FormRequest
 {
@@ -28,7 +27,6 @@ class PurchaseRequest extends FormRequest
     {
         $event = new EventsList;
         $bigliettiRimanenti = $event->getRemainTickets($this->idevento);
-        Log::debug($bigliettiRimanenti);
         return [
             'nomeutente' => 'required',
             'idevento' => 'required',

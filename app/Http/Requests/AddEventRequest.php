@@ -6,7 +6,6 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Contracts\Validation\Validator;
 use Symfony\Component\HttpFoundation\Response;
-use Illuminate\Support\Facades\Log;
 
 class AddEventRequest extends FormRequest
 {
@@ -33,10 +32,11 @@ class AddEventRequest extends FormRequest
             'data' => 'required|date',
             'regione' => 'required',
             'provincia' => 'required',
-            'città' => 'string|required',
-            'indirizzo' => 'string|required',
-            'numciv' => 'numeric|required',
+            'città' => 'required|string',
+            'indirizzo' => 'required|string',
+            'numciv' => 'required|numeric',
             'comeraggiungerci' => 'nullable|string|max:1000',
+            'programma' => 'nullable|string|max:1000',
             'immagine' => 'required|image|mimes:jpeg,png,jpg,bmp,gif|max:1024',
             'bigliettitotali' => 'required|numeric|min:1',
             'costo' => 'required|numeric|min:0',

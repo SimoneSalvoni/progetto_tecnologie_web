@@ -40,7 +40,7 @@ class Event extends Model
         'id'
     ];
 
-
+    /*
     public function setDiscountedPrice(){
         $eventi = Event::all();
         foreach($eventi as $evento){
@@ -49,8 +49,8 @@ class Event extends Model
         $giorniMancanti=floor($differenza/(60*60*24));
         $giorniSconto= $evento->giornisconto;
         $sconto=$evento->sconto;
-        if($giorniMancanti<=$giorniSconto) $evento->costo= ($evento->costo) - ($evento->costo)*$sconto; 
-        
+        if($giorniMancanti<=$giorniSconto) $evento->costo= ($evento->costo) - ($evento->costo)*$sconto;
+
         }
     }
 
@@ -58,5 +58,5 @@ class Event extends Model
     public function getOrganizzatore(){
         return $this->belongsTo(User::class, "nomeorganizzatore", "organizzazione");
     }
-
+    */
 }

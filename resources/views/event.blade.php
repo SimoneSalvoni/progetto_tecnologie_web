@@ -27,7 +27,7 @@
             <h5 id="biglietti" style='display: inline'>{{$event->bigliettitotali-$event->bigliettivenduti}}</h5>
 
             @if ($saldo)
-            <h5>Costo: 
+            <h5>Costo:
                 <span id="prezzo_daScontare">{{$event->costo}}€</span>
                 <span id="prezzo_scontato">{{$event->costo - $event->costo/100*$event->sconto}}€</span>
                 <span class="sconto_text"> &nbsp;&nbsp;SCONTO LAST MINUTE! </span>
@@ -64,7 +64,7 @@
                         Persone che parteciperanno: {{$event->parteciperò}}
                     </p>
                 </div>
-                <form class="form-inline" style="margin-left:2em">                 
+                <form class="form-inline" style="margin-left:2em">
                     <input class="btn btn-inverse" type="submit" value="Parteciper&ograve"
                            formaction="{{ route('login') }}"></input>
                 </form>
@@ -78,7 +78,7 @@
                         Persone che parteciperanno: {{$event->parteciperò}}
                     </p>
                 </div>
-                <form class="form-inline" style="margin-left:2em">                 
+                <form class="form-inline" style="margin-left:2em">
                     @if ($partecipa)
                     <input class="btn btn-inverse" type="submit" value="Cancella"
                            formaction="{{ route('delPart', ['eventId' => $event->id]) }}"></input>
@@ -121,6 +121,10 @@
                     <div>
                         <h5>Come raggiungerci</h5>
                         <p>{{$event->comeraggiungerci}}</p>
+                    </div>
+                    <div>
+                        <h5>Programma</h5>
+                        <p>{{$event->programma}}</p>
                     </div>
                 </div>
                 <div>
