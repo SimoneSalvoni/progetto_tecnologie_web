@@ -11,6 +11,7 @@ use App\Models\UsersList;
 use App\Models\EventsList;
 use App\Http\Requests\UserSearchRequest;
 use App\Http\Requests\FaqRequest;
+use Illuminate\Support\Facades\Log;
 
 
 class AdminController extends Controller {
@@ -36,7 +37,8 @@ class AdminController extends Controller {
      */
     public function AreaRiservata() {
         $FAQ = $this->FAQList->getFAQ();
-        return view('admin')->with('faqs', $FAQ);
+        $orgs=$this->EventsList->getOrganizzatori();
+        return view('admin')->with('faqs', $FAQ)->with('orgs', $orgs);
     }
 
     /*
@@ -48,19 +50,26 @@ class AdminController extends Controller {
      */
     public function searchUser(UserSearchRequest $request) {
         $FAQ = $this->FAQList->getFAQ();
+        $orgs=$this->EventsList->getOrganizzatori();
         if ($request->usertype == 'client') {
-            $user = $this->UsersList->getUserByUsername($request->name);
-            return view('admin')->with('user', $user)->with('faqs', $FAQ);
+            $user = $this->UsersList->getUserByUsername($request->username);
+            return view('admin')->with('user', $user)->with('faqs', $FAQ)->with('orgs', $orgs);
         } else {
-            $user = $this->UsersList->getOrgByOrgname($request->name);
-            $events=$this->EventsList->getEventsManaged($request->name);
+            $user = $this->UsersList->getOrgByOrgname($request->orgname);
+            $events=$this->EventsList->getEventsManaged($request->orgname);
             $biglietti=0;
             $incasso=0;
             foreach($events as $event){
                 $biglietti+=$event->bigliettivenduti;
                 $incasso+=$event->incassototale;
             }
-            return view('admin')->with('user', $user)->with('faqs', $FAQ)->with('biglietti', $biglietti)->with('incasso', $incasso);
+            Log::debug($user);
+            Log::debug($FAQ);
+            Log::debug($biglietti);
+            Log::debug($incasso);
+            Log::debug($orgs);
+            return view('admin')->with('user', $user)->with('faqs', $FAQ)->with('biglietti', $biglietti)->with('incasso', $incasso)
+                    ->with('orgs', $orgs);
         }
     }
 
@@ -82,9 +91,9 @@ class AdminController extends Controller {
      * @param $vecchiadomanda è la domanda originale della FAQ che si vuole modificata, necessaria come riferimento alla
      *        faq da modificare
      */
-    public function modifyFaq(FaqRequest $request, $vecchiadomanda)
+    public function modifyFaq(FaqRequest $request)
     {
-        $faq = $this->FAQList->getSingleFaq($vecchiadomanda);
+        $faq = $this->FAQList->getSingleFaq($request->vecchiadomanda);
         $faq->domanda = $request->domanda;
         $faq->risposta = $request->risposta;
         $faq->save();

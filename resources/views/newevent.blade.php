@@ -120,9 +120,9 @@ doFormValidation(validationUrl, formId);
                 <div class="wrap-input">
                     {{ Form::label('regione', 'Regione', ['class' => 'label-input']) }}
                     @if(isset($event))
-                    {{ Form::select('regione', $regions, $event->regione, ['class' => 'input','id' => 'regione', 'required' => '']) }}
+                    {{ Form::select('regione', [''=>''], $event->regione, ['class' => 'input','id' => 'regione', 'required' => '']) }}
                     @else
-                    {{ Form::select('regione', $regions , ['class' => 'input','id' => 'regione', 'required' => '']) }}
+                    {{ Form::select('regione', [''=>''] , ['class' => 'input','id' => 'regione', 'required' => '']) }}
                     @endif
                 </div>
                 <div class="wrap-input">

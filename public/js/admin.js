@@ -1,9 +1,12 @@
 $(document).ready(function () {
-
-
-    $('#labeltext').html(chooseLabelText());
+    
+    $('#orgname').append('<option selected disabled></option>');
+    
     $('#usertype').change(function () {
-        $('#labeltext').html(chooseLabelText());
+        $('#username').toggle();
+        $('#orgname').toggle();
+        $('#userlabel').toggle();
+        $('#orglabel').toggle();
     });
 
     $("img[name='pencil']").click(function () {
@@ -27,16 +30,16 @@ $(document).ready(function () {
         $(this).closest("form").find('#pencil_text').toggle();
         $(this).closest("form").find('#cross_text').toggle();
     });
-  
-    $(".plus_item").click(function(){
+
+    $(".plus_item").click(function () {
         $(this).toggle();
         $('#salvanuova').toggle();
         $('#annullanuova').toggle();
         $('#nuovadomanda').toggle();
         $('#nuovarisposta').toggle();
     });
-    
-    $('#annullanuova').click(function(){
+
+    $('#annullanuova').click(function () {
         $(this).toggle();
         $('#salvanuova').toggle();
         $('#nuovadomanda').toggle();
@@ -45,9 +48,12 @@ $(document).ready(function () {
     });
 });
 
-function chooseLabelText() {
-    if ($('#usertype').val() === 'client')
-        return 'Inserisci il nome utente';
-    else
-        return 'Inserisci il nome dell\'organizzazione';
+function showAndHide() {
+    if ($('#usertype').val() === 'client') {
+        $('#orgname').toggle();
+        $('#orglabel').toggle();
+    } else {
+        $('#username').hide();
+        $('#userlabel').hide();
+    }
 }

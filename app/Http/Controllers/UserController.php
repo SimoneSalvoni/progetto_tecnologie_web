@@ -8,6 +8,7 @@ use App\Models\Participations;
 use App\Models\Resources\Purchase;
 use App\Models\Resources\Participation;
 use App\Http\Requests\PurchaseRequest;
+use App\Http\Requests\ModifyProfileRequest;
 use Illuminate\Support\Facades\Session;
 use App\User;
 

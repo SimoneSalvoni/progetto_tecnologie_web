@@ -58,6 +58,17 @@
                     @endif
                 </div>
                 <div class="wrap-input">
+                    {{ Form::label('vecchia-password', 'Vecchia Password', ['class' => 'label-input']) }}
+                    {{ Form::password('vecchia-password', ['class' => 'input','id' => 'vecchia-password', 'required' => '']) }}
+                    @if ($errors->first('vecchia-password'))
+                    <ul class="errors">
+                        @foreach ($errors->get('vecchia-password') as $message)
+                        <li>{{ $message }}</li>
+                        @endforeach
+                    </ul>
+                    @endif
+                </div>
+                <div class="wrap-input">
                     {{ Form::label('nuova-password', 'Nuova Password', ['class' => 'label-input']) }}
                     {{ Form::password('password', ['class' => 'input','id' => 'password']) }}
                     @if ($errors->first('password'))
@@ -71,17 +82,6 @@
                 <div class="wrap-input">
                     {{ Form::label('password-confirm', 'Conferma password', ['class' => 'label-input']) }}
                     {{ Form::password('password_confirmation', ['class' => 'input', 'id' => 'password-confirm']) }}
-                </div>
-                <div class="wrap-input">
-                    {{ Form::label('vecchia-password', 'Vecchia Password', ['class' => 'label-input']) }}
-                    {{ Form::password('vecchia-password', ['class' => 'input','id' => 'vecchia-password', 'required' => '']) }}
-                    @if ($errors->first('vecchia-password'))
-                    <ul class="errors">
-                        @foreach ($errors->get('vecchia-password') as $message)
-                        <li>{{ $message }}</li>
-                        @endforeach
-                    </ul>
-                    @endif
                 </div>
                 <span class="container-form-btn">
                     {{ Form::submit('Conferma Modifiche', ['class' => 'button clickable']) }}

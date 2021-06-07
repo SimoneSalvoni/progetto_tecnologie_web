@@ -2,6 +2,31 @@
 @section('title', 'Area riservata')
 @section('scripts')
 <script src='{{asset('js/admin.js')}}'></script>
+
+@if(isset($user)&&($user->livello==3))
+<script>
+        $(document).ready(function () {
+            @foreach($orgs as $org)
+            if ("{!!$org->nomeorganizzatore!!}" === "{!!$user->organizzazione!!}") {
+                $('#orgname').append("<option selected value={!!$org->nomeorganizzatore!!}>{!!$org->nomeorganizzatore!!}</option>");
+            } else {
+                $('#orgname').append(new Option("{!!$org->nomeorganizzatore!!}", "{!!$org->nomeorganizzatore!!}"));
+            }
+            @endforeach
+            showAndHide();
+            }
+            );
+</script>
+@else
+<script>
+        $(document).ready(function () {
+            @foreach($orgs as $org)
+            $('#orgname').append(new Option("{!!$org->nomeorganizzatore!!}", "{!!$org->nomeorganizzatore!!}"));
+            @endforeach
+            showAndHide();
+            });
+</script>
+@endif
 @endsection
 
 @section('content')
@@ -13,8 +38,8 @@
     <section>
         <div class="outer_search">
             <div>
-                {{ Form::open(array('route' => 'searchuser')) }}
-                <label for="usertype" style="margin-bottom:-1.55em"> Selezione la tipologia di
+                {{ Form::open(array('route' => 'searchuser', 'class' => 'contact-form')) }}
+                <label for="usertype" class='label-input' style="margin-bottom:-1.55em"> Selezione la tipologia di
                     utente</label>
                 <select id="usertype" name="usertype">
                     <option id='c' value="client">Cliente</option>
@@ -24,15 +49,20 @@
                     <option id='o' value="org">Organizzazione</option>
                     @endif
                 </select>
-                <span class="search">
-                    <label id='labeltext' for="name" class="control"></label>
+                <span class="search"> 
+                    <label id='userlabel' for="username" class='label-input'>
+                        Inserisci il nome utente
+                    </label>
                     @if(isset($user)&&($user->livello==2))
-                    <input type="text" name="name" id="name" value="{{$user->nomeutente}}" />
-                    @elseif(isset($user)&&($user->livello==3))
-                    <input type="text" name="name" id="name" value="{{$user->organizzazione}}" />
+                    <input type="text" name="username" id="username" value="{{$user->nomeutente}}" />
                     @else
-                    <input type="text" name="name" id="name" />
+                    <input type="text" name="username" id="username">
                     @endif
+                    <label id='orglabel' for="orgname" class='label-input'>
+                        Seleziona il nome dell'organizzazione
+                    </label>
+                    <select name="orgname" id="orgname" >
+                    </select>
                 </span>
                 @if ($errors->first('name'))
                 <ul class="errors">
@@ -70,14 +100,14 @@
                 @if($user->livello==3)
                 <div class="pencil_item user" title="Modifica dati utente">
                     <img id="pencil" class="action_item_clickable" src="{{asset('css/themes/images/pencil.png')}}"
-                        alt="modifica dati" onclick="location.href = '{{route('modifyOrg',[$user->id])}}'">
+                         alt="modifica dati" onclick="location.href = '{{route('modifyOrg',[$user->id])}}'">
                     <p id="pencil_text"><b>Modifica</b></p>
                 </div>
                 @endif
                 <div class="cross_item user" title="Elimina utente">
                     <img id="cross" name="cross" class="action_item_clickable"
-                        src="{{asset('css/themes/images/cross.png')}}" alt="cancella utente"
-                        onclick="if (confirm('Eliminare l\'utente definitivamente?')) {location.href = '{{route('deleteuser',[$user->id])}}'; }">
+                         src="{{asset('css/themes/images/cross.png')}}" alt="cancella utente"
+                         onclick="if (confirm('Eliminare l\'utente definitivamente?')) {location.href = '{{route('deleteuser',[$user->id])}}'; }">
                     <p id="cross_text"><b>ELIMINA</b></p>
                 </div>
             </div>
@@ -91,16 +121,11 @@
         <section>
             <h3>Modifica FAQ</h3>
             <?php
-            $i = 0;
-            $vecchiadomanda=array();
-            foreach ($faqs as $faq) {
-                $vecchiadomanda[$i] = $faq->domanda;
-                $i++;
-            }
-            $i=0;
+            $i = 0;          
             ?>
             @foreach($faqs as $faq)
-            {{ Form::open(array('route' => array('modifyfaq',$vecchiadomanda[$i]),'method'=>'post', 'class' => 'contact-form', 'id' => 'form'.$i)) }}
+            {{ Form::open(array('route' => 'modifyfaq','method'=>'post', 'class' => 'contact-form', 'id' => 'form'.$i)) }}
+            {{Form::hidden('vecchiadomanda', $faq->domanda)}}
             <div class="faq-element">
                 <div class="wrap-contact1">
                     {{ Form::text('domanda', $faq->domanda, ['class' => 'input','id' => 'domanda', 'style'=>'font-weight: bold;width:50em','disabled'=>'disabled','required' => '']) }}
@@ -111,12 +136,12 @@
                 <div style="display:inline-flex">
                     <div class="pencil_item faq" title="Modifica FAQ">
                         <img id="pencil" name="pencil" class="pencil action_item_clickable"
-                            src="{{asset('css/themes/images/pencil.png')}}" alt="modifica FAQ">
+                             src="{{asset('css/themes/images/pencil.png')}}" alt="modifica FAQ">
                         <p id="pencil_text"><b>Modifica la FAQ</b></p>
                     </div>
                     <div class="cross_item faq" title="Elimina FAQ">
                         <img id="cross" name="cross" class="cross action_item_clickable"
-                            src="{{asset('css/themes/images/cross.png')}}" alt="elimina FAQ" onclick="if (confirm('Eliminare la FAQ definitivamente?')) {
+                             src="{{asset('css/themes/images/cross.png')}}" alt="elimina FAQ" onclick="if (confirm('Eliminare la FAQ definitivamente?')) {
                                          location.href = '{{route('deletefaq', [$faq->domanda])}}'; }">
                         <p id="cross_text"><b>ELIMINA</b></p>
                     </div>
@@ -132,7 +157,7 @@
                 {{ Form::open(array('route' => 'addfaq','method'=>'post', 'class' => 'contact-form', 'id' => 'addform')) }}
                 <div class="plus_item" title="Aggiungi domanda">
                     <img id="plus" name="cross" class="action_item_clickable"
-                        src="{{asset('css/themes/images/plus.png')}}" alt="aggiungi domanda" }">
+                         src="{{asset('css/themes/images/plus.png')}}" alt="aggiungi domanda" }">
                     <p id="plus_text"><b>Aggiungi domanda</b></p>
                 </div>
                 <div hidden id='nuovadomanda' class="wrap-input">

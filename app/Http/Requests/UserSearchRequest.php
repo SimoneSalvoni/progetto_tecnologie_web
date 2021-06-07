@@ -25,7 +25,8 @@ class UserSearchRequest extends FormRequest
     {
         return [
             'usertype' => 'required',
-            'name' => 'required'
+            'username' => 'required_without:orgname',
+            'orgname' => 'required_without:username'
         ];
     }
 }

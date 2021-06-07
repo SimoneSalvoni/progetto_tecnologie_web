@@ -72,7 +72,7 @@ class UserSeeder extends Seeder
         ]);
 
         DB::table('users')->insert([
-            'nomeutente' => 'admiadmin',
+            'nomeutente' => 'adminadmin',
             'email' => 'adminadmin@studenti.univpm.it',
             'password' => Hash::make('lBeppPJ4'),
             'livello' => 4,
