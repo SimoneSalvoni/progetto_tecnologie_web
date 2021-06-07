@@ -10,6 +10,7 @@ use App\Models\Resources\Participation;
 use App\Http\Requests\PurchaseRequest;
 use App\Http\Requests\ModifyProfileRequest;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Hash;
 use App\User;
 
 class UserController extends Controller

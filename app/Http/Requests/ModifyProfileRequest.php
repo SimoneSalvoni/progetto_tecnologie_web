@@ -40,7 +40,7 @@ class ModifyProfileRequest extends FormRequest
         }
         $validationArray['nome'] = 'required';
         $validationArray['cognome'] = 'required';
-        $validationArray['password'] = 'sometimes|confirmed';
+        $validationArray['password'] = 'nullable|confirmed|min:8';
         $validationArray['vecchia-password'] = 'password';
         return $validationArray;
     }
