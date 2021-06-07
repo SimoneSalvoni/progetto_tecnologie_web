@@ -33,7 +33,8 @@ class Event extends Model
         'incassototale',
         'parteciperò',
         'nomeorganizzatore',
-        'comeraggiungerci'
+        'comeraggiungerci',
+        'programma'
     ];
     protected $guarded = [
         'id'
