@@ -135,7 +135,6 @@ class OrgController extends Controller {
         if (isset($event)) {
             $imageName = $event->immagine;
             $result = $this->_orgModel->EliminaEvento($eventId);
-            Log::debug($imageName);
             $imagePath = public_path() . '/locandine/' . $event->immagine;
             if (File::exists($imagePath) && $event->immagine !== "default.png") {
                 File::delete($imagePath);
