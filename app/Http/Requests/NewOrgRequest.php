@@ -26,7 +26,7 @@ class NewOrgRequest extends FormRequest
         return [
             'nomeutente' => 'required|unique:users',
             'email' => 'required|email|unique:users',
-            'password' => 'required|confirmed',
+            'password' => 'required|confirmed|min:8',
             'organizzazione' => 'required',
         ];
     }

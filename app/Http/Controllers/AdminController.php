@@ -11,23 +11,26 @@ use App\Models\UsersList;
 use App\Models\EventsList;
 use App\Http\Requests\UserSearchRequest;
 use App\Http\Requests\FaqRequest;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 
-
-class AdminController extends Controller {
+class AdminController extends Controller
+{
 
     protected $FAQList;
     protected $UsersList;
     protected $EverntsList;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->middleware('can:isAdmin');
         $this->FAQList = new FAQList;
         $this->UsersList = new UsersList;
         $this->EventsList = new EventsList;
     }
 
-    public function index() {
+    public function index()
+    {
         return view('admin');
     }
 
@@ -35,9 +38,11 @@ class AdminController extends Controller {
      * Questa funzione ottiene le faq da mostrare nell'area riserva dell'admin, per poi restituire
      * la relativa vista
      */
-    public function AreaRiservata() {
+    public function AreaRiservata()
+    {
         $FAQ = $this->FAQList->getFAQ();
-        $orgs=$this->EventsList->getOrganizzatori();
+        $orgs = $this->UsersList->getOrganizzatori();
+        Log::debug($orgs);
         return view('admin')->with('faqs', $FAQ)->with('orgs', $orgs);
     }
 
@@ -48,28 +53,24 @@ class AdminController extends Controller {
      *
      * @param $request è la richiesta di ricerca che arriva dalla form
      */
-    public function searchUser(UserSearchRequest $request) {
+    public function searchUser(UserSearchRequest $request)
+    {
         $FAQ = $this->FAQList->getFAQ();
-        $orgs=$this->EventsList->getOrganizzatori();
+        $orgs = $this->UsersList->getOrganizzatori();
         if ($request->usertype == 'client') {
             $user = $this->UsersList->getUserByUsername($request->username);
             return view('admin')->with('user', $user)->with('faqs', $FAQ)->with('orgs', $orgs);
         } else {
             $user = $this->UsersList->getOrgByOrgname($request->orgname);
-            $events=$this->EventsList->getEventsManaged($request->orgname);
-            $biglietti=0;
-            $incasso=0;
-            foreach($events as $event){
-                $biglietti+=$event->bigliettivenduti;
-                $incasso+=$event->incassototale;
+            $events = $this->EventsList->getEventsManaged($request->orgname);
+            $biglietti = 0;
+            $incasso = 0;
+            foreach ($events as $event) {
+                $biglietti += $event->bigliettivenduti;
+                $incasso += $event->incassototale;
             }
-            Log::debug($user);
-            Log::debug($FAQ);
-            Log::debug($biglietti);
-            Log::debug($incasso);
-            Log::debug($orgs);
             return view('admin')->with('user', $user)->with('faqs', $FAQ)->with('biglietti', $biglietti)->with('incasso', $incasso)
-                    ->with('orgs', $orgs);
+                ->with('orgs', $orgs);
         }
     }
 
@@ -78,9 +79,11 @@ class AdminController extends Controller {
      *
      * @param $userId è l'id dell'utente da cancellare
      */
-    public function deleteUser($userId) {
+    public function deleteUser($userId)
+    {
         $user = $this->UsersList->getUserById($userId);
-        $user->delete();
+        if ($user !== null)
+            $user->delete();
         return redirect()->route('areariservata.admin');
     }
 
@@ -118,8 +121,9 @@ class AdminController extends Controller {
      *
      * @param $domanda è la domanda della FAQ da cancellare
      */
-    public function deleteFaq($domanda) {
-        $faq = $this->FAQList->getSingleFaq($domanda);
+    public function deleteFaq($domanda)
+    {
+        $faq = $this->FAQList->getSingleFaq(urldecode($domanda));
         $faq->delete();
         return redirect()->route('areariservata.admin');
     }
@@ -148,10 +152,12 @@ class AdminController extends Controller {
      *
      * @param $request Richiesta che arriva dalla form di inserimento di un nuovo organizzatore
      */
-    public function InsertOrg(NewOrgRequest $request) {
+    public function InsertOrg(NewOrgRequest $request)
+    {
         $org = new User;
         $org->fill($request->validated());
         $org->livello = 3;
+        $org->password = Hash::make($org->password);
         $org->save();
         return redirect()->route('areariservata.admin');
     }
@@ -166,8 +172,11 @@ class AdminController extends Controller {
     {
         $org = $this->UsersList->getUserById($request->idOrg);
         $org->fill($request->validated());
+        if (isset($request->nuovapassword)) {
+            $org->password = Hash::make($request->nuovapassword);
+        }
+        $org->password = Hash::make($org->password);
         $org->save();
         return redirect()->route('areariservata.admin');
     }
-
 }

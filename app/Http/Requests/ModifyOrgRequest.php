@@ -37,6 +37,7 @@ class ModifyOrgRequest extends FormRequest
             $validationArray['email'] = 'required';
         }
         $validationArray['organizzazione'] = 'required';
+        $validationArray['password'] = 'nullable|min:8';
         return $validationArray;
     }
 }

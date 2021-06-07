@@ -5,17 +5,21 @@ namespace App\Http\Controllers;
 use App\Models\EventsList;
 use App\Models\FAQList;
 use App\Http\Requests\AdvancedSearchRequest;
+use App\Models\UsersList;
 use Exception;
 
 class PublicController extends Controller
 {
     protected $eventsList;
     protected $FAQList;
+    protected $usersList;
 
     public function __construct()
     {
         $this->eventsList = new EventsList;
         $this->FAQList = new FAQList;
+        $this->usersList= new UsersList;
+
     }
 
     /*
@@ -28,13 +32,13 @@ class PublicController extends Controller
     }
 
     /*
-     * Questa funzione raccoglie i dati necessari per mostrare la lista di tutti gli eventi, paginati per 
-     * facilitarne la fruizione. Ottiene anche la lista degli organizzatori, dei mesi e delle regioni per 
-     * costruire la form. Controlla inoltre per ogni evento se esso è scontato. 
+     * Questa funzione raccoglie i dati necessari per mostrare la lista di tutti gli eventi, paginati per
+     * facilitarne la fruizione. Ottiene anche la lista degli organizzatori, dei mesi e delle regioni per
+     * costruire la form. Controlla inoltre per ogni evento se esso è scontato.
      */
     public function showEventsList()
     {
-        $organizzatori = $this->eventsList->getOrganizzatori();
+        $organizzatori = $this->usersList->getOrganizzatori();
         $regions = $this->eventsList->getRegionList();
         $events = $this->eventsList->getEvents();
         $EventsOnSales = array();
@@ -49,12 +53,12 @@ class PublicController extends Controller
     /*
      * Questa funzione raccoglie i dati necessari per mostrare la lista di tutti gli eventi filtrati secondo
      * i parametri richeisti dall'utente. Per il resto si comporta allo stesso modo della funzione precedente
-     * 
+     *
      * @param $request è il risultato della submit della form di rircerca
      */
     public function showEventsListFiltered(AdvancedSearchRequest $request)
     {
-        $organizzatori = $this->eventsList->getOrganizzatori();
+        $organizzatori = $this->usersList->getOrganizzatori();
         $regions = $this->eventsList->getRegionList();
         $months = $this->eventsList->getMonthList();
         $events = $this->eventsList->getEventsFiltered($request->year, $request->month, $request->reg,
@@ -69,9 +73,9 @@ class PublicController extends Controller
 
 
     /*
-     * Questa funzione ottiene i dati necessari per mostrare la pagina di un evento, controllando anche 
+     * Questa funzione ottiene i dati necessari per mostrare la pagina di un evento, controllando anche
      * se l'utente di livello 2 ha già scelto di partecipare all'evento in questione.
-     * 
+     *
      * @param $eventId è l'id dell'evento da mostrare
      */
     public function showEvent($eventId)
@@ -92,7 +96,7 @@ class PublicController extends Controller
         return view('event')->with('event', $event)->with('partecipa', $partecipa)->with('saldo', $isOnSale);
     }
 
-    
+
     /*
      * Questa funziona ottiene la lista delle faq per passarle alla vista
      */
@@ -101,5 +105,5 @@ class PublicController extends Controller
         $FAQ = $this->FAQList->getFAQ();
         return view('faq')->with('FAQ', $FAQ);
     }
-    
+
 }

@@ -1131,7 +1131,7 @@ section.our_client .row {
 .pencil_item.user{
     display: flex;
     flex-direction: column;
-    margin: -0.5em 15em 0 15em; 
+    margin: -0.5em 15em 0 15em;
     height: 50%;
     justify-content:center
 }
@@ -1274,11 +1274,11 @@ section.our_client .row {
 }
 
 .riepilogo1{
-    float:left; 
+    float:left;
     height:inherit
 }
 
-.riepilogo2{   
+.riepilogo2{
     display:inline-block;
     margin-left:25em;
     margin-top:1.5em
