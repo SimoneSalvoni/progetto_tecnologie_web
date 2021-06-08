@@ -118,6 +118,14 @@ doFormValidation(validationUrl, formId);
                     @endif
                 </div>
                 <div class="wrap-input">
+                    {{ Form::label('orario', 'Orario', ['class' => 'label-input']) }}
+                    @if(isset($event))
+                    {{ Form::time('orario', $event->orario, ['class' => 'input','id' => 'orario', 'required' => '']) }}
+                    @else
+                    {{ Form::time('orario', '', ['class' => 'input','id' => 'orario', 'required' => '']) }}
+                    @endif
+                </div>
+                <div class="wrap-input">
                     {{ Form::label('regione', 'Regione', ['class' => 'label-input']) }}
                     @if(isset($event))
                     {{ Form::select('regione', [''=>''], $event->regione, ['class' => 'input','id' => 'regione', 'required' => '']) }}

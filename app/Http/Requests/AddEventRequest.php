@@ -30,6 +30,7 @@ class AddEventRequest extends FormRequest
             'nome' => 'required|max:50',
             'descrizione' => 'required|max:2000',
             'data' => 'required|date',
+            'orario' => 'required',
             'regione' => 'required',
             'provincia' => 'required',
             'città' => 'required|string',

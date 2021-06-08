@@ -22,6 +22,7 @@
             <h3><span>{{$event->nome}}</span></h3>
             <h5>Organizzato da: {{$event->nomeorganizzatore}}</h5>
             <h5>Data: {{$event->data}}</h5>
+            <h5>Orario: {{$event->orario}}</h5>
             <h5>Location: {{$event->regione.", ".$event->città.", ".$event->indirizzo." ".$event->numciv}}</h5>
             <h5 style='display: inline'>Biglietti rimanenti:&nbsp</h5>
             <h5 id="biglietti" style='display: inline'>{{$event->bigliettitotali-$event->bigliettivenduti}}</h5>

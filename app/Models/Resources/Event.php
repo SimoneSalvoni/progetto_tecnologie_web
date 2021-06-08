@@ -24,6 +24,7 @@ class Event extends Model
         'città',
         'numciv',
         'data',
+        'orario',
         'immagine',
         'costo',
         'sconto',

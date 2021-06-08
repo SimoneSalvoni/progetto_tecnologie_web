@@ -166,6 +166,6 @@ class UserController extends Controller
             $user->password = Hash::make($this->userModel->password);
         }
         $user->save();
-        return $this->AreaRiservata();
+        return redirect()->route('areariservata.user');
     }
 }

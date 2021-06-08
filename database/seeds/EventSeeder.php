@@ -22,6 +22,7 @@ class EventSeeder extends Seeder
         $sconto = array(50, 25, 35, 20, 10, null, 45, 40, 15, 30);
         $giornisconto = array(3, 14, 5, 10, 10, null, 12, 4, 7, 10);
         $date = array('2021-07-22', '2021-07-23', '2021-07-24', '2021-06-30', '2021-07-30', '2021-07-25', '2021-07-20', '2021-07-20', '2021-08-27', '2021-07-02');
+        $orari = array('22:00', '21:30', '21:00', '22:00', '21:30', '22:00', '20:00', '21:00', '21:00', '22:00');
         $nome = array('Ligabue in concerto', 'Vasco in concerto', 'Al Bano in concerto', 'Elisa in concerto', 'Fabri Fibra in concerto', 'Andrea Bocelli in concerto', 'Evento musicale estate 2021', 'Loredana Bertè in concerto', 'Neffa Speciale Live', 'Concerto in teatro');
         $descrizione = array('Ritorna Ligabue in concerto', 'Ritorna Vasco Rossi in concerto', 'Ritorna Al Bano in concerto', 'Ritorna Elisa in concerto', 'Ritorna Fabri Fibra in concerto', 'Ritorna Andrea Bocelli in concerto', 'Evento speciale con la partecipazione di molti artisti', 'Ritorna Loredana Bertè in concerto', 'Non perderti Neffa in live', 'Evento speciale al teatro delle Muse con la partecipazione di molti artisti locali');
         $organizzatori = array('Acme', 'Acme', 'Acme', 'Acme', 'Acme', 'Sconcert', 'Sconcert', 'Sconcert', 'Sconcert', 'Sup');
@@ -42,6 +43,7 @@ class EventSeeder extends Seeder
                 'numciv' => '2',
                 'città' => $cities[$i],
                 'data' => $date[$i],
+                'orario' => $orari[$i],
                 'immagine' => $immagini[$i],
                 'costo' => $costo[$i],
                 'sconto' => $sconto[$i],

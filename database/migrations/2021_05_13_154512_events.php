@@ -26,6 +26,7 @@ class Events extends Migration
             $table->string('numciv');
             $table->string('città');
             $table->string('data');
+            $table->string('orario');
             $table->string('immagine');
             $table->float('costo');
             $table->integer('sconto')->nullable();
