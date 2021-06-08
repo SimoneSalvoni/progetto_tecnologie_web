@@ -127,12 +127,11 @@ class OrgController extends Controller {
      * Chiama una funzione in Org Model che elimina l'evento passato comen parametro eliminando, qualora esistesse anche l'immagine ad esso associata.
      * Poi chiama la funzione EventiOrganizzati passandole il risultato dell'eliminazione
      *
-     * @param $event L'evento da eliminare
+     * @param $eventId L'id dell'evento da eliminare
      */
     public function EliminaEvento($eventId) {
         $event = $this->eventsList->getEventById($eventId);
         if (isset($event)) {
-            $imageName = $event->immagine;
             $result = $this->_orgModel->EliminaEvento($eventId);
             $imagePath = public_path() . '/locandine/' . $event->immagine;
             if (File::exists($imagePath) && $event->immagine !== "default.png") {
