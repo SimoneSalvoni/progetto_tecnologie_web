@@ -5,7 +5,7 @@
                 <ul class="nav">
                     <li><a href="{{route('info')}}">Chi siamo</a></li>
                     <li><a href="{{route('info')}}#faq">FAQ</a></li>
-                    <li><a onclick="window.open('documentazione.pdf', '_blank', 'fullscreen=yes'); return false;">Documentazione</a>
+                    <li><a class="domanda" onclick="window.open('{{ asset('documentazione.pdf') }}', '_blank', 'fullscreen=yes'); return false;">Documentazione</a>
  </li>
                 </ul>
             </div>
