@@ -37,18 +37,6 @@ class UserSeeder extends Seeder
 
         ]);
 
-        DB::table('users')->insert([
-            'nomeutente' => 'utente22',
-            'email' => 'utente22@studenti.univpm.it',
-            'password' => Hash::make('passworddiprova'),
-            'livello' => 2,
-            'nome' => 'Nome',
-            'cognome' => 'Cognome',
-            'created_at' => date("Y-m-d H:i:s"),
-            'updated_at' => date("Y-m-d H:i:s")
-
-        ]);
-
 
         DB::table('users')->insert([
             'nomeutente' => 'orgaorga3',

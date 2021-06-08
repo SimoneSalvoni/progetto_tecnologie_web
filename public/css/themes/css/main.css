@@ -965,13 +965,15 @@ section.our_client .row {
 
 .descr_item {
     flex-shrink: 1;
-    height: 80px;
-    white-space: normal;
+    height: 70px;
+    white-space: nowrap;
     overflow: hidden;
+    text-overflow:ellipsis;
+    overflow-wrap:break-word;
+    margin-top:1em
 }
 
 .info-container {
-    margin-top: 1em;
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;

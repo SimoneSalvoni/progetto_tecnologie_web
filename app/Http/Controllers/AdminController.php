@@ -12,7 +12,6 @@ use App\Models\EventsList;
 use App\Http\Requests\UserSearchRequest;
 use App\Http\Requests\FaqRequest;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Log;
 
 class AdminController extends Controller
 {
@@ -29,10 +28,6 @@ class AdminController extends Controller
         $this->EventsList = new EventsList;
     }
 
-    public function index()
-    {
-        return view('admin');
-    }
 
     /*
      * Questa funzione ottiene le faq da mostrare nell'area riserva dell'admin, per poi restituire
@@ -42,7 +37,6 @@ class AdminController extends Controller
     {
         $FAQ = $this->FAQList->getFAQ();
         $orgs = $this->UsersList->getOrganizzatori();
-        Log::debug($orgs);
         return view('admin')->with('faqs', $FAQ)->with('orgs', $orgs);
     }
 
@@ -82,8 +76,9 @@ class AdminController extends Controller
     public function deleteUser($userId)
     {
         $user = $this->UsersList->getUserById($userId);
-        if ($user !== null)
+        if ($user !== null){
             $user->delete();
+        }
         return redirect()->route('areariservata.admin');
     }
 

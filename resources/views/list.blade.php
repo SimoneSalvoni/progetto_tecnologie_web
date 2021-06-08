@@ -129,20 +129,20 @@
                         </h4>
                     </div>
                     <div class="descr_item">
-                        <p> {{$event->descrizione}} </p>
+                       {{$event->descrizione}}
                     </div>
                     <div class="info-container">
-                        <p class="info_element">ORGANIZZATORE: {{$event->nomeorganizzatore}} </p>
-                        <p class="info_element">REGIONE: {{$event->regione}} </p>
-                        <p class="info_element">DATA: {{$event->data}}</p>
+                        <p class='info_element'>ORGANIZZATORE: {{$event->nomeorganizzatore}} </p>
+                        <p class='info_element'>REGIONE: {{$event->regione}} </p>
+                        <p class='info_element'>DATA: {{$event->data}}</p>
                         @if ($OnSales[$event->id])
-                        <p class="info_element">COSTO: <span id="prezzo_daScontare">{{$event->costo}}€</span><span
+                        <p class='info_element'>COSTO: <span id="prezzo_daScontare">{{$event->costo}}€</span><span
                                 id="prezzo_scontato">{{$event->costo - $event->costo/100*$event->sconto}}€</span></p>
                         @else
-                        <p class="info-element">COSTO: {{$event->costo}}€
-                            @endif
-
+                        <p class='info_element'>
+                            COSTO: {{$event->costo}}€                          
                         </p>
+                        @endif
                     </div>
                 </div>
             </div>

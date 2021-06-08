@@ -29,11 +29,6 @@ class UserController extends Controller
         $this->participations = new Participations;
     }
 
-    public function index()
-    {
-        $nearEvents = $this->eventsList->getNearEvents();
-        return view('home')->with('nearEvents', $nearEvents);
-    }
 
     /*
      * Questa funzione ottiene gli eventi più vicini di cui l'utente attuale ha acquistato i biglietti,
