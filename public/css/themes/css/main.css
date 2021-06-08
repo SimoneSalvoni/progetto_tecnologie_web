@@ -630,12 +630,12 @@ section.our_client .row {
         0 55%,
         from(rgba(255, 255, 255, 0.1)),
         to(rgba(255, 255, 255, 0))
-        );
+    );
     background-image: -moz-linear-gradient(
         270deg,
         rgba(255, 255, 255, 0.1) 45%,
         rgba(255, 255, 255, 0) 55%
-        );
+    );
 }
 .pricing p {
     margin: 0;
@@ -927,7 +927,6 @@ section.our_client .row {
     height: fit-content;
     padding: 1em;
     display: flex;
-    /*flex-wrap: wrap;*/
     flex-direction: row;
     align-items: flex-start;
     align-content: center;
@@ -951,7 +950,7 @@ section.our_client .row {
     flex-grow: 1;
     flex-shrink: 1;
     flex-direction: column;
-    height: fit-content;
+    /*height: 16em;*/
     max-height: 16em;
     overflow: hidden;
     /*overflow-wrap: break-word;
@@ -966,24 +965,24 @@ section.our_client .row {
 
 .descr_item {
     flex-shrink: 1;
-    max-height: 80px;
-    height: fit-content;
-    /*Si può togliere per avere una rappresentazione diversa*/
+    height: 80px;
     white-space: normal;
     overflow: hidden;
 }
 
 .info-container {
-    margin-top: 3em;
+    margin-top: 1em;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-evenly;
     flex-wrap: wrap;
     height: fit-content;
     margin-left: 2em;
-
+    align-items: center;
 }
-
+.info_element {
+    width: 16em;
+}
 @media (max-width: 180px) {
     .navbar-inner.main-menu {
         height: fit-content;
@@ -1128,36 +1127,36 @@ section.our_client .row {
     display: flex;
     flex-direction: column;
 }
-.pencil_item.user{
+.pencil_item.user {
     display: flex;
     flex-direction: column;
     margin: -0.5em 15em 0 15em;
     height: 50%;
-    justify-content:center
+    justify-content: center;
 }
-.pencil_item.faq{
+.pencil_item.faq {
     display: flex;
     flex-direction: column;
-    margin-left:2em;
-    margin-top:-1em
+    margin-left: 2em;
+    margin-top: -1em;
 }
 .cross_item {
     display: flex;
     flex-direction: column;
 }
-.cross_item.user{
+.cross_item.user {
     display: flex;
     flex-direction: column;
     margin: auto 15em;
-    height:50%;
-    justify-content:center
+    height: 50%;
+    justify-content: center;
 }
-.cross_item.faq{
+.cross_item.faq {
     display: flex;
     flex-direction: column;
     margin: -1.2em 0 0 1em;
-    height:50%;
-    justify-content:center
+    height: 50%;
+    justify-content: center;
 }
 
 #cross_item {
@@ -1255,34 +1254,34 @@ section.our_client .row {
     margin-left: 5px;
     font-size: large;
 }
-.product_image{
-    height:16em;
-    width:11em
+.product_image {
+    height: 16em;
+    width: 11em;
 }
-.user_info{
-    width:fit-content;
-    float:left
+.user_info {
+    width: fit-content;
+    float: left;
 }
-.sconto_text{
-    color:red;
-    font-style:italic
-}
-
-.parteciperò_container{
-    display:flex;
-    align-items:flex-end
+.sconto_text {
+    color: red;
+    font-style: italic;
 }
 
-.riepilogo1{
-    float:left;
-    height:inherit
+.parteciperò_container {
+    display: flex;
+    align-items: flex-end;
 }
 
-.riepilogo2{
-    display:inline-block;
-    margin-left:25em;
-    margin-top:1.5em
+.riepilogo1 {
+    float: left;
+    height: inherit;
 }
-#toColor{
+
+.riepilogo2 {
+    display: inline-block;
+    margin-left: 25em;
+    margin-top: 1.5em;
+}
+#toColor {
     color: #df403d;
 }

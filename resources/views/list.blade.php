@@ -132,15 +132,14 @@
                         <p> {{$event->descrizione}} </p>
                     </div>
                     <div class="info-container">
-
-                        <p>ORGANIZZATORE: {{$event->nomeorganizzatore}} </p>
-                        <p>REGIONE: {{$event->regione}} </p>
-                        <p>DATA: {{$event->data}}</p>
+                        <p class="info_element">ORGANIZZATORE: {{$event->nomeorganizzatore}} </p>
+                        <p class="info_element">REGIONE: {{$event->regione}} </p>
+                        <p class="info_element">DATA: {{$event->data}}</p>
                         @if ($OnSales[$event->id])
-                        <p>COSTO: <span id="prezzo_daScontare">{{$event->costo}}€</span><span
+                        <p class="info_element">COSTO: <span id="prezzo_daScontare">{{$event->costo}}€</span><span
                                 id="prezzo_scontato">{{$event->costo - $event->costo/100*$event->sconto}}€</span></p>
                         @else
-                        <p>COSTO: {{$event->costo}}€
+                        <p class="info-element">COSTO: {{$event->costo}}€
                             @endif
 
                         </p>

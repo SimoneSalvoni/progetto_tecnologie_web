@@ -7,7 +7,7 @@
         <h4 class=" left title"><span class="text"><strong>Registrazione</strong></h4>
         <div class="container-contact">
             <div class="wrap-contact1">
-                {{ Form::open(array('route' => 'register', 'class' => 'contact-form')) }}   
+                {{ Form::open(array('route' => 'register', 'class' => 'contact-form')) }}
                 <div  class="wrap-input">
                 </div>
                 <div  class="wrap-input">
@@ -70,7 +70,7 @@
                     {{ Form::password('password_confirmation', ['class' => 'input', 'id' => 'password-confirm', 'required' => '']) }}
                 </div>
                 <div class="container-form-btn">
-                    {{ Form::submit('Registra', ['class' => 'form-btn1']) }}
+                    {{ Form::submit('Conferma registrazione', ['class' => 'button clickable']) }}
                 </div>
                 {{ Form::close() }}
             </div>

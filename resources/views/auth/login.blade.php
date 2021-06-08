@@ -7,7 +7,7 @@
         <div class="container-contact">
             <div class="wrap-contact1">
                 {{ Form::open(array('route' => 'login', 'class' => 'contact-form')) }}
-                <div  class="wrap-input">
+                <div class="wrap-input">
                     {{ Form::label('nomeutente', 'Nome Utente', ['class' => 'label-input']) }}
                     {{ Form::text('nomeutente', '', ['class' => 'input','id' => 'nomeutente']) }}
                     @if ($errors->first('nomeutente'))
@@ -33,7 +33,7 @@
 
 
                 <div class="container-form-btn">
-                    {{ Form::submit('Login', ['class' => 'form-btn1']) }}
+                    {{ Form::submit('Login', ['class' => 'button clickable']) }}
                 </div>
 
                 {{ Form::close() }}

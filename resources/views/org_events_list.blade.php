@@ -24,13 +24,14 @@
                     </div>
                     <div class="purchase_descr_item">
                         @if($event->bigliettitotali!=0)
-                        Percentuale biglietti venduti: {{($event->bigliettivenduti / $event->bigliettitotali)*100}}%
+                        Percentuale biglietti venduti:
+                        {{bcdiv($event->bigliettivenduti*100 ,$event->bigliettitotali, 2)}}%
                         @else
                         Percentuale biglietti venduti: 0
                         @endif
                     </div>
                     <div class="purchase_descr_item">
-                        Incasso totale: {{$event->incassototale}}
+                        Incasso totale: {{$event->incassototale}}€
                     </div>
                 </div>
             </div>
