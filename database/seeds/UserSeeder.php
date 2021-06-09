@@ -30,8 +30,8 @@ class UserSeeder extends Seeder
             'email' => 'clieclie@studenti.univpm.it',
             'password' => Hash::make('lBeppPJ4'),
             'livello' => 2,
-            'nome' => 'Nome',
-            'cognome' => 'Cognome',
+            'nome' => 'Mario',
+            'cognome' => 'Rossi',
             'created_at' => date("Y-m-d H:i:s"),
             'updated_at' => date("Y-m-d H:i:s")
 

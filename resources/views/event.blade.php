@@ -29,12 +29,12 @@
 
             @if ($saldo)
             <h5>Costo:
-                <span id="prezzo_daScontare">{{$event->costo}}€</span>
-                <span id="prezzo_scontato">{{$event->costo - $event->costo/100*$event->sconto}}€</span>
+                <span id="prezzo_daScontare">{{number_format($event->costo,2)}}€</span>
+                <span id="prezzo_scontato">{{number_format(($event->costo - $event->costo/100*$event->sconto),2)}}€</span>
                 <span class="sconto_text"> &nbsp;&nbsp;SCONTO LAST MINUTE! </span>
             </h5>
             @else
-            <span> <h5>Costo: {{$event->costo}}€</h5></span>
+            <span> <h5>Costo: {{number_format($event->costo,2)}}€</h5></span>
             @endif
             <br />
             <div>

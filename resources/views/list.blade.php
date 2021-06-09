@@ -87,7 +87,7 @@
                     <label for="org" class="control">Società organizzatrice</label>
                     <select name="org" id="org">
                         @foreach ($organizzatori as $organizzatore)
-                        <option>{{$organizzatore->nomeorganizzatore}}</option>
+                        <option>{{$organizzatore->organizzazione}}</option>
                         @endforeach
                     </select>
                 </span>
@@ -136,11 +136,11 @@
                         <p class='info_element'>REGIONE: {{$event->regione}} </p>
                         <p class='info_element'>DATA: {{$event->data}}</p>
                         @if ($OnSales[$event->id])
-                        <p class='info_element'>COSTO: <span id="prezzo_daScontare">{{$event->costo}}€</span><span
-                                id="prezzo_scontato">{{$event->costo - $event->costo/100*$event->sconto}}€</span></p>
+                        <p class='info_element'>COSTO: <span id="prezzo_daScontare">{{number_format($event->costo,2)}}€</span><span
+                                id="prezzo_scontato">{{number_format(($event->costo - $event->costo/100*$event->sconto),2)}}€</span></p>
                         @else
                         <p class='info_element'>
-                            COSTO: {{$event->costo}}€                          
+                            COSTO: {{number_format($event->costo,2)}}€                          
                         </p>
                         @endif
                     </div>

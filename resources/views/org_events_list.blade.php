@@ -31,7 +31,7 @@
                         @endif
                     </div>
                     <div class="purchase_descr_item">
-                        Incasso totale: {{$event->incassototale}}€
+                        Incasso totale: {{number_format($event->incassototale,2)}}€
                     </div>
                 </div>
             </div>

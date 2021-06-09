@@ -86,10 +86,10 @@ doFormValidation(validationUrl, formId);
             <div class="wrap-contact1">
                 @if(isset($event))
                 {{ Form::open(array('route' => ['storeModifiedEvent',$event->id], 'class' => 'contact-form',
-                'files'=>true, 'id'=>'modifyEvent')) }}
+                'files'=>true, 'id'=>'modifyEvent', 'method'=>'post')) }}
                 {{ Form::hidden('eventId', $event->id, ['id'=> 'eventId']) }}
                 @else
-                {{ Form::open(array('route' => 'addNewEvent', 'class' => 'contact-form', 'files'=>true, 'id'=>'addEvent')) }}
+                {{ Form::open(array('route' => 'addNewEvent', 'class' => 'contact-form', 'files'=>true, 'id'=>'addEvent', 'method'=>'post')) }}
                 @endif
                 <div class="wrap-input">
                     {{ Form::label('nome', 'Nome', ['class' => 'label-input']) }}

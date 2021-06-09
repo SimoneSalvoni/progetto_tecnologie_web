@@ -1,7 +1,7 @@
 $(document).ready(function () {
     
-    $('#tot').html(($('#costo').html())*($('#numBiglietti').val()));
-    $('#costototale').val(+($('#costo').html())*($('#numBiglietti').val()));
+    $('#tot').html((($('#costo').html())*($('#numBiglietti').val())).toFixed(2));
+    $('#costototale').val((($('#costo').html())*($('#numBiglietti').val())).toFixed(2));
     
     $('#numBiglietti').keydown(function (e) {
         if (e.keyCode === 13) {
@@ -13,7 +13,7 @@ $(document).ready(function () {
     $('#numBiglietti').change(function () {
         var costo = +$('#costo').html();
         var numBiglietti = +$('#numBiglietti').val();
-        var totCosto = costo * numBiglietti;
+        var totCosto = (costo * numBiglietti).toFixed(2);
         $('#tot').html(totCosto.toString());
         $('#costototale').val(totCosto);
     });

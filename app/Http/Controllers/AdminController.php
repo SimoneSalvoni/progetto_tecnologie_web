@@ -53,9 +53,11 @@ class AdminController extends Controller
         $orgs = $this->UsersList->getOrganizzatori();
         if ($request->usertype == 'client') {
             $user = $this->UsersList->getUserByUsername($request->username);
+            if($user->livello==4){return view('admin')->with('faqs', $FAQ)->with('orgs', $orgs);}
             return view('admin')->with('user', $user)->with('faqs', $FAQ)->with('orgs', $orgs);
         } else {
             $user = $this->UsersList->getOrgByOrgname($request->orgname);
+            if($user->livello==4){return view('admin')->with('faqs', $FAQ)->with('orgs', $orgs);}
             $events = $this->EventsList->getEventsManaged($request->orgname);
             $biglietti = 0;
             $incasso = 0;

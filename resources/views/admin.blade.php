@@ -93,7 +93,7 @@
                 <p><b>Nome organizzazione: {{$user->organizzazione}}</b></p>
                 <p><b>Email: {{$user->email}}</b></p>
                 <p><b>Numero di biglietti venduti: {{$biglietti}} </b></p>
-                <p><b>Incasso totale: {{$incasso}} €</b></p>
+                <p><b>Incasso totale: {{number_format($incasso,2)}} €</b></p>
             </div>
             @endif
             <div style="height:inherit">

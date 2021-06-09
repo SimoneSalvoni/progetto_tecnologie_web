@@ -4,7 +4,8 @@
 
 <section name="main content">
     <section class="main-content">
-        <h3>Informazioni Organizzatore</h3>
+        <h3>Informazioni organizzatore</h3>
+        <h6>Nome utente: {{$user->nomeutente}}</h3>
         <h6>Nome organizzazione: {{$user->organizzazione}}</h6>
         <h6>Email di riferimento: {{$user->email}}</h6>
         <hr size="3" color="black" style="height:0.5px" />
@@ -25,7 +26,7 @@
                             class="title">{{$events[$i]->nome}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{$events[$i]->data}}</a><br />
                         <a href="{{route('event', [$events[$i]->id])}}" class="title">BIGLIETTI VENDUTI:
                             {{$events[$i]->bigliettivenduti}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; INCASSO:
-                            {{$events[$i]->incassototale}}€</a><br />
+                            {{number_format($events[$i]->incassototale,2)}}€</a><br />
                     </div>
                     </li>
                     @endisset

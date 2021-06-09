@@ -12,13 +12,14 @@
     <div name="dati-evento">
         <h1 style="font-size:x-large">Dati evento</h1>
         <h2 style="font-size:medium">Data: {{$event->data}}</h2>
+        <h2 style="font-size:medium">Orario: {{$event->orario}}</h2>
         <h2 style="font-size:medium">Location: {{$event->regione}}, {{$event->provincia}},
             {{$event->indirizzo}} {{$event->numciv}}</h2>
         <h2 style="font-size:medium;display: inline">Costo: </h2>
         @if ($saldo)
-        <h2 style="font-size:medium;display: inline" id="costo">{{$event->costo - $event->costo/100*$event->sconto}}</h2>
+        <h2 style="font-size:medium;display: inline" id="costo">{{number_format(($event->costo - $event->costo/100*$event->sconto),2)}}</h2>
         @else
-        <h2 style="font-size:medium;display: inline" id="costo">{{$event->costo}}</h2>
+        <h2 style="font-size:medium;display: inline" id="costo">{{number_format($event->costo,2)}}</h2>
         @endif
         <h2 style="font-size:medium;display: inline">€</h2>
     </div>
@@ -59,9 +60,9 @@
             </div>
             <br />
             <h4 style="display:inline">Costo complessivo: &nbsp</h4>
-            <h4 style="display:inline" id="tot">{{$event->costo}}</h4>
+            <h4 style="display:inline" id="tot"></h4>
             <h4 style="display:inline"> € </h4>
-            <input type="hidden" name="costototale" id="costototale" value="{{$event->costo}}">
+            <input type="hidden" name="costototale" id="costototale">
             <input type='hidden' name='nomeutente' value='{{auth()->user()->nomeutente}}'>
             <input type='hidden' name='idevento' value='{{$event->id}}'>
             <input type='hidden' name='nomeevento' value='{{$event->nome}}'>

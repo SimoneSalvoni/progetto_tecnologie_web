@@ -11,10 +11,10 @@
                 </h5>
                 <div class="riepilogo1">
                     <h5>
-                        {{$event->data}}
+                        {{$event->data}}, {{$event->orario}}
                     </h5>
                     <h5>
-                        {{$event->regione}}, {{$event->provincia}}
+                        {{$event->regione}}, {{$event->provincia}}, {{$event->città}}
                     </h5>
                     <h5>
                         {{$event->indirizzo}} {{$event->numciv}}
